@@ -7,13 +7,14 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.sugo.databinding.ActivityMainBinding
+import com.example.sugo.feature.deal.DealViewModel
 import com.example.sugo.feature.intro.IntroActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater)}
     private var container = -1
-
+    private lateinit var dealViewModel: DealViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.toolbar, menu)
+
         return true
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
