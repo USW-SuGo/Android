@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     private fun getFragment(menuItem: MenuItem): Boolean {
         when(menuItem.itemId){
             R.id.menuDeal -> {
-                supportFragmentManager.beginTransaction().replace(container,DealFragment())
+                supportFragmentManager.beginTransaction().replace(container,com.example.sugo_mvc.ui.DealFragment())
                     .commitAllowingStateLoss()
             }
             else -> {

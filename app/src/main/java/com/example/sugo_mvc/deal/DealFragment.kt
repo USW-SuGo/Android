@@ -22,8 +22,7 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  * Use the [DealFragment.newInstance] factory method to
  * create an instance of this fragment.
- */
-class DealFragment : Fragment() {
+ */class DealFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var _binding: FragmentDealBinding? = null
     private val binding get() = _binding!!
