@@ -16,16 +16,19 @@
         android:theme="@style/Theme.Sugo_mvc"
         tools:targetApi="31">
         <activity
-            android:name=".JoinActivity"
+            android:name=".ui.JoinActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".IntroActivity"
+            android:name=".ui.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.DealDetailActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

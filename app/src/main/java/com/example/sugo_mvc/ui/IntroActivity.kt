@@ -1,9 +1,11 @@
-package com.example.sugo_mvc
+package com.example.sugo_mvc.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.example.sugo_mvc.MainActivity
+import com.example.sugo_mvc.R
 
 class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
