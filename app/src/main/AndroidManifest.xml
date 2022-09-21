@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.sugo_mvc">
+    package="com.example.sugo_mvc" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,19 +14,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sugo_mvc"
-        tools:targetApi="31">
+        tools:targetApi="31" >
         <activity
-            android:name=".JoinActivity"
+            android:name=".ui.DealDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.JoinActivity"
             android:exported="false" />
         <activity
-            android:name=".IntroActivity"
+            android:name=".ui.LoginActivity"
             android:exported="false" />
+        <activity android:name=".MainActivity">
+
+        </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".ui.IntroActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

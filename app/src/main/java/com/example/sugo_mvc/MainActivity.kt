@@ -7,7 +7,9 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.sugo_mvc.databinding.ActivityMainBinding
+
 import com.example.sugo_mvc.deal.DealFragment
+import com.example.sugo_mvc.ui.IntroActivity
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater)}

@@ -4,11 +4,76 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <androidx.recyclerview.widget.RecyclerView
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
-        tools:listitem="@layout/dealrvitem"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/dealRv"/>
+    <TextView
+        android:id="@+id/tvUserHandle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <FrameLayout
+        android:id="@+id/mediaContainer"
+        android:layout_width="70dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/black"
+        android:gravity="center"
+        android:scaleType="center"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserHandle"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="장소"
+            android:id="@+id/dealpicture"
+            app:layout_constraintTop_toBottomOf="@+id/mediaContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <!--            <ImageView-->
+        <!--                android:id="@+id/dealpicture"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:background="@android:color/white"-->
+        <!--                android:scaleType="centerCrop"-->
+        <!--                android:src="@drawable/ic_launcher_background"-->
+        <!--                />-->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+    </FrameLayout>
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="장소"
+        android:id="@+id/dealrvplace"
+        app:layout_constraintTop_toBottomOf="@+id/mediaContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="제목"
+        android:id="@+id/dealrvtitle"
+        app:layout_constraintTop_toBottomOf="@+id/dealrvplace"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="가격"
+        android:id="@+id/dealrvprice"
+        app:layout_constraintTop_toBottomOf="@+id/dealrvtitle"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
