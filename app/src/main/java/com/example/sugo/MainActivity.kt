@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.sugo.databinding.ActivityMainBinding
+import com.example.sugo.feature.deal.DealFragment
 import com.example.sugo.feature.deal.DealViewModel
 import com.example.sugo.feature.intro.IntroActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView

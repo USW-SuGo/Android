@@ -9,16 +9,10 @@ import androidx.lifecycle.ViewModel
 import com.example.sugo.feature.data.DealData
 import com.example.sugo.feature.repository.deal.DealRepository
 
-class DealViewModel : ViewModel() {
-
-
-    //    private val dealData: MutableLiveData<List<DealData>> =MutableLiveData<List<DealData>>()
-//    by lazy {
-//        MutableLiveData<List<DealData>>().also {
-//            loaddealDatas()
-//        }
-//    }
-var dealData : MutableLiveData<ArrayList<DealData>> = MutableLiveData<ArrayList<DealData>>()
+class DealViewModel(
+//    private val dealrepository:DealRepository
+) : ViewModel() {
+    var dealData : MutableLiveData<ArrayList<DealData>> = MutableLiveData<ArrayList<DealData>>()
 
     init{
         var UserData = ArrayList<DealData>()
@@ -28,12 +22,4 @@ var dealData : MutableLiveData<ArrayList<DealData>> = MutableLiveData<ArrayList<
 
         dealData.postValue(UserData)
     }
-//
-//    fun getdealData(): LiveData<List<DealData>> {
-//        return dealData
-//    }
-//
-//    private fun  loaddealDatas() {
-//        dealData.value=dealData.value?.plus(DealData("asd","asd","asd","asd"))
-//    }
 }

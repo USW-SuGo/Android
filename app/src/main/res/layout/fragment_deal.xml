@@ -8,7 +8,7 @@ xmlns:tools="http://schemas.android.com/tools">
     <import type="android.view.View"/>
 
     <variable
-        name="DealData"
+        name="DealViewModel"
          type="com.example.sugo.feature.deal.DealViewModel"
         />
 
