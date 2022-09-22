@@ -7,7 +7,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.sugo_mvc.databinding.ActivityMainBinding
-import com.example.sugo_mvc.deal.DealFragment
+import com.example.sugo_mvc.ui.deal.DealFragment
+
 import com.example.sugo_mvc.ui.IntroActivity
 
 class MainActivity : AppCompatActivity() {
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     private fun getFragment(menuItem: MenuItem): Boolean {
         when(menuItem.itemId){
             R.id.menuDeal -> {
-                supportFragmentManager.beginTransaction().replace(container,com.example.sugo_mvc.ui.DealFragment())
+                supportFragmentManager.beginTransaction().replace(container, DealFragment())
                     .commitAllowingStateLoss()
             }
             else -> {
