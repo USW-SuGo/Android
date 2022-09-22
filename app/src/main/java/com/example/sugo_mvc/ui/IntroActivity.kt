@@ -12,6 +12,8 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
         Handler().postDelayed({
+//            val intent = Intent(applicationContext, DealDetailActivity::class.java)
+//            startActivity(intent)
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
             finish()
