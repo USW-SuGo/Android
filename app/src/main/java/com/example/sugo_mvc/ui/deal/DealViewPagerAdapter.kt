@@ -1,25 +1,49 @@
 package com.example.sugo_mvc.ui.deal
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.target.Target
 import com.example.sugo_mvc.R
-
-class DealViewPagerAdapter(var dealpictures: ArrayList<Int>) :
-    RecyclerView.Adapter<DealViewPagerAdapter.PagerViewHolder>() {
+import com.example.sugo_mvc.databinding.DealrvitemBinding
 
 
-    inner class PagerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder
-        (LayoutInflater.from(parent.context).inflate(R.layout.dealrvitem, parent, false)) {
-        val aespaMember = itemView.findViewById<ImageView>(R.id.dealpicture)
+class DealViewPagerAdapter(private val imageUrlList: List<String>) :
+RecyclerView.Adapter<DealViewPagerAdapter.ViewPagerViewHolder>() {
+
+    inner class ViewPagerViewHolder(val binding: DealrvitemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun setData(imageUrl: String) {
+
+            Glide.with(binding.root.context)
+                .load(imageUrl)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.dealpicture)
+        }
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PagerViewHolder((parent))
+    override fun getItemCount(): Int = imageUrlList.size
 
-    override fun getItemCount(): Int = dealpictures.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerViewHolder {
 
-    override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.aespaMember.setImageResource(dealpictures[position])
+        val binding = DealrvitemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+
+        return ViewPagerViewHolder(binding)
     }
+
+    override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
+
+        holder.setData(imageUrlList[position])
+    }
+
 }

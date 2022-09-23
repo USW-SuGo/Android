@@ -3,16 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable-anydpi/hambug.xml" value="0.196" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/ic_launcher_background.xml" value="0.238" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/activity_deal_detail.xml" value="0.2" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/activity_intro.xml" value="0.1125" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/activity_join.xml" value="0.1125" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/activity_login.xml" value="0.2" />
-        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/dealrvitem.xml" value="0.4" />
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/drawble_main.xml" value="0.1" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/fragment_deal.xml" value="0.2390625" />
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/fragment_map.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/image_slide_fragment.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/menu/bottom_menu.xml" value="0.4" />
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/menu/drawer_menu.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/menu/toolbar.xml" value="0.4" />
       </map>
     </option>
