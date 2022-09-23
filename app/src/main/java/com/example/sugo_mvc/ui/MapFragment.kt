@@ -1,4 +1,4 @@
-package com.example.sugo_mvc.ui.deal
+package com.example.sugo_mvc.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

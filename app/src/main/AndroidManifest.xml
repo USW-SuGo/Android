@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Sugo_mvc"
         tools:targetApi="31">
         <activity
+            android:name=".AddItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.JoinActivity"
             android:exported="false" />
         <activity
@@ -26,7 +29,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.DealDetailActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".ui.IntroActivity"
             android:exported="true">

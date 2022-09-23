@@ -16,7 +16,7 @@
         />
 
     <item
-        android:id="@+id/toolbar_talk"
+        android:id="@+id/additem"
         android:title="search"
         android:icon="@drawable/plus"
         app:showAsAction="ifRoom"

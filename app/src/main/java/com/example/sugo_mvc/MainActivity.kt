@@ -7,16 +7,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.sugo_mvc.databinding.ActivityMainBinding
+import com.example.sugo_mvc.ui.*
 
 import com.example.sugo_mvc.ui.deal.DealFragment
 
-import com.example.sugo_mvc.ui.IntroActivity
-import com.example.sugo_mvc.ui.deal.MapFragment
+import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater)}
     private var container = -1
     lateinit var drawerLayout: DrawerLayout
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val bottomBar = binding.bottomNav
         val toolbar=binding.toolbar
-
+        val drawerBar=binding.navigationView
         drawerLayout=binding.mainDrawerLayout
 
         setSupportActionBar(toolbar)
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.hambug)
         toolbar.setBackgroundColor(Color.rgb(102,255,102));
 
+        drawerBar.setNavigationItemSelectedListener(this)
         container = binding.mainContainer.id
         supportFragmentManager.beginTransaction().replace(container, DealFragment())
             .commitAllowingStateLoss()
@@ -47,7 +49,10 @@ class MainActivity : AppCompatActivity() {
         bottomBar.setOnItemReselectedListener {
             Log.d("Main","menu reselected")
         }
+
+
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.toolbar, menu)
 
@@ -56,10 +61,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             android.R.id.home -> {
-                //뒤로가기 버튼 눌렀을 때
+
                 drawerLayout.openDrawer(GravityCompat.START)
-//                Log.d("ToolBar_item: ", "뒤로가기 버튼 클릭")
-//                finish()
+
                 return true
             }
             R.id.toolbar_msg -> {
@@ -68,10 +72,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 return true
             }
-            R.id.toolbar_talk -> {
+            R.id.additem -> {
 
                 Log.d("ToolBar_item: ", "msg버튼클릭")
-                val intent = Intent(applicationContext, IntroActivity::class.java)
+                val intent = Intent(applicationContext, AddItemActivity::class.java)
                 startActivity(intent)
                 return true
             }
@@ -85,6 +89,7 @@ class MainActivity : AppCompatActivity() {
             else -> return super.onOptionsItemSelected(item)
         }
     }
+
     private fun getFragment(menuItem: MenuItem): Boolean {
         when(menuItem.itemId){
             R.id.menuDeal -> {
@@ -102,4 +107,22 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menuDeal1 -> {
+                Toast.makeText(this, "menu_item1 실행", Toast.LENGTH_SHORT).show()
+                val intent = Intent(applicationContext, LoginActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.menumap1 -> {
+                Toast.makeText(this, "menu_item2 실행", Toast.LENGTH_SHORT).show()
+                val intent = Intent(applicationContext, JoinActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.menuMyPage1 -> Toast.makeText(this, "menu_item3 실행", Toast.LENGTH_SHORT).show()
+        }
+        return false
+    }
+
 }
