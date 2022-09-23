@@ -1,6 +1,7 @@
 package com.example.sugo_mvc
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -24,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         //왼쪽 버튼 사용설정(기본은 뒤로가기)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         //왼쪽 버튼 아이콘 변경
-        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_launcher_background)
-
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.hambug)
+        toolbar.setBackgroundColor(Color.rgb(102,255,102));
         container = binding.mainContainer.id
         supportFragmentManager.beginTransaction().replace(container, DealFragment())
             .commitAllowingStateLoss()
@@ -57,6 +58,13 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 return true
             }
+            R.id.toolbar_talk -> {
+
+                Log.d("ToolBar_item: ", "msg버튼클릭")
+                val intent = Intent(applicationContext, IntroActivity::class.java)
+                startActivity(intent)
+                return true
+            }
 
             R.id.toolbar_search -> {
                 Log.d("ToolBar_item: ", "검색버튼클릭")
@@ -70,6 +78,10 @@ class MainActivity : AppCompatActivity() {
     private fun getFragment(menuItem: MenuItem): Boolean {
         when(menuItem.itemId){
             R.id.menuDeal -> {
+                supportFragmentManager.beginTransaction().replace(container, DealFragment())
+                    .commitAllowingStateLoss()
+            }
+            R.id.menumap -> {
                 supportFragmentManager.beginTransaction().replace(container, DealFragment())
                     .commitAllowingStateLoss()
             }
