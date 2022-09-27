@@ -3,13 +3,11 @@ package com.example.sugo_mvc.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
 
-import com.example.sugo_mvc.R
 import com.example.sugo_mvc.databinding.ActivityDealDetailBinding
-import com.example.sugo_mvc.databinding.ActivityMainBinding
 import com.example.sugo_mvc.ui.deal.DealData
 import com.example.sugo_mvc.ui.deal.DealViewPagerAdapter
+import com.esafirm.imagepicker.model.Image as Image
 
 class DealDetailActivity : AppCompatActivity() {
     private val binding by lazy { ActivityDealDetailBinding.inflate(layoutInflater)}

@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.additem -> {
 
                 Log.d("ToolBar_item: ", "msg버튼클릭")
-                val intent = Intent(applicationContext, AddItemActivity::class.java)
+                val intent = Intent(applicationContext,AddItemActivity::class.java)
                 startActivity(intent)
                 return true
             }

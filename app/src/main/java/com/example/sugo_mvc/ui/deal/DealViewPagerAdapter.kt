@@ -1,13 +1,11 @@
 package com.example.sugo_mvc.ui.deal
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.target.Target
 import com.example.sugo_mvc.R
 import com.example.sugo_mvc.databinding.DealrvitemBinding
 

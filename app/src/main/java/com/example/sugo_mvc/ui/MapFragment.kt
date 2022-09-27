@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.sugo_mvc.R
 import com.example.sugo_mvc.databinding.FragmentDealBinding
 import com.example.sugo_mvc.databinding.FragmentMapBinding
+import java.net.Socket
 
 class MapFragment : Fragment() {
     private var _binding: FragmentMapBinding? = null

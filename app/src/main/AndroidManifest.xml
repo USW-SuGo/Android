@@ -4,7 +4,7 @@
     package="com.example.sugo_mvc">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Sugo_mvc"
         tools:targetApi="31">
         <activity
-            android:name=".AddItemActivity"
+            android:name=".ui.AddItemActivity"
             android:exported="false" />
         <activity
             android:name=".ui.JoinActivity"
