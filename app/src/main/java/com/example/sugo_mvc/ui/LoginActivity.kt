@@ -1,5 +1,6 @@
 package com.example.sugo_mvc.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.sugo_mvc.R
@@ -11,5 +12,14 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        binding.signupbtn.setOnClickListener {
+            val intent = Intent(applicationContext,JoinActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.loginBtn.setOnClickListener {
+
+        }
     }
 }

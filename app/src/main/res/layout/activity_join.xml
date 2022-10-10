@@ -8,10 +8,14 @@
     android:orientation="vertical">
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/loginId"
+        android:layout_height="wrap_content"
+        app:counterMaxLength="20"
+>
+
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginId"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Id"
@@ -20,10 +24,11 @@
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
+        android:id="@+id/loginPwd"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginPwd"
+            inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="pwd"
@@ -32,10 +37,11 @@
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
+        android:id="@+id/loginEmail"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginEmail"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="email"

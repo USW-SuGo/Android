@@ -34,15 +34,19 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="login"/>
+        android:text="login"
+        android:id="@+id/loginBtn"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="signup"/>
+        android:text="signup"
+        android:id="@+id/signupbtn"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="find"/>
+        android:text="find"
+        android:id="@+id/findbtn"
+        />
 
     <ProgressBar
         android:id="@+id/progressBar"
