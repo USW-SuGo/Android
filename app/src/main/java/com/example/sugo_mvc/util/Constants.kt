@@ -6,9 +6,8 @@ class Constants {
         const val BASE_URL: String = " https://api.sugo-diger.com"
         const val EXIST : String="/user/check-email"
         const val LOGINCHECK : String="/user/check-loginId"
-        const val EmailSend : String ="/user/send-authorization-email"
-
-
+        const val FindId : String ="/user/find-id"
+        const val FindPwd : String ="/user/find-pw"
         const val LOGIN : String="/user/login"
         const val SIGN_UP: String = "/user/join"
         const val REQUEST_REFRESH: String = "/token"

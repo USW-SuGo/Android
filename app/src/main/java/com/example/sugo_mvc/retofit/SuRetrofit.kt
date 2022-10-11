@@ -4,11 +4,13 @@ import com.example.sugo_mvc.data.*
 import com.example.sugo_mvc.util.Constants.Companion.AUTH_HEADER
 import com.example.sugo_mvc.util.Constants.Companion.EXIST
 import com.example.sugo_mvc.util.Constants.Companion.EmailSend
+import com.example.sugo_mvc.util.Constants.Companion.LOGIN
 import com.example.sugo_mvc.util.Constants.Companion.LOGINCHECK
 import com.example.sugo_mvc.util.Constants.Companion.OVERLAP
 import com.example.sugo_mvc.util.Constants.Companion.REQUEST_REFRESH
 import com.example.sugo_mvc.util.Constants.Companion.SIGN_UP
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 
@@ -20,12 +22,14 @@ interface SuRetrofit {
     @POST(LOGINCHECK)
     fun checkLoginId(@Body info: Login):Call<CheckExist>
     //이메일 인증시 요청 보내기
-    @POST(EmailSend)
-    fun emailSend(@Body info : Email) :Call<SuccessCheckDto>
     //회원가입
     @POST(SIGN_UP)
     fun signUp(@Body info : UserInfo):Call<SuccessCheckDto>
-
+    //로그인
+    @Headers("accept: application/json",
+        "content-type: application/json")
+    @POST(LOGIN)
+    fun login(@Body info: LoginFormat): Call<Token>
     @POST(REQUEST_REFRESH)
     fun requestRefresh(@Header(AUTH_HEADER) refresh: String): Call<Token>
 

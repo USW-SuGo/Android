@@ -8,28 +8,30 @@
     android:orientation="vertical">
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Id"/>
-        <!--            android:text="@{LoginViewModel.id}"/>-->
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:id="@+id/loginId1"
         android:layout_height="wrap_content"
+        app:counterMaxLength="20"
         >
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginPwd"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="password"/>
-        <!--            android:text="@{LoginViewModel.pwd}"-->
+            android:hint="Id"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/loginPwd2"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.textfield.TextInputEditText
+        inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="pwd"
         />
+
     </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:layout_width="wrap_content"
