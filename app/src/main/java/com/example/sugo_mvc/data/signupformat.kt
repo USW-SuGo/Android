@@ -5,7 +5,7 @@ import java.io.Serializable
 
 data class SignUpFormat
     (
-    @SerializedName("LoginId")  val id: String,
+    @SerializedName("LoginId")  val loginid: String,
     val password: String,
     val email: String,
 ): Serializable
