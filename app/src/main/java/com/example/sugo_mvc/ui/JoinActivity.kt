@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.sugo_mvc.data.*
 import com.example.sugo_mvc.databinding.ActivityJoinBinding
 import com.example.sugo_mvc.retofit.RetrofitBuilder
+import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,7 +25,7 @@ class JoinActivity : AppCompatActivity() {
         Log.d("Test",email)
         Log.d("Test",loginid)
         Log.d("Test",loginpwd)
-
+///response.errorBody()?.string()!!메시지에러보기
 
 //            val d = Log.d("test11", data.toString())
 //            service.getLectureMainList( selectedType).enqueue(object : Callback<dataDto<MutableList<LectureMain?>>>{
@@ -48,6 +50,7 @@ class JoinActivity : AppCompatActivity() {
 //                }
 //
 //            })
+
             RetrofitBuilder.service.existEmail(Email(email)).enqueue(object :Callback<CheckExist>{
                 override fun onResponse(
                     call: Call<CheckExist>,
@@ -57,7 +60,7 @@ class JoinActivity : AppCompatActivity() {
                         Log.d("다시입력","다시입려고해주세요")
                     }
                     if (response.isSuccessful){
-                        Log.d("exist","$result")
+                        Log.d("exist", response.body().toString())
                     }else{
                         Log.d("fail1","fali")
                     }
@@ -88,7 +91,23 @@ class JoinActivity : AppCompatActivity() {
 
             })
 //
+        RetrofitBuilder.service.signUp(UserInfo(loginid,loginpwd,email,"정보보호학과")).enqueue(object :Callback<SuccessCheckDto>{
+            override fun onResponse(
+                call: Call<SuccessCheckDto>,
+                response: Response<SuccessCheckDto>
+            ) {
+                if (response.isSuccessful){
+                    Log.d("signup",response.body().toString())
+                }else{
+                    Log.d("fail3",response.errorBody()?.string()!!)
+                }
+            }
 
+            override fun onFailure(call: Call<SuccessCheckDto>, t: Throwable) {
+                Log.d("onFailure",t.localizedMessage)
+            }
+
+        })
     }
     }
     private fun validateEmail(): Boolean {
