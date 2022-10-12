@@ -13,6 +13,12 @@ class Constants {
         const val REQUEST_REFRESH: String = "/token"
         const val AUTH_HEADER = "Authorization"
         const val OVERLAP : String ="/user/check-id"
+        const val CHANGEPWD : String = "/user/password"
+        const val WITHDRAWAL : String = "/user"
+        const val MANNER : String="/user/manner"
+        const val MYPAGE : String="user?target={}&?page={}&size={}"
+        const val USERPAGE : String="/user/?target={}&?page={}&size={}"
+        const val POSTUPLOAD : String="/post"
 
     }
 

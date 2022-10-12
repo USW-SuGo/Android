@@ -3,7 +3,9 @@ package com.example.sugo_mvc.retofit
 import com.example.sugo_mvc.data.*
 import com.example.sugo_mvc.util.Constants.Companion.AUTH_HEADER
 import com.example.sugo_mvc.util.Constants.Companion.EXIST
-import com.example.sugo_mvc.util.Constants.Companion.EmailSend
+
+import com.example.sugo_mvc.util.Constants.Companion.FindId
+import com.example.sugo_mvc.util.Constants.Companion.FindPwd
 import com.example.sugo_mvc.util.Constants.Companion.LOGIN
 import com.example.sugo_mvc.util.Constants.Companion.LOGINCHECK
 import com.example.sugo_mvc.util.Constants.Companion.OVERLAP
@@ -30,6 +32,12 @@ interface SuRetrofit {
         "content-type: application/json")
     @POST(LOGIN)
     fun login(@Body info: LoginFormat): Call<Token>
+    //아이디 찾기
+    @POST(FindId)
+    fun findId(@Body info : Email):Call<SuccessCheckDto>
+    @POST(FindPwd)
+    fun findPwd(@Body info : LoginFormat):Call<SuccessCheckDto>
+
     @POST(REQUEST_REFRESH)
     fun requestRefresh(@Header(AUTH_HEADER) refresh: String): Call<Token>
 

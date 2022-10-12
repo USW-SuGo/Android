@@ -1,19 +1,21 @@
-package com.example.sugo_mvc.ui
+package com.example.sugo_mvc.ui.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.sugo_mvc.MainActivity
 import com.example.sugo_mvc.R
 import com.example.sugo_mvc.data.LoginFormat
 import com.example.sugo_mvc.data.Token
-import com.example.sugo_mvc.databinding.ActivityAddItemBinding
 import com.example.sugo_mvc.databinding.ActivityLoginBinding
 
 import com.example.sugo_mvc.retofit.RetrofitBuilder
-import com.example.sugo_mvc.ui.deal.DealFragment
+import com.example.sugo_mvc.ui.JoinActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.signupbtn.setOnClickListener {
-            val intent = Intent(applicationContext,JoinActivity::class.java)
+            val intent = Intent(applicationContext, JoinActivity::class.java)
             startActivity(intent)
 
         }
@@ -55,7 +57,11 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("onFailure",t.localizedMessage)
                 }
             })
-//
+            binding.findidbtn.setOnClickListener {
+                
+            }
+
+            binding.findpwdbtn.setOnClickListener {  }
         }
     }
 }
