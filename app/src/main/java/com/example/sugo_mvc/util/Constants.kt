@@ -1,5 +1,7 @@
 package com.example.sugo_mvc.util
 
+import android.app.Application
+
 class Constants {
     companion object  {
 
@@ -19,6 +21,7 @@ class Constants {
         const val MYPAGE : String="user?target={}&?page={}&size={}"
         const val USERPAGE : String="/user/?target={}&?page={}&size={}"
         const val POSTUPLOAD : String="/post"
+
 
     }
 
