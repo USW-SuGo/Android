@@ -1,5 +1,6 @@
 package com.example.sugo_mvc.retofit
 
+import com.example.sugo_mvc.util.App
 import com.example.sugo_mvc.util.Constants.Companion.AUTH_HEADER
 import com.example.sugo_mvc.util.Constants.Companion.BASE_URL
 import okhttp3.Interceptor
@@ -18,31 +19,26 @@ object RetrofitBuilder {
     var service :SuRetrofit
     var clientBuilder = OkHttpClient.Builder()
     var loggingInterceptor = HttpLoggingInterceptor()
-
+    val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
     init{
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
     val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .client(provideOkHttpClient(AppInterceptor()))
+        .client(okHttpClient)
         .addConverterFactory(NullOnEmptyConverterFactory())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
      service = retrofit.create(SuRetrofit::class.java)
 }
-    private fun provideOkHttpClient(interceptor: AppInterceptor): OkHttpClient
-            = OkHttpClient.Builder().run {
-        addInterceptor(interceptor)
-        build()
-    }
 
-    class AppInterceptor : Interceptor {
-        @Throws(IOException::class)
-        override fun intercept(chain: Interceptor.Chain) : Response = with(chain) {
-            val newRequest = request().newBuilder()
-                .addHeader(AUTH_HEADER, "(header Value)")
-                .build()
-            proceed(newRequest)
+    class AuthInterceptor : Interceptor {
+        override fun intercept(chain: Interceptor.Chain): Response {
+            var req =
+                chain.request().newBuilder().addHeader("Authorization", App.prefs.AccessToken ?: "").build()
+                chain.request().newBuilder().addHeader("Authorization", App.prefs.RefreshToken ?: "").build()
+            return chain.proceed(req)
         }
     }
+
 }

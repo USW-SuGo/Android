@@ -24,10 +24,11 @@
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="-4dp"
-        tools:layout_editor_absoluteY="175dp">
+        tools:layout_editor_absoluteY="175dp"
+        android:id="@+id/addtitle">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Addtitle"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="제목" />
@@ -38,11 +39,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
+        android:id="@+id/addprice"
+
         tools:layout_editor_absoluteX="-4dp"
         tools:layout_editor_absoluteY="230dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/addprice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="가격" />
@@ -63,14 +65,14 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/addrecycle"
-            android:layout_width="match_parent"
+            android:layout_width="303dp"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </GridLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/addcontentfield"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
@@ -78,10 +80,41 @@
         tools:layout_editor_absoluteY="358dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/addtextfield"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="글쓰기" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addcontactplace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-4dp"
+        tools:layout_editor_absoluteY="358dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="수고장소" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addcategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-4dp"
+        tools:layout_editor_absoluteY="358dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="카테고리" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

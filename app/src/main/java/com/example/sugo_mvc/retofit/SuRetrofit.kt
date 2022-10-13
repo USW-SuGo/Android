@@ -1,5 +1,7 @@
 package com.example.sugo_mvc.retofit
 
+import android.content.Intent
+import android.net.Uri
 import com.example.sugo_mvc.data.*
 import com.example.sugo_mvc.util.Constants.Companion.AUTH_HEADER
 import com.example.sugo_mvc.util.Constants.Companion.EXIST
@@ -9,8 +11,10 @@ import com.example.sugo_mvc.util.Constants.Companion.FindPwd
 import com.example.sugo_mvc.util.Constants.Companion.LOGIN
 import com.example.sugo_mvc.util.Constants.Companion.LOGINCHECK
 import com.example.sugo_mvc.util.Constants.Companion.OVERLAP
+import com.example.sugo_mvc.util.Constants.Companion.POSTUPLOAD
 import com.example.sugo_mvc.util.Constants.Companion.REQUEST_REFRESH
 import com.example.sugo_mvc.util.Constants.Companion.SIGN_UP
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -44,8 +48,16 @@ interface SuRetrofit {
     @POST(OVERLAP)
     fun overlapemail(@Body info : EmailOverLap):Call<OverLapEmail>
 
+    @Multipart
+    @POST(POSTUPLOAD)
+    fun postUpload(@Header(AUTH_HEADER) AccessToken:String,
+                   @Body info:PostFormat, image:MultipartBody.Part?
+    ):Call<ProductPostId>
+
 
 }
+
+
 //@GET(LECTURE_MAIN)
 //fun getLectureMainList(
 //    @Query("option") option: String,

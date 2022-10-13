@@ -16,6 +16,7 @@ import com.example.sugo_mvc.databinding.ActivityLoginBinding
 
 import com.example.sugo_mvc.retofit.RetrofitBuilder
 import com.example.sugo_mvc.ui.JoinActivity
+import com.example.sugo_mvc.util.App
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,11 +44,17 @@ class LoginActivity : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<Token>,
                     response: Response<Token>) {
-                   val result= response.headers().get("Authorization")
+                    val result= response.headers().get("Authorization")
+
                     if (response.isSuccessful){
-                    Log.d("good",result.toString())
+                        val spi =result!!.split(",")
+                        App.prefs.AccessToken=spi[1].replace("}","")
+                        App.prefs.RefreshToken=spi[0].replace("{","")
+                        val token = App.prefs.AccessToken
+                        val token2 = App.prefs.RefreshToken
                         val intent = Intent(applicationContext,MainActivity::class.java)
                         startActivity(intent)
+
                     }else{
                         Log.d("LoginFail",response.errorBody()?.string()!!)
                     }

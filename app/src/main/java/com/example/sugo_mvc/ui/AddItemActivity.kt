@@ -1,16 +1,30 @@
 package com.example.sugo_mvc.ui
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.telecom.Call
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sugo_mvc.data.PostFormat
+import com.example.sugo_mvc.data.ProductPostId
+import com.example.sugo_mvc.data.image
 import com.example.sugo_mvc.databinding.ActivityAddItemBinding
+import com.example.sugo_mvc.retofit.RetrofitBuilder
+import com.example.sugo_mvc.util.App
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Response
+import java.io.File
+import javax.security.auth.callback.Callback
 
 
 class AddItemActivity : AppCompatActivity() {
@@ -18,28 +32,49 @@ class AddItemActivity : AppCompatActivity() {
 
     var list = ArrayList<Uri>()
     val adapter=AddrecycleAdapter(list,this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         binding.pickpicture.setOnClickListener {
-//            var intent =Intent(Intent.ACTION_GET_CONTENT)
-////            var intent=Intent
-//            intent.setType("image/*")
-//            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-//            intent.action=Intent.ACTION_GET_CONTENT
-//
-//            startActivityForResult(intent,200)
-
-
-// 버튼을 누르면 해당 Intent 를 호출하는데,
             val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
                 type = "image/*"
                 putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             }
             startActivityForResult(intent,200)
 
+//
+
         }
+
+        binding.addsugo.setOnClickListener {
+            val addtitle=binding.addtitle.editText?.text.toString()
+            val addprice=binding.addprice.editText?.text
+            val addcategory=binding.addcategory.editText?.text.toString()
+            val addcontactplace=binding.addcontactplace.editText?.text.toString()
+            val addcontentfield=binding.addcontentfield.editText?.text.toString()
+//            RetrofitBuilder.service.postUpload( App.prefs.AccessToken.toString(),
+//                PostFormat(addtitle,addcontentfield,addprice,addcontactplace,addcategory),image).enqueue(object: retrofit2.Callback<ProductPostId> {
+//                override fun onResponse(
+//                    call: retrofit2.Call<ProductPostId>,
+//                    response: Response<ProductPostId>
+//                ) {
+//                    if (response?.isSuccessful) {
+//                        Log.d("로그 ",""+response?.body().toString())
+//                        Toast.makeText(applicationContext,"통신성공",Toast.LENGTH_SHORT).show()
+//                    }
+//                    else {
+//                        Toast.makeText(applicationContext,"통신실패",Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//
+//                override fun onFailure(call: retrofit2.Call<ProductPostId>, t: Throwable) {
+//                    Log.d("onFailure",t.localizedMessage)
+//                }
+//
+//            })
+  }
         binding.addrecycle.adapter=adapter
         binding.addrecycle.adapter = AddrecycleAdapter(list,this)
         adapter.setItemClickListener(object : AddrecycleAdapter.OnItemClickListener{
@@ -81,4 +116,6 @@ class AddItemActivity : AppCompatActivity() {
         }
 
     }
+
+
 }
