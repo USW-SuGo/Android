@@ -51,7 +51,8 @@ interface SuRetrofit {
     @Multipart
     @POST(POSTUPLOAD)
     fun postUpload(@Header(AUTH_HEADER) AccessToken:String,
-                   @Body info:PostFormat, image:MultipartBody.Part?
+                   @Body info:PostFormat,
+                   @Part image:MultipartBody.Part?
     ):Call<ProductPostId>
 
 
