@@ -6,6 +6,7 @@
         android:title="message"
         android:icon="@drawable/talkmenu"
         app:showAsAction="ifRoom"
+
         />
 
     <item
