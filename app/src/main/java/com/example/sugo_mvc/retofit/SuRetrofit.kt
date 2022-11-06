@@ -15,6 +15,7 @@ import com.example.sugo_mvc.util.Constants.Companion.POSTUPLOAD
 import com.example.sugo_mvc.util.Constants.Companion.REQUEST_REFRESH
 import com.example.sugo_mvc.util.Constants.Companion.SIGN_UP
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -50,9 +51,10 @@ interface SuRetrofit {
 
     @Multipart
     @POST(POSTUPLOAD)
-    fun postUpload(@Header(AUTH_HEADER) AccessToken:String,
-                   @Body info:PostFormat,
-                   @Part image:MultipartBody.Part?
+    fun postUpload(
+        @Header(AUTH_HEADER) AccessToken:String,
+        @Part image: MultipartBody.Part,
+        @Part ("info") PostFormat: PostFormat
     ):Call<ProductPostId>
 
 

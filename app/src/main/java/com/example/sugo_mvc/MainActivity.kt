@@ -97,10 +97,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 supportFragmentManager.beginTransaction().replace(container, DealFragment())
                     .commitAllowingStateLoss()
             }
-            R.id.menumap -> {
-                supportFragmentManager.beginTransaction().replace(container, MapFragment())
-                    .commitAllowingStateLoss()
-            }
+//            R.id.menumap -> {
+//                supportFragmentManager.beginTransaction().replace(container, MapFragment())
+//                    .commitAllowingStateLoss()
+//            }
             else -> {
                 supportFragmentManager.beginTransaction().replace(container, DealFragment())
                     .commitAllowingStateLoss()
