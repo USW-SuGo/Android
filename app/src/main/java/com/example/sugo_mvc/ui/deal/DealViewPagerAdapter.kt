@@ -21,7 +21,7 @@ RecyclerView.Adapter<DealViewPagerAdapter.ViewPagerViewHolder>() {
             Glide.with(binding.root.context)
                 .load(imageUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.dealpicture)
+                .into(binding.dealimageLink)
         }
 
     }
