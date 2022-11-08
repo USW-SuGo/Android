@@ -8,9 +8,11 @@ import com.example.sugo_mvc.util.Constants.Companion.EXIST
 
 import com.example.sugo_mvc.util.Constants.Companion.FindId
 import com.example.sugo_mvc.util.Constants.Companion.FindPwd
+import com.example.sugo_mvc.util.Constants.Companion.LECTURE_MAIN
 import com.example.sugo_mvc.util.Constants.Companion.LOGIN
 import com.example.sugo_mvc.util.Constants.Companion.LOGINCHECK
 import com.example.sugo_mvc.util.Constants.Companion.OVERLAP
+import com.example.sugo_mvc.util.Constants.Companion.POSTGET
 import com.example.sugo_mvc.util.Constants.Companion.POSTUPLOAD
 import com.example.sugo_mvc.util.Constants.Companion.REQUEST_REFRESH
 import com.example.sugo_mvc.util.Constants.Companion.SIGN_UP
@@ -57,13 +59,17 @@ interface SuRetrofit {
         @Part ("info") PostFormat: PostFormat
     ):Call<ProductPostId>
 
-
+    @GET(POSTGET)
+    fun getItemList(
+        @Query("page") page: Int =1,
+        @Query("size") size: Int =10,
+    ):Call<MutableList<DealMainItem?>>
+@GET(LECTURE_MAIN)
+fun getLectureMainList(
+    @Query("option") option: String,
+    @Query("page") page: Int = 1,
+    @Query("majorType") majorType: String = ""
+): Call<dataDto<MutableList<LectureMain?>>>
 }
 
 
-//@GET(LECTURE_MAIN)
-//fun getLectureMainList(
-//    @Query("option") option: String,
-//    @Query("page") page: Int = 1,
-//    @Query("majorType") majorType: String = ""
-//): Call<dataDto<MutableList<LectureMain?>>>

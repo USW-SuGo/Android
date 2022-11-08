@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sugo_mvc.data.DealMainItem
 import com.example.sugo_mvc.databinding.DealrvitemBinding
 import com.example.sugo_mvc.ui.DealDetailActivity
 
-class DealAdapter(val items: MutableList<DealData>) : RecyclerView.Adapter<DealAdapter.ViewHolder>() {
+class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<DealAdapter.ViewHolder>() {
 
     companion object {
         const val ITEM = 1
@@ -19,11 +20,11 @@ class DealAdapter(val items: MutableList<DealData>) : RecyclerView.Adapter<DealA
     class ViewHolder(binding: DealrvitemBinding) : RecyclerView.ViewHolder(binding.root){
         var binding: DealrvitemBinding
 
-        fun bind(dealData: DealData){
+        fun bind(dealMainItem: DealMainItem){
 
-            binding.dealrvtitle.text = dealData.title
-            binding.dealrvprice.text = dealData.price
-            binding.dealrvplace.text = dealData.place
+            binding.dealrvtitle.text = dealMainItem.title
+            binding.dealrvprice.text = dealMainItem.price.toString()
+            binding.dealrvplace.text = dealMainItem.contactPlace
 //            binding.dealpicture.setImageIcon()=memoData.pictureUrl
         }
         init {
