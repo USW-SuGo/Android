@@ -2,11 +2,17 @@ package com.example.sugo_mvc.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
+import com.example.sugo_mvc.data.DealMainItem
 
 import com.example.sugo_mvc.databinding.ActivityDealDetailBinding
+import com.example.sugo_mvc.retofit.RetrofitBuilder
 import com.example.sugo_mvc.ui.deal.DealData
 import com.example.sugo_mvc.ui.deal.DealViewPagerAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import com.esafirm.imagepicker.model.Image as Image
 
 class DealDetailActivity : AppCompatActivity() {
@@ -15,16 +21,44 @@ class DealDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val imageUrlList = listOf(
-            "https://images.unsplash.com/photo-1621318164984-b06589834c91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxOTU3MDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjM2OTk4MjI&ixlib=rb-1.2.1&q=80&w=1080",
-            "https://images.unsplash.com/photo-1621551122354-e96737d64b70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxOTU3MDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjM2OTk4MjI&ixlib=rb-1.2.1&q=80&w=1080",
-            "https://images.unsplash.com/photo-1621616875450-79f024a8c42c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxOTU3MDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjM2OTk4MjI&ixlib=rb-1.2.1&q=80&w=1080",
-            "https://images.unsplash.com/photo-1621687947404-e41b3d139088?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxOTU3MDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjM2OTk4MjI&ixlib=rb-1.2.1&q=80&w=1080"
-        )
-        binding.dealViewPager.adapter = DealViewPagerAdapter(imageUrlList)
-        binding.dealViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        val testItems1 = DealMainItem(0, "", "", "", "", 0, "", "")
+        var mainDealItemList = mutableListOf<DealMainItem>()
+        var imageList :List<String>
+        var aas:String
+        RetrofitBuilder.service.getItemList().enqueue(object : Callback<MutableList<DealMainItem>> {
+                        override fun onResponse(
+                            call: Call<MutableList<DealMainItem>>,
+                            response: Response<MutableList<DealMainItem>>
+            ) {
+                if (response.isSuccessful) {
 
+                    mainDealItemList = response.body()!!
+                    Log.d("성공", " 성공: " + mainDealItemList[0].toString())
+                    Log.d("성공", " 성공: " + mainDealItemList[0].imageLink)
+                    aas=mainDealItemList[0].imageLink.replace("[","")
+                        .replace("]","").replace(" ","")
+                    imageList=aas.split(",")
+                    Log.d("성공", " 성공: " + imageList)
+                    binding.dealViewPager.adapter = DealViewPagerAdapter(imageList)
+                    binding.dealViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+                    testItems1.id=mainDealItemList[0].id
+                    testItems1.imageLink = "https://s3.ap-northeast-2.amazonaws.com/diger-usw-sugo-s3/post-resource/%EC%A0%9C%EB%AA%A9%EC%B5%9C%EB%8C%80%EA%B8%80%EC%9E%90%EB%A5%BC%EB%AA%87%EA%B8%80%EC%9E%90%EB%A1%9C%EC%A7%80%EC%A0%95%ED%95%B4%EC%95%BC%EB%90%A0%EC%A7%80%EC%A7%80%3B%EC%83%81%EB%8B%B9%ED%9E%88%2B0"
+                    testItems1.contactPlace = mainDealItemList[0].contactPlace
+//                    testItems1.updateAt = mainDealItemList[0].updateAt
+                    testItems1.updateAt="201"
+                    testItems1.title = mainDealItemList[0].title
+                    testItems1.price = mainDealItemList[0].price
+                    testItems1.nickname = mainDealItemList[0].nickname
+                    testItems1.category = mainDealItemList[0].category
+
+                } else {
+                    Log.d("성공", "onFailure 에러: ")
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<DealMainItem>>, t: Throwable) {
+                Log.d("onFailure", t.localizedMessage)
+            }
+        })
     }
-
-
 }
