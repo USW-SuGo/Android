@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
@@ -31,12 +31,11 @@
                     android:layout_marginBottom="1dp">
 
                     <ImageView
-                        android:id="@+id/dealimageLink"
+                        android:id="@+id/dealimageLnk"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:src="@drawable/ic_launcher_background" />
-
                 </RelativeLayout>
             </LinearLayout>
             <RelativeLayout

@@ -1,18 +1,20 @@
 package com.example.sugo_mvc.retofit
 
 import com.example.sugo_mvc.util.App
-import com.example.sugo_mvc.util.Constants.Companion.AUTH_HEADER
 import com.example.sugo_mvc.util.Constants.Companion.BASE_URL
+import com.google.gson.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Converter
+import org.threeten.bp.DayOfWeek.FROM
+import org.threeten.bp.LocalDate.FROM
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
 import java.lang.reflect.Type
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.temporal.TemporalAccessor
 
 
 object RetrofitBuilder {

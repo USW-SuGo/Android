@@ -61,9 +61,9 @@ interface SuRetrofit {
 
     @GET(POSTGET)
     fun getItemList(
-        @Query("page") page: Int =1,
+        @Query("page") page: Int =0,
         @Query("size") size: Int =10,
-    ):Call<MutableList<DealMainItem?>>
+    ):Call<MutableList<DealMainItem>>
 @GET(LECTURE_MAIN)
 fun getLectureMainList(
     @Query("option") option: String,
