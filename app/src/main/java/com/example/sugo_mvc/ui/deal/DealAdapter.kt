@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.sugo_mvc.data.DealMainItem
 import com.example.sugo_mvc.databinding.DealrvitemBinding
 import com.example.sugo_mvc.ui.DealDetailActivity
@@ -19,13 +21,19 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
     }
     class ViewHolder(binding: DealrvitemBinding) : RecyclerView.ViewHolder(binding.root){
         var binding: DealrvitemBinding
-
+        fun setData(imageUrl: String) {
+            Glide.with(binding.root.context)
+                .load(imageUrl)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.dealimageLnk)
+        }
         fun bind(dealMainItem: DealMainItem){
-
+            val tesl:List<String>
+            tesl=dealMainItem.imageLink.replace("[","").replace("]","").split(",")
             binding.dealrvtitle.text = dealMainItem.title
             binding.dealrvprice.text = dealMainItem.price.toString()
             binding.dealrvplace.text = dealMainItem.contactPlace
-//            binding.dealpicture.setImageIcon()=memoData.pictureUrl
+            Glide.with(itemView).load(tesl[0]).into(binding.dealimageLnk)
         }
         init {
             this.binding = binding
@@ -68,6 +76,7 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView?.context, DealDetailActivity::class.java)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
+
         }
 
     }

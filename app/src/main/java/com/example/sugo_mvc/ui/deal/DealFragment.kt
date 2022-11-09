@@ -1,7 +1,5 @@
 package com.example.sugo_mvc.ui.deal
 
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,17 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sugo_mvc.MainActivity
 import com.example.sugo_mvc.data.DealMainItem
-import com.example.sugo_mvc.data.LoginFormat
-import com.example.sugo_mvc.data.Token
 import com.example.sugo_mvc.databinding.FragmentDealBinding
 import com.example.sugo_mvc.retofit.RetrofitBuilder
-import com.example.sugo_mvc.util.App
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDateTime
 
 
 class DealFragment : Fragment() {
@@ -30,7 +23,7 @@ class DealFragment : Fragment() {
     private val binding get() = _binding!!
 
     var isLoading = false
-    private val DealItem = mutableListOf<DealMainItem>()
+    private val DealItemSize = mutableListOf<DealMainItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,54 +35,40 @@ class DealFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val testItems1 = DealMainItem(0, "", "", "", "", 0, "", "")
-        testItems1.id = 0
-        testItems1.imageLink = ""
-        testItems1.contactPlace = "asdad"
-        testItems1.updateAt = ""
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            testItems1.updateAt= LocalDateTime.of(2022,1,26,19,30,20)
-//        }
-        testItems1.title = "dltkr"
-        testItems1.price = 10000
-        testItems1.nickname = ""
-        testItems1.category = ""
+        RetrofitBuilder.service.getItemList().enqueue(object : Callback<MutableList<DealMainItem>> {
+            override fun onResponse(
+                call: Call<MutableList<DealMainItem>>,
+                response: Response<MutableList<DealMainItem>>
+            ) {
+                if (response.isSuccessful) {
+                    var mainDealItemList = mutableListOf<DealMainItem>()
+                    mainDealItemList = response.body()!!
+                    Log.d("성공", " 성공: " + mainDealItemList[0].toString())
+                    testItems1.id=mainDealItemList[0].id
+                    testItems1.imageLink = "https://s3.ap-northeast-2.amazonaws.com/diger-usw-sugo-s3/post-resource/%EC%A0%9C%EB%AA%A9%EC%B5%9C%EB%8C%80%EA%B8%80%EC%9E%90%EB%A5%BC%EB%AA%87%EA%B8%80%EC%9E%90%EB%A1%9C%EC%A7%80%EC%A0%95%ED%95%B4%EC%95%BC%EB%90%A0%EC%A7%80%EC%A7%80%3B%EC%83%81%EB%8B%B9%ED%9E%88%2B0"
+                    testItems1.contactPlace = mainDealItemList[0].contactPlace
+//                    testItems1.updateAt = mainDealItemList[0].updateAt
+                    testItems1.updateAt="201"
+                    testItems1.title = mainDealItemList[0].title
+                    testItems1.price = mainDealItemList[0].price
+                    testItems1.nickname = mainDealItemList[0].nickname
+                    testItems1.category = mainDealItemList[0].category
 
+                } else {
+                    Log.d("성공", "onFailure 에러: ")
+                }
+            }
 
-//        RetrofitBuilder.service.getItemList().enqueue(object : Callback<MutableList<DealMainItem>> {
-//            override fun onResponse(
-//                call: Call<MutableList<DealMainItem>>,
-//                response: Response<MutableList<DealMainItem>>
-//            ) {
-//                if (response.isSuccessful) {
-//                    var mainDealItemList = mutableListOf<DealMainItem>()
-//                    mainDealItemList = response.body()!!
-//                    Log.d("성공", " 성공: " + mainDealItemList[0].toString())
-//                    testItems1.id=mainDealItemList[0].id
-//                    testItems1.imageLink = "https://s3.ap-northeast-2.amazonaws.com/diger-usw-sugo-s3/post-resource/%EC%A0%9C%EB%AA%A9%EC%B5%9C%EB%8C%80%EA%B8%80%EC%9E%90%EB%A5%BC%EB%AA%87%EA%B8%80%EC%9E%90%EB%A1%9C%EC%A7%80%EC%A0%95%ED%95%B4%EC%95%BC%EB%90%A0%EC%A7%80%EC%A7%80%3B%EC%83%81%EB%8B%B9%ED%9E%88%2B0"
-//                    testItems1.contactPlace = mainDealItemList[0].contactPlace
-////                    testItems1.updateAt = mainDealItemList[0].updateAt
-//                    testItems1.updateAt="201"
-//                    testItems1.title = mainDealItemList[0].title
-//                    testItems1.price = mainDealItemList[0].price
-//                    testItems1.nickname = mainDealItemList[0].nickname
-//                    testItems1.category = mainDealItemList[0].category
-//
-//                } else {
-//                    Log.d("성공", "onFailure 에러: ")
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<MutableList<DealMainItem>>, t: Throwable) {
-//                Log.d("onFailure", t.localizedMessage)
-//            }
-//        })
+            override fun onFailure(call: Call<MutableList<DealMainItem>>, t: Throwable) {
+                Log.d("onFailure", t.localizedMessage)
+            }
+        })
 //        for(i in 1 until 10){
-        DealItem.add(testItems1)
+        DealItemSize.add(testItems1)
 //        }
         binding.dealRv.layoutManager = GridLayoutManager(context, 2)
-        binding.dealRv.adapter = DealAdapter(DealItem)
+        binding.dealRv.adapter = DealAdapter(DealItemSize)
 
         binding.dealRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -99,7 +78,6 @@ class DealFragment : Fragment() {
                     if (!binding.dealRv.canScrollVertically(1)) {
                         isLoading = true
                         getMoreData()
-
                     }
                 }
             }
@@ -110,22 +88,49 @@ class DealFragment : Fragment() {
 
     private fun getMoreData() {
         val testItems1 = DealMainItem(0, "", "", "null", "", 0, "", "")
-        testItems1.id = 0
-        testItems1.imageLink = ""
-        testItems1.contactPlace = "asdad"
-        testItems1.updateAt
-        testItems1.title = "dltkr"
-        testItems1.price = 10000
-        testItems1.nickname = ""
-        testItems1.category = ""
-        DealItem.add(testItems1)
-        binding.dealRv.adapter?.notifyItemInserted(DealItem.size - 1)
-        DealItem.removeAt(DealItem.size - 1)
-        val currentSize = DealItem.size
-        for (i in currentSize + 1 until currentSize + 10) {
-            DealItem.add(testItems1)
-        }
-        binding.dealRv.adapter?.notifyDataSetChanged()
+        RetrofitBuilder.service.getItemList().enqueue(object : Callback<MutableList<DealMainItem>> {
+            override fun onResponse(
+                call: Call<MutableList<DealMainItem>>,
+                response: Response<MutableList<DealMainItem>>
+            ) {
+                if (response.isSuccessful) {
+                    var mainDealItemList = mutableListOf<DealMainItem>()
+                    mainDealItemList = response.body()!!
+                    Log.d("바디사이즈", " 성공: " + response.body()!!.size.toString())
+                    for (i in 0 until response.body()!!.size){
+                        Log.d("0번째",i.toString())
+                        testItems1.id=mainDealItemList[i].id
+                        testItems1.imageLink =mainDealItemList[i].imageLink
+                        testItems1.contactPlace = mainDealItemList[i].contactPlace
+                        testItems1.updateAt="201"
+                        testItems1.title = mainDealItemList[i].title
+                        testItems1.price = mainDealItemList[i].price
+                        testItems1.nickname = mainDealItemList[i].nickname
+                        testItems1.category = mainDealItemList[i].category
+                        mainDealItemList.add(testItems1)
+                        Log.d("테스트아이템인덱스",testItems1.toString())
+                    }
+                    Log.d("testItems",DealItemSize.toString())
+                    Log.d("중간",mainDealItemList.toString())
+                    binding.dealRv.adapter?.notifyItemInserted(DealItemSize.size - 1)
+                    Log.d("DealItemsize",DealItemSize.size.toString())
+                    //순서대로 출력하기 위해
+                    DealItemSize.removeAt(DealItemSize.size - 1)
+                    Log.d("DealItemsize",DealItemSize.size.toString())
+                        for (i in 0..mainDealItemList.size-1) {
+                            DealItemSize.add(mainDealItemList[i])
+                        }
+                    binding.dealRv.adapter?.notifyDataSetChanged()
+                } else {
+                    Log.d("성공", "onFailure 에러: ")
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<DealMainItem>>, t: Throwable) {
+                Log.d("onFailure", t.localizedMessage)
+            }
+        })
+
         isLoading = false
     }
 }
