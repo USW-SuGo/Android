@@ -73,17 +73,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
                 return true
             }
-            R.id.additem -> {
+            R.id.map -> {
 
                 Log.d("ToolBar_item: ", "msg버튼클릭")
-                val intent = Intent(applicationContext,AddItemActivity::class.java)
-                startActivity(intent)
+                supportFragmentManager.beginTransaction().replace(container, MapFragment())
+                    .commitAllowingStateLoss()
+//                val intent = Intent(applicationContext,AddItemActivity::class.java)
+//                startActivity(intent)
                 return true
             }
 
-            R.id.toolbar_search -> {
+            R.id.toolbar_upload -> {
                 Log.d("ToolBar_item: ", "검색버튼클릭")
-                val intent = Intent(applicationContext, IntroActivity::class.java)
+                val intent = Intent(applicationContext,AddItemActivity::class.java)
                 startActivity(intent)
                 return true
             }
