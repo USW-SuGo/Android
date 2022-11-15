@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/menuDeal1"
-        android:enabled="true"
-        android:title="로그인"
-
-        />
-    <item
-        android:id="@+id/menumap1"
-        android:enabled="true"
-        android:title="회원가입"
-
-        />
-    <item
-        android:id="@+id/menuMyPage1"
-        android:enabled="true"
-        android:title="공지사항"
-
-        />
+    <group android:id="@+id/menu_01">
+        <item
+            android:id="@+id/menuDeal1"
+            android:enabled="true"
+            android:title="로그인" />
+    </group>
+    <group android:id="@+id/menu_02">
+        <item
+            android:id="@+id/menumap1"
+            android:enabled="true"
+            android:title="회원가입"
+            />
+    </group>
+    <group android:id="@+id/menu_03">
+        <item
+            android:id="@+id/menuMyPage1"
+            android:enabled="true"
+            android:title="공지사항"
+            />
+    </group>
 </menu>

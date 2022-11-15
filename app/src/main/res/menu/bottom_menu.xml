@@ -17,7 +17,7 @@
         android:id="@+id/menuMyPage"
         android:enabled="true"
         android:title="내정보"
-        android:icon="@drawable/user"
+        android:icon="@drawable/user1"
         />
 
 </menu>
