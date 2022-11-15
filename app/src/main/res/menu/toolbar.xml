@@ -8,15 +8,15 @@
         app:showAsAction="ifRoom"
         />
     <item
-        android:id="@+id/toolbar_search"
-        android:title="search"
+        android:id="@+id/toolbar_upload"
+        android:title="upload"
         android:icon="@drawable/icplus"
         app:showAsAction="ifRoom"
         />
 
     <item
-        android:id="@+id/additem"
-        android:title="search"
+        android:id="@+id/map"
+        android:title="map"
         android:icon="@drawable/icmap"
         app:showAsAction="ifRoom"
         />

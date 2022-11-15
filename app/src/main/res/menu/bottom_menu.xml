@@ -5,7 +5,7 @@
         android:id="@+id/menuDeal"
         android:enabled="true"
         android:title="거래"
-        android:icon="@drawable/home"
+        android:icon="@drawable/ishopping_cart"
         />
 <!--    <item-->
 <!--        android:id="@+id/menumap"-->
@@ -17,7 +17,7 @@
         android:id="@+id/menuMyPage"
         android:enabled="true"
         android:title="내정보"
-        android:icon="@drawable/user1"
+        android:icon="@drawable/icuser2"
         />
 
 </menu>
