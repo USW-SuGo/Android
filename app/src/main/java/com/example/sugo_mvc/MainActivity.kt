@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         //왼쪽 버튼 아이콘 변경
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.hambug)
-        toolbar.setBackgroundColor(Color.rgb(102,255,102));
+        toolbar.setBackgroundColor(Color.rgb(240,240,240));
 
         drawerBar.setNavigationItemSelectedListener(this)
         container = binding.mainContainer.id

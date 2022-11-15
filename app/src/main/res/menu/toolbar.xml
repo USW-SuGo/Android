@@ -4,20 +4,20 @@
     <item
         android:id="@+id/toolbar_msg"
         android:title="message"
-        android:icon="@drawable/messenger"
+        android:icon="@drawable/ictalkmenu"
         app:showAsAction="ifRoom"
         />
     <item
         android:id="@+id/toolbar_search"
         android:title="search"
-        android:icon="@drawable/plus1"
+        android:icon="@drawable/icplus"
         app:showAsAction="ifRoom"
         />
 
     <item
         android:id="@+id/additem"
         android:title="search"
-        android:icon="@drawable/placeholder"
+        android:icon="@drawable/icmap"
         app:showAsAction="ifRoom"
         />
 </menu>
