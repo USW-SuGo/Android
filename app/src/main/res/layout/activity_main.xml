@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<androidx.drawerlayout.widget.DrawerLayout-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:id="@+id/main_drawer_layout"-->
-<!--    tools:openDrawer="start"-->
-<!--    android:fitsSystemWindows="true"-->
-<!--    android:layout_width="match_parent"-->
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_drawer_layout"
+    tools:openDrawer="start"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
 
-<!--    android:layout_height="match_parent">-->
+    android:layout_height="match_parent">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -48,24 +48,39 @@
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_menu" />
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
         android:id="@+id/searchbar"
         android:padding="3dp"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
-            android:layout_width="300dp"
+            android:layout_width="240dp"
             android:layout_height="match_parent"
             android:layout_marginStart="4dp"
-            app:iconifiedByDefault="false"
-            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="left"
             app:queryHint="검색"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="-9dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:background="@drawable/edge"
+            tools:ignore="GridLayout" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_columnSpan="1"
+            android:gravity="center"
+            android:fontFamily="@font/pretendardbold"
+            android:text="카테고리"
+            android:textSize="13dp" />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_columnSpan="1"
+            android:src="@drawable/ishopping_cart"
+            />
+    </GridLayout>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_container"
         android:layout_width="match_parent"
@@ -73,9 +88,9 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNav"
         app:layout_constraintTop_toBottomOf="@+id/searchbar"
 
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp" />
-<!--        app:layout_constraintBottom_toTopOf="@+id/bottomNav"-->
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="-194dp" />
+    <!--        app:layout_constraintBottom_toTopOf="@+id/bottomNav"-->
 
 
 
