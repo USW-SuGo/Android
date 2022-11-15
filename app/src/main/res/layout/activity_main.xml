@@ -7,6 +7,7 @@
     tools:openDrawer="start"
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent">
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -83,8 +84,6 @@
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/drawer_header"
             app:menu="@menu/drawer_menu" />
-        <!-- itemTextAppearance - 메뉴의 font를 바꾸기 위함 -->
-
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
