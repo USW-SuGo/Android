@@ -21,12 +21,7 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
     }
     class ViewHolder(binding: DealrvitemBinding) : RecyclerView.ViewHolder(binding.root){
         var binding: DealrvitemBinding
-        fun setData(imageUrl: String) {
-            Glide.with(binding.root.context)
-                .load(imageUrl)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.dealimageLnk)
-        }
+
         fun bind(dealMainItem: DealMainItem){
             val tesl:List<String>
             tesl=dealMainItem.imageLink.replace("[","").replace("]","").split(",")
