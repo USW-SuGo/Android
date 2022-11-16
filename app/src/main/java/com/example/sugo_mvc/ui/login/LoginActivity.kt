@@ -35,8 +35,8 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loginBtn.setOnClickListener {
 
-            val loginid1=binding.loginId1.editText?.text.toString()
-            val loginpwd2=binding.loginPwd2.editText?.text.toString()
+            val loginid1=binding.loginId1.text.toString()
+            val loginpwd2=binding.loginPWD2.text.toString()
             Log.d("good",loginid1+loginpwd2)
 
             RetrofitBuilder.service.login(LoginFormat(loginid1,loginpwd2)).enqueue(object :Callback<Token>{
