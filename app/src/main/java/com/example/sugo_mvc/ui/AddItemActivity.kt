@@ -244,29 +244,29 @@ class AddItemActivity : AppCompatActivity() {
 }
 
 
-    private fun sendImage(image : MultipartBody.Part,postFormat:PostFormat) {
-
-        RetrofitBuilder.service.postUpload(
-            App.prefs.AccessToken.toString(),
-            image,
-            postFormat
-        ).enqueue(object : retrofit2.Callback<ProductPostId> {
-            override fun onResponse(
-                call: retrofit2.Call<ProductPostId>,
-                response: Response<ProductPostId>
-            ) {
-                if (response?.isSuccessful) {
-                    Log.d("로그 ", "" + response?.body().toString())
-                    Toast.makeText(applicationContext, "통신성공", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(applicationContext, "통신실패", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: retrofit2.Call<ProductPostId>, t: Throwable) {
-                Log.d("onFailure", t.localizedMessage)
-            }
-
-        })
-    }
+//    private fun sendImage(image : MultipartBody.Part,postFormat:PostFormat) {
+//
+//        RetrofitBuilder.service.postUpload(
+//            App.prefs.AccessToken.toString(),
+//            image,
+//            postFormat
+//        ).enqueue(object : retrofit2.Callback<ProductPostId> {
+//            override fun onResponse(
+//                call: retrofit2.Call<ProductPostId>,
+//                response: Response<ProductPostId>
+//            ) {
+//                if (response?.isSuccessful) {
+//                    Log.d("로그 ", "" + response?.body().toString())
+//                    Toast.makeText(applicationContext, "통신성공", Toast.LENGTH_SHORT).show()
+//                } else {
+//                    Toast.makeText(applicationContext, "통신실패", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//            override fun onFailure(call: retrofit2.Call<ProductPostId>, t: Throwable) {
+//                Log.d("onFailure", t.localizedMessage)
+//            }
+//
+//        })
+//    }
 }

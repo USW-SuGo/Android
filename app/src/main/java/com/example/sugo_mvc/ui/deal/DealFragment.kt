@@ -115,6 +115,7 @@ class DealFragment : Fragment() {
                     binding.dealRv.adapter?.notifyItemInserted(DealItemSize.size - 1)
                     Log.d("DealItemsize",DealItemSize.size.toString())
                     //순서대로 출력하기 위해
+
                     DealItemSize.removeAt(DealItemSize.size - 1)
                     Log.d("DealItemsize",DealItemSize.size.toString())
                         for (i in 0..mainDealItemList.size-1) {

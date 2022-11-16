@@ -33,11 +33,11 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_gravity="center"
-            android:text="Sugo"
+            android:text="SUGO"
             android:fontFamily="@font/pretendardbold"
             android:textStyle="bold"
             android:textColor="@color/sugreen"
-            android:textSize="22dp"
+            android:textSize="26dp"
             />
 
     </androidx.appcompat.widget.Toolbar>

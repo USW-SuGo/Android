@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -31,6 +34,7 @@
                     android:layout_marginBottom="1dp">
 
                     <ImageView
+
                         android:id="@+id/dealimageLnk"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -43,38 +47,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white">
-
-                <TextView
-                    android:id="@+id/dealrvplace"
-                    android:layout_width="70dp"
+                <GridLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="장소"
-                    android:textColor="@color/ef_grey"
-                    android:textSize="10dp"
-                    tools:ignore="MissingConstraints" />
+                    android:columnCount="3"
+                    android:orientation="horizontal"
+                    android:rowCount="1">
+                    <TextView
+                        android:gravity="center"
+                        android:fontFamily="@font/pretendardbold"
+                        android:textSize="12dp"
+                        android:layout_columnWeight="1"
+                        android:id="@+id/dealrvplace"
+                        android:text="장소"/>
+                    <TextView
+                        android:gravity="center"
+                        android:id="@+id/dealDatetime"
+                        android:fontFamily="@font/pretendardbold"
+                        android:textSize="12dp"
+                        android:layout_columnWeight="1"
+                        android:text="시간"/>
+                    <TextView
+                        android:gravity="center"
+                        android:id="@+id/dealCategory"
+                        android:fontFamily="@font/pretendardbold"
+                        android:textSize="12dp"
+                        android:layout_columnWeight="1"
+                        android:text="카테고리"
+                        tools:ignore="GridLayout" />
 
-                <TextView
-                    android:id="@+id/dealCategory"
-                    android:layout_width="85dp"
-                    android:layout_height="27dp"
-                    android:textColor="@color/ef_grey"
-                    android:text="카테고리"
-                    android:textSize="10dp"
-                    android:layout_toRightOf="@+id/dealDatetime"
-                    tools:ignore="MissingConstraints"/>
-
-                <TextView
-                    android:id="@+id/dealDatetime"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/ef_grey"
-                    android:text="시간"
-                    android:textSize="10dp"
-                    android:layout_toRightOf="@+id/dealrvplace"
-                    tools:ignore="MissingConstraints"
-              />
-
-
+                </GridLayout>
             </RelativeLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -83,45 +85,51 @@
                 android:background="#ddd">
 
                 <RelativeLayout
+                    android:padding="3dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="16dp"
                     android:background="#fff"
                     android:layout_marginBottom="1dp">
 
                     <TextView
                         android:id="@+id/dealrvtitle"
-                        android:layout_width="70dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLength="8"
                         android:text="제목"
-                        android:textSize="13dp"
+                        android:textSize="14dp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent" />
                 </RelativeLayout>
             </LinearLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white">
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
                 <TextView
+                    android:gravity="left"
+                    android:fontFamily="@font/pretendardbold"
                     android:id="@+id/dealNickname"
                     android:layout_width="102dp"
                     android:layout_height="32dp"
-                    android:textSize="8dp"
                     android:text="nickname"
                     android:textColor="@color/ef_grey"
-                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:textSize="10dp"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
+                    android:fontFamily="@font/pretendardbold"
                     android:id="@+id/dealrvprice"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
                     android:text="가격"
                     android:textColor="@color/sugreen"
-                    android:textSize="12dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:layout_constraintRight_toRightOf="parent"
                     tools:ignore="MissingConstraints"
@@ -134,3 +142,4 @@
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>
+</RelativeLayout>

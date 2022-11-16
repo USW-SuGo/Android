@@ -7,12 +7,7 @@
         android:title="거래"
         android:icon="@drawable/ishopping_cart"
         />
-<!--    <item-->
-<!--        android:id="@+id/menumap"-->
-<!--        android:enabled="true"-->
-<!--        android:title="지도"-->
-<!--        android:icon="@drawable/map"-->
-<!--        />-->
+
     <item
         android:id="@+id/menuMyPage"
         android:enabled="true"

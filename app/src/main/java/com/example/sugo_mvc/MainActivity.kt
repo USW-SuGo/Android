@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         //왼쪽 버튼 아이콘 변경
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.hambug)
-        toolbar.setBackgroundColor(Color.rgb(240,240,240));
+        toolbar.setBackgroundColor(Color.rgb(255,255,255));
 
         drawerBar.setNavigationItemSelectedListener(this)
         container = binding.mainContainer.id
@@ -62,11 +62,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             android.R.id.home -> {
-
                 drawerLayout.openDrawer(GravityCompat.START)
-
                 return true
             }
+
             R.id.toolbar_msg -> {
                 Log.d("ToolBar_item: ", "msg버튼클릭")
                 val intent = Intent(applicationContext, IntroActivity::class.java)
@@ -74,7 +73,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 return true
             }
             R.id.map -> {
-
                 Log.d("ToolBar_item: ", "msg버튼클릭")
                 supportFragmentManager.beginTransaction().replace(container, MapFragment())
                     .commitAllowingStateLoss()
@@ -99,14 +97,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 supportFragmentManager.beginTransaction().replace(container, DealFragment())
                     .commitAllowingStateLoss()
             }
+            R.id.menuMyPage ->{
+                Log.d("ToolBar_item: ", "msg버튼클릭")
+                val intent = Intent(applicationContext, UserPageActivity::class.java)
+                startActivity(intent)
+                return true
+            }
 //            R.id.menumap -> {
 //                supportFragmentManager.beginTransaction().replace(container, MapFragment())
 //                    .commitAllowingStateLoss()
 //            }
-            else -> {
-                supportFragmentManager.beginTransaction().replace(container, DealFragment())
-                    .commitAllowingStateLoss()
-            }
+//            else -> {
+//                supportFragmentManager.beginTransaction().replace(container, UserpageFragment())
+//                    .commitAllowingStateLoss()
+//            }
         }
         return true
     }

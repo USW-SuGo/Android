@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginActivity"
     android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:textSize="36dp"
+        android:textColor="@color/sugreen"
+        android:fontFamily="@font/pretendardbold"
+        android:text="SUGO"
+        android:gravity="center"/>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:id="@+id/loginId1"
