@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="4dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,67 +9,89 @@
     android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:textSize="36dp"
         android:textColor="@color/sugreen"
         android:fontFamily="@font/pretendardbold"
         android:text="SUGO"
         android:gravity="center"/>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:id="@+id/loginId1"
-        android:layout_height="wrap_content"
-        app:counterMaxLength="20"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Id"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:id="@+id/loginPwd2"
-        android:layout_height="wrap_content">
-
-    <com.google.android.material.textfield.TextInputEditText
-        inputType="textPassword"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="pwd"
-        />
-
-    </com.google.android.material.textfield.TextInputLayout>
-    <Button
-        android:layout_width="wrap_content"
+        android:text="아이디"
+        android:fontFamily="@font/pretendardbold"
+        android:textStyle="bold"
+        android:textSize="12dp"/>
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="예) honggildong"
+        android:textSize="14dp"
+        android:id="@+id/loginId1"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="비밀번호"
+        android:fontFamily="@font/pretendardbold"
+        android:textStyle="bold"
+        android:textSize="12dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="예) honggildong"
+        android:textSize="14dp"
+        android:id="@+id/loginPWD2"
+        android:inputType="textPassword"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/sugreen"
         android:text="login"
+        android:fontFamily="@font/pretendardbold"
+        android:textColor="@color/white"
+        android:background="@drawable/buttonshape"
         android:id="@+id/loginBtn"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="signup"
-        android:id="@+id/signupbtn"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="findId"
-        android:id="@+id/findidbtn"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="findPwd"
-        android:id="@+id/findpwdbtn"
-        />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/findidbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/pretendardbold"
+            android:gravity="center"
+            android:text="아이디 찾기"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/findpwdbtn"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="0dp" />
+
+
+
+        <TextView
+            android:id="@+id/findpwdbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/pretendardbold"
+            android:gravity="center"
+            android:text="비밀번호 찾기"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="181dp"
-        tools:layout_editor_absoluteY="682dp"
-        tools:ignore="MissingConstraints" />
+        android:backgroundTint="@color/white"
+        android:text="회원가입"
+        android:fontFamily="@font/pretendardbold"
+        android:textColor="@color/sugreen"
+        android:background="@drawable/buttonshape"
+        android:id="@+id/signupbtn"/>
+
 </LinearLayout>
