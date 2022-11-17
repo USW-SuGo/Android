@@ -3,7 +3,7 @@ package com.example.sugo_mvc.data
 
     data class DealDetailItem(
 var id: Long,
-var writterid: Long,
+var writerId: Long,
 var imageLink:String,
 var contactPlace: String,
 var updateAt: String,

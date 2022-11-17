@@ -33,7 +33,6 @@ class DealDetailActivity : AppCompatActivity() {
                 response: Response<DealDetailItem>
             ) {
                     Log.d("asd", call.request().toString())
-                    Log.d("FailDetail",response.errorBody()?.string()!!)
                 }
 
             override fun onFailure(call: Call<DealDetailItem>, t: Throwable) {

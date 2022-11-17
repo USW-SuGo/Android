@@ -70,7 +70,7 @@ interface SuRetrofit {
     @GET(DETAILPAGE)
     fun getDetailPage(
         @Header("Authorization") AccessToken: String,
-        @Query("productPostId",encoded = true) Id : Int=16
+        @Query("productPostId") Id : Long=16
     ):Call<DealDetailItem>
 
 }
