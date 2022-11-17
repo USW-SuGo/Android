@@ -22,7 +22,7 @@ class Constants {
         const val USERPAGE : String="/user/?target={}&?page={}&size={}"
         const val POSTUPLOAD : String="/post"
         const val POSTGET : String = "/post/all?page=0&size=10&category"
-        const val LECTURE_MAIN : String ="/lecture/all"
+        const val DETAILPAGE : String="/post/"
     }
 
 }
