@@ -1,53 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.JoinActivity"
-    android:orientation="vertical">
-    <com.google.android.material.textfield.TextInputLayout
+    android:layout_margin="4dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:id="@+id/loginId"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.JoinActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:fontFamily="@font/pretendardbold"
+            android:paddingLeft="3dp"
+            android:paddingBottom="6dp"
+            android:text="학교 이메일"
+            android:textSize="18dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:fontFamily="@font/pretendardbold"
+            android:paddingLeft="3dp"
+            android:paddingBottom="6dp"
+            android:text="재학생 인증이 필요하므로 정확히 입력해주세요"
+
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/loginEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/textline"
+            android:fontFamily="@font/pretendardbold"
+            android:hint="이메일"
+            android:padding="3dp"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:fontFamily="@font/pretendardbold"
+            android:paddingLeft="3dp"
+            android:paddingBottom="6dp"
+            android:textColor="@color/black"
+            android:text="아이디"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/loginId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/textline"
+            android:fontFamily="@font/pretendardbold"
+            android:hint="아이디"
+            android:padding="3dp"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:fontFamily="@font/pretendardbold"
+            android:paddingLeft="3dp"
+            android:paddingBottom="6dp"
+            android:text="비밀번호"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:fontFamily="@font/pretendardbold"
+            android:paddingLeft="3dp"
+            android:paddingBottom="6dp"
+            android:text="영문/숫자/특수문자 3가지 조합 (8~20자)"
+
+            android:textSize="12dp" />
+
+        <EditText
+            android:layout_margin="5dp"
+            android:id="@+id/loginPwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/textline"
+            android:fontFamily="@font/pretendardbold"
+            android:hint="비밀번호"
+            android:padding="3dp"
+            android:textSize="18dp" />
+
+        <EditText
+            android:layout_margin="5dp"
+            android:id="@+id/loginPwdCheck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/textline"
+            android:fontFamily="@font/pretendardbold"
+            android:hint="비밀번호확인"
+            android:padding="3dp"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/joinbtb"
+        android:text="다음"
+        android:fontFamily="@font/pretendardbold"
+        android:backgroundTint="@color/sugreen"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:counterMaxLength="20"
->
-        <com.google.android.material.textfield.TextInputEditText
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Id"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:id="@+id/loginPwd"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="pwd"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:id="@+id/loginEmail"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="email"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/joinbtb"/>
-</LinearLayout>
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>

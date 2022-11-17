@@ -37,8 +37,10 @@ object RetrofitBuilder {
     class AuthInterceptor : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
             var req =
+
                 chain.request().newBuilder().addHeader("Authorization", App.prefs.AccessToken ?: "").build()
                 chain.request().newBuilder().addHeader("Authorization", App.prefs.RefreshToken ?: "").build()
+
             return chain.proceed(req)
         }
     }

@@ -77,7 +77,6 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView?.context, DealDetailActivity::class.java)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
-
         }
 
     }
