@@ -47,7 +47,8 @@ object RetrofitBuilder {
                         )
                     }
                 }
-            )            .create()
+            )
+            .create()
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
