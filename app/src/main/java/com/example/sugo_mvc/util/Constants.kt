@@ -23,6 +23,9 @@ class Constants {
         const val POSTUPLOAD : String="/post"
         const val POSTGET : String = "/post/all?page=0&size=10&category"
         const val DETAILPAGE : String="/post/"
+            const val MAKEMESSAGEROOM:String="/note"
+            const val CHECKMESSAGEROOM:String="/note/list?page=0&size=10"
+            const val SENDMESSAGE:String="/note-content/"
     }
 
 }
