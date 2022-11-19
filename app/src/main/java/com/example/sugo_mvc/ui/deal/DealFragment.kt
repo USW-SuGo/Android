@@ -35,7 +35,7 @@ class DealFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val testItems1 = DealMainItem(0, "", "", "", "", 0, "", "")
+        val testItems1 = DealMainItem(0, "", "", "", "", 0, "", "",false)
         RetrofitBuilder.service.getItemList().enqueue(object : Callback<MutableList<DealMainItem>> {
             override fun onResponse(
                 call: Call<MutableList<DealMainItem>>,
@@ -89,7 +89,7 @@ class DealFragment : Fragment() {
     }
 
     private fun getMoreData() {
-        val testItems1 = DealMainItem(0, "", "", "null", "", 0, "", "")
+        val testItems1 = DealMainItem(0, "", "", "null", "", 0, "", "",false)
         RetrofitBuilder.service.getItemList().enqueue(object : Callback<MutableList<DealMainItem>> {
             override fun onResponse(
                 call: Call<MutableList<DealMainItem>>,
