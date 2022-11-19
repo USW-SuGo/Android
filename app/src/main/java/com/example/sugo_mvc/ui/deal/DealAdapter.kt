@@ -12,6 +12,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.sugo_mvc.data.DealMainItem
 import com.example.sugo_mvc.databinding.DealrvitemBinding
 import com.example.sugo_mvc.ui.DealDetailActivity
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<DealAdapter.ViewHolder>() {
 
@@ -31,7 +33,7 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
             binding.dealrvplace.text = dealMainItem.contactPlace
             binding.dealNickname.text=dealMainItem.nickname
             binding.dealCategory.text=dealMainItem.category
-            binding.dealDatetime.text=dealMainItem.updateAt
+            binding.dealDatetime.text= dealMainItem.updatedAt.toString()
             Glide.with(itemView).load(tesl[0]).into(binding.dealimageLnk)
         }
         init {

@@ -12,7 +12,7 @@ data class DealMainItem(
     var id: Long,
     var imageLink:String,
     var contactPlace: String,
-    var updateAt: String,
+    var updatedAt: LocalDateTime,
     var title: String,
     var price: Int,
     var nickname: String,
