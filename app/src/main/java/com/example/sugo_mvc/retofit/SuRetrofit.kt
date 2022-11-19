@@ -6,6 +6,7 @@ import androidx.core.text.PrecomputedTextCompat
 import com.example.sugo_mvc.data.*
 import com.example.sugo_mvc.util.App
 import com.example.sugo_mvc.util.Constants.Companion.AUTH_HEADER
+import com.example.sugo_mvc.util.Constants.Companion.CHECKMESSAGEROOM
 import com.example.sugo_mvc.util.Constants.Companion.DETAILPAGE
 import com.example.sugo_mvc.util.Constants.Companion.EXIST
 
@@ -13,6 +14,7 @@ import com.example.sugo_mvc.util.Constants.Companion.FindId
 import com.example.sugo_mvc.util.Constants.Companion.FindPwd
 import com.example.sugo_mvc.util.Constants.Companion.LOGIN
 import com.example.sugo_mvc.util.Constants.Companion.LOGINCHECK
+import com.example.sugo_mvc.util.Constants.Companion.MAKEMESSAGEROOM
 import com.example.sugo_mvc.util.Constants.Companion.MYPAGE
 //import com.example.sugo_mvc.util.Constants.Companion.NOTE
 import com.example.sugo_mvc.util.Constants.Companion.OVERLAP
@@ -76,20 +78,22 @@ interface SuRetrofit {
         @Query("productPostId") Id : Long
     ):Call<DealDetailItem>
 
-    @GET("/note/list?page=0&size=10")
-    fun getNoteroom(
-        @Header("Authorization") AccessToken: String,
-       ):Call<roomInfo>
-
     @GET(MYPAGE)
     fun getUserPage(
         @Header("Authorization") AccessToken: String,
     ):Call<Userpage>
-//    @POST(NOTE)
-//    fun openNote(
-//        @Header(AUTH_HEADER) AccessToken:String,
-//        @Body noteRoom: noteRoom
-//    ):Call<noteRoom>
+
+    @POST(MAKEMESSAGEROOM)
+    fun makeMessageRoom(
+        @Header("Authorization") AccessToken: String,
+        @Body info : noteRoom
+    )
+
+    @GET(CHECKMESSAGEROOM)
+    fun checkMessageRoom(
+        @Header("Authorization") AccessToken: String
+    ):Call <MutableList<roomInfo>>
+
 
 }
 
