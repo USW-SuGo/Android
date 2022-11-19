@@ -13,11 +13,14 @@ import com.example.sugo_mvc.util.Constants.Companion.FindId
 import com.example.sugo_mvc.util.Constants.Companion.FindPwd
 import com.example.sugo_mvc.util.Constants.Companion.LOGIN
 import com.example.sugo_mvc.util.Constants.Companion.LOGINCHECK
+import com.example.sugo_mvc.util.Constants.Companion.MYPAGE
+import com.example.sugo_mvc.util.Constants.Companion.NOTE
 import com.example.sugo_mvc.util.Constants.Companion.OVERLAP
 import com.example.sugo_mvc.util.Constants.Companion.POSTGET
 import com.example.sugo_mvc.util.Constants.Companion.POSTUPLOAD
 import com.example.sugo_mvc.util.Constants.Companion.REQUEST_REFRESH
 import com.example.sugo_mvc.util.Constants.Companion.SIGN_UP
+import com.example.sugo_mvc.util.Constants.Companion.USERPAGE
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -70,8 +73,23 @@ interface SuRetrofit {
     @GET(DETAILPAGE)
     fun getDetailPage(
         @Header("Authorization") AccessToken: String,
-        @Query("productPostId") Id : Long=16
+        @Query("productPostId") Id : Long
     ):Call<DealDetailItem>
+
+    @GET("/note/list?page=0&size=10")
+    fun getNoteroom(
+        @Header("Authorization") AccessToken: String,
+       ):Call<roomInfo>
+
+    @GET(MYPAGE)
+    fun getUserPage(
+        @Header("Authorization") AccessToken: String,
+    ):Call<Userpage>
+    @POST(NOTE)
+    fun openNote(
+        @Header(AUTH_HEADER) AccessToken:String,
+        @Body noteRoom: noteRoom
+    ):Call<noteRoom>
 
 }
 

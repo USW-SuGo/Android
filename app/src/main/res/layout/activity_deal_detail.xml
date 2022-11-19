@@ -161,7 +161,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="유저가 쓴글"/>
+                android:text="유저가 쓴글"
+                android:id="@+id/content"/>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
