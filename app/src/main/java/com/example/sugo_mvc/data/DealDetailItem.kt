@@ -1,7 +1,9 @@
 package com.example.sugo_mvc.data
 
+import java.time.LocalDateTime
 
-    data class DealDetailItem(
+
+data class DealDetailItem(
 var id: Long,
 var writerId: Long,
 var imageLink:String,
