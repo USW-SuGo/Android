@@ -14,7 +14,7 @@ import com.example.sugo_mvc.util.Constants.Companion.FindPwd
 import com.example.sugo_mvc.util.Constants.Companion.LOGIN
 import com.example.sugo_mvc.util.Constants.Companion.LOGINCHECK
 import com.example.sugo_mvc.util.Constants.Companion.MYPAGE
-import com.example.sugo_mvc.util.Constants.Companion.NOTE
+//import com.example.sugo_mvc.util.Constants.Companion.NOTE
 import com.example.sugo_mvc.util.Constants.Companion.OVERLAP
 import com.example.sugo_mvc.util.Constants.Companion.POSTGET
 import com.example.sugo_mvc.util.Constants.Companion.POSTUPLOAD
@@ -85,11 +85,11 @@ interface SuRetrofit {
     fun getUserPage(
         @Header("Authorization") AccessToken: String,
     ):Call<Userpage>
-    @POST(NOTE)
-    fun openNote(
-        @Header(AUTH_HEADER) AccessToken:String,
-        @Body noteRoom: noteRoom
-    ):Call<noteRoom>
+//    @POST(NOTE)
+//    fun openNote(
+//        @Header(AUTH_HEADER) AccessToken:String,
+//        @Body noteRoom: noteRoom
+//    ):Call<noteRoom>
 
 }
 
