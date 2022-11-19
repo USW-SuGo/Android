@@ -28,6 +28,8 @@ class UserPageActivity : AppCompatActivity() {
                 Log.d("user",call.request().toString())
                 binding.userrv.layoutManager = LinearLayoutManager(this@UserPageActivity)
                 binding.userrv.adapter = DealAdapter(response.body()!!.myPosting as MutableList<DealMainItem>)
+                binding.usernickname.text= response.body()!!.nickname.toString()
+                binding.countTradeAttempt.text=response.body()!!.countTradeAttempt.toString()
             }
 
             override fun onFailure(call: Call<Userpage>, t: Throwable) {
