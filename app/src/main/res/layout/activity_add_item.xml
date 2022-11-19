@@ -1,24 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.AddItemActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="수고올리기"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="44dp" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardbold"
+            android:gravity="center"
+            android:text="완료"
+            android:textSize="16dp"
+            android:textColor="@color/sugreen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pretendardbold"
+            android:text="수고올리기"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,29 +49,48 @@
         android:id="@+id/addtitle">
 
         <com.google.android.material.textfield.TextInputEditText
-
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardbold"
             android:hint="제목" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        android:id="@+id/addprice"
+        android:layout_height="wrap_content">
 
-        tools:layout_editor_absoluteX="-4dp"
-        tools:layout_editor_absoluteY="230dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/addprice"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="가격" />
+            android:layout_row="0"
+            android:layout_column="0"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="-4dp"
+            tools:layout_editor_absoluteY="230dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="180dp"
+                android:fontFamily="@font/pretendardbold"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="가격" />
 
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="180dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/buttonshape"
+            android:fontFamily="@font/pretendardbold"
+            android:layout_height="40dp"
+            android:textColor="@color/sugreen"
+            android:layout_gravity="center"
+            android:text="수고 할 장소" />
+
+    </GridLayout>
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -58,10 +98,11 @@
         tools:ignore="MissingConstraints">
 
         <ImageView
+            android:padding="17dp"
             android:id="@+id/pickpicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_background" />
+            android:layout_width="76dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_camera" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/addrecycle"
@@ -71,37 +112,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </GridLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/addcontentfield"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-4dp"
-        tools:layout_editor_absoluteY="358dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="글쓰기" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/addcontactplace"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-4dp"
-        tools:layout_editor_absoluteY="358dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="수고장소" />
-
-    </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/addcategory"
         android:layout_width="match_parent"
@@ -114,23 +124,30 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="카테고리" />
+            android:background="@color/white"
+            android:hint="카테고리"
+            android:fontFamily="@font/pretendardbold"/>
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
+</LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addsugo"
-        android:layout_width="180dp"
+        android:fontFamily="@font/pretendardbold"
+        android:textColor="@color/white"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/buttonshape"
+        android:backgroundTint="@color/sugreen"
+        android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginBottom="24dp"
         android:text="수고올리기"
-        android:textSize="21dp"
-        android:textStyle="bold"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 

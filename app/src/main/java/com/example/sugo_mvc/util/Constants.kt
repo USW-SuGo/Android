@@ -18,7 +18,7 @@ class Constants {
         const val CHANGEPWD : String = "/user/password"
         const val WITHDRAWAL : String = "/user"
         const val MANNER : String="/user/manner"
-        const val MYPAGE : String="user?page=0&size=10"
+        const val MYPAGE : String="user?target={}&?page={}&size={}"
         const val USERPAGE : String="/user/?target={}&?page={}&size={}"
         const val POSTUPLOAD : String="/post"
         const val POSTGET : String = "/post/all?page=0&size=10&category"

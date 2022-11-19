@@ -35,17 +35,19 @@ class DealFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val testItems1 = DealMainItem(0, "", "", "", "", 0, "", "")
+        val testItems1 = DealMainItem(0, "", "", "", "", 0, "", "",false)
         RetrofitBuilder.service.getItemList().enqueue(object : Callback<MutableList<DealMainItem>> {
             override fun onResponse(
                 call: Call<MutableList<DealMainItem>>,
                 response: Response<MutableList<DealMainItem>>
             ) {
                 if (response.isSuccessful) {
+                    Log.d("asd",call.request().toString())
                     var mainDealItemList = mutableListOf<DealMainItem>()
                     mainDealItemList = response.body()!!
                     Log.d("성공", " 성공: " + mainDealItemList[0].toString())
                     testItems1.id=mainDealItemList[0].id
+                    Log.d("id",testItems1.id.toString())
                     testItems1.imageLink = "https://s3.ap-northeast-2.amazonaws.com/diger-usw-sugo-s3/post-resource/%EC%A0%9C%EB%AA%A9%EC%B5%9C%EB%8C%80%EA%B8%80%EC%9E%90%EB%A5%BC%EB%AA%87%EA%B8%80%EC%9E%90%EB%A1%9C%EC%A7%80%EC%A0%95%ED%95%B4%EC%95%BC%EB%90%A0%EC%A7%80%EC%A7%80%3B%EC%83%81%EB%8B%B9%ED%9E%88%2B0"
                     testItems1.contactPlace = mainDealItemList[0].contactPlace
 //                    testItems1.updateAt = mainDealItemList[0].updateAt
@@ -87,7 +89,7 @@ class DealFragment : Fragment() {
     }
 
     private fun getMoreData() {
-        val testItems1 = DealMainItem(0, "", "", "null", "", 0, "", "")
+        val testItems1 = DealMainItem(0, "", "", "null", "", 0, "", "",false)
         RetrofitBuilder.service.getItemList().enqueue(object : Callback<MutableList<DealMainItem>> {
             override fun onResponse(
                 call: Call<MutableList<DealMainItem>>,
@@ -115,6 +117,7 @@ class DealFragment : Fragment() {
                     binding.dealRv.adapter?.notifyItemInserted(DealItemSize.size - 1)
                     Log.d("DealItemsize",DealItemSize.size.toString())
                     //순서대로 출력하기 위해
+
                     DealItemSize.removeAt(DealItemSize.size - 1)
                     Log.d("DealItemsize",DealItemSize.size.toString())
                         for (i in 0..mainDealItemList.size-1) {

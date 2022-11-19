@@ -51,8 +51,8 @@ class AddItemActivity : AppCompatActivity() {
                 val addtitle = binding.addtitle.editText?.text.toString()
                 val addprice = binding.addprice.editText?.text
                 val addcategory = binding.addcategory.editText?.text.toString()
-                val addcontactplace = binding.addcontactplace.editText?.text.toString()
-                val addcontentfield = binding.addcontentfield.editText?.text.toString()
+//                val addcontactplace = binding.addcontactplace.editText?.text.toString()
+//                val addcontentfield = binding.addcontentfield.editText?.text.toString()
                 val list1= ArrayList<Uri>()
                 for (i in 0 until list.size) {
                     list1.add(list[i])
@@ -107,8 +107,7 @@ class AddItemActivity : AppCompatActivity() {
             val addtitle = binding.addtitle.editText?.text.toString()
             val addprice = binding.addprice.editText?.text
             val addcategory = binding.addcategory.editText?.text.toString()
-            val addcontactplace = binding.addcontactplace.editText?.text.toString()
-            val addcontentfield = binding.addcontentfield.editText?.text.toString()
+//            val addcontactplace = binding.addcontactplace.editText?.text.to/
             if (data?.clipData != null) { // 사진 여러개 선택한 경우
 
                 val count = data.clipData!!.itemCount
@@ -128,7 +127,7 @@ class AddItemActivity : AppCompatActivity() {
                     val imageUri : Uri? = data?.data
                     if (imageUri != null) {
                         list.add(imageUri)
-                        sendImage(body,PostFormat(addtitle, addcontentfield, addprice, addcontactplace, addcategory))
+//                        sendImage(body,PostFormat(addtitle, addcontentfield, addprice, addcontactplace, addcategory))
                     }
                 }
             }
@@ -245,29 +244,29 @@ class AddItemActivity : AppCompatActivity() {
 }
 
 
-    private fun sendImage(image : MultipartBody.Part,postFormat:PostFormat) {
-
-        RetrofitBuilder.service.postUpload(
-            App.prefs.AccessToken.toString(),
-            image,
-            postFormat
-        ).enqueue(object : retrofit2.Callback<ProductPostId> {
-            override fun onResponse(
-                call: retrofit2.Call<ProductPostId>,
-                response: Response<ProductPostId>
-            ) {
-                if (response?.isSuccessful) {
-                    Log.d("로그 ", "" + response?.body().toString())
-                    Toast.makeText(applicationContext, "통신성공", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(applicationContext, "통신실패", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: retrofit2.Call<ProductPostId>, t: Throwable) {
-                Log.d("onFailure", t.localizedMessage)
-            }
-
-        })
-    }
+//    private fun sendImage(image : MultipartBody.Part,postFormat:PostFormat) {
+//
+//        RetrofitBuilder.service.postUpload(
+//            App.prefs.AccessToken.toString(),
+//            image,
+//            postFormat
+//        ).enqueue(object : retrofit2.Callback<ProductPostId> {
+//            override fun onResponse(
+//                call: retrofit2.Call<ProductPostId>,
+//                response: Response<ProductPostId>
+//            ) {
+//                if (response?.isSuccessful) {
+//                    Log.d("로그 ", "" + response?.body().toString())
+//                    Toast.makeText(applicationContext, "통신성공", Toast.LENGTH_SHORT).show()
+//                } else {
+//                    Toast.makeText(applicationContext, "통신실패", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//            override fun onFailure(call: retrofit2.Call<ProductPostId>, t: Throwable) {
+//                Log.d("onFailure", t.localizedMessage)
+//            }
+//
+//        })
+//    }
 }

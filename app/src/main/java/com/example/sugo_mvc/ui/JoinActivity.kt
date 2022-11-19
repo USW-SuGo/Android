@@ -19,9 +19,9 @@ class JoinActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.joinbtb.setOnClickListener {
-            val loginid=binding.loginId.editText?.text.toString()
-            val loginpwd=binding.loginPwd.editText?.text.toString()
-            val email=binding.loginEmail.editText?.text.toString()
+            val loginid=binding.loginId.text.toString()
+            val loginpwd=binding.loginPwd.text.toString()
+            val email=binding.loginEmail.text.toString()
 
         Log.d("Test",email)
         Log.d("Test",loginid)
@@ -117,7 +117,7 @@ class JoinActivity : AppCompatActivity() {
     }
     }
     private fun validateEmail(): Boolean {
-        val value: String = binding.loginEmail.editText?.text.toString()
+        val value: String = binding.loginEmail.text.toString()
         val emailPattern = """^[a-z0-9]*${'$'}@suwon.ac.kr"""
 
         return if (value.isEmpty()) {
@@ -128,13 +128,12 @@ class JoinActivity : AppCompatActivity() {
             false
         } else {
             binding.loginEmail.error = null
-            binding.loginEmail.isErrorEnabled = false
             true
         }
     }
 
     private fun validateLoginPwd(): Boolean {
-        val value: String = binding.loginPwd.editText?.text.toString()
+        val value: String = binding.loginPwd.text.toString()
         val loginPwdPattern =  """^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^+\-=])(?=\S+$).*$"""
 
         return if (value.isEmpty()) {
@@ -145,13 +144,13 @@ class JoinActivity : AppCompatActivity() {
             false
         } else {
             binding.loginPwd.error = null
-            binding.loginPwd.isErrorEnabled = false
+//            binding.loginPwd.isErrorEnabled = false
             true
         }
     }
 
     private fun validateLoginId(): Boolean {
-        val value: String = binding.loginId.editText?.text.toString()
+        val value: String = binding.loginId.text.toString()
         val loginPattern = """^[a-z0-9]*$"""
 
         return if (value.isEmpty()) {
@@ -162,7 +161,7 @@ class JoinActivity : AppCompatActivity() {
             false
         } else {
             binding.loginId.error = null
-            binding.loginId.isErrorEnabled = false
+//            binding.loginId.isErrorEnabled = false
             true
         }
     }

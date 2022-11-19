@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.sugo_mvc.MainActivity
 import com.example.sugo_mvc.R
+import com.example.sugo_mvc.data.DealDetailItem
 import com.example.sugo_mvc.data.DealMainItem
 import com.example.sugo_mvc.data.LoginFormat
 import com.example.sugo_mvc.data.Token
@@ -28,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.signupbtn.setOnClickListener {
+
             val intent = Intent(applicationContext, JoinActivity::class.java)
             startActivity(intent)
 
@@ -35,8 +37,8 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loginBtn.setOnClickListener {
 
-            val loginid1=binding.loginId1.editText?.text.toString()
-            val loginpwd2=binding.loginPwd2.editText?.text.toString()
+            val loginid1=binding.loginId1.text.toString()
+            val loginpwd2=binding.loginPWD2.text.toString()
             Log.d("good",loginid1+loginpwd2)
 
             RetrofitBuilder.service.login(LoginFormat(loginid1,loginpwd2)).enqueue(object :Callback<Token>{
@@ -49,6 +51,7 @@ class LoginActivity : AppCompatActivity() {
                         val spi =result!!.split(",")
                         App.prefs.AccessToken=spi[1].replace("}","")
                         App.prefs.RefreshToken=spi[0].replace("{","")
+                        Log.d("asd",App.prefs.AccessToken.toString())
                         val token = App.prefs.AccessToken
                         val token2 = App.prefs.RefreshToken
                         val intent = Intent(applicationContext,MainActivity::class.java)
@@ -64,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
             binding.findidbtn.setOnClickListener {
-                
+
             }
 
             binding.findpwdbtn.setOnClickListener {  }

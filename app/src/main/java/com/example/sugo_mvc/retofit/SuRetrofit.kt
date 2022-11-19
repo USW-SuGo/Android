@@ -2,20 +2,25 @@ package com.example.sugo_mvc.retofit
 
 import android.content.Intent
 import android.net.Uri
+import androidx.core.text.PrecomputedTextCompat
 import com.example.sugo_mvc.data.*
+import com.example.sugo_mvc.util.App
 import com.example.sugo_mvc.util.Constants.Companion.AUTH_HEADER
+import com.example.sugo_mvc.util.Constants.Companion.DETAILPAGE
 import com.example.sugo_mvc.util.Constants.Companion.EXIST
 
 import com.example.sugo_mvc.util.Constants.Companion.FindId
 import com.example.sugo_mvc.util.Constants.Companion.FindPwd
-import com.example.sugo_mvc.util.Constants.Companion.LECTURE_MAIN
 import com.example.sugo_mvc.util.Constants.Companion.LOGIN
 import com.example.sugo_mvc.util.Constants.Companion.LOGINCHECK
+import com.example.sugo_mvc.util.Constants.Companion.MYPAGE
+import com.example.sugo_mvc.util.Constants.Companion.NOTE
 import com.example.sugo_mvc.util.Constants.Companion.OVERLAP
 import com.example.sugo_mvc.util.Constants.Companion.POSTGET
 import com.example.sugo_mvc.util.Constants.Companion.POSTUPLOAD
 import com.example.sugo_mvc.util.Constants.Companion.REQUEST_REFRESH
 import com.example.sugo_mvc.util.Constants.Companion.SIGN_UP
+import com.example.sugo_mvc.util.Constants.Companion.USERPAGE
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -64,12 +69,28 @@ interface SuRetrofit {
         @Query("page") page: Int =0,
         @Query("size") size: Int =10,
     ):Call<MutableList<DealMainItem>>
-@GET(LECTURE_MAIN)
-fun getLectureMainList(
-    @Query("option") option: String,
-    @Query("page") page: Int = 1,
-    @Query("majorType") majorType: String = ""
-): Call<dataDto<MutableList<LectureMain?>>>
+
+    @GET(DETAILPAGE)
+    fun getDetailPage(
+        @Header("Authorization") AccessToken: String,
+        @Query("productPostId") Id : Long
+    ):Call<DealDetailItem>
+
+    @GET("/note/list?page=0&size=10")
+    fun getNoteroom(
+        @Header("Authorization") AccessToken: String,
+       ):Call<roomInfo>
+
+    @GET(MYPAGE)
+    fun getUserPage(
+        @Header("Authorization") AccessToken: String,
+    ):Call<Userpage>
+    @POST(NOTE)
+    fun openNote(
+        @Header(AUTH_HEADER) AccessToken:String,
+        @Body noteRoom: noteRoom
+    ):Call<noteRoom>
+
 }
 
 
