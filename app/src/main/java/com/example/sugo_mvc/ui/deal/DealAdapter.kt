@@ -25,6 +25,7 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
         fun bind(dealMainItem: DealMainItem){
             val tesl:List<String>
             tesl=dealMainItem.imageLink.replace("[","").replace("]","").split(",")
+            binding.dealrvid.text=dealMainItem.id.toString()
             binding.dealrvtitle.text = dealMainItem.title
             binding.dealrvprice.text = dealMainItem.price.toString()
             binding.dealrvplace.text = dealMainItem.contactPlace
@@ -38,7 +39,6 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
             //item Click Listener
             binding.root.setOnClickListener(View.OnClickListener {
                 val pos = adapterPosition
-
                 Log.d("click", pos.toString() + " : click!")
             })
 
@@ -72,10 +72,13 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
     override fun onBindViewHolder(holder: DealAdapter.ViewHolder, position: Int) {
         holder.bind(items!![position])
         val layoutParams = holder.itemView.layoutParams
+
         layoutParams.height = 1000
         holder.itemView.requestLayout()
         holder.itemView.setOnClickListener{
-            val intent = Intent(holder.itemView?.context, DealDetailActivity::class.java)
+
+            val intent = Intent(holder.itemView?.context, DealDetailActivity()::class.java)
+            intent.putExtra("id",   holder.binding.dealrvid.text)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
         }
 
@@ -83,7 +86,6 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
     override fun getItemCount(): Int {
         return items.size
     }
-
 
 
 
