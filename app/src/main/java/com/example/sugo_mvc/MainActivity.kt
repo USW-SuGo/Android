@@ -15,6 +15,7 @@ import com.example.sugo_mvc.ui.*
 
 import com.example.sugo_mvc.ui.deal.DealFragment
 import com.example.sugo_mvc.ui.login.LoginActivity
+import com.example.sugo_mvc.ui.messageRoom.MessageRoomActivity
 
 import com.google.android.material.navigation.NavigationView
 

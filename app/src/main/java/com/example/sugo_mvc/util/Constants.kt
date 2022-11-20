@@ -25,7 +25,9 @@ class Constants {
         const val DETAILPAGE : String="/post/"
             const val MAKEMESSAGEROOM:String="/note"
             const val CHECKMESSAGEROOM:String="/note/list?page=0&size=10"
-            const val SENDMESSAGE:String="/note-content/"
+        const val CHECKMESSAGECONTENTROOM:String="/note/"
+
+        const val SENDMESSAGE:String="/note-content/"
     }
 
 }

@@ -22,7 +22,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.MessageRoomActivity"
+            android:name=".ui.messageRoom.MessageContentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.messageRoom.MessageRoomActivity"
             android:exported="false" />
         <activity
             android:name=".ui.UserPageActivity"

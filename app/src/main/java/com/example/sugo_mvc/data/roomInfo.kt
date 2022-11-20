@@ -3,7 +3,7 @@ package com.example.sugo_mvc.data
 import java.time.LocalDateTime
 
 data class roomInfo (
-    val roomId:Long,
+    val noteId:Long,
     val requestUserId : Long,
     val opponentUserId : Long,
     val opponentUserNickname: String,
