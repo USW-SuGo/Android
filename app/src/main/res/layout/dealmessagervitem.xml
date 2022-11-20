@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="방번호"
+        android:textColor="@color/white"
         android:id="@+id/roomId"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="보낸사람"
+        android:fontFamily="@font/pretendardbold"
+        android:textSize="16dp"
         android:id="@+id/messagesender"/>
     <TextView
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="보낸사람"
+        android:textSize="0.1dp"
         android:id="@+id/requestUserid"/>
     <TextView
+        android:textSize="0.1dp"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="자신"
@@ -27,15 +40,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="최근메시지"
+        android:fontFamily="@font/pretendardbold"
         android:id="@+id/recentcontent"/>
     <TextView
+        android:layout_marginRight="30dp"
+        android:gravity="right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="최근시간"
+        android:fontFamily="@font/pretendardbold"
         android:id="@+id/recentChattingtime"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="읽음확인"
+        android:fontFamily="@font/pretendardbold"
         android:id="@+id/unreadcount"/>
-</LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

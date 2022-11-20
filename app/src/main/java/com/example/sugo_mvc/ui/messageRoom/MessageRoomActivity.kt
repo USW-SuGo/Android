@@ -1,17 +1,12 @@
-package com.example.sugo_mvc.ui
+package com.example.sugo_mvc.ui.messageRoom
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sugo_mvc.data.DealMainItem
-import com.example.sugo_mvc.data.roomAll
 import com.example.sugo_mvc.data.roomInfo
-import com.example.sugo_mvc.databinding.ActivityJoinBinding
 import com.example.sugo_mvc.databinding.ActivityMessageRoomBinding
 import com.example.sugo_mvc.retofit.RetrofitBuilder
-import com.example.sugo_mvc.ui.deal.DealAdapter
-import com.example.sugo_mvc.ui.messageRoom.MessageAdapter
 import com.example.sugo_mvc.util.App
 import retrofit2.Call
 import retrofit2.Callback

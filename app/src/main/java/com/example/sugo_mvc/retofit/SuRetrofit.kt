@@ -6,6 +6,7 @@ import androidx.core.text.PrecomputedTextCompat
 import com.example.sugo_mvc.data.*
 import com.example.sugo_mvc.util.App
 import com.example.sugo_mvc.util.Constants.Companion.AUTH_HEADER
+import com.example.sugo_mvc.util.Constants.Companion.CHECKMESSAGECONTENTROOM
 import com.example.sugo_mvc.util.Constants.Companion.CHECKMESSAGEROOM
 import com.example.sugo_mvc.util.Constants.Companion.DETAILPAGE
 import com.example.sugo_mvc.util.Constants.Companion.EXIST
@@ -94,6 +95,19 @@ interface SuRetrofit {
         @Header("Authorization") AccessToken: String
     ):Call <MutableList<roomInfo>>
 
+    @GET(CHECKMESSAGECONTENTROOM)
+    fun checkMessageContentRoom(
+        @Header("Authorization") AccessToken: String,
+        @Query("noteId") noteId : Long,
+        @Query("page") page:Int,
+        @Query("size") size :Int
+    ):Call <MutableList<NoteItem>>
+
+    @POST("/note-content/")
+    fun chatput(
+        @Header("Authorization") AccessToken: String,
+        @Body info:msgformat
+    ):Call<SuccessCheckDto>
 
 }
 

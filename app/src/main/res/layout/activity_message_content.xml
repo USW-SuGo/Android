@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.messageRoom.MessageContentActivity"
+    android:orientation="vertical">
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:id="@+id/messageContentRv"
+        tools:ignore="MissingConstraints"
+        tools:listitem="@layout/messagecontentrvitem"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="보낼말을 적어보시오"
+        android:id="@+id/msg"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/msggo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="msggo"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="166dp"
+        tools:ignore="MissingConstraints" />
+</LinearLayout>
