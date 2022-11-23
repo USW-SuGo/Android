@@ -5,26 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.messageRoom.MessageContentActivity"
+    android:padding="13dp"
     android:orientation="vertical">
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:id="@+id/messageContentRv"
-        tools:ignore="MissingConstraints"
-        tools:listitem="@layout/messagecontentrvitem"/>
-    <EditText
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="보낼말을 적어보시오"
-        android:id="@+id/msg"
-        tools:ignore="MissingConstraints" />
+        android:fontFamily="@font/pretendardbold"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="쪽지함"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:id="@+id/msgham"/>
 
-    <Button
-        android:id="@+id/msggo"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="msggo"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="166dp"
-        tools:ignore="MissingConstraints" />
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/msggo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전 송"
+            android:fontFamily="@font/pretendardbold"
+            android:background="@color/white"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/msggo"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="0dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.3dp"
+        android:background="@color/ef_grey" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messageContentRv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints"
+        tools:listitem="@layout/messagecontentrvitem" />
+
+
 </LinearLayout>

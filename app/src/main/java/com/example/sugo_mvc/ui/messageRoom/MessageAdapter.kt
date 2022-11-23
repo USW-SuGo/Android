@@ -21,6 +21,7 @@ class MessageAdapter(val items: MutableList<roomInfo>) : RecyclerView.Adapter<Me
         fun bind(dealMainItem: roomInfo){
             binding.roomId.text=dealMainItem.noteId.toString()
             binding.requestUserid.text=dealMainItem.requestUserId.toString()
+            binding.opponentUserid.text=dealMainItem.opponentUserId.toString()
 //            binding.recentcontent.text=dealMainItem.recentContent.toString()
             binding.recentChattingtime.text=dealMainItem.recentChattingDate.toString()
             binding.messagesender.text=dealMainItem.opponentUserNickname.toString()
@@ -68,6 +69,8 @@ class MessageAdapter(val items: MutableList<roomInfo>) : RecyclerView.Adapter<Me
         holder.itemView.setOnClickListener{
 
             val intent = Intent(holder.itemView?.context, MessageContentActivity()::class.java)
+            intent.putExtra("senderid",   holder.binding.requestUserid.text)
+            intent.putExtra("receiverid",   holder.binding.opponentUserid.text)
             intent.putExtra("id",   holder.binding.roomId.text)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
         }

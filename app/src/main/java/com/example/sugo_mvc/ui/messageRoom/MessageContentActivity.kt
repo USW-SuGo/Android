@@ -24,13 +24,18 @@ class MessageContentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val id: String? = intent.getStringExtra("id")
-        var senderid1:Long =0
-        var receiverid1:Long = 0
+        val sender : String? = intent.getStringExtra("senderid")
+        var senderid:Long = intent.getStringExtra("senderid")!!.toLong()
+        var receiverid:Long = intent.getStringExtra("receiverid")!!.toLong()
         val accessToken = App.prefs.AccessToken!!.replace("AccessToken=","")
         RetrofitBuilder.service.checkMessageContentRoom(accessToken,id!!.toLong(),0,10).enqueue(object :
             retrofit2.Callback<MutableList<NoteItem>> {
             override fun onResponse(call: retrofit2.Call<MutableList<NoteItem>>, response: Response<MutableList<NoteItem>>) {
                 Log.d("msg",response.body().toString())
+//                for(i in 0 ..response.body()!!.size-1) {
+//                    if (senderid == response.body()!![i].messageSenderId)
+//                        binding.messageContentRv.co
+//                }
                 binding.messageContentRv.layoutManager = LinearLayoutManager(this@MessageContentActivity)
                 binding.messageContentRv.adapter = MessageContentAdapter(response.body()!!)
             }
@@ -43,8 +48,10 @@ class MessageContentActivity : AppCompatActivity() {
 
          Log.d("edittext",binding.msg.text.toString())
         binding.msggo.setOnClickListener {
-            val senderid = senderid1
-            var a=msgformat(id!!.toLong(),binding.msg.text.toString(),2,1)
+            val senderid = senderid
+            val receiverid=receiverid
+            Log.d("idre",senderid.toString()+receiverid.toString())
+            var a=msgformat(id!!.toLong(),binding.msg.text.toString(),senderid,receiverid)
 
             RetrofitBuilder.service.chatput(accessToken,a).enqueue(object :
                 retrofit2.Callback<SuccessCheckDto> {

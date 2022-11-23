@@ -29,6 +29,13 @@
         android:text="보낸사람"
         android:textSize="0.1dp"
         android:id="@+id/requestUserid"/>
+        <TextView
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="보낸사람"
+            android:textSize="0.1dp"
+            android:id="@+id/opponentUserid"/>
     <TextView
         android:textSize="0.1dp"
         android:textColor="@color/white"

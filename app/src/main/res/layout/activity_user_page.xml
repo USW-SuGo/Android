@@ -26,7 +26,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <View
         android:layout_width="wrap_content"
-        android:layout_height="0.3dp"
+        android:layout_height="0.7dp"
         android:background="@color/ef_grey" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,13 +36,14 @@
         <ImageView
             android:id="@+id/iv_image"
             android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_gravity="left"
             app:srcCompat="@drawable/boy"
             tools:ignore="MissingConstraints" />
         <TextView
             android:paddingTop="20dp"
             android:paddingLeft="20dp"
+            android:gravity="center"
             android:id="@+id/usernickname"
             android:fontFamily="@font/pretendardbold"
             android:layout_width="wrap_content"
@@ -78,6 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="3"
+        android:padding="5dp"
         android:orientation="horizontal"
         android:rowCount="2">
         <TextView
@@ -140,6 +142,6 @@
         android:id="@+id/userrv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/dealrvitem"/>
+        tools:listitem="@layout/mypagervitem"/>
 
 </LinearLayout>
