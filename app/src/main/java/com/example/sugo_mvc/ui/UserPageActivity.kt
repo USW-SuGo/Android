@@ -27,7 +27,7 @@ class UserPageActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Userpage>, response: Response<Userpage>) {
                 Log.d("user",call.request().toString())
                 binding.userrv.layoutManager = LinearLayoutManager(this@UserPageActivity)
-                binding.userrv.adapter = DealAdapter(response.body()!!.myPosting as MutableList<DealMainItem>)
+                binding.userrv.adapter = userPageAdapter(response.body()!!.myPosting as MutableList<DealMainItem>)
                 binding.usernickname.text= response.body()!!.nickname.toString()
                 binding.countTradeAttempt.text=response.body()!!.countTradeAttempt.toString()
             }

@@ -6,12 +6,15 @@
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable-anydpi/hambug.xml" value="0.196" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/button_color_drawable.xml" value="0.258" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/buttonshape.xml" value="0.258" />
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/buttonshapegreen.xml" value="0.161" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/edge.xml" value="0.165" />
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/heartselector.xml" value="0.1" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/ic_launcher_background.xml" value="0.238" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/ic_map.xml" value="0.165" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/ichome.xml" value="0.165" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/icplus.xml" value="0.1335" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/ictalkmenu.xml" value="0.1335" />
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/icuser2.xml" value="0.125" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/ishopping_cart.xml" value="0.1335" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/drawable/textline.xml" value="0.1505" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/font-v26/font.xml" value="0.2828125" />
@@ -24,8 +27,9 @@
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/activity_message_content.xml" value="0.2" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/activity_message_room.xml" value="0.176" />
-        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/activity_user_page.xml" value="0.176" />
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/activity_user_page.xml" value="0.264" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/addsugorecycleitem.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/dealdetailviewitem.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/dealmessagervitem.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/dealrvitem.xml" value="0.26842105263157895" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/drawble_main.xml" value="0.1" />
@@ -34,9 +38,11 @@
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/fragment_deal.xml" value="0.2390625" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/fragment_map.xml" value="0.2" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/fragment_userpage.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/heartselector.xml" value="0.1" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/image_slide_fragment.xml" value="0.264" />
-        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/messagecontentrvitem.xml" value="0.1" />
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/messagecontentrvitem.xml" value="0.264" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/multi_image_item.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/mypagervitem.xml" value="0.176" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/layout/rv_loading.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/menu/bottom_menu.xml" value="0.2" />
         <entry key="..\:/Users/lsls4/AndroidStudioProjects/Sugo_mvc/app/src/main/res/menu/drawer_menu.xml" value="0.18697916666666667" />

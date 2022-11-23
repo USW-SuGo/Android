@@ -26,6 +26,10 @@ class MessageContentAdapter(val items: MutableList<NoteItem>) : RecyclerView.Ada
             binding.contentmsgsender.text=dealMainItem.messageSenderId.toString()
             binding.contentmsgreceiver.text=dealMainItem.messageReceiverId.toString()
             binding.contentmsgcreateat.text=dealMainItem.messageCreatedAt.toString()
+            if (dealMainItem.requestUserId == dealMainItem.messageSenderId)
+                binding.contentwho.text="보낸 쪽지"
+            else
+                binding.contentwho.text="받은 쪽지"
         }
 
 

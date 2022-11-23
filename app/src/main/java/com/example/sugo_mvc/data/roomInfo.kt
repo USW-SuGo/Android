@@ -4,6 +4,7 @@ import java.time.LocalDateTime
 
 data class roomInfo (
     val noteId:Long,
+    val productPostId: Long,
     val requestUserId : Long,
     val opponentUserId : Long,
     val opponentUserNickname: String,

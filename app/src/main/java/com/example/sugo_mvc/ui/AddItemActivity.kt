@@ -49,8 +49,8 @@ class AddItemActivity : AppCompatActivity() {
             binding.addsugo.setOnClickListener {
 
                 val addtitle = binding.addtitle.editText?.text.toString()
-                val addprice = binding.addprice.editText?.text
-                val addcategory = binding.addcategory.editText?.text.toString()
+                val addprice = binding.addprice.editText?.text.toString()
+                val addcategory = binding.addcategory.text.toString()
 //                val addcontactplace = binding.addcontactplace.editText?.text.toString()
 //                val addcontentfield = binding.addcontentfield.editText?.text.toString()
                 val list1= ArrayList<Uri>()
@@ -106,7 +106,7 @@ class AddItemActivity : AppCompatActivity() {
             val body = MultipartBody.Part.createFormData("proFile", file.name, requestFile)
             val addtitle = binding.addtitle.editText?.text.toString()
             val addprice = binding.addprice.editText?.text
-            val addcategory = binding.addcategory.editText?.text.toString()
+            val addcategory = binding.addcategory.text.toString()
 //            val addcontactplace = binding.addcontactplace.editText?.text.to/
             if (data?.clipData != null) { // 사진 여러개 선택한 경우
 

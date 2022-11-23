@@ -1,4 +1,4 @@
-package com.example.sugo_mvc.ui.deal
+package com.example.sugo_mvc.ui
 
 import android.content.Intent
 import android.util.Log
@@ -8,21 +8,18 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.sugo_mvc.data.DealMainItem
 import com.example.sugo_mvc.databinding.DealrvitemBinding
-import com.example.sugo_mvc.ui.DealDetailActivity
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import com.example.sugo_mvc.databinding.MypagervitemBinding
 
-class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<DealAdapter.ViewHolder>() {
+class userPageAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<userPageAdapter.ViewHolder>() {
 
     companion object {
         const val ITEM = 1
         const val LOADING = 0
     }
-    class ViewHolder(binding: DealrvitemBinding) : RecyclerView.ViewHolder(binding.root){
-        var binding: DealrvitemBinding
+    class ViewHolder(binding: MypagervitemBinding) : RecyclerView.ViewHolder(binding.root){
+        var binding: MypagervitemBinding
 
         fun bind(dealMainItem: DealMainItem){
             val tesl:List<String>
@@ -60,9 +57,9 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DealAdapter.ViewHolder {
-            val binding = DealrvitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-           return ViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): userPageAdapter.ViewHolder {
+        val binding = MypagervitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     interface ItemClick{ //인터페이스
@@ -71,12 +68,9 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
 
     var itemClick: ItemClick? = null
 
-    override fun onBindViewHolder(holder: DealAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: userPageAdapter.ViewHolder, position: Int) {
         holder.bind(items!![position])
-//        val layoutParams = holder.itemView.layoutParams
-//
-//        layoutParams.height = 1200
-//        holder.itemView.requestLayout()
+        val layoutParams = holder.itemView.layoutParams
         holder.itemView.setOnClickListener{
 
             val intent = Intent(holder.itemView?.context, DealDetailActivity()::class.java)
