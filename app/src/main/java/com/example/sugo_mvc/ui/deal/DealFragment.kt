@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,8 @@ class DealFragment : Fragment() {
     private val binding get() = _binding!!
 
     var isLoading = false
+
+
     private val DealItemSize = mutableListOf<DealMainItem>()
 
     override fun onCreateView(
@@ -37,6 +40,7 @@ class DealFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.searchView.setOnQueryTextListener(searchViewTextListner)
         val testItems1 = DealMainItem(0, "", "", LocalDateTime.now(), "", 0, "", "",false)
         RetrofitBuilder.service.getItemList().enqueue(object : Callback<MutableList<DealMainItem>> {
             override fun onResponse(
@@ -90,7 +94,18 @@ class DealFragment : Fragment() {
 
 
     }
+    var searchViewTextListner:SearchView.OnQueryTextListener=
+        object :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                DealAdapter(DealItemSize).filter.filter(newText)
+                Log.d("Search", "SearchVies Text is changed : $newText")
+                return false
+            }
 
+        }
     private fun getMoreData() {
         val testItems1 = DealMainItem(0, "", "", LocalDateTime.now(), "", 0, "", "",false)
         RetrofitBuilder.service.getItemList().enqueue(object : Callback<MutableList<DealMainItem>> {

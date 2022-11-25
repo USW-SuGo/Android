@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="15dp"
     tools:context=".ui.messageRoom.MessageRoomActivity">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendardbold"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="쪽지함"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:id="@+id/msgham"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:id="@+id/messageRoomRv"
         tools:ignore="MissingConstraints"
         tools:listitem="@layout/dealmessagervitem"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

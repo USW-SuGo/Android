@@ -47,41 +47,7 @@
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_menu" />
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:id="@+id/searchbar"
-        android:padding="4dp"
-        android:columnCount="3"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-        <androidx.appcompat.widget.SearchView
-            android:layout_columnWeight="2"
-            android:paddingLeft="15dp"
-            android:id="@+id/search_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="4dp"
-            android:gravity="left"
-            app:queryHint="검색"
-            android:background="@drawable/edge"
-            tools:ignore="GridLayout" />
 
-        <TextView
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:layout_columnSpan="1"
-            android:gravity="center"
-            android:fontFamily="@font/pretendardbold"
-            android:text="카테고리"
-            android:textSize="13dp" />
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_columnSpan="1"
-            android:src="@drawable/ishopping_cart"
-            />
-    </GridLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_container"
@@ -89,8 +55,7 @@
         android:layout_height="0dp"
         android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNav"
-        app:layout_constraintTop_toBottomOf="@+id/searchbar"
-
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="-194dp" />
     <!--        app:layout_constraintBottom_toTopOf="@+id/bottomNav"-->
