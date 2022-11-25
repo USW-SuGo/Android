@@ -9,8 +9,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sugo_mvc.data.DealMainItem
+import com.example.sugo_mvc.data.SuccessCheckDto
 import com.example.sugo_mvc.databinding.DealrvitemBinding
 import com.example.sugo_mvc.databinding.MypagervitemBinding
+import com.example.sugo_mvc.retofit.RetrofitBuilder
+import com.example.sugo_mvc.util.App
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class userPageAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<userPageAdapter.ViewHolder>() {
 
@@ -23,6 +29,8 @@ class userPageAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapt
 
         fun bind(dealMainItem: DealMainItem){
             val tesl:List<String>
+            val accessToken = App.prefs.AccessToken!!.replace("AccessToken=","")
+
             tesl=dealMainItem.imageLink.replace("[","").replace("]","").split(",")
             binding.dealrvid.text=dealMainItem.id.toString()
             binding.dealrvtitle.text = dealMainItem.title
@@ -32,6 +40,24 @@ class userPageAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapt
             binding.dealCategory.text=dealMainItem.category
             binding.dealDatetime.text= dealMainItem.updatedAt.toString()
             Glide.with(itemView).load(tesl[0]).into(binding.dealimageLnk)
+            binding.safeBtn.setOnClickListener{
+                RetrofitBuilder.service.upPost(accessToken,dealMainItem.id).enqueue(object :
+                    Callback<SuccessCheckDto> {
+                    override fun onResponse(
+                        call: Call<SuccessCheckDto>,
+                        response: Response<SuccessCheckDto>
+                    ) {
+                        Log.d("success",response.body().toString())
+                    }
+
+                    override fun onFailure(call: Call<SuccessCheckDto>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
+            }
+            binding.refactorBtn.setOnClickListener {
+
+            }
         }
         init {
             this.binding = binding

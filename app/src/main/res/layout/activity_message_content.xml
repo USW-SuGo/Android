@@ -7,51 +7,52 @@
     tools:context=".ui.messageRoom.MessageContentActivity"
     android:padding="13dp"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/pretendardbold"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="쪽지함"
-        android:layout_gravity="center"
-        android:textSize="20dp"
-        android:id="@+id/msgham"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/msggo"
+        <TextView
+            android:id="@+id/msgham"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="전 송"
+            android:layout_gravity="center"
             android:fontFamily="@font/pretendardbold"
-            android:background="@color/white"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="쪽지"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints" />
 
-        <EditText
-            android:id="@+id/msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/msggo"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="0dp" />
+        <ImageButton
+            android:id="@+id/sendMsg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_send"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <View
         android:layout_width="wrap_content"
         android:layout_height="0.3dp"
         android:background="@color/ef_grey" />
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pullContent">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messageContentRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:ignore="MissingConstraints"
         tools:listitem="@layout/messagecontentrvitem" />
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

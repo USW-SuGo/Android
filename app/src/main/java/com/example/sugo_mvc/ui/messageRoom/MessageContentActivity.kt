@@ -1,6 +1,7 @@
 package com.example.sugo_mvc.ui.messageRoom
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.telecom.Call
@@ -32,10 +33,6 @@ class MessageContentActivity : AppCompatActivity() {
             retrofit2.Callback<MutableList<NoteItem>> {
             override fun onResponse(call: retrofit2.Call<MutableList<NoteItem>>, response: Response<MutableList<NoteItem>>) {
                 Log.d("msg",response.body().toString())
-//                for(i in 0 ..response.body()!!.size-1) {
-//                    if (senderid == response.body()!![i].messageSenderId)
-//                        binding.messageContentRv.co
-//                }
                 binding.messageContentRv.layoutManager = LinearLayoutManager(this@MessageContentActivity)
                 binding.messageContentRv.adapter = MessageContentAdapter(response.body()!!)
             }
@@ -43,31 +40,29 @@ class MessageContentActivity : AppCompatActivity() {
             override fun onFailure(call: retrofit2.Call<MutableList<NoteItem>>, t: Throwable) {
                 Log.d("good",t.toString())
             }
-
         })
-
-         Log.d("edittext",binding.msg.text.toString())
-        binding.msggo.setOnClickListener {
-            val senderid = senderid
-            val receiverid=receiverid
-            Log.d("idre",senderid.toString()+receiverid.toString())
-            var a=msgformat(id!!.toLong(),binding.msg.text.toString(),senderid,receiverid)
-
-            RetrofitBuilder.service.chatput(accessToken,a).enqueue(object :
-                retrofit2.Callback<SuccessCheckDto> {
-                override fun onResponse(
-                    call: retrofit2.Call<SuccessCheckDto>,
-                    response: Response<SuccessCheckDto>
-                ) {
-                    Log.d("msg",binding.msg.text.toString())
+        binding.pullContent.setOnRefreshListener {
+            RetrofitBuilder.service.checkMessageContentRoom(accessToken,id!!.toLong(),0,10).enqueue(object :
+                retrofit2.Callback<MutableList<NoteItem>> {
+                override fun onResponse(call: retrofit2.Call<MutableList<NoteItem>>, response: Response<MutableList<NoteItem>>) {
                     Log.d("msg",response.body().toString())
+                    binding.messageContentRv.layoutManager = LinearLayoutManager(this@MessageContentActivity)
+                    binding.messageContentRv.adapter = MessageContentAdapter(response.body()!!)
                 }
 
-                override fun onFailure(call: retrofit2.Call<SuccessCheckDto>, t: Throwable) {
-                    TODO("Not yet implemented")
+                override fun onFailure(call: retrofit2.Call<MutableList<NoteItem>>, t: Throwable) {
+                    Log.d("good",t.toString())
                 }
-
             })
+            binding.pullContent.isRefreshing=false
         }
+       binding.sendMsg.setOnClickListener{
+           val intent = Intent(applicationContext, SendMsgActivity::class.java)
+           intent.putExtra("senderid",  senderid.toString())
+           intent.putExtra("receiverid",   receiverid.toString())
+           intent.putExtra("id",   id)
+           startActivity(intent)
+       }
+
     }
 }

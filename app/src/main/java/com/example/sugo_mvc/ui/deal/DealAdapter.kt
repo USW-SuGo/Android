@@ -1,10 +1,14 @@
 package com.example.sugo_mvc.ui.deal
 
+import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,11 +19,18 @@ import com.example.sugo_mvc.ui.DealDetailActivity
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<DealAdapter.ViewHolder>() {
+class DealAdapter(val items: MutableList<DealMainItem>) :
+    RecyclerView.Adapter<DealAdapter.ViewHolder>(),Filterable {
+    var filterItems= mutableListOf<DealMainItem>()
+    var itemFilter= ItemFilter()
 
     companion object {
+
         const val ITEM = 1
         const val LOADING = 0
+    }
+    override fun getFilter(): Filter {
+        return itemFilter
     }
     class ViewHolder(binding: DealrvitemBinding) : RecyclerView.ViewHolder(binding.root){
         var binding: DealrvitemBinding
@@ -43,10 +54,10 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
                 val pos = adapterPosition
                 Log.d("click", pos.toString() + " : click!")
             })
-
-
-
         }
+    }
+    init {
+        filterItems.addAll(items)
     }
     inner class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 //        val progressBar = itemView.findViewById<ProgressBar>(R.id.rv_loading_pb)!!
@@ -73,10 +84,6 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
 
     override fun onBindViewHolder(holder: DealAdapter.ViewHolder, position: Int) {
         holder.bind(items!![position])
-//        val layoutParams = holder.itemView.layoutParams
-//
-//        layoutParams.height = 1200
-//        holder.itemView.requestLayout()
         holder.itemView.setOnClickListener{
 
             val intent = Intent(holder.itemView?.context, DealDetailActivity()::class.java)
@@ -90,5 +97,39 @@ class DealAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<D
     }
 
 
+    inner class ItemFilter : Filter() {
+        override fun performFiltering(charSequence: CharSequence): FilterResults {
+            val filterString = charSequence.toString()
+            Log.d(TAG, "charSequence : $charSequence")
+            val results = FilterResults()
+            //검색이 필요없을 경우를 위해 원본 배열을 복제
+            val filteredList: MutableList<DealMainItem> = mutableListOf<DealMainItem>()
+            //공백제외 아무런 값이 없을 경우 -> 원본 배열
+            if (filterString.trim { it <= ' ' }.isEmpty()) {
+                results.values = items
+                results.count = items.size
+                return results
+            } else {
+                for (item in items) {
+                    Log.d("search title",item.title.toString())
+                    if (item.title.contains(filterString)) {
+                        filteredList.add(item)
+                        Log.d("searchfilter",filteredList.toString())
+                    }
+                }
+            }
+            Log.d("searchfilter",filteredList.toString())
+            results.values = filteredList
+            results.count = filteredList.size
+            return results
+        }
 
+        override fun publishResults(p0: CharSequence?, p1: FilterResults) {
+            filterItems.clear()
+            filterItems.addAll(p1.values as MutableList<DealMainItem>)
+            notifyDataSetChanged()
+        }
+//        @SuppressLint("NotifyDataSetChanged")
+
+    }
 }

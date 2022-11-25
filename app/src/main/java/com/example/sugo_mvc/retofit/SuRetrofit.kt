@@ -109,6 +109,11 @@ interface SuRetrofit {
         @Body info:msgformat
     ):Call<SuccessCheckDto>
 
+    @POST("/post/up-post")
+    fun upPost(
+        @Header("Authorization") AccessToken: String,
+        @Body productPostId :Long
+    ):Call<SuccessCheckDto>
 }
 
 
