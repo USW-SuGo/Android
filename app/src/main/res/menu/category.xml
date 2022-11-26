@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/category1"
+        android:title="전체" />
+    <item
+        android:id="@+id/category2"
+        android:title="서적" />
+    <item
+        android:id="@+id/category3"
+        android:title="전자기기" />
+    <item
+        android:id="@+id/category4"
+        android:title="생활용품" />
+    <item
+        android:id="@+id/category5"
+        android:title="기타" />
+</menu>
