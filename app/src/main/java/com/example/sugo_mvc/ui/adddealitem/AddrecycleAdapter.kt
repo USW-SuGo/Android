@@ -1,4 +1,4 @@
-package com.example.sugo_mvc.ui
+package com.example.sugo_mvc.ui.adddealitem
 
 import android.content.Context
 import android.net.Uri

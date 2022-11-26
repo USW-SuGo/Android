@@ -1,6 +1,5 @@
-package com.example.sugo_mvc.ui
+package com.example.sugo_mvc.ui.deal
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +7,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.sugo_mvc.data.DealDetailItem
 import com.example.sugo_mvc.databinding.ActivityDealDetailBinding
 import com.example.sugo_mvc.retofit.RetrofitBuilder
-import com.example.sugo_mvc.ui.deal.DealViewPagerAdapter
 import com.example.sugo_mvc.util.App
 import retrofit2.Call
 import retrofit2.Callback

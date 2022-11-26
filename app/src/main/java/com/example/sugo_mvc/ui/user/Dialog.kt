@@ -1,4 +1,4 @@
-package com.example.sugo_mvc.ui
+package com.example.sugo_mvc.ui.user
 
 import android.app.Dialog
 import android.content.Context
