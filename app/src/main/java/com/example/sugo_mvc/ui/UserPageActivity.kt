@@ -1,13 +1,9 @@
 package com.example.sugo_mvc.ui
 
-import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.WindowManager
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.sugo_mvc.R
 import com.example.sugo_mvc.data.DealMainItem
 import com.example.sugo_mvc.data.SuccessCheckDto
 import com.example.sugo_mvc.data.Userpage
@@ -24,20 +20,12 @@ class UserPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
+        val safebtn: String? = intent.getStringExtra("safebtn")
+        if (safebtn=="1"){
+            dialog(this).showDialog()
+        }
         val accessToken = App.prefs.AccessToken!!.replace("AccessToken=","")
-        RetrofitBuilder.service.upPost(accessToken,5).enqueue(object :
-            Callback<SuccessCheckDto> {
-            override fun onResponse(
-                call: Call<SuccessCheckDto>,
-                response: Response<SuccessCheckDto>
-            ) {
-                Log.d("success",response.body().toString())
-            }
-            override fun onFailure(call: Call<SuccessCheckDto>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
+
         RetrofitBuilder.service.getUserPage(accessToken).enqueue(object : Callback<Userpage>{
             override fun onResponse(call: Call<Userpage>, response: Response<Userpage>) {
                 Log.d("user",call.request().toString())

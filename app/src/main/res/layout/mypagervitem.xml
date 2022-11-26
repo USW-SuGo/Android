@@ -149,7 +149,12 @@
                 android:textColor="@color/sugreen"
                 android:background="@color/white"
                 tools:ignore="MissingConstraints" />
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="0.1dp"
+                android:id="@+id/safebbtn"
+                tools:ignore="MissingConstraints" />
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="190dp"
                 android:background="@color/white"
