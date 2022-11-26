@@ -26,31 +26,7 @@ class JoinActivity : AppCompatActivity() {
         Log.d("Test",email)
         Log.d("Test",loginid)
         Log.d("Test",loginpwd)
-///response.errorBody()?.string()!!메시지에러보기
 
-//            val d = Log.d("test11", data.toString())
-//            service.getLectureMainList( selectedType).enqueue(object : Callback<dataDto<MutableList<LectureMain?>>>{
-//
-//                override fun onResponse(
-//                    call: Call<dataDto<MutableList<LectureMain?>>>,
-//                    response: Response<dataDto<MutableList<LectureMain?>>>
-//                ) {
-//                    if(response.isSuccessful){
-//                        var result=response.body()
-//                        Log.d("성공", " 성공: " + result.toString());
-//                    }else{
-//                        Log.d("성공", "onFailure 에러: ")
-//                    }
-//                }
-//
-//                override fun onFailure(
-//                    call: Call<dataDto<MutableList<LectureMain?>>>,
-//                    t: Throwable
-//                ) {
-//                    Log.d("YMC", "onFailure 에러: " + t.message.toString());
-//                }
-//
-//            })
             if(!validateEmail()){
                 Log.d("다시입력","다시입려고해주세요")
             }

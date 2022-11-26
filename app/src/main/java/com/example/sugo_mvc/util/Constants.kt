@@ -18,12 +18,16 @@ class Constants {
         const val CHANGEPWD : String = "/user/password"
         const val WITHDRAWAL : String = "/user"
         const val MANNER : String="/user/manner"
-        const val MYPAGE : String="user?target={}&?page={}&size={}"
-        const val USERPAGE : String="/user/?target={}&?page={}&size={}"
+        const val MYPAGE : String="/user?page=0&size=10"
+        const val USERPAGE : String="/user/?target=&?page=0&size=10"
         const val POSTUPLOAD : String="/post"
         const val POSTGET : String = "/post/all?page=0&size=10&category"
         const val DETAILPAGE : String="/post/"
-        const val NOTE : String= " /note"
+            const val MAKEMESSAGEROOM:String="/note"
+            const val CHECKMESSAGEROOM:String="/note/list?page=0&size=10"
+        const val CHECKMESSAGECONTENTROOM:String="/note/"
+
+        const val SENDMESSAGE:String="/note-content/"
     }
 
 }

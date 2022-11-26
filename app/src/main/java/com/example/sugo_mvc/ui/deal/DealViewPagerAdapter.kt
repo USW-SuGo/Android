@@ -7,13 +7,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.sugo_mvc.R
+import com.example.sugo_mvc.databinding.DealdetailviewitemBinding
 import com.example.sugo_mvc.databinding.DealrvitemBinding
 
 
 class DealViewPagerAdapter(private val imageUrlList: List<String>) :
 RecyclerView.Adapter<DealViewPagerAdapter.ViewPagerViewHolder>() {
 
-    inner class ViewPagerViewHolder(val binding: DealrvitemBinding) :
+    inner class ViewPagerViewHolder(val binding: DealdetailviewitemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun setData(imageUrl: String) {
@@ -30,7 +31,7 @@ RecyclerView.Adapter<DealViewPagerAdapter.ViewPagerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerViewHolder {
 
-        val binding = DealrvitemBinding.inflate(
+        val binding = DealdetailviewitemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

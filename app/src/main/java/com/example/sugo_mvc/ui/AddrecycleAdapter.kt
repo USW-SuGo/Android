@@ -7,13 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.sugo_mvc.R
-import com.example.sugo_mvc.databinding.AddsugorecycleitemBinding
-import com.example.sugo_mvc.databinding.DealrvitemBinding
-import com.example.sugo_mvc.ui.deal.DealAdapter
-import kotlinx.coroutines.withContext
 
 class AddrecycleAdapter(private val items : ArrayList<Uri>,val context: Context) :
     RecyclerView.Adapter<AddrecycleAdapter.ViewHolder>() {

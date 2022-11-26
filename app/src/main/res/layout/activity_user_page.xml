@@ -26,19 +26,33 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <View
         android:layout_width="wrap_content"
-        android:layout_height="0.3dp"
+        android:layout_height="0.7dp"
         android:background="@color/ef_grey" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp">
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/boy"
-            android:id="@+id/userImage"
-            tools:ignore="MissingConstraints" />
 
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_gravity="left"
+            app:srcCompat="@drawable/boy"
+            tools:ignore="MissingConstraints" />
+        <TextView
+            android:paddingTop="20dp"
+            android:paddingLeft="20dp"
+            android:gravity="center"
+            android:id="@+id/usernickname"
+            android:fontFamily="@font/pretendardbold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="오늘도 수고하세요!"
+            android:textSize="12dp"
+            app:layout_constraintLeft_toRightOf="@id/iv_image"
+            tools:ignore="MissingConstraints"
+            />
 <!--        <TextView-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
@@ -65,6 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="3"
+        android:padding="5dp"
         android:orientation="horizontal"
         android:rowCount="2">
         <TextView
@@ -97,6 +112,7 @@
             android:text="0"/>
         <TextView
             android:gravity="center"
+            android:id="@+id/countTradeAttempt"
             android:fontFamily="@font/pretendardbold"
             android:textSize="16dp"
             android:layout_columnWeight="1"
@@ -123,7 +139,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userrv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/mypagervitem"/>
 
 </LinearLayout>
