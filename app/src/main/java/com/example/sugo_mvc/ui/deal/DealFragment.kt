@@ -40,7 +40,7 @@ class DealFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.searchView.setOnQueryTextListener(searchViewTextListner)
+
         val testItems1 = DealMainItem(0, "", "", LocalDateTime.now(), "", 0, "", "",false)
         RetrofitBuilder.service.getItemList().enqueue(object : Callback<MutableList<DealMainItem>> {
             override fun onResponse(
@@ -73,11 +73,11 @@ class DealFragment : Fragment() {
                 Log.d("onFailure", t.localizedMessage)
             }
         })
-//        for(i in 1 until 10){
+        binding.searchView.setOnQueryTextListener(searchViewTextListner)
         DealItemSize.add(testItems1)
-//        }
         binding.dealRv.layoutManager = GridLayoutManager(context, 2)
         binding.dealRv.adapter = DealAdapter(DealItemSize)
+
 
         binding.dealRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -114,26 +114,8 @@ class DealFragment : Fragment() {
                 response: Response<MutableList<DealMainItem>>
             ) {
                 if (response.isSuccessful) {
-
                     var mainDealItemList = response.body()!!
-                    for (i in 0 until response.body()!!.size){
-                        testItems1.id=mainDealItemList[i].id
-                        testItems1.imageLink =mainDealItemList[i].imageLink
-                        testItems1.contactPlace = mainDealItemList[i].contactPlace
-                        testItems1.updatedAt=mainDealItemList[i].updatedAt
-                        testItems1.title = mainDealItemList[i].title
-                        testItems1.price = mainDealItemList[i].price
-                        testItems1.nickname = mainDealItemList[i].nickname
-                        testItems1.category = mainDealItemList[i].category
-                        mainDealItemList.add(testItems1)
-                        Log.d("테스트아이템인덱스",testItems1.toString())
-                    }
-                    Log.d("testItems",DealItemSize.toString())
-                    Log.d("중간",mainDealItemList.toString())
                     binding.dealRv.adapter?.notifyItemInserted(DealItemSize.size - 1)
-                    Log.d("DealItemsize",DealItemSize.size.toString())
-                    //순서대로 출력하기 위해
-
                     DealItemSize.removeAt(DealItemSize.size - 1)
                     Log.d("DealItemsize",DealItemSize.size.toString())
                         for (i in 0..mainDealItemList.size-1) {
