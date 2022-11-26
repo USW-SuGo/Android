@@ -1,11 +1,14 @@
 package com.example.sugo_mvc.ui
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sugo_mvc.data.DealMainItem
@@ -19,14 +22,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class userPageAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapter<userPageAdapter.ViewHolder>() {
-
     companion object {
         const val ITEM = 1
         const val LOADING = 0
     }
+
     class ViewHolder(binding: MypagervitemBinding) : RecyclerView.ViewHolder(binding.root){
         var binding: MypagervitemBinding
-
+        var safeContext :Long =0
+        var refactorContext :Long =0
         fun bind(dealMainItem: DealMainItem){
             val tesl:List<String>
             val accessToken = App.prefs.AccessToken!!.replace("AccessToken=","")
@@ -41,22 +45,11 @@ class userPageAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapt
             binding.dealDatetime.text= dealMainItem.updatedAt.toString()
             Glide.with(itemView).load(tesl[0]).into(binding.dealimageLnk)
             binding.safeBtn.setOnClickListener{
-                RetrofitBuilder.service.upPost(accessToken,dealMainItem.id).enqueue(object :
-                    Callback<SuccessCheckDto> {
-                    override fun onResponse(
-                        call: Call<SuccessCheckDto>,
-                        response: Response<SuccessCheckDto>
-                    ) {
-                        Log.d("success",response.body().toString())
-                    }
-
-                    override fun onFailure(call: Call<SuccessCheckDto>, t: Throwable) {
-                        TODO("Not yet implemented")
-                    }
-                })
+                Log.d("sageBtn","btnclick")
+//                dialog()
             }
             binding.refactorBtn.setOnClickListener {
-
+                Log.d("refactorBtn","btnclick")
             }
         }
         init {
@@ -100,6 +93,7 @@ class userPageAdapter(val items: MutableList<DealMainItem>) : RecyclerView.Adapt
         holder.itemView.setOnClickListener{
 
             val intent = Intent(holder.itemView?.context, DealDetailActivity()::class.java)
+            intent.putExtra("id",   holder.binding.dealrvid.text)
             intent.putExtra("id",   holder.binding.dealrvid.text)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
         }

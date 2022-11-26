@@ -17,7 +17,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 
 class DealFragment : Fragment() {
@@ -29,6 +28,7 @@ class DealFragment : Fragment() {
 
 
     private val DealItemSize = mutableListOf<DealMainItem>()
+    private lateinit var dealAdapter: DealAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,7 +76,8 @@ class DealFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(searchViewTextListner)
         DealItemSize.add(testItems1)
         binding.dealRv.layoutManager = GridLayoutManager(context, 2)
-        binding.dealRv.adapter = DealAdapter(DealItemSize)
+        dealAdapter = DealAdapter(DealItemSize)
+        binding.dealRv.adapter = dealAdapter
 
 
         binding.dealRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -100,7 +101,7 @@ class DealFragment : Fragment() {
                 return false
             }
             override fun onQueryTextChange(newText: String?): Boolean {
-                DealAdapter(DealItemSize).filter.filter(newText)
+                dealAdapter.filter.filter(newText)
                 Log.d("Search", "SearchVies Text is changed : $newText")
                 return false
             }
@@ -118,9 +119,9 @@ class DealFragment : Fragment() {
                     binding.dealRv.adapter?.notifyItemInserted(DealItemSize.size - 1)
                     DealItemSize.removeAt(DealItemSize.size - 1)
                     Log.d("DealItemsize",DealItemSize.size.toString())
-                        for (i in 0..mainDealItemList.size-1) {
-                            DealItemSize.add(mainDealItemList[i])
-                        }
+                    for (i in 0..mainDealItemList.size-1) {
+                        DealItemSize.add(mainDealItemList[i])
+                    }
                     binding.dealRv.adapter?.notifyDataSetChanged()
                 } else {
                     Log.d("성공", "onFailure 에러: ")
