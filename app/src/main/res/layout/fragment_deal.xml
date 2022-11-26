@@ -25,6 +25,7 @@
             tools:ignore="GridLayout" />
 
         <TextView
+            android:id="@+id/categorybtn"
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:layout_columnSpan="1"

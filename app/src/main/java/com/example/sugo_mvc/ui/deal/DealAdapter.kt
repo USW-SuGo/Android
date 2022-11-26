@@ -104,7 +104,7 @@ class DealAdapter(var items: MutableList<DealMainItem>) :
                 val resultList= mutableListOf<DealMainItem>()
                 for (item in items) {
                     Log.d("search title",item.title)
-                    if (item.title.contains(filterString)) {
+                    if (item.title.contains(filterString)|| item.category.contains(filterString)) {
                         resultList.add(item)
                         Log.d("searchfilter",resultList.toString())
                     }
