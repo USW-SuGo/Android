@@ -1,22 +1,20 @@
-package com.example.sugo_mvc.ui
+package com.example.sugo_mvc.ui.user
 
-import android.app.ProgressDialog.show
-import android.content.DialogInterface
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
-import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sugo_mvc.data.DealMainItem
 import com.example.sugo_mvc.data.SuccessCheckDto
 import com.example.sugo_mvc.databinding.MypagervitemBinding
 import com.example.sugo_mvc.retofit.RetrofitBuilder
+import com.example.sugo_mvc.ui.adddealitem.AddItemActivity
+import com.example.sugo_mvc.ui.deal.DealDetailActivity
 import com.example.sugo_mvc.util.App
 import retrofit2.Call
 import retrofit2.Callback
@@ -95,7 +93,7 @@ class userPageAdapter(val items: MutableList<DealMainItem>) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): userPageAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             MypagervitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
@@ -107,7 +105,7 @@ class userPageAdapter(val items: MutableList<DealMainItem>) :
 
     var itemClick: ItemClick? = null
 
-    override fun onBindViewHolder(holder: userPageAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items!![position])
         val layoutParams = holder.itemView.layoutParams
         holder.itemView.setOnClickListener {

@@ -31,10 +31,10 @@
             android:name=".ui.messageRoom.MessageRoomActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.UserPageActivity"
+            android:name=".ui.user.UserPageActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.AddItemActivity"
+            android:name=".ui.adddealitem.AddItemActivity"
             android:exported="false" />
         <activity
             android:name=".ui.JoinActivity"
@@ -46,7 +46,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.DealDetailActivity"
+            android:name=".ui.deal.DealDetailActivity"
             android:exported="true" />
         <activity
             android:name=".ui.IntroActivity"

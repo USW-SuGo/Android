@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.DealDetailActivity"
+    tools:context=".ui.deal.DealDetailActivity"
     android:layout_marginBottom="10dp"
     android:paddingTop="50dp">
 

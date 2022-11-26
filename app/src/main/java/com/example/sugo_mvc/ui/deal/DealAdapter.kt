@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide
 
 import com.example.sugo_mvc.data.DealMainItem
 import com.example.sugo_mvc.databinding.DealrvitemBinding
-import com.example.sugo_mvc.ui.DealDetailActivity
 
 
 class DealAdapter(var items: MutableList<DealMainItem>) :
