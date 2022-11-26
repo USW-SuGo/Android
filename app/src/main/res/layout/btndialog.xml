@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이미 올리셨어요!"
+        android:fontFamily="@font/pretendardbold"
+        android:textSize="20dp"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="게시글은 하루 한개만 올릴수 있어요."
+        android:fontFamily="@font/pretendardbold"
+        android:textSize="12dp"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:id="@+id/okBtn"
+        android:background="@color/white"/>
+</LinearLayout>
