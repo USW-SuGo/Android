@@ -29,6 +29,7 @@ class DealFragment : Fragment() {
 
 
     private val DealItemSize = mutableListOf<DealMainItem>()
+    private lateinit var dealAdapter: DealAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,7 +77,8 @@ class DealFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(searchViewTextListner)
         DealItemSize.add(testItems1)
         binding.dealRv.layoutManager = GridLayoutManager(context, 2)
-        binding.dealRv.adapter = DealAdapter(DealItemSize)
+        dealAdapter = DealAdapter(DealItemSize)
+        binding.dealRv.adapter = dealAdapter
 
 
         binding.dealRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -100,7 +102,7 @@ class DealFragment : Fragment() {
                 return false
             }
             override fun onQueryTextChange(newText: String?): Boolean {
-                DealAdapter(DealItemSize).filter.filter(newText)
+                dealAdapter.filter.filter(newText)
                 Log.d("Search", "SearchVies Text is changed : $newText")
                 return false
             }
