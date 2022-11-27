@@ -77,24 +77,25 @@
                             android:text="장소"
                             android:textSize="12dp" />
 
-                        <TextView
-                            android:id="@+id/dealDatetime"
-                            android:layout_columnWeight="1"
-                            android:layout_width="wrap_content"
-                            android:fontFamily="@font/pretendardbold"
-                            android:gravity="center"
-                            android:text="시간"
-                            android:textSize="12dp" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/dealDatetime"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_columnWeight="1"-->
+<!--                            android:fontFamily="@font/pretendardbold"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="시간"-->
+<!--                            android:textSize="12dp" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:id="@+id/dealCategory"
-                            android:layout_columnWeight="1"
-                            android:fontFamily="@font/pretendardbold"
-                            android:gravity="center"
-                            android:text="카테고리"
-                            android:textSize="12dp"
-                            tools:ignore="GridLayout" />
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:id="@+id/dealCategory"-->
+<!--                            android:layout_columnWeight="1"-->
+<!--                            android:fontFamily="@font/pretendardbold"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="카테고리"-->
+<!--                            android:textSize="12dp"-->
+<!--                            tools:ignore="GridLayout" />-->
 
                     </GridLayout>
                     <TextView
@@ -178,6 +179,6 @@
         android:id="@+id/likebtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/heartselector"/>
+        android:src="@drawable/heart"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
