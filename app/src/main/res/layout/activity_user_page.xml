@@ -28,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0.7dp"
         android:background="@color/ef_grey" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,41 +41,45 @@
             android:layout_gravity="left"
             app:srcCompat="@drawable/boy"
             tools:ignore="MissingConstraints" />
+
         <TextView
-            android:paddingTop="20dp"
-            android:paddingLeft="20dp"
-            android:gravity="center"
-            android:id="@+id/usernickname"
-            android:fontFamily="@font/pretendardbold"
+            android:id="@+id/userPageNickName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardbold"
+            android:layout_gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
             android:text="오늘도 수고하세요!"
-            android:textSize="12dp"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/iv_image"
-            tools:ignore="MissingConstraints"
-            />
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fontFamily="@font/pretendardbold"-->
-<!--            android:text="오늘도 수고하세요!"-->
-<!--            android:textSize="16dp"-->
-<!--            tools:layout_editor_absoluteX="75dp"-->
-<!--            tools:layout_editor_absoluteY="25dp"-->
-<!--            tools:ignore="MissingConstraints" />-->
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fontFamily="@font/pretendardbold"-->
-<!--            android:text="닉네임"-->
-<!--            android:id="@+id/userPageNickName"-->
-<!--            android:textSize="16dp"-->
-<!--            tools:ignore="MissingConstraints"-->
-<!--            tools:layout_editor_absoluteX="210dp"-->
-<!--            tools:layout_editor_absoluteY="25dp" />-->
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:fontFamily="@font/pretendardbold"-->
+        <!--            android:text="오늘도 수고하세요!"-->
+        <!--            android:textSize="16dp"-->
+        <!--            tools:layout_editor_absoluteX="75dp"-->
+        <!--            tools:layout_editor_absoluteY="25dp"-->
+        <!--            tools:ignore="MissingConstraints" />-->
+
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:fontFamily="@font/pretendardbold"-->
+        <!--            android:text="닉네임"-->
+        <!--            android:id="@+id/userPageNickName"-->
+        <!--            android:textSize="16dp"-->
+        <!--            tools:ignore="MissingConstraints"-->
+        <!--            tools:layout_editor_absoluteX="210dp"-->
+        <!--            tools:layout_editor_absoluteY="25dp" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

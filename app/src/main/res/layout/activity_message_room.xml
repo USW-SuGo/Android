@@ -18,11 +18,14 @@
         android:layout_gravity="center"
         android:textSize="20dp"
         android:id="@+id/msgham"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:id="@+id/messageRoomRv"
         tools:ignore="MissingConstraints"
         tools:listitem="@layout/dealmessagervitem"/>
+    </ScrollView>
 </LinearLayout>

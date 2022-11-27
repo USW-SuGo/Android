@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sugo_mvc.R
 
-class AddrecycleAdapter(private val items : ArrayList<Uri>,val context: Context) :
+class AddrecycleAdapter(private val items : ArrayList<Uri>) :
     RecyclerView.Adapter<AddrecycleAdapter.ViewHolder>() {
     private lateinit var itemClickListener : OnItemClickListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -18,7 +18,6 @@ class AddrecycleAdapter(private val items : ArrayList<Uri>,val context: Context)
         return ViewHolder(inflatedView)
 
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             items[position].let { items ->
                 with(holder.itemView){
@@ -27,11 +26,8 @@ class AddrecycleAdapter(private val items : ArrayList<Uri>,val context: Context)
                         .override(500,500)
                         .into(holder.image)
                 }
-
             }
-
     }
-
     override fun getItemCount(): Int {
         return items.size
     }

@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sugo_mvc.data.DealMainItem
+import com.example.sugo_mvc.data.ProductPostId
 import com.example.sugo_mvc.data.SuccessCheckDto
 import com.example.sugo_mvc.databinding.MypagervitemBinding
 import com.example.sugo_mvc.retofit.RetrofitBuilder
@@ -19,6 +20,8 @@ import com.example.sugo_mvc.util.App
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.Duration
+import java.time.LocalDateTime
 
 
 class userPageAdapter(val items: MutableList<DealMainItem>) :
@@ -35,22 +38,33 @@ class userPageAdapter(val items: MutableList<DealMainItem>) :
             val accessToken = App.prefs.AccessToken!!.replace("AccessToken=", "")
 
             tesl = dealMainItem.imageLink.replace("[", "").replace("]", "").split(",")
+            var a=""
+            val startDateTime = LocalDateTime.now()
+            val endDateTime =dealMainItem.updatedAt
+            val duration: Duration = Duration.between(startDateTime, endDateTime)
+            Log.d("duration",duration.toDays().toString().replace("-",""))
+            if(duration.toDays().toString().replace("-","")=="0")  a="오늘"
+            if(duration.toDays().toString().replace("-","")=="1")  a="어제"
+            if(duration.toDays().toString().replace("-","")!="1"&&
+                duration.toDays().toString().replace("-","")!="0")  a=duration.toDays().toString().replace("-","")+"일 전"
+
             binding.dealrvid.text = dealMainItem.id.toString()
             binding.dealrvtitle.text = dealMainItem.title
-            binding.dealrvprice.text = dealMainItem.price.toString()
+            binding.dealrvprice.text = dealMainItem.price.toString()+"원"
             binding.dealrvplace.text = dealMainItem.contactPlace
             binding.dealNickname.text = dealMainItem.nickname
             binding.dealCategory.text = dealMainItem.category
-            binding.dealDatetime.text = dealMainItem.updatedAt.toString()
+            binding.dealDatetime.text = a
             Glide.with(itemView).load(tesl[0]).into(binding.dealimageLnk)
             binding.safeBtn.setOnClickListener() {
-                RetrofitBuilder.service.upPost(accessToken, 5).enqueue(object :
+                RetrofitBuilder.service.upPost(accessToken, ProductPostId( dealMainItem.id)).enqueue(object :
                     Callback<SuccessCheckDto> {
                     override fun onResponse(
                         call: Call<SuccessCheckDto>,
                         response: Response<SuccessCheckDto>
                     ) {
                         if (response.isSuccessful) {
+                            dialog(binding.root.context).showDialog2()
                             Log.d("success", response.body().toString())
                         } else {
                             dialog(binding.root.context).showDialog()
