@@ -1,6 +1,7 @@
 package com.example.sugo_mvc.ui.messageRoom
 
 import android.content.Intent
+import android.graphics.Color.rgb
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,15 +22,18 @@ class MessageContentAdapter(val items: MutableList<NoteItem>) : RecyclerView.Ada
     }
     class ViewHolder(binding: MessagecontentrvitemBinding) : RecyclerView.ViewHolder(binding.root){
         var binding: MessagecontentrvitemBinding
-        fun bind(dealMainItem: NoteItem){
-            binding.contentmsg.text=dealMainItem.message
-            binding.contentmsgsender.text=dealMainItem.messageSenderId.toString()
-            binding.contentmsgreceiver.text=dealMainItem.messageReceiverId.toString()
-            binding.contentmsgcreateat.text=dealMainItem.messageCreatedAt.toString()
-            if (dealMainItem.requestUserId == dealMainItem.messageSenderId)
-                binding.contentwho.text="보낸 쪽지"
-            else
+        fun bind(dealMainItem: NoteItem) {
+            binding.contentmsg.text = dealMainItem.message
+            binding.contentmsgsender.text = dealMainItem.messageSenderId.toString()
+            binding.contentmsgreceiver.text = dealMainItem.messageReceiverId.toString()
+            binding.contentmsgcreateat.text = dealMainItem.messageCreatedAt.toString()
+            if (dealMainItem.requestUserId == dealMainItem.messageSenderId){
+                binding.contentwho.text = "보낸 쪽지"
+            binding.contentwho.setTextColor(rgb(255, 0, 0))
+        }else{
                 binding.contentwho.text="받은 쪽지"
+                binding.contentwho.setTextColor(rgb(0, 255, 0))
+        }
         }
 
 
