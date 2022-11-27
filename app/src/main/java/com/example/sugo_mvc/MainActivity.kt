@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportFragmentManager.beginTransaction().replace(container, DealFragment())
             .commitAllowingStateLoss()
 
-
         bottomBar.setOnItemSelectedListener {
             getFragment(it)
         }

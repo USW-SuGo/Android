@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,16 +17,16 @@
             android:layout_height="200dp"
             android:layout_centerVertical="true"
             android:layout_marginBottom="15dp"
-            android:scaleType="fitXY" />
+            android:scaleType="centerCrop" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/dealrvplace"
-                android:layout_columnWeight="1"
-                android:fontFamily="@font/pretendardbold"
-                android:text="장소"
-                android:textSize="8dp" />
+        <TextView
+            android:id="@+id/dealrvplace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:fontFamily="@font/pretendardbold"
+            android:text="장소"
+            android:textSize="8dp" />
 
 
         <TextView
@@ -63,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendardbold"
                 android:gravity="right"
+                android:singleLine="true"
                 android:text="가격"
                 android:textColor="@color/sugreen"
                 android:textSize="16dp"
@@ -88,11 +89,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="0.01dp"
-            android:id="@+id/userlikestatus"/>
+
+    <TextView
+        android:id="@+id/userlikestatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="0.01dp" />
 
 
 </RelativeLayout>
