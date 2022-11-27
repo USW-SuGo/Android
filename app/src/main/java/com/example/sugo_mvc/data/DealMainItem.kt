@@ -17,5 +17,6 @@ data class DealMainItem(
     var price: Int,
     var nickname: String,
     var category: String,
-    val status :Boolean
+    val status :Boolean,
+    val userLikeStatus :Boolean
 )

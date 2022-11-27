@@ -11,9 +11,10 @@ import android.widget.Filterable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-
 import com.example.sugo_mvc.data.DealMainItem
 import com.example.sugo_mvc.databinding.DealrvitemBinding
+import java.time.Duration
+import java.time.LocalDateTime
 
 
 class DealAdapter(var items: MutableList<DealMainItem>) :
@@ -42,15 +43,25 @@ class DealAdapter(var items: MutableList<DealMainItem>) :
 
         fun bind(dealMainItem: DealMainItem){
             val tesl:List<String>
+            var a=""
+            val startDateTime = LocalDateTime.now()
+            val endDateTime = dealMainItem.updatedAt
+            val duration: Duration = Duration.between(startDateTime, endDateTime)
+            Log.d("duration",duration.toDays().toString().replace("-",""))
+            if(duration.toDays().toString().replace("-","")=="0")  a="오늘"
+            if(duration.toDays().toString().replace("-","")=="1")  a="어제"
+            if(duration.toDays().toString().replace("-","")!="1"&&
+                duration.toDays().toString().replace("-","")!="0")  a=duration.toDays().toString().replace("-","")+"일 전"
+
+
             tesl=dealMainItem.imageLink.replace("[","").replace("]","").split(",")
             binding.dealrvid.text=dealMainItem.id.toString()
             binding.dealrvtitle.text = dealMainItem.title
-            binding.dealrvprice.text = dealMainItem.price.toString()
-            binding.dealrvplace.text = dealMainItem.contactPlace
+            binding.dealrvprice.text = dealMainItem.price.toString()+"원"
+            binding.dealrvplace.text = dealMainItem.contactPlace+" | "+a+" | "+dealMainItem.category
             binding.dealNickname.text=dealMainItem.nickname
-            binding.dealCategory.text=dealMainItem.category
-            binding.dealDatetime.text= dealMainItem.updatedAt.toString()
             Glide.with(itemView).load(tesl[0]).into(binding.dealimageLnk)
+            binding.userlikestatus.text=dealMainItem.userLikeStatus.toString()
         }
         init {
             this.binding = binding
@@ -71,9 +82,6 @@ class DealAdapter(var items: MutableList<DealMainItem>) :
         }
     }
 
-
-
-
     override fun getItemCount(): Int {
         return filterItems.size
     }
@@ -83,6 +91,7 @@ class DealAdapter(var items: MutableList<DealMainItem>) :
 
             val intent = Intent(holder.itemView.context, DealDetailActivity()::class.java)
             intent.putExtra("id",   holder.binding.dealrvid.text)
+            intent.putExtra("userLikeStatus",holder.binding.userlikestatus.text)
             ContextCompat.startActivity(holder.itemView.context,intent,null)
         }
 
