@@ -106,14 +106,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
                 return true
             }
-//            R.id.menumap -> {
-//                supportFragmentManager.beginTransaction().replace(container, MapFragment())
-//                    .commitAllowingStateLoss()
-//            }
-//            else -> {
-//                supportFragmentManager.beginTransaction().replace(container, UserpageFragment())
-//                    .commitAllowingStateLoss()
-//            }
         }
         return true
     }
