@@ -5,9 +5,11 @@
 
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:requestLegacyExternalStorage="true"
         android:name=".util.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -31,10 +33,10 @@
             android:name=".ui.messageRoom.MessageRoomActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.UserPageActivity"
+            android:name=".ui.user.UserPageActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.AddItemActivity"
+            android:name=".ui.adddealitem.AddItemActivity"
             android:exported="false" />
         <activity
             android:name=".ui.JoinActivity"
@@ -46,7 +48,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.DealDetailActivity"
+            android:name=".ui.deal.DealDetailActivity"
             android:exported="true" />
         <activity
             android:name=".ui.IntroActivity"

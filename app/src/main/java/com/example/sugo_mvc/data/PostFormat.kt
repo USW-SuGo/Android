@@ -8,7 +8,7 @@ data class PostFormat(
 
     val title: String,
     val content: String,
-    val price: Editable?,
+    val price: Long?,
     val contactPlace: String,
     val category: String,
 

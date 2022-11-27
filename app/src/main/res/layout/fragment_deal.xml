@@ -41,14 +41,20 @@
             />
     </GridLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/dealRv"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/pullContent"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchbar"
-        app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/dealrvitem" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/searchbar">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dealRv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchbar"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/dealrvitem" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

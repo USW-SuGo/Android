@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:id="@+id/menu_01">
         <item
-            android:id="@+id/menuDeal1"
+            android:id="@+id/logindraw1"
             android:enabled="true"
-            android:title="로그인" />
+            android:title="로그아웃" />
     </group>
     <group android:id="@+id/menu_02">
         <item
-            android:id="@+id/menumap1"
+            android:id="@+id/menu1"
             android:enabled="true"
-            android:title="회원가입"
+            android:title="내정보"
             />
     </group>
     <group android:id="@+id/menu_03">

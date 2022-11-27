@@ -12,10 +12,12 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.sugo_mvc.databinding.ActivityMainBinding
 import com.example.sugo_mvc.ui.*
+import com.example.sugo_mvc.ui.adddealitem.AddItemActivity
 
 import com.example.sugo_mvc.ui.deal.DealFragment
 import com.example.sugo_mvc.ui.login.LoginActivity
 import com.example.sugo_mvc.ui.messageRoom.MessageRoomActivity
+import com.example.sugo_mvc.ui.user.UserPageActivity
 
 import com.google.android.material.navigation.NavigationView
 
@@ -43,7 +45,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         container = binding.mainContainer.id
         supportFragmentManager.beginTransaction().replace(container, DealFragment())
             .commitAllowingStateLoss()
-
 
         bottomBar.setOnItemSelectedListener {
             getFragment(it)
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             R.id.toolbar_upload -> {
                 Log.d("ToolBar_item: ", "검색버튼클릭")
-                val intent = Intent(applicationContext,AddItemActivity::class.java)
+                val intent = Intent(applicationContext, AddItemActivity::class.java)
                 startActivity(intent)
                 return true
             }
@@ -104,14 +105,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
                 return true
             }
-//            R.id.menumap -> {
-//                supportFragmentManager.beginTransaction().replace(container, MapFragment())
-//                    .commitAllowingStateLoss()
-//            }
-//            else -> {
-//                supportFragmentManager.beginTransaction().replace(container, UserpageFragment())
-//                    .commitAllowingStateLoss()
-//            }
         }
         return true
     }
