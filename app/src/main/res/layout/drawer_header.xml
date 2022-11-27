@@ -14,7 +14,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="left"
-        app:srcCompat="@drawable/boy"
+        app:srcCompat="@drawable/user"
         tools:ignore="MissingConstraints" />
     <TextView
         android:paddingTop="20dp"

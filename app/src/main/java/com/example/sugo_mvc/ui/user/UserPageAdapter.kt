@@ -51,10 +51,8 @@ class userPageAdapter(val items: MutableList<DealMainItem>) :
             binding.dealrvid.text = dealMainItem.id.toString()
             binding.dealrvtitle.text = dealMainItem.title
             binding.dealrvprice.text = dealMainItem.price.toString()+"원"
-            binding.dealrvplace.text = dealMainItem.contactPlace
+            binding.dealrvplace.text = dealMainItem.contactPlace+" | "+a+" | "+dealMainItem.category
             binding.dealNickname.text = dealMainItem.nickname
-            binding.dealCategory.text = dealMainItem.category
-            binding.dealDatetime.text = a
             Glide.with(itemView).load(tesl[0]).into(binding.dealimageLnk)
             binding.safeBtn.setOnClickListener() {
                 RetrofitBuilder.service.upPost(accessToken, ProductPostId( dealMainItem.id)).enqueue(object :

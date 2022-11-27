@@ -39,7 +39,7 @@
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:layout_gravity="left"
-            app:srcCompat="@drawable/boy"
+            app:srcCompat="@drawable/user"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -51,32 +51,12 @@
             android:paddingLeft="20dp"
             android:paddingTop="20dp"
             android:text="오늘도 수고하세요!"
-            android:textSize="20dp"
+            android:textSize="17dp"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/iv_image"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
-
-        <!--        <TextView-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:fontFamily="@font/pretendardbold"-->
-        <!--            android:text="오늘도 수고하세요!"-->
-        <!--            android:textSize="16dp"-->
-        <!--            tools:layout_editor_absoluteX="75dp"-->
-        <!--            tools:layout_editor_absoluteY="25dp"-->
-        <!--            tools:ignore="MissingConstraints" />-->
-
-        <!--        <TextView-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:fontFamily="@font/pretendardbold"-->
-        <!--            android:text="닉네임"-->
-        <!--            android:id="@+id/userPageNickName"-->
-        <!--            android:textSize="16dp"-->
-        <!--            tools:ignore="MissingConstraints"-->
-        <!--            tools:layout_editor_absoluteX="210dp"-->
-        <!--            tools:layout_editor_absoluteY="25dp" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -89,22 +69,25 @@
         android:rowCount="2">
         <TextView
             android:gravity="center"
-            android:fontFamily="@font/pretendardbold"
+            android:fontFamily="@font/pretendardsemibold"
             android:textSize="16dp"
+            android:textColor="@color/black"
             android:paddingBottom="10dp"
             android:layout_columnWeight="1"
             android:text="학점"/>
         <TextView
+            android:textColor="@color/black"
             android:paddingBottom="10dp"
             android:gravity="center"
-            android:fontFamily="@font/pretendardbold"
+            android:fontFamily="@font/pretendardsemibold"
             android:textSize="16dp"
             android:layout_columnWeight="1"
             android:text="수고"/>
         <TextView
+            android:textColor="@color/black"
             android:paddingBottom="10dp"
             android:gravity="center"
-            android:fontFamily="@font/pretendardbold"
+            android:fontFamily="@font/pretendardsemibold"
             android:textSize="16dp"
             android:layout_columnWeight="1"
             android:text="유저평가"
@@ -132,17 +115,44 @@
     </GridLayout>
     <View
         android:layout_width="wrap_content"
-        android:layout_height="0.3dp"
-        android:background="@color/ef_grey" />
-    <TextView
-        android:padding="8dp"
-        android:gravity="left"
-        android:fontFamily="@font/pretendardbold"
-        android:textSize="14dp"
-        android:layout_columnWeight="1"
-        android:text="내가 쓴 글  좋아요 누른 글"
+        android:layout_height="0.9dp"
+        android:background="@color/ef_grey"
+      />
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:fontFamily="@font/pretendardbold"
+            android:gravity="left"
+            android:paddingTop="12dp"
+            android:paddingLeft="8dp"
+            android:paddingBottom="8dp"
+            android:text="내가 쓴 글    "
+            android:textSize="14dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:fontFamily="@font/pretendardbold"
+            android:gravity="left"
+            android:paddingTop="12dp"
+            android:paddingLeft="8dp"
+
+            android:text="좋아요 누른 글"
+            android:textSize="14dp"
+
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userrv"
         android:layout_width="match_parent"
