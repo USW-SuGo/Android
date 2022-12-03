@@ -53,30 +53,24 @@ class AddItemActivity : AppCompatActivity() {
             val addprice = binding.addprice.editText?.text.toString()
             val addcontactPlace = "미래혁신관"
             val addcategory = "서적"
-            val multibody = mutableListOf<MultipartBody.Part>()
-            val file = File(getRealPathFromURI(list[0]))
-            if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
-                file.mkdirs()
+            val imageMultipartBody = mutableListOf<MultipartBody.Part>()
+            for(image in list){
+                val file = File(getRealPathFromURI(image))
+                if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
+                    file.mkdirs()
+                }
+                val requestFile = RequestBody.create(MediaType.parse("image*/"), file)
+                val body =
+                    MultipartBody.Part.createFormData("multipartFileList", file.name, requestFile)
+                imageMultipartBody.add(body)
             }
-            val requestFile = RequestBody.create(MediaType.parse("image*/"), file)
-            val body =
-                MultipartBody.Part.createFormData("multipartFileList", file.name, requestFile)
-            val file1 = File(getRealPathFromURI(list[0]))
-            if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
-                file.mkdirs()
-            }
-            val requestFile1 = RequestBody.create(MediaType.parse("image*/"), file1)
-            val body1 =
-                MultipartBody.Part.createFormData("multipartFileList", file1.name, requestFile1)
-            multibody.add(body)
-            multibody.add(body1)
             RetrofitBuilder.service.postUpload(
                 accessToken, PostFormat(
                     addtitle,
                     addcontent, addprice.toLong(),
                     addcontactPlace,
                     addcategory
-                ), multibody
+                ), imageMultipartBody
             )
                 .enqueue(object : retrofit2.Callback<ProductPostId> {
                     override fun onResponse(
