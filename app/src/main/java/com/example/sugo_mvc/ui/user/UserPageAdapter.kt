@@ -48,14 +48,14 @@ class userPageAdapter(val items: MutableList<DealMainItem>) :
             if(duration.toDays().toString().replace("-","")!="1"&&
                 duration.toDays().toString().replace("-","")!="0")  a=duration.toDays().toString().replace("-","")+"일 전"
 
-            binding.dealrvid.text = dealMainItem.id.toString()
+            binding.dealrvid.text = dealMainItem.productPostId.toString()
             binding.dealrvtitle.text = dealMainItem.title
             binding.dealrvprice.text = dealMainItem.price.toString()+"원"
             binding.dealrvplace.text = dealMainItem.contactPlace+" | "+a+" | "+dealMainItem.category
             binding.dealNickname.text = dealMainItem.nickname
             Glide.with(itemView).load(tesl[0]).into(binding.dealimageLnk)
             binding.safeBtn.setOnClickListener() {
-                RetrofitBuilder.service.upPost(accessToken, ProductPostId( dealMainItem.id)).enqueue(object :
+                RetrofitBuilder.service.upPost(accessToken, ProductPostId( dealMainItem.productPostId)).enqueue(object :
                     Callback<SuccessCheckDto> {
                     override fun onResponse(
                         call: Call<SuccessCheckDto>,

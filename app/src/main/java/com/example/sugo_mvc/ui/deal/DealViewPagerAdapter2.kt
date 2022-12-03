@@ -1,22 +1,15 @@
 package com.example.sugo_mvc.ui.deal
 
-import android.app.ActivityOptions
-import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.sugo_mvc.R
 import com.example.sugo_mvc.databinding.DealdetailviewitemBinding
-import com.example.sugo_mvc.databinding.DealrvitemBinding
 
 
-class DealViewPagerAdapter(private val imageUrlList: List<String>) :
-RecyclerView.Adapter<DealViewPagerAdapter.ViewPagerViewHolder>() {
+class DealViewPagerAdapter2(private val imageUrlList: List<String>) :
+    RecyclerView.Adapter<DealViewPagerAdapter2.ViewPagerViewHolder>() {
 
     inner class ViewPagerViewHolder(val binding: DealdetailviewitemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -26,7 +19,7 @@ RecyclerView.Adapter<DealViewPagerAdapter.ViewPagerViewHolder>() {
             Glide.with(binding.root.context)
                 .load(imageUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.dealimageLnk)
+                .into(binding.dealimageLnk2)
         }
 
     }

@@ -12,4 +12,13 @@
         android:layout_marginBottom="15dp"
         android:scaleType="center"
         tools:ignore="MissingConstraints" />
+    <ImageView
+        android:layout_marginTop="60dp"
+        android:id="@+id/dealimageLnk2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="60dp"
+        android:scaleType="fitXY"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

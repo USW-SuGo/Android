@@ -8,6 +8,7 @@ import android.database.Cursor.FIELD_TYPE_STRING
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
@@ -38,7 +39,7 @@ class AddItemActivity : AppCompatActivity() {
 
     var list = ArrayList<Uri>()
     val adapter = AddrecycleAdapter(list)
-    val uri=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -46,7 +47,7 @@ class AddItemActivity : AppCompatActivity() {
             selectGallery()
 
         }
-        Log.d("image",list.toString())
+
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.addrecycle.layoutManager = layoutManager
         binding.addrecycle.adapter = adapter
@@ -54,16 +55,53 @@ class AddItemActivity : AppCompatActivity() {
         binding.addsugo.setOnClickListener {
 
             val addtitle = binding.addtitle.editText?.text.toString()
-            val addcontent = "asdasd"
+            val addcontent = "binding"
             val addprice = binding.addprice.editText?.text.toString()
-            val addcontactPlace = "asdasd"
-            val addcategory = binding.addcategory.text.toString()
+            val addcontactPlace = "미래혁신관"
+            val addcategory = "서적"
+            val multibody= mutableListOf<MultipartBody.Part>()
+            val file = File(getRealPathFromURI(list[0]))
+            if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
+                file.mkdirs()
+            }
+            val requestFile = RequestBody.create(MediaType.parse("image*/"),file)
+            Log.d(" requestFile",requestFile.toString())
+            val body = MultipartBody.Part.createFormData("multipartFileList",file.name, requestFile)
+            val file1 = File(getRealPathFromURI(list[0]))
+            if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
+                file.mkdirs()
+            }
+            val requestFile1 = RequestBody.create(MediaType.parse("image*/"),file1)
+            Log.d(" requestFile",requestFile.toString())
+            val body1 = MultipartBody.Part.createFormData("multipartFileList",file1.name, requestFile1)
+            multibody.add(body)
+            multibody.add(body1)
+            RetrofitBuilder.service.postUpload(
+                accessToken, PostFormat(
+                    addtitle,
+                    addcontent, addprice.toLong(),
+                    addcontactPlace,
+                    addcategory), multibody)
+                .enqueue(object : retrofit2.Callback<ProductPostId> {
+                    override fun onResponse(
+                        call: Call<ProductPostId>,
+                        response: Response<ProductPostId>
+                    ) {
+                        if (response.isSuccessful) {
+                            Log.d("postUploadtest", response.body().toString())
+                        } else {
+                            Log.d("postUploadFail", response.errorBody()!!.toString())
+                        }
+                    }
 
+                    override fun onFailure(call: Call<ProductPostId>, t: Throwable) {
+                        Log.d("postUploadFail", t.toString())
+                    }
+
+                })
             }
     }
 
-    private var currentPhotoPath:String=""
-    var mImageCaptureName:String=""
     private val imageResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -78,45 +116,44 @@ class AddItemActivity : AppCompatActivity() {
                 }
 
                 for (i in 0 until count) {
-
                     val imageUri = it.data!!.clipData!!.getItemAt(i).uri
-                    currentPhotoPath=getFilePathFromUri(imageUri)
-                    val file = File(getFilePathFromUri(imageUri))
-                    if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
-                        file.mkdirs();    // 하위폴더를 포함한 폴더를 전부 생성
-                    }
-                    val requestFile = RequestBody.create(MediaType.parse("image*"),createImageFile())
-                    val body = MultipartBody.Part.createFormData("proFile", file.name, requestFile)
-                    RetrofitBuilder.service
-                        .postUpload(
-                            accessToken,
-                            PostFormat(
-                            "test",
-                                "test",
-                                3,
-                                "test",
-                                "test"
-                            ),
-                            body
-                            )
-                        .enqueue(object : retrofit2.Callback<ProductPostId> {
-                            override fun onResponse(
-                                call: Call<ProductPostId>,
-                                response: Response<ProductPostId>
-                            ) {
-                                if (response.isSuccessful) {
-                                    Log.d("postUploadtest", response.body().toString())
-                                } else {
-                                    Log.d("postUploadFail", response.errorBody()!!.toString())
-                                }
-                            }
-
-                            override fun onFailure(call: Call<ProductPostId>, t: Throwable) {
-                                Log.d("postUploadFail", t.toString())
-                            }
-
-                        })
-                    Log.d("image",getFilePathFromUri(imageUri).toString())
+//                    Log.d("image",imageUri.toString())
+//                    Log.d("image",it.data!!.clipData!!.toString())
+//                    val file = File(getRealPathFromURI(imageUri))
+//                    if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
+//                        file.mkdirs()
+//                    }
+//                    val requestFile = RequestBody.create(MediaType.parse("image*/"),file)
+//                    Log.d(" requestFile",requestFile.toString())
+//                    val body = MultipartBody.Part.createFormData("multipartFileList",file.name, requestFile)
+//                    val multibody= mutableListOf<MultipartBody.Part>()
+//                    multibody.add(body)
+//                    Log.d(" requestbody",body.toString())
+//                    RetrofitBuilder.service.postUpload(
+//                            accessToken, PostFormat(
+//                            "test",
+//                                "test",
+//                                3,
+//                                "test",
+//                                "test"), multibody)
+//                        .enqueue(object : retrofit2.Callback<ProductPostId> {
+//                            override fun onResponse(
+//                                call: Call<ProductPostId>,
+//                                response: Response<ProductPostId>
+//                            ) {
+//                                if (response.isSuccessful) {
+//                                    Log.d("postUploadtest", response.body().toString())
+//                                } else {
+//                                    Log.d("postUploadFail", response.errorBody()!!.toString())
+//                                }
+//                            }
+//
+//                            override fun onFailure(call: Call<ProductPostId>, t: Throwable) {
+//                                Log.d("postUploadFail", t.toString())
+//                            }
+//
+//                        })
+//                    Log.d("image2",getFilePathFromUri(imageUri).toString())
                     list.add(imageUri)
                 }
 
@@ -134,50 +171,59 @@ class AddItemActivity : AppCompatActivity() {
         }
     }
 
-    @Throws(IOException::class)
-    private fun createImageFile(): File? {
-        val dir = File(Environment.getExternalStorageDirectory().toString() + "/path/")
-        if (!dir.exists()) {
-            dir.mkdirs()
-        }
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        mImageCaptureName = "$timeStamp.png"
-        val storageDir = File(
-            Environment.getExternalStorageDirectory().absoluteFile.toString() + "/path/"
-                    + mImageCaptureName
-        )
-        currentPhotoPath = storageDir.absolutePath
-        return storageDir
-    }
     fun getFilePathFromUri(uri: Uri): String {
 
         var cursor : Cursor? = null
-        var result: String =""
 
         try {
-            val projection = arrayOf(MediaStore.Images.Media.DATA)
-
+            val projection = arrayOf(MediaStore.Video.Media.DATA)
+            var result :String = ""
             cursor = contentResolver.query(uri, projection, null, null, null)
             if (cursor == null) {
                 result = uri.path!!
+                Log.d("cursor=null","cursornull")
             } else {
                 Log.d("1", "Path_img = " + uri)
                 Log.d("2", "Path_pth = " + uri.path)
                 Log.d("3", "Path_cursor = " + cursor)
-
                 cursor.moveToFirst()
                 val idx = cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA)
                 if (cursor.getType(idx) == FIELD_TYPE_STRING) {
-                    result = cursor.getString(idx);
+                   result = cursor.getString(idx)
+                    Log.d("resultimage",result)
                 }
             }
-
+            Log.d("elseresulr","null$result")
             return result
         } finally {
             cursor!!.close()
         }
     }
-
+    private fun getRealPathFromURI(contentUri: Uri): String? {
+        if (contentUri.path!!.startsWith("/storage")) {
+            return contentUri.path
+        }
+        val id = DocumentsContract.getDocumentId(contentUri).split(":").toTypedArray()[1]
+        val columns = arrayOf(MediaStore.Files.FileColumns.DATA)
+        val selection = MediaStore.Files.FileColumns._ID + " = " + id
+        val cursor = contentResolver.query(
+            MediaStore.Files.getContentUri("external"),
+            columns,
+            selection,
+            null,
+            null
+        )
+        try {
+            val columnIndex = cursor!!.getColumnIndex(columns[0])
+            if (cursor.moveToFirst()) {
+                Log.d("elseresulr",cursor.getString(columnIndex).toString())
+                return cursor.getString(columnIndex)
+            }
+        } finally {
+            cursor!!.close()
+        }
+        return null
+    }
     private fun selectGallery() {
         val writePermission =
             ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)

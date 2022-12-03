@@ -1,7 +1,10 @@
 package com.example.sugo_mvc.ui.deal
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.sugo_mvc.R
@@ -10,6 +13,8 @@ import com.example.sugo_mvc.data.Like
 import com.example.sugo_mvc.data.ProductPostId
 import com.example.sugo_mvc.databinding.ActivityDealDetailBinding
 import com.example.sugo_mvc.retofit.RetrofitBuilder
+import com.example.sugo_mvc.ui.login.LoginActivity
+import com.example.sugo_mvc.ui.messageRoom.MessageRoomActivity
 import com.example.sugo_mvc.util.App
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,36 +44,48 @@ class DealDetailActivity : AppCompatActivity() {
                     call: Call<DealDetailItem>,
                     response: Response<DealDetailItem>
                 ) {
-                    imagelink = response.body()?.imageLink?.replace("[", "")
-                        ?.replace("]", "")!!.replace(" ", "")
-                    imageList = imagelink.split(",")
-                    var a=""
-                    val startDateTime = LocalDateTime.now()
-                    val endDateTime = response.body()!!.updatedAt
-                    val duration: Duration = Duration.between(startDateTime, endDateTime)
-                    Log.d("duration",duration.toDays().toString().replace("-",""))
-                    if(duration.toDays().toString().replace("-","")=="0")  a="오늘"
-                    if(duration.toDays().toString().replace("-","")=="1")  a="어제"
-                    if(duration.toDays().toString().replace("-","")!="1"&&
-                        duration.toDays().toString().replace("-","")!="0")  a=duration.toDays().toString().replace("-","")+"일 전"
+                    if (response.isSuccessful) {
+                        imagelink = response.body()?.imageLink?.replace("[", "")
+                            ?.replace("]", "")!!.replace(" ", "")
+                        imageList = imagelink.split(",")
+                        var a = ""
+                        val startDateTime = LocalDateTime.now()
+                        val endDateTime = response.body()!!.updatedAt
+                        val duration: Duration = Duration.between(startDateTime, endDateTime)
+                        Log.d("duration", duration.toDays().toString().replace("-", ""))
+                        if (duration.toDays().toString().replace("-", "") == "0") a = "오늘"
+                        if (duration.toDays().toString().replace("-", "") == "1") a = "어제"
+                        if (duration.toDays().toString().replace("-", "") != "1" &&
+                            duration.toDays().toString().replace("-", "") != "0"
+                        ) a = duration.toDays().toString().replace("-", "") + "일 전"
 
-                    binding.dealViewPager.adapter = DealViewPagerAdapter(imageList)
-                    binding.dealViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-                    Log.d("datetime",response.body()!!.updatedAt.toString())
-                    binding.dealrvplace.text = response.body()!!.contactPlace+" | "+a+" | "+response.body()!!.category
-                    binding.dealrvtitle.text = response.body()!!.title
+                        binding.dealViewPager.adapter = DealViewPagerAdapter(imageList)
+                        binding.dealViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-                    binding.dealNickname.text = response.body()!!.nickname
-                    binding.dealrvprice.text = response.body()!!.price.toString()+"원"
-                    binding.content.text = response.body()!!.content
-                    Log.d("asd", call.request().toString())
-                    Log.d("asd", response.body()!!.userLikeStatus.toString())
+                        binding.test.setOnClickListener {
+                            clickEvent(binding.root, imagelink)
+                        }
 
-                    if (response.body()!!.userLikeStatus.toString().contains("true")) {
-                        binding.likebtn.setImageResource(R.drawable.heartred)
-                    }
-                    if (response.body()!!.userLikeStatus.toString().contains("false")) {
-                        binding.likebtn.setImageResource(R.drawable.heart)
+                        binding.dealrvplace.text =
+                            response.body()!!.contactPlace + " | " + a + " | " + response.body()!!.category
+                        binding.dealrvtitle.text = response.body()!!.title
+
+                        binding.dealNickname.text = response.body()!!.nickname
+                        binding.dealrvprice.text = response.body()!!.price.toString() + "원"
+                        binding.content.text = response.body()!!.content
+                        Log.d("asd", call.request().toString())
+                        Log.d("asd", response.body()!!.userLikeStatus.toString())
+
+                        if (response.body()!!.userLikeStatus.toString().contains("true")) {
+                            binding.likebtn.setImageResource(R.drawable.heartred)
+                        }
+                        if (response.body()!!.userLikeStatus.toString().contains("false")) {
+                            binding.likebtn.setImageResource(R.drawable.heart)
+                        }
+                    }else{
+                        Log.d("asd", response.errorBody()!!.toString())
+                        val intent = Intent(applicationContext, LoginActivity::class.java)
+                        startActivity(intent)
                     }
                 }
 
@@ -101,5 +118,11 @@ class DealDetailActivity : AppCompatActivity() {
                 })
         }
 
+    }
+    private fun clickEvent(view: View, pos: String) {
+        val intent = Intent(applicationContext, ImageActivity::class.java)
+        intent.putExtra("pos", pos)
+        val opt = ActivityOptions.makeSceneTransitionAnimation(this, view, "imgTrans")
+        startActivity(intent, opt.toBundle())
     }
 }
