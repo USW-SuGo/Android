@@ -79,7 +79,8 @@
             android:fitsSystemWindows="true"
             android:padding="30dp"
             app:headerLayout="@layout/drawer_header"
-            app:menu="@menu/drawer_menu" />
+            app:menu="@menu/drawer_menu"
+            />
 
     </RelativeLayout>
 

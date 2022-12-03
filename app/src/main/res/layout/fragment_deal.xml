@@ -9,24 +9,37 @@
         android:layout_height="40dp"
         android:orientation="horizontal"
         android:id="@+id/searchbar"
-        android:padding="4dp"
+        android:padding="2dp"
         android:columnCount="3"
         tools:ignore="MissingConstraints">
-        <androidx.appcompat.widget.SearchView
+<!--        <androidx.appcompat.widget.SearchView-->
+<!--            android:layout_columnWeight="2"-->
+<!--            android:paddingLeft="15dp"-->
+<!--            android:id="@+id/search_view"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginStart="4dp"-->
+<!--            android:gravity="left"-->
+<!--            app:queryHint="검색"-->
+<!--            android:background="@drawable/edge"-->
+<!--            tools:ignore="GridLayout" />-->
+        <EditText
+            android:drawableStart="@drawable/searcha"
+            android:drawablePadding="10dp"
+            android:inputType="text"
             android:layout_columnWeight="2"
-            android:paddingLeft="15dp"
-            android:id="@+id/search_view"
+            android:paddingLeft="8dp"
+            android:id="@+id/search_view2"
             android:layout_width="200dp"
-            android:layout_height="match_parent"
+            android:layout_height="30dp"
             android:layout_marginStart="4dp"
             android:gravity="left"
-            app:queryHint="검색"
             android:background="@drawable/edge"
             tools:ignore="GridLayout" />
-
         <TextView
             android:id="@+id/categorybtn"
             android:layout_width="70dp"
+            android:textColor="@color/black"
             android:layout_height="match_parent"
             android:layout_columnSpan="1"
             android:gravity="center"

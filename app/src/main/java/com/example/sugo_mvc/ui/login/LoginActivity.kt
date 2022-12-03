@@ -8,10 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.sugo_mvc.MainActivity
 import com.example.sugo_mvc.R
-import com.example.sugo_mvc.data.DealDetailItem
-import com.example.sugo_mvc.data.DealMainItem
-import com.example.sugo_mvc.data.LoginFormat
-import com.example.sugo_mvc.data.Token
+import com.example.sugo_mvc.data.*
 import com.example.sugo_mvc.databinding.ActivityLoginBinding
 
 import com.example.sugo_mvc.retofit.RetrofitBuilder
@@ -67,7 +64,21 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
             binding.findidbtn.setOnClickListener {
+                RetrofitBuilder.service.findPwd(LoginFormat("androidtest","dltkr46@suwon.ac.kr")).enqueue(object : Callback<SuccessCheckDto>{
+                    override fun onResponse(
+                        call: Call<SuccessCheckDto>,
+                        response: Response<SuccessCheckDto>
+                    ) {
+                        if (response.isSuccessful){
+                            Log.d("successpwd",response.body().toString())
+                        }
+                    }
 
+                    override fun onFailure(call: Call<SuccessCheckDto>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
             }
 
             binding.findpwdbtn.setOnClickListener {  }

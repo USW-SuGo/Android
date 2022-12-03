@@ -1,6 +1,8 @@
 package com.example.sugo_mvc.ui.deal
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -16,6 +18,7 @@ import com.example.sugo_mvc.R
 import com.example.sugo_mvc.data.DealMainItem
 import com.example.sugo_mvc.databinding.FragmentDealBinding
 import com.example.sugo_mvc.retofit.RetrofitBuilder
+import com.example.sugo_mvc.util.App
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,7 +32,7 @@ class DealFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
     private var page = 0
     private var size = 10
     var isLoading = false
-
+    val accessToken = App.prefs.AccessToken!!.replace("AccessToken=","")
 
     private val DealItemSize = mutableListOf<DealMainItem>()
     private lateinit var dealAdapter: DealAdapter
@@ -44,10 +47,20 @@ class DealFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.d("access",accessToken.toString())
         val testItems1 = DealMainItem(0, "", "", LocalDateTime.now(), "", 0, "", "", false, false)
-
-        binding.searchView.setOnQueryTextListener(searchViewTextListner)
+       binding.searchView2.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun afterTextChanged(editable: Editable) {
+                // input창에 문자를 입력할때마다 호출된다.
+                // search 메소드를 호출한다.
+                val text: String = binding.searchView2.getText().toString()
+                dealAdapter.filter.filter(text)
+                Log.d("Search", "SearchVies Text is changed : $text")
+            }
+        })
+//        binding.searchView.setOnQueryTextListener(searchViewTextListner)
         DealItemSize.add(testItems1)
         binding.dealRv.layoutManager = GridLayoutManager(context, 2)
         dealAdapter = DealAdapter(DealItemSize)

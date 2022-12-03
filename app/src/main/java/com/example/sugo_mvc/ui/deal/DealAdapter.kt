@@ -55,7 +55,7 @@ class DealAdapter(var items: MutableList<DealMainItem>) :
 
 
             tesl=dealMainItem.imageLink.replace("[","").replace("]","").split(",")
-            binding.dealrvid.text=dealMainItem.id.toString()
+            binding.dealrvid.text=dealMainItem.productPostId.toString()
             binding.dealrvtitle.text = dealMainItem.title
             binding.dealrvprice.text = dealMainItem.price.toString()+"원"
             binding.dealrvplace.text = dealMainItem.contactPlace+" | "+a+" | "+dealMainItem.category

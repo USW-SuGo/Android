@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 
 
 data class DealDetailItem(
-var id: Long,
+var productPostid: Long,
 var writerId: Long,
 var imageLink:String,
 var contactPlace: String,
