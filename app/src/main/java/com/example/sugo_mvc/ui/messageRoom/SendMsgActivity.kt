@@ -1,5 +1,6 @@
 package com.example.sugo_mvc.ui.messageRoom
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import com.example.sugo_mvc.data.msgformat
 import com.example.sugo_mvc.databinding.ActivityMessageContentBinding
 import com.example.sugo_mvc.databinding.ActivitySendMsgBinding
 import com.example.sugo_mvc.retofit.RetrofitBuilder
+import com.example.sugo_mvc.ui.user.dialog
 import com.example.sugo_mvc.util.App
 import retrofit2.Response
 
@@ -34,6 +36,8 @@ class SendMsgActivity : AppCompatActivity() {
                 ) {
                     Log.d("msg",binding.msg.text.toString())
                     Log.d("msg",response.body().toString())
+                    dialog(binding.root.context).showDialog3()
+
                 }
 
                 override fun onFailure(call: retrofit2.Call<SuccessCheckDto>, t: Throwable) {

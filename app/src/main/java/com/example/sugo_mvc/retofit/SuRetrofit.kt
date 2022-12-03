@@ -64,7 +64,7 @@ interface SuRetrofit {
     fun postUpload(
         @Header(AUTH_HEADER) AccessToken: String,
         @Part ("info") PostFormat: PostFormat,
-        @Part image: MultipartBody.Part?
+        @Part image: MutableList<MultipartBody.Part>
 
     ): Call<ProductPostId>
 
@@ -121,6 +121,11 @@ interface SuRetrofit {
         @Header("Authorization") AccessToken: String,
         @Body info:ProductPostId
     ):Call<Like>
+    @POST("/token")
+    fun refresh(
+        @Header("Authorization") RefreshToken: String,
+
+    ):Call<Token>
 }
 
 
