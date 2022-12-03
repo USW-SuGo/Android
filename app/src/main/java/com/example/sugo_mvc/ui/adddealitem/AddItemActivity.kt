@@ -3,11 +3,8 @@ package com.example.sugo_mvc.ui.adddealitem
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
-import android.database.Cursor.FIELD_TYPE_STRING
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
@@ -28,9 +25,6 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class AddItemActivity : AppCompatActivity() {
@@ -59,21 +53,21 @@ class AddItemActivity : AppCompatActivity() {
             val addprice = binding.addprice.editText?.text.toString()
             val addcontactPlace = "미래혁신관"
             val addcategory = "서적"
-            val multibody= mutableListOf<MultipartBody.Part>()
+            val multibody = mutableListOf<MultipartBody.Part>()
             val file = File(getRealPathFromURI(list[0]))
             if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
                 file.mkdirs()
             }
-            val requestFile = RequestBody.create(MediaType.parse("image*/"),file)
-            Log.d(" requestFile",requestFile.toString())
-            val body = MultipartBody.Part.createFormData("multipartFileList",file.name, requestFile)
+            val requestFile = RequestBody.create(MediaType.parse("image*/"), file)
+            val body =
+                MultipartBody.Part.createFormData("multipartFileList", file.name, requestFile)
             val file1 = File(getRealPathFromURI(list[0]))
             if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
                 file.mkdirs()
             }
-            val requestFile1 = RequestBody.create(MediaType.parse("image*/"),file1)
-            Log.d(" requestFile",requestFile.toString())
-            val body1 = MultipartBody.Part.createFormData("multipartFileList",file1.name, requestFile1)
+            val requestFile1 = RequestBody.create(MediaType.parse("image*/"), file1)
+            val body1 =
+                MultipartBody.Part.createFormData("multipartFileList", file1.name, requestFile1)
             multibody.add(body)
             multibody.add(body1)
             RetrofitBuilder.service.postUpload(
@@ -81,7 +75,9 @@ class AddItemActivity : AppCompatActivity() {
                     addtitle,
                     addcontent, addprice.toLong(),
                     addcontactPlace,
-                    addcategory), multibody)
+                    addcategory
+                ), multibody
+            )
                 .enqueue(object : retrofit2.Callback<ProductPostId> {
                     override fun onResponse(
                         call: Call<ProductPostId>,
@@ -99,7 +95,7 @@ class AddItemActivity : AppCompatActivity() {
                     }
 
                 })
-            }
+        }
     }
 
     private val imageResult = registerForActivityResult(
@@ -114,50 +110,12 @@ class AddItemActivity : AppCompatActivity() {
                 if (count > 2) {
                     Toast.makeText(applicationContext, "사진은 10장까지 선택 가능합니다.", Toast.LENGTH_LONG)
                 }
-
                 for (i in 0 until count) {
                     val imageUri = it.data!!.clipData!!.getItemAt(i).uri
-//                    Log.d("image",imageUri.toString())
-//                    Log.d("image",it.data!!.clipData!!.toString())
-//                    val file = File(getRealPathFromURI(imageUri))
-//                    if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
-//                        file.mkdirs()
-//                    }
-//                    val requestFile = RequestBody.create(MediaType.parse("image*/"),file)
-//                    Log.d(" requestFile",requestFile.toString())
-//                    val body = MultipartBody.Part.createFormData("multipartFileList",file.name, requestFile)
-//                    val multibody= mutableListOf<MultipartBody.Part>()
-//                    multibody.add(body)
-//                    Log.d(" requestbody",body.toString())
-//                    RetrofitBuilder.service.postUpload(
-//                            accessToken, PostFormat(
-//                            "test",
-//                                "test",
-//                                3,
-//                                "test",
-//                                "test"), multibody)
-//                        .enqueue(object : retrofit2.Callback<ProductPostId> {
-//                            override fun onResponse(
-//                                call: Call<ProductPostId>,
-//                                response: Response<ProductPostId>
-//                            ) {
-//                                if (response.isSuccessful) {
-//                                    Log.d("postUploadtest", response.body().toString())
-//                                } else {
-//                                    Log.d("postUploadFail", response.errorBody()!!.toString())
-//                                }
-//                            }
-//
-//                            override fun onFailure(call: Call<ProductPostId>, t: Throwable) {
-//                                Log.d("postUploadFail", t.toString())
-//                            }
-//
-//                        })
-//                    Log.d("image2",getFilePathFromUri(imageUri).toString())
                     list.add(imageUri)
                 }
 
-            } else { // 단일 선택
+            } else {
                 it.data?.data?.let { uri ->
                     val imageUri: Uri? = it.data?.data
                     if (imageUri != null) {
@@ -166,39 +124,10 @@ class AddItemActivity : AppCompatActivity() {
                     }
                 }
             }
-
             adapter.notifyDataSetChanged()
         }
     }
 
-    fun getFilePathFromUri(uri: Uri): String {
-
-        var cursor : Cursor? = null
-
-        try {
-            val projection = arrayOf(MediaStore.Video.Media.DATA)
-            var result :String = ""
-            cursor = contentResolver.query(uri, projection, null, null, null)
-            if (cursor == null) {
-                result = uri.path!!
-                Log.d("cursor=null","cursornull")
-            } else {
-                Log.d("1", "Path_img = " + uri)
-                Log.d("2", "Path_pth = " + uri.path)
-                Log.d("3", "Path_cursor = " + cursor)
-                cursor.moveToFirst()
-                val idx = cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA)
-                if (cursor.getType(idx) == FIELD_TYPE_STRING) {
-                   result = cursor.getString(idx)
-                    Log.d("resultimage",result)
-                }
-            }
-            Log.d("elseresulr","null$result")
-            return result
-        } finally {
-            cursor!!.close()
-        }
-    }
     private fun getRealPathFromURI(contentUri: Uri): String? {
         if (contentUri.path!!.startsWith("/storage")) {
             return contentUri.path
@@ -216,7 +145,7 @@ class AddItemActivity : AppCompatActivity() {
         try {
             val columnIndex = cursor!!.getColumnIndex(columns[0])
             if (cursor.moveToFirst()) {
-                Log.d("elseresulr",cursor.getString(columnIndex).toString())
+                Log.d("elseresulr", cursor.getString(columnIndex).toString())
                 return cursor.getString(columnIndex)
             }
         } finally {
@@ -224,6 +153,7 @@ class AddItemActivity : AppCompatActivity() {
         }
         return null
     }
+
     private fun selectGallery() {
         val writePermission =
             ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -246,7 +176,7 @@ class AddItemActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             intent.action = Intent.ACTION_GET_CONTENT
             intent.setDataAndType(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*"
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*"
             )
 
             imageResult.launch(intent)
