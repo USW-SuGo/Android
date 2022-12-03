@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 
 
 data class DealMainItem(
-    var id: Long,
+    var productPostId: Long,
     var imageLink:String,
     var contactPlace: String,
     var updatedAt: LocalDateTime,
