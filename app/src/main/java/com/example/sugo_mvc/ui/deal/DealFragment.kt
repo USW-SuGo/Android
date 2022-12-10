@@ -9,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,7 +31,7 @@ class DealFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
     private var page = 0
     private var size = 10
     var isLoading = false
-    val accessToken = App.prefs.AccessToken!!.replace("AccessToken=","")
+    val accessToken = App.prefs.AccessToken!!.replace("AccessToken=", "")
 
     private val DealItemSize = mutableListOf<DealMainItem>()
     private lateinit var dealAdapter: DealAdapter
@@ -40,21 +39,19 @@ class DealFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDealBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("access",accessToken.toString())
         val testItems1 = DealMainItem(0, "", "", LocalDateTime.now(), "", 0, "", "", false, false)
-       binding.searchView2.addTextChangedListener(object : TextWatcher {
+        binding.searchView2.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun afterTextChanged(editable: Editable) {
-                // input창에 문자를 입력할때마다 호출된다.
-                // search 메소드를 호출한다.
+
                 val text: String = binding.searchView2.getText().toString()
                 dealAdapter.filter.filter(text)
                 Log.d("Search", "SearchVies Text is changed : $text")
@@ -140,19 +137,6 @@ class DealFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
         return item != null // 아이템이 null이 아닌 경우 true, null인 경우 false 리턴
     }
 
-    var searchViewTextListner: SearchView.OnQueryTextListener =
-        object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                dealAdapter.filter.filter(newText)
-                Log.d("Search", "SearchVies Text is changed : $newText")
-                return false
-            }
-
-        }
 
     private fun getMoreData() {
         RetrofitBuilder.service.getItemList(page, size)
@@ -162,7 +146,7 @@ class DealFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
                     response: Response<MutableList<DealMainItem>>
                 ) {
                     if (response.isSuccessful) {
-                        var mainDealItemList = response.body()!!
+                        val mainDealItemList = response.body()!!
                         binding.dealRv.adapter?.notifyItemInserted(DealItemSize.size - 1)
                         DealItemSize.removeAt(DealItemSize.size - 1)
                         Log.d("DealItemsize", DealItemSize.size.toString())
@@ -181,7 +165,7 @@ class DealFragment : Fragment(), PopupMenu.OnMenuItemClickListener {
                 }
 
                 override fun onFailure(call: Call<MutableList<DealMainItem>>, t: Throwable) {
-                    Log.d("onFailure", t.localizedMessage)
+                    t.localizedMessage?.let { Log.d("onFailure", it) }
                 }
             })
 
