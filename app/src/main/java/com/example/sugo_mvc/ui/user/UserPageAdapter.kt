@@ -74,9 +74,22 @@ class userPageAdapter(val items: MutableList<DealMainItem>) :
                 })
 
             }
+            //임시 삭제
             binding.refactorBtn.setOnClickListener {
-                val intent = Intent(binding.root.context, AddItemActivity::class.java)
-                startActivity(binding.root.context, intent, null)
+//                val intent = Intent(binding.root.context, AddItemActivity::class.java)
+//                startActivity(binding.root.context, intent, null)
+                RetrofitBuilder.service.deletePost(accessToken,ProductPostId( dealMainItem.productPostId)).enqueue(object :Callback<SuccessCheckDto>{
+                    override fun onResponse(
+                        call: Call<SuccessCheckDto>,
+                        response: Response<SuccessCheckDto>
+                    ) {
+                        Log.d("successdelete",response.body().toString())
+                    }
+
+                    override fun onFailure(call: Call<SuccessCheckDto>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
             }
         }
 
