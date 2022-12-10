@@ -8,12 +8,16 @@ import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sugo_mvc.R
 import com.example.sugo_mvc.data.PostFormat
 import com.example.sugo_mvc.data.ProductPostId
 import com.example.sugo_mvc.databinding.ActivityAddItemBinding
@@ -27,7 +31,7 @@ import retrofit2.Response
 import java.io.File
 
 
-class AddItemActivity : AppCompatActivity() {
+class AddItemActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
     private val binding by lazy { ActivityAddItemBinding.inflate(layoutInflater) }
     val accessToken = App.prefs.AccessToken!!.replace("AccessToken=", "")
 
@@ -37,24 +41,35 @@ class AddItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.pickpicture.setOnClickListener {
+        binding.selectPicture.setOnClickListener {
             selectGallery()
-
         }
 
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.addrecycle.layoutManager = layoutManager
         binding.addrecycle.adapter = adapter
+        val postTitle = binding.postTitle.text.toString()
+        val postContent = binding.postContent.text.toString()
+        val postPrice = binding.postPrice.editableText.toString()
+        val contactPlace = binding.postContactPlace.text.toString()
+        val postCategory = binding.postCategory.text.toString()
+        binding.postCategory.setOnClickListener {
+            showPopup(binding.root)
+        }
+
+        fun getBody(key: String, value: Any): MultipartBody.Part {
+            return MultipartBody.Part.createFormData(key, value.toString())
+        }
 
         binding.addsugo.setOnClickListener {
 
-            val addtitle = binding.addtitle.editText?.text.toString()
-            val addcontent = "binding"
-            val addprice = binding.addprice.editText?.text.toString()
-            val addcontactPlace = "미래혁신관"
-            val addcategory = "서적"
+            val title = MultipartBody.Part.createFormData("title",postTitle)
+            val content =MultipartBody.Part.createFormData("content",postContent)
+            val price =MultipartBody.Part.createFormData("price",postPrice)
+            val contactPlace =MultipartBody.Part.createFormData("contactPlace",contactPlace)
+            val postCategory =MultipartBody.Part.createFormData("category",postCategory)
             val imageMultipartBody = mutableListOf<MultipartBody.Part>()
-            for(image in list){
+            for (image in list) {
                 val file = File(getRealPathFromURI(image))
                 if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
                     file.mkdirs()
@@ -65,12 +80,7 @@ class AddItemActivity : AppCompatActivity() {
                 imageMultipartBody.add(body)
             }
             RetrofitBuilder.service.postUpload(
-                accessToken, PostFormat(
-                    addtitle,
-                    addcontent, addprice.toLong(),
-                    addcontactPlace,
-                    addcategory
-                ), imageMultipartBody
+                accessToken,title,content,price,contactPlace,postCategory,imageMultipartBody
             )
                 .enqueue(object : retrofit2.Callback<ProductPostId> {
                     override fun onResponse(
@@ -122,6 +132,32 @@ class AddItemActivity : AppCompatActivity() {
         }
     }
 
+//    private fun getRealPathFromURI(contentUri: Uri): String? {
+//        if (contentUri.path!!.startsWith("/storage")) {
+//            return contentUri.path
+//        }
+//        val id = DocumentsContract.getDocumentId(contentUri).split(":").toTypedArray()[1]
+//        val columns = arrayOf(MediaStore.Files.FileColumns.DATA)
+//        val selection = MediaStore.Files.FileColumns._ID + " = " + id
+//        val cursor = contentResolver.query(
+//            MediaStore.Files.getContentUri("external"),
+//            columns,
+//            selection,
+//            null,
+//            null
+//        )
+//        try {
+//            val columnIndex = cursor!!.getColumnIndex(columns[0])
+//            if (cursor.moveToFirst()) {
+//                Log.d("elseresulr", cursor.getString(columnIndex).toString())
+//                return cursor.getString(columnIndex)
+//            }
+//        } finally {
+//            cursor!!.close()
+//        }
+//        return null
+//    }
+
     private fun getRealPathFromURI(contentUri: Uri): String? {
         if (contentUri.path!!.startsWith("/storage")) {
             return contentUri.path
@@ -137,9 +173,8 @@ class AddItemActivity : AppCompatActivity() {
             null
         )
         try {
-            val columnIndex = cursor!!.getColumnIndex(columns[0])
+            val columnIndex: Int = cursor!!.getColumnIndex(columns[0])
             if (cursor.moveToFirst()) {
-                Log.d("elseresulr", cursor.getString(columnIndex).toString())
                 return cursor.getString(columnIndex)
             }
         } finally {
@@ -147,7 +182,6 @@ class AddItemActivity : AppCompatActivity() {
         }
         return null
     }
-
     private fun selectGallery() {
         val writePermission =
             ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -175,6 +209,38 @@ class AddItemActivity : AppCompatActivity() {
 
             imageResult.launch(intent)
         }
+    }
+
+    private fun showPopup(v: View) {
+        val popup = PopupMenu(binding.root.context, v)
+        popup.menuInflater.inflate(R.menu.category, popup.menu) // 메뉴 레이아웃 inflate
+        popup.setOnMenuItemClickListener(this) // 메뉴 아이템 클릭 리스너 달아주기
+        popup.show() // 팝업 보여주기
+
+    }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+
+        when (item?.itemId) { // 메뉴 아이템에 따라 동작 다르게 하기
+            R.id.category1 -> {
+                binding.postCategory.text = "전체"
+            }
+            R.id.category2 -> {
+                binding.postCategory.text = "서적"
+            }
+            R.id.category3 -> {
+                binding.postCategory.text = "전자기기"
+            }
+            R.id.category4 -> {
+                binding.postCategory.text = "생활용품"
+            }
+            R.id.category5 -> {
+                binding.postCategory.text = "기타"
+            }
+
+        }
+
+        return item != null // 아이템이 null이 아닌 경우 true, null인 경우 false 리턴
     }
 }
 
