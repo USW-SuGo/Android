@@ -63,8 +63,14 @@ interface SuRetrofit {
     @POST(POSTUPLOAD)
     fun postUpload(
         @Header(AUTH_HEADER) AccessToken: String,
-        @Part ("info") PostFormat: PostFormat,
+//        @Part ("PostFormat") PostFormat: PostFormat,
+        @Part title: MultipartBody.Part,
+        @Part content: MultipartBody.Part,
+        @Part price: MultipartBody.Part,
+        @Part contactPlace: MultipartBody.Part,
+        @Part category: MultipartBody.Part,
         @Part image: MutableList<MultipartBody.Part>
+
 
     ): Call<ProductPostId>
 
@@ -126,6 +132,12 @@ interface SuRetrofit {
         @Header("Authorization") RefreshToken: String,
 
     ):Call<Token>
+
+    @HTTP(method = "DELETE", path = "/post", hasBody = true)
+    fun deletePost(
+        @Header("Authorization") AccessToken: String,
+        @Body info:ProductPostId
+    ): Call<SuccessCheckDto>
 }
 
 
