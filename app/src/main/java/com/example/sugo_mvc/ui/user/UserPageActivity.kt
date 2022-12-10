@@ -46,5 +46,6 @@ class UserPageActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
+
     }
 }
