@@ -71,7 +71,6 @@ interface SuRetrofit {
         @Part category: MultipartBody.Part,
         @Part image: MutableList<MultipartBody.Part>
 
-
     ): Call<ProductPostId>
 
     @GET(POSTGET)

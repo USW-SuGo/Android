@@ -3,8 +3,11 @@ package com.example.sugo_mvc.ui.adddealitem
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
+import android.database.Cursor.FIELD_TYPE_STRING
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
@@ -29,8 +32,9 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import java.io.File
-
-
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 class AddItemActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
     private val binding by lazy { ActivityAddItemBinding.inflate(layoutInflater) }
     val accessToken = App.prefs.AccessToken!!.replace("AccessToken=", "")
@@ -41,33 +45,31 @@ class AddItemActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         binding.selectPicture.setOnClickListener {
             selectGallery()
         }
-
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.addrecycle.layoutManager = layoutManager
         binding.addrecycle.adapter = adapter
-        val postTitle = binding.postTitle.text.toString()
-        val postContent = binding.postContent.text.toString()
-        val postPrice = binding.postPrice.editableText.toString()
-        val contactPlace = binding.postContactPlace.text.toString()
-        val postCategory = binding.postCategory.text.toString()
         binding.postCategory.setOnClickListener {
             showPopup(binding.root)
         }
+        binding.postContactPlace.setOnClickListener {
+            val intent = Intent(binding.root.context, ContactPlaceActivity::class.java)
+            startActivity(intent)
 
-        fun getBody(key: String, value: Any): MultipartBody.Part {
-            return MultipartBody.Part.createFormData(key, value.toString())
         }
+        val contactPlace1: String = intent.getStringExtra("contactPlace").toString()
+        binding.postContactPlace.text=contactPlace1
 
         binding.addsugo.setOnClickListener {
 
-            val title = MultipartBody.Part.createFormData("title",postTitle)
-            val content =MultipartBody.Part.createFormData("content",postContent)
-            val price =MultipartBody.Part.createFormData("price",postPrice)
-            val contactPlace =MultipartBody.Part.createFormData("contactPlace",contactPlace)
-            val postCategory =MultipartBody.Part.createFormData("category",postCategory)
+            val title = getBody("title", binding.postTitle.text.toString())
+            val content = getBody("content", binding.postContent.text.toString())
+            val price = getBody("price", binding.postPrice.editableText.toString())
+            val contactPlace = getBody("contactPlace",binding.postContactPlace.text.toString())
+            val postCategory = getBody("category", binding.postCategory.text.toString())
             val imageMultipartBody = mutableListOf<MultipartBody.Part>()
             for (image in list) {
                 val file = File(getRealPathFromURI(image))
@@ -80,7 +82,7 @@ class AddItemActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
                 imageMultipartBody.add(body)
             }
             RetrofitBuilder.service.postUpload(
-                accessToken,title,content,price,contactPlace,postCategory,imageMultipartBody
+                accessToken, title, content, price, contactPlace, postCategory, imageMultipartBody
             )
                 .enqueue(object : retrofit2.Callback<ProductPostId> {
                     override fun onResponse(
@@ -131,32 +133,32 @@ class AddItemActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
             adapter.notifyDataSetChanged()
         }
     }
+    val mDatas=mutableListOf<String>()
+    fun initRecyclerView(){
+        val adapter=ContactPlaceAdapter(mDatas) //어댑터 객체 만듦
+//        binding.contactrv.adapter=adapter //리사이클러뷰에 어댑터 연결
+//        binding.contactrv.layoutManager= LinearLayoutManager(this) //레이아웃 매니저 연결
+    }
 
-//    private fun getRealPathFromURI(contentUri: Uri): String? {
-//        if (contentUri.path!!.startsWith("/storage")) {
-//            return contentUri.path
-//        }
-//        val id = DocumentsContract.getDocumentId(contentUri).split(":").toTypedArray()[1]
-//        val columns = arrayOf(MediaStore.Files.FileColumns.DATA)
-//        val selection = MediaStore.Files.FileColumns._ID + " = " + id
-//        val cursor = contentResolver.query(
-//            MediaStore.Files.getContentUri("external"),
-//            columns,
-//            selection,
-//            null,
-//            null
-//        )
-//        try {
-//            val columnIndex = cursor!!.getColumnIndex(columns[0])
-//            if (cursor.moveToFirst()) {
-//                Log.d("elseresulr", cursor.getString(columnIndex).toString())
-//                return cursor.getString(columnIndex)
-//            }
-//        } finally {
-//            cursor!!.close()
-//        }
-//        return null
-//    }
+    fun initializelist(){ //임의로 데이터 넣어서 만들어봄
+        with(mDatas){
+            add("정문")
+            add("인문대")
+            add("체대")
+            add("미래혁신관")
+            add("공대")
+            add("IT")
+            add("ACE교육관 (구 종합강의동)")
+            add("학생회관")
+            add("건강과학대학")
+            add("중앙도서관")
+            add("글로벌경상대")
+
+        }
+    }
+    fun getBody(key: String, value: Any): MultipartBody.Part {
+        return MultipartBody.Part.createFormData(key, value.toString())
+    }
 
     private fun getRealPathFromURI(contentUri: Uri): String? {
         if (contentUri.path!!.startsWith("/storage")) {
@@ -182,6 +184,7 @@ class AddItemActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         }
         return null
     }
+
     private fun selectGallery() {
         val writePermission =
             ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -243,6 +246,9 @@ class AddItemActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         return item != null // 아이템이 null이 아닌 경우 true, null인 경우 false 리턴
     }
 }
+
+
+
 
 
 
