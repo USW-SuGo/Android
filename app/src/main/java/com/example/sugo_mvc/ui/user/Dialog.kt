@@ -1,14 +1,15 @@
 package com.example.sugo_mvc.ui.user
 
+import android.R
 import android.app.AlertDialog
-import android.app.Application
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
-import androidx.core.content.ContextCompat.startActivity
-import com.example.sugo_mvc.ui.adddealitem.AddItemActivity
-import com.example.sugo_mvc.util.App
+import android.view.Display
+import android.view.WindowManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
 
 class dialog(context: Context) : Dialog(context) {
 

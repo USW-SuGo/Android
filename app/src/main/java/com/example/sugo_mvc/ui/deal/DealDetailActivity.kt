@@ -31,13 +31,11 @@ class DealDetailActivity : AppCompatActivity() {
         val id: String? = intent.getStringExtra("id")
         val userLikeStatus: String? = intent.getStringExtra("userLikeStatus")
         Log.d("userlike",userLikeStatus.toString())
-
         Log.d("id", id.toString())
            var imageList: List<String>
         val accessToken = App.prefs.AccessToken!!.replace("AccessToken=", "")
         var imagelink: String
         Log.d("token", accessToken)
-//        Log.d("token",idd)
         RetrofitBuilder.service.getDetailPage(accessToken, id!!.toLong())
             .enqueue(object : Callback<DealDetailItem> {
                 override fun onResponse(
