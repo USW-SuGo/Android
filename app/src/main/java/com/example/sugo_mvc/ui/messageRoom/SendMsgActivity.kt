@@ -28,7 +28,7 @@ class SendMsgActivity : AppCompatActivity() {
             Log.d("idre",senderid.toString()+receiverid.toString())
             var a= msgformat(id!!.toLong(),binding.msg.text.toString(),senderid,receiverid)
 
-            RetrofitBuilder.service.chatput(accessToken,a).enqueue(object :
+            RetrofitBuilder.service.chatput(a).enqueue(object :
                 retrofit2.Callback<SuccessCheckDto> {
                 override fun onResponse(
                     call: retrofit2.Call<SuccessCheckDto>,

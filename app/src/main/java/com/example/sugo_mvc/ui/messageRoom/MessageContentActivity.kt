@@ -29,7 +29,7 @@ class MessageContentActivity : AppCompatActivity() {
         var senderid:Long = intent.getStringExtra("senderid")!!.toLong()
         var receiverid:Long = intent.getStringExtra("receiverid")!!.toLong()
         val accessToken = App.prefs.AccessToken!!.replace("AccessToken=","")
-        RetrofitBuilder.service.checkMessageContentRoom(accessToken,id!!.toLong(),0,100).enqueue(object :
+        RetrofitBuilder.service.checkMessageContentRoom(id!!.toLong(),0,100).enqueue(object :
             retrofit2.Callback<MutableList<NoteItem>> {
             override fun onResponse(call: retrofit2.Call<MutableList<NoteItem>>, response: Response<MutableList<NoteItem>>) {
                 Log.d("msg",response.body().toString())
@@ -42,7 +42,7 @@ class MessageContentActivity : AppCompatActivity() {
             }
         })
         binding.pullContent.setOnRefreshListener {
-            RetrofitBuilder.service.checkMessageContentRoom(accessToken,id!!.toLong(),0,100).enqueue(object :
+            RetrofitBuilder.service.checkMessageContentRoom(id!!.toLong(),0,100).enqueue(object :
                 retrofit2.Callback<MutableList<NoteItem>> {
                 override fun onResponse(call: retrofit2.Call<MutableList<NoteItem>>, response: Response<MutableList<NoteItem>>) {
                     Log.d("msg",response.body().toString())

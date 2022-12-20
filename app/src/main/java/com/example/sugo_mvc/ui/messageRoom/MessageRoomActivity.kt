@@ -20,7 +20,7 @@ class MessageRoomActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val accessToken = App.prefs.AccessToken!!.replace("AccessToken=","")
-        RetrofitBuilder.service.checkMessageRoom(accessToken).enqueue(object : Callback<MutableList<roomInfo>> {
+        RetrofitBuilder.service.checkMessageRoom().enqueue(object : Callback<MutableList<roomInfo>> {
             override fun onResponse(call: Call<MutableList<roomInfo>>, response: Response<MutableList<roomInfo>>) {
                 if(response.isSuccessful) {
                     Log.d("asd", response.body().toString())
