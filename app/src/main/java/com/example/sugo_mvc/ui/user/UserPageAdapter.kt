@@ -55,7 +55,7 @@ class userPageAdapter(val items: MutableList<DealMainItem>) :
             binding.dealNickname.text = dealMainItem.nickname
             Glide.with(itemView).load(tesl[0]).into(binding.dealimageLnk)
             binding.safeBtn.setOnClickListener() {
-                RetrofitBuilder.service.upPost(accessToken, ProductPostId( dealMainItem.productPostId)).enqueue(object :
+                RetrofitBuilder.service.upPost( ProductPostId( dealMainItem.productPostId)).enqueue(object :
                     Callback<SuccessCheckDto> {
                     override fun onResponse(
                         call: Call<SuccessCheckDto>,
@@ -78,7 +78,7 @@ class userPageAdapter(val items: MutableList<DealMainItem>) :
             binding.refactorBtn.setOnClickListener {
 //                val intent = Intent(binding.root.context, AddItemActivity::class.java)
 //                startActivity(binding.root.context, intent, null)
-                RetrofitBuilder.service.deletePost(accessToken,ProductPostId( dealMainItem.productPostId)).enqueue(object :Callback<SuccessCheckDto>{
+                RetrofitBuilder.service.deletePost(ProductPostId( dealMainItem.productPostId)).enqueue(object :Callback<SuccessCheckDto>{
                     override fun onResponse(
                         call: Call<SuccessCheckDto>,
                         response: Response<SuccessCheckDto>

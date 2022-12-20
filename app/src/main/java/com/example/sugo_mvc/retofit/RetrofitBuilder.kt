@@ -1,6 +1,11 @@
 package com.example.sugo_mvc.retofit
 
+import android.content.Intent
 import android.util.Log
+import androidx.core.content.ContextCompat.startActivity
+import com.example.sugo_mvc.MainActivity
+import com.example.sugo_mvc.data.Token
+import com.example.sugo_mvc.ui.login.LoginActivity
 import com.example.sugo_mvc.util.App
 import com.example.sugo_mvc.util.Constants.Companion.BASE_URL
 import com.google.gson.GsonBuilder
@@ -13,6 +18,8 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONArray
 import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
@@ -26,7 +33,7 @@ object RetrofitBuilder {
     var service: SuRetrofit
 
     val okHttpClient = OkHttpClient.Builder()
-        //.addInterceptor(AuthInterceptor())
+        .addInterceptor(AuthInterceptor())
         .addInterceptor(getLogOkHttpClient())
         .build()
 
@@ -78,14 +85,45 @@ object RetrofitBuilder {
 
     class AuthInterceptor : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
+
             var req =
-
-                chain.request().newBuilder().addHeader("Authorization", App.prefs.AccessToken ?: "")
+                chain.request().newBuilder().addHeader("Authorization", App.prefs.AccessToken!!.replace("AccessToken=", ""))
                     .build()
-            chain.request().newBuilder().addHeader("Authorization", App.prefs.RefreshToken ?: "")
+            chain.request().newBuilder().addHeader("Authorization", App.prefs.RefreshToken!!.replace("RefreshToken=", ""))
                 .build()
+            val response = chain.proceed(req)
+            Log.d("response.code",response.code().toString())
+            when (response.code()){
+                403 ->{
+                    val req1 =
+                        chain.request().newBuilder().addHeader("Authorization", App.prefs.AccessToken!!.replace("AccessToken=", ""))
+                            .build()
+                        chain.request().newBuilder().addHeader("Authorization", App.prefs.RefreshToken!!.replace("RefreshToken=", ""))
+                        .build()
+                    val response1 = chain.proceed(req1)
 
-            return chain.proceed(req)
+                    service.refresh().enqueue( object :Callback<Token>{
+                        override fun onResponse(
+                            call: Call<Token>,
+                            response: retrofit2.Response<Token>
+                        ) {
+                            val result= response.headers().get("Authorization")
+                            val spi =result!!.split(",")
+                            App.prefs.AccessToken=spi[1].replace("}","")
+                            App.prefs.RefreshToken=spi[0].replace("{","")
+                            Log.d("asd",App.prefs.AccessToken.toString())
+                        }
+                        override fun onFailure(call: Call<Token>, t: Throwable) {
+//                            val intent = Intent(applicationContext, LoginActivity::class.java)
+//                            startActivity(intent)
+                        }
+
+                    })
+                    return response1
+                }
+            }
+            return response
+
         }
     }
 

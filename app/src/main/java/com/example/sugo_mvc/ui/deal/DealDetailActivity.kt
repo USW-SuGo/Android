@@ -36,7 +36,7 @@ class DealDetailActivity : AppCompatActivity() {
         val accessToken = App.prefs.AccessToken!!.replace("AccessToken=", "")
         var imagelink: String
         Log.d("token", accessToken)
-        RetrofitBuilder.service.getDetailPage(accessToken, id!!.toLong())
+        RetrofitBuilder.service.getDetailPage( id!!.toLong())
             .enqueue(object : Callback<DealDetailItem> {
                 override fun onResponse(
                     call: Call<DealDetailItem>,
@@ -94,7 +94,7 @@ class DealDetailActivity : AppCompatActivity() {
             })
 
         binding.likebtn.setOnClickListener {
-            RetrofitBuilder.service.like(accessToken, ProductPostId(id.toLong()))
+            RetrofitBuilder.service.like( ProductPostId(id.toLong()))
                 .enqueue(object : Callback<Like> {
                     override fun onResponse(call: Call<Like>, response: Response<Like>) {
                         if (response.isSuccessful) {

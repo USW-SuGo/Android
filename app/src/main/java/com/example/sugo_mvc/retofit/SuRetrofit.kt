@@ -62,7 +62,7 @@ interface SuRetrofit {
     @Multipart
     @POST(POSTUPLOAD)
     fun postUpload(
-        @Header(AUTH_HEADER) AccessToken: String,
+//        @Header(AUTH_HEADER) AccessToken: String,
 //        @Part ("PostFormat") PostFormat: PostFormat,
         @Part title: MultipartBody.Part,
         @Part content: MultipartBody.Part,
@@ -81,13 +81,13 @@ interface SuRetrofit {
 
     @GET(DETAILPAGE)
     fun getDetailPage(
-        @Header("Authorization") AccessToken: String,
+//        @Header("Authorization") AccessToken: String,
         @Query("productPostId") Id: Long
     ): Call<DealDetailItem>
 
     @GET(MYPAGE)
     fun getUserPage(
-        @Header("Authorization") AccessToken: String,
+//        @Header("Authorization") AccessToken: String,
     ): Call<Userpage>
 
     @POST(MAKEMESSAGEROOM)
@@ -98,12 +98,12 @@ interface SuRetrofit {
 
     @GET(CHECKMESSAGEROOM)
     fun checkMessageRoom(
-        @Header("Authorization") AccessToken: String
+//        @Header("Authorization") AccessToken: String
     ): Call<MutableList<roomInfo>>
 
     @GET(CHECKMESSAGECONTENTROOM)
     fun checkMessageContentRoom(
-        @Header("Authorization") AccessToken: String,
+//        @Header("Authorization") AccessToken: String,
         @Query("noteId") noteId: Long,
         @Query("page") page: Int,
         @Query("size") size: Int
@@ -111,30 +111,30 @@ interface SuRetrofit {
 
     @POST("/note-content/")
     fun chatput(
-        @Header("Authorization") AccessToken: String,
+//        @Header("Authorization") AccessToken: String,
         @Body info: msgformat
     ): Call<SuccessCheckDto>
 
     @POST("/post/up-post")
     fun upPost(
-        @Header("Authorization") AccessToken: String,
+//        @Header("Authorization") AccessToken: String,
         @Body info:ProductPostId
     ): Call<SuccessCheckDto>
 
     @POST("/like")
     fun like(
-        @Header("Authorization") AccessToken: String,
+//        @Header("Authorization") AccessToken: String,
         @Body info:ProductPostId
     ):Call<Like>
     @POST("/token")
     fun refresh(
-        @Header("Authorization") RefreshToken: String,
+//        @Header("Authorization") RefreshToken: String,
 
     ):Call<Token>
 
     @HTTP(method = "DELETE", path = "/post", hasBody = true)
     fun deletePost(
-        @Header("Authorization") AccessToken: String,
+//        @Header("Authorization") AccessToken: String,
         @Body info:ProductPostId
     ): Call<SuccessCheckDto>
 }

@@ -27,7 +27,7 @@ class UserPageActivity : AppCompatActivity() {
         }
         val accessToken = App.prefs.AccessToken!!.replace("AccessToken=","")
 
-        RetrofitBuilder.service.getUserPage(accessToken).enqueue(object : Callback<Userpage>{
+        RetrofitBuilder.service.getUserPage().enqueue(object : Callback<Userpage>{
             override fun onResponse(call: Call<Userpage>, response: Response<Userpage>) {
                 if(response.isSuccessful){
                 Log.d("user",call.request().toString())
