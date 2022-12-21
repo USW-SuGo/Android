@@ -137,7 +137,6 @@ class JoinActivity : AppCompatActivity() {
             false
         } else {
             binding.loginId.error = null
-//            binding.loginId.isErrorEnabled = false
             true
         }
     }

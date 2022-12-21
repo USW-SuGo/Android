@@ -82,7 +82,7 @@ class AddItemActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
                 imageMultipartBody.add(body)
             }
             RetrofitBuilder.service.postUpload(
-                accessToken, title, content, price, contactPlace, postCategory, imageMultipartBody
+                title, content, price, contactPlace, postCategory, imageMultipartBody
             )
                 .enqueue(object : retrofit2.Callback<ProductPostId> {
                     override fun onResponse(
