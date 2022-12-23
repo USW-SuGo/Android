@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="itemList">
+        <item>카테고리</item>
+        <item>서적</item>
+        <item>전자기기</item>
+        <item>생활용품</item>
+        <item>기타</item>
+
+    </string-array>
+</resources>
