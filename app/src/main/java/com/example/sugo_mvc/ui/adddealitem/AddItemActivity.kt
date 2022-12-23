@@ -13,6 +13,8 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -35,7 +37,7 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-class AddItemActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
+class AddItemActivity : AppCompatActivity() {
     private val binding by lazy { ActivityAddItemBinding.inflate(layoutInflater) }
     val accessToken = App.prefs.AccessToken!!.replace("AccessToken=", "")
 
@@ -45,16 +47,33 @@ class AddItemActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-//
+        var postCategory=""
+//        val itemList = listOf("category","서적","전자기기","생활용품","기타")
+        val data:Array<String> = resources.getStringArray(R.array.itemList)
+        val adapter2 = ArrayAdapter(this, R.layout.spinneritem, data)
+        binding.spinner.adapter = adapter2
+        binding.spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                if(position != 0)
+                    postCategory=data[position]
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+        }
         binding.selectPicture.setOnClickListener {
             selectGallery()
         }
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.addrecycle.layoutManager = layoutManager
         binding.addrecycle.adapter = adapter
-        binding.postCategory.setOnClickListener {
-            showPopup(binding.root)
-        }
+//        binding.postCategory.setOnClickListener {
+//            showPopup(binding.root)
+//        }
         binding.postContactPlace.setOnClickListener {
             val intent = Intent(binding.root.context, ContactPlaceActivity::class.java)
             startActivity(intent)
@@ -69,7 +88,7 @@ class AddItemActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
             val content = getBody("content", binding.postContent.text.toString())
             val price = getBody("price", binding.postPrice.editableText.toString())
             val contactPlace = getBody("contactPlace",binding.postContactPlace.text.toString())
-            val postCategory = getBody("category", binding.postCategory.text.toString())
+            val postCategory = getBody("category", postCategory.toString())
             val imageMultipartBody = mutableListOf<MultipartBody.Part>()
             for (image in list) {
                 val file = File(getRealPathFromURI(image))
@@ -214,37 +233,37 @@ class AddItemActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         }
     }
 
-    private fun showPopup(v: View) {
-        val popup = PopupMenu(binding.root.context, v)
-        popup.menuInflater.inflate(R.menu.category, popup.menu) // 메뉴 레이아웃 inflate
-        popup.setOnMenuItemClickListener(this) // 메뉴 아이템 클릭 리스너 달아주기
-        popup.show() // 팝업 보여주기
-
-    }
-
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
-
-        when (item?.itemId) { // 메뉴 아이템에 따라 동작 다르게 하기
-            R.id.category1 -> {
-                binding.postCategory.text = "전체"
-            }
-            R.id.category2 -> {
-                binding.postCategory.text = "서적"
-            }
-            R.id.category3 -> {
-                binding.postCategory.text = "전자기기"
-            }
-            R.id.category4 -> {
-                binding.postCategory.text = "생활용품"
-            }
-            R.id.category5 -> {
-                binding.postCategory.text = "기타"
-            }
-
-        }
-
-        return item != null // 아이템이 null이 아닌 경우 true, null인 경우 false 리턴
-    }
+//    private fun showPopup(v: View) {
+//        val popup = PopupMenu(binding.root.context, v)
+//        popup.menuInflater.inflate(R.menu.category, popup.menu) // 메뉴 레이아웃 inflate
+//        popup.setOnMenuItemClickListener(this) // 메뉴 아이템 클릭 리스너 달아주기
+//        popup.show() // 팝업 보여주기
+//
+//    }
+//
+//    override fun onMenuItemClick(item: MenuItem?): Boolean {
+//
+//        when (item?.itemId) { // 메뉴 아이템에 따라 동작 다르게 하기
+//            R.id.category1 -> {
+//                binding.postCategory.text = "전체"
+//            }
+//            R.id.category2 -> {
+//                binding.postCategory.text = "서적"
+//            }
+//            R.id.category3 -> {
+//                binding.postCategory.text = "전자기기"
+//            }
+//            R.id.category4 -> {
+//                binding.postCategory.text = "생활용품"
+//            }
+//            R.id.category5 -> {
+//                binding.postCategory.text = "기타"
+//            }
+//
+//        }
+//
+//        return item != null // 아이템이 null이 아닌 경우 true, null인 경우 false 리턴
+//    }
 }
 
 

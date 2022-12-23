@@ -128,13 +128,25 @@
             android:layout_height="1dp"
             android:background="@color/ef_grey" />
 
-        <TextView
-            android:id="@+id/postCategory"
+<!--        <TextView-->
+<!--            android:id="@+id/postCategory"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/pretendardbold"-->
+<!--            android:gravity="center"-->
+<!--            android:text="카테고리" />-->
+        <Spinner
+
+            android:id="@+id/spinner"
+
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendardbold"
-            android:gravity="center"
-            android:text="카테고리" />
+
+            android:layout_margin="10dp"
+
+            android:spinnerMode="dropdown"
+            />
         <View
             android:layout_width="wrap_content"
             android:layout_height="1dp"
