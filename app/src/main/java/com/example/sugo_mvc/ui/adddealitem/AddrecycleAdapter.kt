@@ -27,6 +27,9 @@ class AddrecycleAdapter(private val items : ArrayList<Uri>) :
                         .into(holder.image)
                 }
             }
+        holder.delete.setOnClickListener {
+            removeItem(position)
+        }
     }
     override fun getItemCount(): Int {
         return items.size
@@ -35,13 +38,18 @@ class AddrecycleAdapter(private val items : ArrayList<Uri>) :
     interface OnItemClickListener {
         fun onClick(v: View, position: Int)
     }
-    fun setItemClickListener(itemClickListener: OnItemClickListener) {
-        this.itemClickListener = itemClickListener
+
+    fun removeItem(position :Int){
+        if(position>=0){
+            items.removeAt(position)
+            notifyDataSetChanged()
+        }
     }
 
     class ViewHolder(v:View) : RecyclerView.ViewHolder(v){
         private var view:View = v
         var image = v.findViewById<ImageView>(R.id.addrecycleitem)
+        var delete=v.findViewById<ImageView>(R.id.deleteimage)
         fun bind(listener: View.OnClickListener ,item :String) {
                 view.setOnClickListener (listener)
         }

@@ -63,9 +63,6 @@ class MessageAdapter(val items: MutableList<roomInfo>) : RecyclerView.Adapter<Me
 
     override fun onBindViewHolder(holder: MessageAdapter.ViewHolder, position: Int) {
         holder.bind(items!![position])
-//        val layoutParams = holder.itemView.layoutParams
-//        layoutParams.height = 1000
-//        holder.itemView.requestLayout()
         holder.itemView.setOnClickListener{
 
             val intent = Intent(holder.itemView?.context, MessageContentActivity()::class.java)

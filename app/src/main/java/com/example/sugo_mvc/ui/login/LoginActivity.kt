@@ -42,15 +42,13 @@ class LoginActivity : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<Token>,
                     response: Response<Token>) {
-                    val result= response.headers().get("Authorization")
+//                    val result= response.headers().get("Authorization")
 
                     if (response.isSuccessful){
-                        val spi =result!!.split(",")
-                        App.prefs.AccessToken=spi[1].replace("}","")
-                        App.prefs.RefreshToken=spi[0].replace("{","")
-                        Log.d("asd",App.prefs.AccessToken.toString())
-                        val token = App.prefs.AccessToken
-                        val token2 = App.prefs.RefreshToken
+//                        val spi =result!!.split(",")
+//                        App.prefs.AccessToken=spi[1].replace("}","")
+//                        App.prefs.RefreshToken=spi[0].replace("{","")
+//                        Log.d("asd",App.prefs.AccessToken.toString())
                         val intent = Intent(applicationContext,MainActivity::class.java)
                         startActivity(intent)
 
