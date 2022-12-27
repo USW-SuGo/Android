@@ -4,12 +4,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.example.sugo_mvc.MainActivity
 import com.example.sugo_mvc.R
 import com.example.sugo_mvc.data.*
-import com.example.sugo_mvc.databinding.ActivityLoginBinding
+
 
 import com.example.sugo_mvc.retofit.RetrofitBuilder
 import com.example.sugo_mvc.ui.JoinActivity
@@ -19,7 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
-    private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater)}
+    private val binding by lazy { com.example.sugo_mvc.databinding.ActivityLoginBinding.inflate(layoutInflater)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -33,53 +37,44 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.loginBtn.setOnClickListener {
+            val bundle = Bundle()
 
-            val loginid1=binding.loginId1.text.toString()
-            val loginpwd2=binding.loginPWD2.text.toString()
-            Log.d("good",loginid1+loginpwd2)
+            val loginid1 = binding.loginId1.text.toString()
+            bundle.putString("id", loginid1)
+            val loginpwd2 = binding.loginPWD2.text.toString()
+            Log.d("good", loginid1 + loginpwd2)
 
-            RetrofitBuilder.service.login(LoginFormat(loginid1,loginpwd2)).enqueue(object :Callback<Token>{
-                override fun onResponse(
-                    call: Call<Token>,
-                    response: Response<Token>) {
-//                    val result= response.headers().get("Authorization")
-
-                    if (response.isSuccessful){
-//                        val spi =result!!.split(",")
-//                        App.prefs.AccessToken=spi[1].replace("}","")
-//                        App.prefs.RefreshToken=spi[0].replace("{","")
-//                        Log.d("asd",App.prefs.AccessToken.toString())
-                        val intent = Intent(applicationContext,MainActivity::class.java)
-                        startActivity(intent)
-
-                    }else{
-                        Log.d("LoginFail",response.errorBody()?.string()!!)
-                    }
-                }
-
-                override fun onFailure(call: Call<Token>, t: Throwable) {
-                    Log.d("onFailure",t.localizedMessage)
-                }
-            })
-            binding.findidbtn.setOnClickListener {
-                RetrofitBuilder.service.findPwd(LoginFormat("androidtest","dltkr46@suwon.ac.kr")).enqueue(object : Callback<SuccessCheckDto>{
+            RetrofitBuilder.service.login(LoginFormat(loginid1, loginpwd2))
+                .enqueue(object : Callback<Token> {
                     override fun onResponse(
-                        call: Call<SuccessCheckDto>,
-                        response: Response<SuccessCheckDto>
+                        call: Call<Token>,
+                        response: Response<Token>
                     ) {
-                        if (response.isSuccessful){
-                            Log.d("successpwd",response.body().toString())
+                        if (response.isSuccessful) {
+                            val intent = Intent(applicationContext, MainActivity::class.java)
+                            startActivity(intent)
+
+                        } else {
+                            Log.d("LoginFail", response.errorBody()?.string()!!)
                         }
                     }
 
-                    override fun onFailure(call: Call<SuccessCheckDto>, t: Throwable) {
-                        TODO("Not yet implemented")
+                    override fun onFailure(call: Call<Token>, t: Throwable) {
+                        Log.d("onFailure", t.localizedMessage)
                     }
-
                 })
+        }
+            binding.findidbtn.setOnClickListener {
+                val intent = Intent(applicationContext, findIdActivity::class.java)
+                startActivity(intent)
             }
 
-            binding.findpwdbtn.setOnClickListener {  }
-        }
+            binding.findpwdbtn.setOnClickListener {
+                val intent = Intent(applicationContext, FindPwdActivity::class.java)
+                startActivity(intent)
+            }
+
     }
+
+
 }

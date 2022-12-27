@@ -51,7 +51,7 @@ interface SuRetrofit {
     fun findId(@Body info: Email): Call<SuccessCheckDto>
 
     @POST(FindPwd)
-    fun findPwd(@Body info: LoginFormat): Call<SuccessCheckDto>
+    fun findPwd(@Body info:findPwd): Call<SuccessCheckDto>
 
     @POST(REQUEST_REFRESH)
     fun requestRefresh(@Header(AUTH_HEADER) refresh: String): Call<Token>
