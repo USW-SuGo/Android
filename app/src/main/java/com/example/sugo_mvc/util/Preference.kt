@@ -9,7 +9,7 @@ import android.content.SharedPreferences
 class Preference (context: Context){
 
 
-        private val prefs=context.getSharedPreferences("asdasd",MODE_PRIVATE)
+    private val prefs=context.getSharedPreferences("asdasd",MODE_PRIVATE)
 
     var AccessToken:String?
         get() = prefs.getString(ACCESS_TOKEN,null)

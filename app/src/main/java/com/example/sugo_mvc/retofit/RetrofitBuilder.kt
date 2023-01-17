@@ -28,7 +28,6 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
-
 object RetrofitBuilder {
     var service: SuRetrofit
 
@@ -38,7 +37,6 @@ object RetrofitBuilder {
         .build()
 
     init {
-
         val gson = GsonBuilder()
             .registerTypeAdapter(
                 LocalDateTime::class.java,
@@ -85,7 +83,6 @@ object RetrofitBuilder {
 
     class AuthInterceptor : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
-
             var req =
                 chain.request().newBuilder().addHeader("Authorization", App.prefs.AccessToken!!.replace("AccessToken=", ""))
                     .build()
@@ -100,7 +97,7 @@ object RetrofitBuilder {
                             .build()
                         chain.request().newBuilder().addHeader("Authorization", App.prefs.RefreshToken!!.replace("RefreshToken=", ""))
                         .build()
-                    val response1 = chain.proceed(req1)
+                    val response = chain.proceed(req1)
 
                     service.refresh().enqueue( object :Callback<Token>{
                         override fun onResponse(
@@ -111,7 +108,7 @@ object RetrofitBuilder {
                             val spi =result!!.split(",")
                             App.prefs.AccessToken=spi[1].replace("}","")
                             App.prefs.RefreshToken=spi[0].replace("{","")
-                            Log.d("asd",App.prefs.AccessToken.toString())
+                            Log.d("refresh",App.prefs.AccessToken.toString())
                         }
                         override fun onFailure(call: Call<Token>, t: Throwable) {
 //                            val intent = Intent(applicationContext, LoginActivity::class.java)
@@ -119,11 +116,10 @@ object RetrofitBuilder {
                         }
 
                     })
-                    return response1
+                    return response
                 }
             }
             return response
-
         }
     }
 

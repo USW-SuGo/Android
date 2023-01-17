@@ -103,7 +103,6 @@ interface SuRetrofit {
 
     @GET(CHECKMESSAGECONTENTROOM)
     fun checkMessageContentRoom(
-//        @Header("Authorization") AccessToken: String,
         @Query("noteId") noteId: Long,
         @Query("page") page: Int,
         @Query("size") size: Int
@@ -111,32 +110,29 @@ interface SuRetrofit {
 
     @POST("/note-content/")
     fun chatput(
-//        @Header("Authorization") AccessToken: String,
         @Body info: msgformat
     ): Call<SuccessCheckDto>
 
     @POST("/post/up-post")
     fun upPost(
-//        @Header("Authorization") AccessToken: String,
         @Body info:ProductPostId
     ): Call<SuccessCheckDto>
 
     @POST("/like")
     fun like(
-//        @Header("Authorization") AccessToken: String,
         @Body info:ProductPostId
     ):Call<Like>
     @POST("/token")
     fun refresh(
 //        @Header("Authorization") RefreshToken: String,
-
     ):Call<Token>
 
     @HTTP(method = "DELETE", path = "/post", hasBody = true)
     fun deletePost(
-//        @Header("Authorization") AccessToken: String,
         @Body info:ProductPostId
     ): Call<SuccessCheckDto>
+
+
 }
 
 

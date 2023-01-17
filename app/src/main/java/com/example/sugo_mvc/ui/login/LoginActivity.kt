@@ -53,6 +53,11 @@ class LoginActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val intent = Intent(applicationContext, MainActivity::class.java)
                             startActivity(intent)
+                            val result = response.headers().get("Authorization")
+                            val spi = result!!.split(",")
+                            App.prefs.AccessToken = spi[1].replace("}", "")
+                            App.prefs.RefreshToken=spi[0].replace("{","")
+                            Log.d("LoginSuccess", spi.toString()!!)
 
                         } else {
                             Log.d("LoginFail", response.errorBody()?.string()!!)
