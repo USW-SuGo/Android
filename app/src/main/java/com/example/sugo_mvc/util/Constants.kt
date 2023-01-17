@@ -6,7 +6,7 @@ class Constants {
     companion object  {
 //
         const val BASE_URL: String = "https://api.sugo-diger.com"
-        const val EXIST : String="/user/check-email"
+            const val EXIST : String="/user/check-email"
         const val LOGINCHECK : String="/user/check-loginId"
         const val FindId : String ="/user/find-id"
         const val FindPwd : String ="/user/find-pw"

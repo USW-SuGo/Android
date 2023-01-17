@@ -45,9 +45,10 @@ class ContactPlaceAdapter(var items: MutableList<String>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position])
         holder.itemView.setOnClickListener {
+
             val intent = Intent(holder.itemView.context, AddItemActivity()::class.java)
+            intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             intent.putExtra("contactPlace",   holder.binding.rv1.text)
-//            AddItemActivity().contactPlace1=holder.binding.rv1.text
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
 

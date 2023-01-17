@@ -67,10 +67,10 @@ class DealAdapter(var items: MutableList<DealMainItem>) :
             this.binding = binding
             //item Click Listener
 
-            binding.root.setOnClickListener({
+            binding.root.setOnClickListener {
                 val pos = adapterPosition
-                Log.d("click", pos.toString() + " : click!")
-            })
+                Log.d("click", "$pos : click!")
+            }
         }
     }
 

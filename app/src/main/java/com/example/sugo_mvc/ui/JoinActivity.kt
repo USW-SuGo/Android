@@ -72,6 +72,8 @@ class JoinActivity : AppCompatActivity() {
 
             })
 //
+
+
         RetrofitBuilder.service.signUp(UserInfo(loginid,email,loginpwd,"정보보호학과")).enqueue(object :Callback<SuccessCheckDto>{
             override fun onResponse(
                 call: Call<SuccessCheckDto>,
