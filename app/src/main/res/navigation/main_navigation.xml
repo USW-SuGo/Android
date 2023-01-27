@@ -10,5 +10,15 @@
         android:name="com.sugo.app.ui.DealFragment"
         android:label="DealFragment"
         tools:layout="@layout/fragment_deal"/>
+    <fragment
+        android:id="@+id/navigation_message"
+        android:name="com.sugo.app.ui.MessageFragment"
+        android:label="MessageFragment"
+        tools:layout="@layout/fragment_message"/>
+    <fragment
+        android:id="@+id/navigation_mypage"
+        android:name="com.sugo.app.ui.MyPageFragment"
+        android:label="MyPageFragment"
+        tools:layout="@layout/fragment_mypage"/>
 
 </navigation>

@@ -8,12 +8,12 @@
         android:title="@string/page_deal"/>
 
     <item
-        android:id="@+id/navigation_user"
+        android:id="@+id/navigation_mypage"
         android:icon="@drawable/user"
         android:title="@string/page_user"/>
 
     <item
-        android:id="@+id/navigation_chat"
+        android:id="@+id/navigation_message"
         android:icon="@drawable/chat"
         android:title="@string/page_chat"/>
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--use Pretendard-->
+    <style name="Title">
+        <item name="android:fontFamily">@font/pretendardbold</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">@color/sugreen</item>
+    </style>
+
+
+</resources>
