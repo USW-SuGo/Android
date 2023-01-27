@@ -59,7 +59,7 @@ class AddItemActivity : AppCompatActivity() {
                 if(position != 0)
                     postCategory=data[position]
             }
-
+//
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
