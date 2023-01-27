@@ -1,4 +1,4 @@
-package com.sugo.app
+package com.sugo.app.ui
 
 import android.content.Intent
 import android.os.Bundle
