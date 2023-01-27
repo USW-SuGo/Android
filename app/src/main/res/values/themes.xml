@@ -13,4 +13,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.Sugo.Splash" parent="Theme.SplashScreen">
+        <!--순서대로 배경색/중앙 아이콘/화면 지속 시간/테마 지정-->
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/background_splash_screen</item>
+        <item name="windowSplashScreenAnimationDuration">200</item>
+        <item name="postSplashScreenTheme">@style/Theme.Sugo</item>
+    </style>
+
 </resources>
