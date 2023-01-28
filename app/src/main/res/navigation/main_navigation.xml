@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/navigation_deal"
-        android:name="com.sugo.app.ui.DealFragment"
+        android:name="com.sugo.app.feat.ui.deal.DealFragment"
         android:label="DealFragment"
         tools:layout="@layout/fragment_deal"/>
     <fragment
         android:id="@+id/navigation_message"
-        android:name="com.sugo.app.ui.MessageFragment"
+        android:name="com.sugo.app.feat.ui.MessageFragment"
         android:label="MessageFragment"
         tools:layout="@layout/fragment_message"/>
     <fragment
         android:id="@+id/navigation_mypage"
-        android:name="com.sugo.app.ui.MyPageFragment"
+        android:name="com.sugo.app.feat.ui.MyPageFragment"
         android:label="MyPageFragment"
         tools:layout="@layout/fragment_mypage"/>
 

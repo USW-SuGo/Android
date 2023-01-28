@@ -19,6 +19,7 @@
 
                 <ImageView
                     android:id="@+id/iv_deal_product_image"
+                    imageUrl="@{dealproduct.imageLink}"
                     android:layout_width="0dp"
                     android:layout_height="180dp"
                     android:scaleType="centerCrop"
@@ -28,31 +29,34 @@
                     tools:src="@drawable/icplus" />
 
                 <TextView
+                    style="@style/PretendardThin.MiniText"
                     android:id="@+id/tv_deal_product_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="@{dealproduct.contactPlace}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_deal_product_image"
                     tools:text="인문대" />
 
                 <TextView
+                    style="@style/PretendardThin.MiniText"
                     android:id="@+id/tv_deal_product_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="3dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_deal_product_place"
                     app:layout_constraintStart_toEndOf="@+id/tv_deal_product_place"
                     tools:text="2일전" />
 
                 <TextView
+                    style="@style/PretendardThin.MiniText"
                     android:id="@+id/tv_deal_product_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="3dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_deal_product_date"
                     app:layout_constraintStart_toEndOf="@+id/tv_deal_product_date"
                     tools:text="전자기기"
@@ -60,13 +64,15 @@
 
                 <TextView
                     android:text="@{dealproduct.title}"
+                    style="@style/PretendardBold.Middle"
+                    tools:text="아무말이나아무말아무말"
                     android:id="@+id/tv_deal_product_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
                     android:maxLines="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -74,21 +80,24 @@
 
                 <TextView
                     android:layout_width="0dp"
+                    style="@style/PretendardThin.MiniUpText"
                     android:text="@{dealproduct.nickname}"
                     android:layout_height="wrap_content"
                     tools:text="정보보호학과-1"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_deal_product_title"
                     android:id="@+id/tv_deal_product_nickname" />
 
                 <TextView
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    style="@style/PretendardBold.Title2"
+                    price="@{dealproduct.price}"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     tools:text="100,100원"

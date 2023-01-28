@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sugo.app.databinding.ItemDealBinding
 import com.sugo.app.feat.model.DealProduct
-import com.sugo.app.feat.ui.common.CategoryDiffCallback
+import com.sugo.app.feat.ui.common.DealProductDiffCallback
 
 class ProductAdapter(private val viewModel:DealProductViewModel) : ListAdapter<DealProduct, ProductAdapter.ProductViewHolder>(
-    CategoryDiffCallback()
+    DealProductDiffCallback()
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {

@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Sugo</string>
 
+    <string name="product_price">%s원</string>
     <!--메뉴 아이템-->
     <string name="page_deal">거래</string>
     <string name="page_user">내정보</string>
     <string name="page_chat">쪽지</string>
+    <string name="deal_title_msg">SUGO</string>
 </resources>

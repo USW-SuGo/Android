@@ -1,4 +1,4 @@
-package com.sugo.app.ui
+package com.sugo.app.feat.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

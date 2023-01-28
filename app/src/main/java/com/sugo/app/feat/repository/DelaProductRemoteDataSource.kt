@@ -5,7 +5,7 @@ import com.sugo.app.feat.network.SugoRetrofit
 
 class DelaProductRemoteDataSource (private val apiClient : SugoRetrofit):DealProductDataSource {
 
-    override suspend fun getCategories(): List<DealProduct> {
-        return apiClient.getMainPage()
+    override suspend fun getDealProducts(): List<DealProduct> {
+        return apiClient.getMainPage(0)
     }
 }

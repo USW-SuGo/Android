@@ -1,4 +1,4 @@
-package com.sugo.app.ui
+package com.sugo.app.feat.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--use Pretendard-->
-    <style name="Title">
-        <item name="android:fontFamily">@font/pretendardbold</item>
-        <item name="android:textSize">26sp</item>
+
+    <style name="PretendardBold">
+        <item name="fontFamily">@font/pretendardbold</item>
+    </style>
+
+    <style name="PretendardThin">
+        <item name="fontFamily">@font/pretendardthin</item>
+    </style>
+
+    <style name="PretendardBold.Title">
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/sugreen</item>
     </style>
 
+    <style name="PretendardBold.Title2">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/sugreen</item>
+    </style>
 
+    <style name="PretendardBold.Middle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="PretendardThin.MiniText">
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="PretendardThin.MiniUpText">
+        <item name="android:textSize">6sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

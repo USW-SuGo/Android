@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sugo.app.feat.Event
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.repository.DealProductRepository
 import kotlinx.coroutines.launch
