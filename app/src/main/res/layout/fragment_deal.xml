@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <com.google.android.material.appbar.AppBarLayout
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="0dp">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/deal_toolbar"
             android:layout_width="match_parent"
             android:layout_height="46dp"
             android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
-                    android:text="SUGO"
+                    android:text="@string/deal_title_msg"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -35,13 +41,13 @@
                     android:id="@+id/toolbar_post_product"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_margin="8dp"
                     android:layout_marginEnd="4dp"
                     android:scaleType="center"
-                    android:layout_margin="8dp"
+                    android:src="@drawable/icplus"
                     app:layout_constraintBottom_toBottomOf="@+id/deal_title"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/deal_title"
-                    android:src="@drawable/icplus" />
+                    app:layout_constraintTop_toTopOf="@id/deal_title" />
 
                 <ImageView
                     android:id="@+id/post_deal"
@@ -57,11 +63,21 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.Toolbar>
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_deal_product"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="47dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/deal_toolbar"
+            app:spanCount="2"
+            tools:listitem="@layout/item_deal" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
