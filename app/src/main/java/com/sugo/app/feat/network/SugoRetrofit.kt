@@ -1,13 +1,9 @@
 package com.sugo.app.feat.network
 
-import android.util.Log
 import com.google.gson.*
 import com.sugo.app.feat.model.DealProduct
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.json.JSONArray
-import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -18,11 +14,11 @@ import java.time.format.DateTimeFormatter
 
 interface SugoRetrofit {
 
-    @GET("/post/all?page=1&size=10&category")
+    @GET("/post/all")
     suspend fun getMainPage(
         @Query("page") page:Int,
-        @Query("size") size:Int = 10
-
+        @Query("size") size:Int,
+        @Query("category") category:String
     ):List<DealProduct>
 
     companion object{
