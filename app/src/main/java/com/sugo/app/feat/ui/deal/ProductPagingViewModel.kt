@@ -1,4 +1,4 @@
-package com.sugo.app.feat.ui.deal.paging
+package com.sugo.app.feat.ui.deal
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData
@@ -11,9 +11,6 @@ import kotlinx.coroutines.flow.asStateFlow
 class ProductPagingViewModel(private val repoImpl: ProductPagingRepositoryImpl):ViewModel() {
     private val _itmes = MutableStateFlow<PagingData<DealProduct>>(PagingData.empty())
     val items = _itmes.asStateFlow()
-//    init {
-//        getMainPage()
-//    }
 
     fun getMainPage(): Flow<PagingData<DealProduct>> {
         return repoImpl.getMainPage()
