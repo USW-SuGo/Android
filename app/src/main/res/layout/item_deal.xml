@@ -5,6 +5,9 @@
 
         <data>
                 <variable
+                    name="viewModel"
+                    type="com.sugo.app.feat.ui.deal.ProductPagingViewModel" />
+                <variable
                     name="dealproduct"
                     type="com.sugo.app.feat.model.DealProduct" />
         </data>
@@ -15,7 +18,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:onClick="@{()->viewModel.openDealDetail(dealproduct)}"
+           >
 
                 <ImageView
                     android:id="@+id/iv_deal_product_image"

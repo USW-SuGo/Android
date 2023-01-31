@@ -9,7 +9,11 @@
         android:id="@+id/navigation_deal"
         android:name="com.sugo.app.feat.ui.deal.DealFragment"
         android:label="DealFragment"
-        tools:layout="@layout/fragment_deal"/>
+        tools:layout="@layout/fragment_deal">
+        <action
+            android:id="@+id/action_deal_to_deal_detail"
+            app:destination="@id/dealDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_message"
         android:name="com.sugo.app.feat.ui.MessageFragment"
@@ -20,5 +24,9 @@
         android:name="com.sugo.app.feat.ui.MyPageFragment"
         android:label="MyPageFragment"
         tools:layout="@layout/fragment_mypage"/>
+    <fragment
+        android:id="@+id/dealDetailFragment"
+        android:name="com.sugo.app.feat.ui.dealdetail.DealDetailFragment"
+        android:label="DealDetailFragment" />
 
 </navigation>

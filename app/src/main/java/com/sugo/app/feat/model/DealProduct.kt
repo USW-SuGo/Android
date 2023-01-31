@@ -14,5 +14,4 @@ data class DealProduct(
     val nickname: String,
     val category: String,
     val status :Boolean,
-    val userLikeStatus :Boolean
 )
