@@ -1,4 +1,4 @@
-package com.sugo.app.feat.repository.maindealpage.mainpage
+package com.sugo.app.feat.repository.repo.mainpage
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

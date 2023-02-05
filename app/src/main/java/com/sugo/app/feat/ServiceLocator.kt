@@ -1,5 +1,6 @@
 package com.sugo.app.feat
 
+import android.content.SharedPreferences
 import com.sugo.app.feat.network.SugoRetrofit
 
 object ServiceLocator {

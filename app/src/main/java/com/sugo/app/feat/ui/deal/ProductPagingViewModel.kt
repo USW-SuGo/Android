@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData
 import com.sugo.app.feat.model.DealProduct
-import com.sugo.app.feat.repository.maindealpage.mainpage.ProductPagingRepositoryImpl
+import com.sugo.app.feat.repository.repo.mainpage.ProductPagingRepositoryImpl
 import com.sugo.app.feat.ui.common.Event
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
