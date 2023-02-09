@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="productvm"
+            type="com.sugo.app.feat.ui.deal.SearchPagingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,9 +26,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_scrollFlags="scroll|enterAlways">
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp">
+
 
                 <TextView
                     android:id="@+id/deal_title"
@@ -64,18 +72,54 @@
 
         </androidx.appcompat.widget.Toolbar>
 
+        <EditText
+            android:id="@+id/etv_search"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/edge"
+            android:paddingLeft="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/deal_toolbar" />
+
+        <ImageView
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:onClick="@{()->productvm.onClickSearch(etvSearch.getText().toString)}"
+            android:src="@drawable/search"
+            app:layout_constraintBottom_toBottomOf="@id/etv_search"
+            app:layout_constraintStart_toStartOf="@+id/etv_search"
+            app:layout_constraintTop_toTopOf="@+id/etv_search" />
+
+        <Spinner
+            android:id="@+id/sp_category"
+            style="@style/PretendardBold.Size20"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="8dp"
+            tools:entries="@{productvm.spinnerEntry}"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/etv_search"
+            app:layout_constraintTop_toBottomOf="@id/deal_toolbar"
+            tools:selectedValue="@={productvm.spinnerData}" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_deal_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="47dp"
+            android:layout_marginTop="70dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/deal_toolbar"
+            app:layout_constraintTop_toBottomOf="@+id/etv_search"
             app:spanCount="2"
             tools:listitem="@layout/item_deal" />
 

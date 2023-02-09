@@ -43,7 +43,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="@{loginviewmodel.loginId}"
             android:layout_marginRight="8dp"
             android:hint="ID"
             app:layout_constraintTop_toBottomOf="@+id/tv_login_id" />
@@ -64,7 +63,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="@{loginviewmodel.loginPassWord}"
             android:layout_marginRight="8dp"
             android:hint="ID"
             app:layout_constraintTop_toBottomOf="@+id/tv_login_pwd" />
@@ -101,7 +99,6 @@
             android:layout_marginTop="6dp"
             android:layout_marginRight="10dp"
             android:text="아이디 찾기"
-            android:onClick="@{()-> loginviewmodel.findlogin(etvLoginId.getText().toString())}"
             app:layout_constraintEnd_toStartOf="@id/tv_find_pwd"
             app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
