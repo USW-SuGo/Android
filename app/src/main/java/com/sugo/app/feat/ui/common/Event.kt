@@ -2,10 +2,9 @@ package com.sugo.app.feat.ui.common
 
 import androidx.lifecycle.Observer
 
-/**
- * reference link
- * https://github.com/android/architecture-samples/blob/main/app/src/main/java/com/example/android/architecture/blueprints/todoapp/Event.kt
- */
+
+
+// 데이터 소비한거 재사용 x
 class Event<T>(private val content: T) {
 
     private var hasBeenHandled = false
