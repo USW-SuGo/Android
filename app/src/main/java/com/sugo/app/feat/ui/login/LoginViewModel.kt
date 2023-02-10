@@ -5,8 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sugo.app.feat.App
+import com.sugo.app.feat.network.SugoRetrofit
 import com.sugo.app.feat.repository.repo.Token.TokenPreferenceManager
 import com.sugo.app.feat.repository.repo.login.LoginRepository
+import com.sugo.app.feat.ui.common.TokenHeadersText
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
@@ -14,25 +17,19 @@ class LoginViewModel(
     val tokenPreferenceManager: TokenPreferenceManager
 ) : ViewModel() {
 
-    private val _loginId = MutableLiveData<String>()
-    val loginId: LiveData<String> = _loginId
-    private val _loginPassWord = MutableLiveData<String>()
-    val loginPassWord: LiveData<String> = _loginPassWord
-
     fun login(id: String, passWord: String) = viewModelScope.launch {
         val response = loginRepository.login(id, passWord)
-        val a = response.headers()
+        val originalHeaders = response.headers().get("authorization")
         if (response.code() == 200) {
-            saveAccessToken(a.toString())
+            val (accessToken, refreshToken) = TokenHeadersText(originalHeaders)
+            saveAccessToken(accessToken)
+            saveRefreshToken(refreshToken)
         }
     }
-
-    fun findlogin(email: String) = viewModelScope.launch {
-        val response = loginRepository.findlogin(email)
-        if (response.isSuccessful) Log.d("ads", "asdasd") else Log.d("ads", "asdasd")
-    }
-
-    fun saveAccessToken(token: String) = viewModelScope.launch {
+    private fun saveAccessToken(token: String) = viewModelScope.launch {
         tokenPreferenceManager.saveAccessToken(token)
+    }
+    private fun saveRefreshToken(token: String) = viewModelScope.launch {
+        tokenPreferenceManager.saveRefreshToken(token)
     }
 }

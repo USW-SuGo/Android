@@ -14,7 +14,7 @@ import com.sugo.app.feat.ui.login.LoginViewModel
 
 class MyPageFragment : Fragment() {
     private val viewModel: LoginViewModel by viewModels { ViewModelFactory(requireContext()) }
-    private lateinit var binding: FragmentLoginBinding
+    private lateinit var binding: com.sugo.app.databinding.FragmentLoginBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
