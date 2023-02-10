@@ -6,7 +6,7 @@ import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.network.SugoRetrofit
 
 class ProductPagingDataSource(
-    private val apiService : SugoRetrofit
+    private val apiService : SugoRetrofit,
 ) : PagingSource<Int,DealProduct>(){
     override fun getRefreshKey(state: PagingState<Int, DealProduct>): Int? {
         return state.anchorPosition?.let { position ->

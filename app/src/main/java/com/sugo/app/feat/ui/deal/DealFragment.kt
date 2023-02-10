@@ -1,10 +1,12 @@
 package com.sugo.app.feat.ui.deal
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,27 +19,41 @@ import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.observeOn
 import kotlinx.coroutines.launch
 
 
-class DealFragment : Fragment(){
-
+class DealFragment : Fragment() {
 
     private val viewModel: ProductPagingViewModel by viewModels { ViewModelFactory(requireContext()) }
+    private val viewModel2: SearchPagingViewModel by viewModels { ViewModelFactory(requireContext()) }
     private lateinit var binding: FragmentDealBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
+    ): View {
         binding = FragmentDealBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.productvm = viewModel2
         val pagingAdapter = initAdapter()
+        viewModel2.searchValue.observe(viewLifecycleOwner) {
+            productSubmitData2(pagingAdapter, it, "")
+        }
+
+//        lifecycleScope.launch {
+//            viewModel2.spinnerData.collect {
+//                Log.v("Spinner", it)
+//                if (it =="전체"||it=="카테고리") productSubmitData2(pagingAdapter, "", "")
+//                productSubmitData2(pagingAdapter,"",it)
+//            }
+//        }
+
         productSubmitData(pagingAdapter)
         setNavigation()
     }
@@ -48,20 +64,43 @@ class DealFragment : Fragment(){
         return pagingAdapter
     }
 
-    private fun setNavigation(){
-        viewModel.openDealEvent.observe(viewLifecycleOwner,EventObserver{
-            openDealDetail()
+    private fun setNavigation() {
+        viewModel.openDealEvent.observe(viewLifecycleOwner, EventObserver {
+            Log.d("productPostId",it.id.toString())
+            Log.d("productPostId",it.toString())
+            Log.d("productPostId",viewModel.openDealEvent.value.toString())
+            openDealDetail(it.id)
         })
     }
 
-    private fun openDealDetail(){
-        findNavController().navigate(R.id.action_deal_to_deal_detail, bundleOf())
+    private fun openDealDetail(productPostId:Long) {
+
+        findNavController().navigate(R.id.action_deal_to_deal_detail, bundleOf(
+            "productPostId" to productPostId
+        ))
     }
+
     private fun productSubmitData(pagingAdapter: ProductPagingAdapter) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.getMainPage().collectLatest { pagingData ->
+                        pagingAdapter.submitData(pagingData)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun productSubmitData2(
+        pagingAdapter: ProductPagingAdapter,
+        value: String,
+        category: String
+    ) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel2.getSearchPage(value, category).collectLatest { pagingData ->
                         pagingAdapter.submitData(pagingData)
                     }
                 }

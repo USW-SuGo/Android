@@ -13,4 +13,11 @@ class ProductPagingRepositoryImpl(private val apiService:SugoRetrofit): ProductP
         Pager(PagingConfig(10)){
             ProductPagingDataSource(apiService)
         }.flow
+
+    override fun getSearchPage(value: String, category: String): Flow<PagingData<DealProduct>> =
+        Pager(PagingConfig(10)){
+            SearchPagingDataSource(apiService,value,category)
+        }.flow
+
+
 }
