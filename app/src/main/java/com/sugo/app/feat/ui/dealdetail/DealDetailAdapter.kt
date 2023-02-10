@@ -2,18 +2,19 @@ package com.sugo.app.feat.ui.dealdetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sugo.app.databinding.ItemDealBinding
-import com.sugo.app.feat.model.DealProduct
-import com.sugo.app.feat.ui.common.DealProductDiffCallback
+import com.sugo.app.databinding.ItemDetailImageBinding
 
-class DealDetailAdapter: ListAdapter<DealProduct, DealDetailAdapter.DealDetailViewHolder>(
-    DealProductDiffCallback()
+
+class DealDetailAdapter() : ListAdapter<String, DealDetailAdapter.DealDetailViewHolder>(
+    imageLinkDiffCallback()
 ) {
-    private lateinit var binding: ItemDealBinding
+    private lateinit var binding: ItemDetailImageBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DealDetailViewHolder {
-        binding=ItemDealBinding.inflate(LayoutInflater.from(parent.context),false)
+        binding = ItemDetailImageBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+
         return DealDetailViewHolder(binding)
     }
 
@@ -21,10 +22,23 @@ class DealDetailAdapter: ListAdapter<DealProduct, DealDetailAdapter.DealDetailVi
         holder.bind(getItem(position))
     }
 
-    class DealDetailViewHolder(private val binding : ItemDealBinding):RecyclerView.ViewHolder(binding.root){
+    class DealDetailViewHolder(private val binding: ItemDetailImageBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(dealProduct: DealProduct){
-
+        fun bind(imagelink: String) {
+            binding.imageUrl = imagelink
+            binding.executePendingBindings()
         }
+    }
+    class imageLinkDiffCallback : DiffUtil.ItemCallback<String>() {
+
+        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+            TODO("Not yet implemented")
+        }
+
+        override fun areContentsTheSame(oldItem: String, newItem:String): Boolean {
+            return oldItem == newItem
+        }
+
     }
 }

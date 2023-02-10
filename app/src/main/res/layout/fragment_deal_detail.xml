@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="dealproduct"
+            type="com.sugo.app.feat.model.DealProduct" />
 
     </data>
 
@@ -16,6 +21,7 @@
             android:background="@color/white">
 
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_product_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|enterAlways"
@@ -25,6 +31,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="10dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +41,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewpager_deal_detail"
                     android:layout_width="0dp"
-                    android:layout_height="250dp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -49,10 +56,99 @@
                     app:tabBackground="@drawable/selector_viewpager_indicator"
                     app:tabGravity="center"
                     app:tabIndicatorHeight="0dp" />
+
+                <TextView
+                    android:id="@+id/tv_contactplace"
+                    style="@style/PretendardBold.Size20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="6dp"
+                    android:text="@{dealproduct.contactPlace}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewpager_deal_detail_indicator"
+                    tools:text="장소" />
+
+                <TextView
+                    android:id="@+id/tv_datetime"
+                    style="@style/PretendardBold.Size20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="6dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_contactplace"
+                    app:layout_constraintStart_toEndOf="@+id/tv_contactplace"
+                    tools:text="날짜" />
+
+                <TextView
+                    android:id="@+id/tv_category"
+                    style="@style/PretendardBold.Size20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{dealproduct.category}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_contactplace"
+                    app:layout_constraintStart_toEndOf="@id/tv_datetime"
+                    tools:text="카테고리" />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    style="@style/PretendardBold.detailTilte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{dealproduct.title}"
+                    android:maxLines="1"
+                    android:paddingTop="6dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_contactplace"
+                    tools:text="제목" />
+
+                <TextView
+                    android:text="@{dealproduct.nickname}"
+                    android:id="@+id/tv_nickname"
+                    style="@style/PretendardBold.Size20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="6dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                    tools:text="닉네임" />
+
+
+                <TextView
+                    price="@{dealproduct.price}"
+                    android:id="@+id/tv_price"
+                    style="@style/PretendardBold.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title"
+                    tools:text="가격" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:id="@+id/view_line"
+                    app:layout_constraintTop_toBottomOf="@id/tv_price"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_line"
+                    tools:text="내용 콘텐츠"
+                    android:paddingTop="6dp"
+                    android:id="@+id/tv_content"
+                    android:text="@{dealproduct.content}"
+                    style="@style/PretendardBold.Size18"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:menu="@menu/bottom_appbar"
+            app:navigationIcon="@drawable/ic_back"
+            />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
