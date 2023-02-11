@@ -14,4 +14,12 @@ object ServiceLocator {
             }
         }
     }
+
+    fun provideTokenApiClient(): SugoRetrofit {
+        return apiClient ?: kotlin.run {
+            SugoRetrofit.tokenCreate().also {
+                apiClient = it
+            }
+        }
+    }
 }

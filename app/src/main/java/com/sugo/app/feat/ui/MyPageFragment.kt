@@ -5,31 +5,72 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.sugo.app.databinding.FragmentLoginBinding
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.sugo.app.R
+import com.sugo.app.databinding.FragmentMypageBinding
+import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ViewModelFactory
-import com.sugo.app.feat.ui.login.LoginViewModel
+import com.sugo.app.feat.ui.deal.ProductPagingAdapter
+import com.sugo.app.feat.ui.deal.ProductPagingViewModel
+import com.sugo.app.feat.ui.mypage.MyPageAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class MyPageFragment : Fragment() {
-    private val viewModel: LoginViewModel by viewModels { ViewModelFactory(requireContext()) }
-    private lateinit var binding: com.sugo.app.databinding.FragmentLoginBinding
+    private val viewModel: ProductPagingViewModel by viewModels { ViewModelFactory(requireContext()) }
+    private lateinit var binding: FragmentMypageBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        binding = FragmentMypageBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.loginviewmodel = viewModel
-        Log.d("Test", stringPreferencesKey("access_token").toString())
-
+        val pagingAdapter = initAdapter()
+        productSubmitData(pagingAdapter)
+        setNavigation()
     }
 
+    private fun initAdapter(): MyPageAdapter {
+        val pagingAdapter = MyPageAdapter(viewModel)
+        binding.rvMypage.adapter = pagingAdapter
+        return pagingAdapter
+    }
+
+    private fun setNavigation() {
+        viewModel.openDealEvent.observe(viewLifecycleOwner, EventObserver {
+            Log.d("productPostId", it.toString())
+            openDealDetail(it)
+        })
+    }
+
+    private fun openDealDetail(productPostId: Long) {
+        findNavController().navigate(R.id.action_mypage_to_dealDetail, bundleOf(
+                "productPostId" to productPostId
+            )
+        )
+    }
+
+    private fun productSubmitData(pagingAdapter: MyPageAdapter) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.getMyPageProduct().collectLatest { pagingData ->
+                        pagingAdapter.submitData(pagingData)
+                    }
+                }
+            }
+        }
+    }
 
 }

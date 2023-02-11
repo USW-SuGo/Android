@@ -11,3 +11,4 @@ fun applyPriceFormat(view: TextView, price: Int) {
     view.text = view.context.getString(R.string.product_price, decimalFormat.format(price))
 }
 
+
