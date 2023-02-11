@@ -1,10 +1,12 @@
 package com.sugo.app.feat.repository.repo.Token
 
 import android.content.Context
+import com.sugo.app.feat.App
+import com.sugo.app.feat.network.SugoRetrofit
 
 
 class TokenPreferenceManager(context: Context) : TokenLocalDataSource {
-    val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     override fun getAccessToken(): String? {
         return prefs.getString(ACCESS_TOKEN, null)
@@ -22,7 +24,8 @@ class TokenPreferenceManager(context: Context) : TokenLocalDataSource {
         prefs.edit().putString(Refresh_TOKEN, token).apply()
     }
 
-    companion object {
+
+    private companion object {
         const val PREFS_NAME = "preferences"
         const val ACCESS_TOKEN = "accesstoken"
         const val Refresh_TOKEN = "refreshtoken"

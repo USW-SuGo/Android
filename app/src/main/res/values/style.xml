@@ -9,6 +9,25 @@
     <style name="PretendardThin">
         <item name="fontFamily">@font/pretendardthin</item>
     </style>
+    <style name="PretendardSemiBold">
+        <item name="fontFamily">@font/pretendardsemibold</item>
+    </style>
+    <style name="PretendardSemiBold.16">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="PretendardBold.detailTilte">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="PretendardBold.Size20">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="PretendardBold.Size18">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 
     <style name="PretendardBold.Title">
         <item name="android:textSize">20sp</item>
@@ -16,12 +35,12 @@
     </style>
 
     <style name="PretendardBold.Title2">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/sugreen</item>
     </style>
 
     <style name="PretendardBold.Middle">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
 

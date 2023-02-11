@@ -7,4 +7,5 @@
     <string name="page_user">내정보</string>
     <string name="page_chat">쪽지</string>
     <string name="deal_title_msg">SUGO</string>
+    <string name="category_tv">카테고리</string>
 </resources>

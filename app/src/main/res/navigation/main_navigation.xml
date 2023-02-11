@@ -23,7 +23,11 @@
         android:id="@+id/navigation_mypage"
         android:name="com.sugo.app.feat.ui.MyPageFragment"
         android:label="MyPageFragment"
-        tools:layout="@layout/fragment_mypage"/>
+        tools:layout="@layout/fragment_mypage">
+        <action
+            android:id="@+id/action_mypage_to_dealDetail"
+            app:destination="@id/dealDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dealDetailFragment"
         android:name="com.sugo.app.feat.ui.dealdetail.DealDetailFragment"

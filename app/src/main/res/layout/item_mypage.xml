@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sugo.app.feat.ui.deal.ProductPagingViewModel" />
+
+        <variable
+            name="dealproduct"
+            type="com.sugo.app.feat.model.DealProduct" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="15dp"
+        android:onClick="@{()->viewModel.openDealDetail(dealproduct.id)}">
+
+        <ImageView
+            android:id="@+id/iv_mypage_product_link"
+            imageUrl="@{dealproduct.imageLink}"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/icplus" />
+
+        <TextView
+            android:id="@+id/tv_deal_product_place"
+            style="@style/PretendardSemiBold.16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{dealproduct.contactPlace}"
+            app:layout_constraintStart_toEndOf="@+id/iv_mypage_product_link"
+            app:layout_constraintTop_toTopOf="@+id/iv_mypage_product_link"
+            tools:text="인문대" />
+
+        <TextView
+            android:id="@+id/tv_deal_product_date"
+            style="@style/PretendardSemiBold.16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_deal_product_place"
+            app:layout_constraintStart_toEndOf="@+id/tv_deal_product_place"
+            tools:text="2일전" />
+
+        <TextView
+            android:id="@+id/tv_deal_product_category"
+            style="@style/PretendardSemiBold.16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:text="@{dealproduct.category}"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_deal_product_date"
+            app:layout_constraintStart_toEndOf="@+id/tv_deal_product_date"
+            tools:text="전자기기" />
+
+        <TextView
+            android:id="@+id/tv_deal_product_title"
+            style="@style/PretendardBold.Middle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:maxLines="1"
+            android:text="@{dealproduct.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_mypage_product_link"
+            app:layout_constraintTop_toBottomOf="@+id/tv_deal_product_category"
+            tools:text="아무말이나아무말아무말" />
+
+        <TextView
+            android:id="@+id/tv_deal_product_nickname"
+            style="@style/PretendardSemiBold.16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{dealproduct.nickname}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_mypage_product_link"
+            app:layout_constraintTop_toBottomOf="@id/tv_deal_product_title"
+            tools:text="정보보호학과-1" />
+
+        <TextView
+            style="@style/PretendardBold.Title2"
+            price="@{dealproduct.price}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_mypage_product_link"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_deal_product_nickname"
+            tools:text="100,100원" />
+
+        <View
+            android:id="@+id/item_line1"
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_mypage_product_link" />
+
+        <TextView
+            style="@style/PretendardBold.Size20"
+            android:layout_width="194dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="게시물 살리기"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/item_line1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/item_line1" />
+
+        <TextView
+            style="@style/PretendardBold.Size20"
+            android:layout_width="194dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="수정하기"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_line1"
+            app:layout_constraintTop_toTopOf="@id/item_line1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
