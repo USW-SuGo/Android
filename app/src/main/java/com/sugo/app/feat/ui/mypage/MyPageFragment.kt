@@ -1,4 +1,4 @@
-package com.sugo.app.feat.ui
+package com.sugo.app.feat.ui.mypage
 
 import android.os.Bundle
 import android.util.Log
@@ -16,14 +16,12 @@ import com.sugo.app.R
 import com.sugo.app.databinding.FragmentMypageBinding
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ViewModelFactory
-import com.sugo.app.feat.ui.deal.ProductPagingAdapter
 import com.sugo.app.feat.ui.deal.ProductPagingViewModel
-import com.sugo.app.feat.ui.mypage.MyPageAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MyPageFragment : Fragment() {
-    private val viewModel: ProductPagingViewModel by viewModels { ViewModelFactory(requireContext()) }
+    private val viewModel: MyPageViewModel by viewModels { ViewModelFactory(requireContext()) }
     private lateinit var binding: FragmentMypageBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,15 +34,23 @@ class MyPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUser()
         val pagingAdapter = initAdapter()
         productSubmitData(pagingAdapter)
         setNavigation()
     }
 
     private fun initAdapter(): MyPageAdapter {
+
         val pagingAdapter = MyPageAdapter(viewModel)
         binding.rvMypage.adapter = pagingAdapter
         return pagingAdapter
+    }
+
+    private fun setUser() {
+        viewModel.myPage.observe(viewLifecycleOwner) {
+            binding.mypage = it
+        }
     }
 
     private fun setNavigation() {
@@ -55,7 +61,8 @@ class MyPageFragment : Fragment() {
     }
 
     private fun openDealDetail(productPostId: Long) {
-        findNavController().navigate(R.id.action_mypage_to_dealDetail, bundleOf(
+        findNavController().navigate(
+            R.id.action_mypage_to_dealDetail, bundleOf(
                 "productPostId" to productPostId
             )
         )

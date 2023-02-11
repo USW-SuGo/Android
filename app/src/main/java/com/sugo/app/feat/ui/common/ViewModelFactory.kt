@@ -10,10 +10,13 @@ import com.sugo.app.feat.repository.repo.detail.DetailRepository
 import com.sugo.app.feat.repository.repo.login.LoginRemoteDataSource
 import com.sugo.app.feat.repository.repo.login.LoginRepository
 import com.sugo.app.feat.repository.repo.mainpage.ProductPagingRepositoryImpl
+import com.sugo.app.feat.repository.repo.mypage.MyPageRemoteDataSource
+import com.sugo.app.feat.repository.repo.mypage.MyPageRepository
 import com.sugo.app.feat.ui.deal.ProductPagingViewModel
 import com.sugo.app.feat.ui.deal.SearchPagingViewModel
 import com.sugo.app.feat.ui.dealdetail.DetailViewModel
 import com.sugo.app.feat.ui.login.LoginViewModel
+import com.sugo.app.feat.ui.mypage.MyPageViewModel
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 
@@ -23,6 +26,13 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                 val repository =
                     ProductPagingRepositoryImpl((ServiceLocator.provideApiClient()))
                 ProductPagingViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(MyPageViewModel::class.java) -> {
+                val repository =
+                    ProductPagingRepositoryImpl((ServiceLocator.provideApiClient()))
+                val repository2 =
+                    MyPageRepository(MyPageRemoteDataSource(ServiceLocator.provideTokenApiClient()))
+                MyPageViewModel(repository2,repository) as T
             }
             modelClass.isAssignableFrom(SearchPagingViewModel::class.java) -> {
                 val repository =

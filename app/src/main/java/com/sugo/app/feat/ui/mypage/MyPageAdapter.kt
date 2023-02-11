@@ -4,13 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sugo.app.databinding.ItemDealBinding
 import com.sugo.app.databinding.ItemMypageBinding
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.ui.common.DealProductDiffCallback
 import com.sugo.app.feat.ui.deal.ProductPagingViewModel
 
-class MyPageAdapter(private val viewModel: ProductPagingViewModel) : PagingDataAdapter<DealProduct, MyPageAdapter.PagingViewHolder>(
+class MyPageAdapter(private val viewModel: MyPageViewModel) : PagingDataAdapter<DealProduct, MyPageAdapter.PagingViewHolder>(
     DealProductDiffCallback()
 ) {
 

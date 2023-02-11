@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_message"/>
     <fragment
         android:id="@+id/navigation_mypage"
-        android:name="com.sugo.app.feat.ui.MyPageFragment"
+        android:name="com.sugo.app.feat.ui.mypage.MyPageFragment"
         android:label="MyPageFragment"
         tools:layout="@layout/fragment_mypage">
         <action

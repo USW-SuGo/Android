@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.sugo.app.feat.ui.deal.ProductPagingViewModel" />
+            type="com.sugo.app.feat.ui.mypage.MyPageViewModel" />
 
         <variable
             name="dealproduct"
@@ -126,6 +126,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/item_line1"
             app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{()->viewModel.upPost(dealproduct.id)}"
             app:layout_constraintTop_toTopOf="@id/item_line1" />
 
         <TextView
