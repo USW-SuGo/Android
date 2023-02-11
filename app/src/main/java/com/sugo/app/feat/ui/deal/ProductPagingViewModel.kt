@@ -27,10 +27,13 @@ class ProductPagingViewModel(private val repoImpl: ProductPagingRepositoryImpl) 
         return repoImpl.getMainPage()
     }
 
-    private val _openDealEvent = MutableLiveData<Event<DealProduct>>()
-    val openDealEvent: LiveData<Event<DealProduct>> = _openDealEvent
+    fun getMyPageProduct(): Flow<PagingData<DealProduct>> {
+        return repoImpl.getMyPageProduct()
+    }
+    private val _openDealEvent = MutableLiveData<Event<Long>>()
+    val openDealEvent: LiveData<Event<Long>> = _openDealEvent
 
-    fun openDealDetail(productPostId: DealProduct) {
+    fun openDealDetail(productPostId: Long) {
         _openDealEvent.value = Event(productPostId)
     }
 

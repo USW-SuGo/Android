@@ -66,15 +66,12 @@ class DealFragment : Fragment() {
 
     private fun setNavigation() {
         viewModel.openDealEvent.observe(viewLifecycleOwner, EventObserver {
-            Log.d("productPostId",it.id.toString())
             Log.d("productPostId",it.toString())
-            Log.d("productPostId",viewModel.openDealEvent.value.toString())
-            openDealDetail(it.id)
+            openDealDetail(it)
         })
     }
 
     private fun openDealDetail(productPostId:Long) {
-
         findNavController().navigate(R.id.action_deal_to_deal_detail, bundleOf(
             "productPostId" to productPostId
         ))
@@ -93,9 +90,7 @@ class DealFragment : Fragment() {
     }
 
     private fun productSubmitData2(
-        pagingAdapter: ProductPagingAdapter,
-        value: String,
-        category: String
+        pagingAdapter: ProductPagingAdapter, value: String, category: String
     ) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {

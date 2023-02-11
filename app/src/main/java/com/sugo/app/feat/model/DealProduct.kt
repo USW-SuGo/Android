@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 
 import com.google.gson.annotations.SerializedName
 data class DealProduct(
-    @SerializedName("id")val productPostId: Long,
+    @SerializedName("productPostId")val id: Long,
     val imageLink:String,
     val contactPlace: String,
     val updatedAt: LocalDateTime,
@@ -13,5 +13,6 @@ data class DealProduct(
     val price: Int,
     val nickname: String,
     val category: String,
+    val content:String,
     val status :Boolean,
 )
