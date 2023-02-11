@@ -29,6 +29,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/sv_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp"
@@ -93,62 +94,91 @@
                     style="@style/PretendardBold.detailTilte"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{dealproduct.title}"
                     android:maxLines="1"
                     android:paddingTop="6dp"
+                    android:text="@{dealproduct.title}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_contactplace"
                     tools:text="제목" />
 
                 <TextView
-                    android:text="@{dealproduct.nickname}"
                     android:id="@+id/tv_nickname"
                     style="@style/PretendardBold.Size20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="6dp"
+                    android:text="@{dealproduct.nickname}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_title"
                     tools:text="닉네임" />
 
 
                 <TextView
-                    price="@{dealproduct.price}"
                     android:id="@+id/tv_price"
                     style="@style/PretendardBold.Title"
+                    price="@{dealproduct.price}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="6dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_title"
                     tools:text="가격" />
+
                 <View
+                    android:id="@+id/view_line"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/black"
-                    android:id="@+id/view_line"
-                    app:layout_constraintTop_toBottomOf="@id/tv_price"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_price" />
 
                 <TextView
+                    android:id="@+id/tv_content"
+                    style="@style/PretendardBold.Size18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="60dp"
+                    android:text="@{dealproduct.content}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view_line"
-                    tools:text="내용 콘텐츠"
-                    android:paddingTop="6dp"
-                    android:id="@+id/tv_content"
-                    android:text="@{dealproduct.content}"
-                    style="@style/PretendardBold.Size18"/>
+                    tools:text="내용 콘텐츠" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottom_navigation"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:menu="@menu/bottom_appbar"
-            app:navigationIcon="@drawable/ic_back"
-            />
+            android:layout_height="60dp"
+            android:layout_gravity="bottom">
+
+            <View
+                android:id="@+id/view_line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_sugo"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:text="수고하기"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_heart"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/shopping_cart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="20dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

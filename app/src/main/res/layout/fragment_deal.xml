@@ -73,9 +73,11 @@
         </androidx.appcompat.widget.Toolbar>
 
         <EditText
+            android:gravity="center"
             android:id="@+id/etv_search"
             android:layout_width="300dp"
             android:layout_height="30dp"
+            android:paddingBottom="15dp"
             android:layout_marginStart="7dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/edge"
@@ -110,18 +112,20 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_deal_product"
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.063"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etv_search"
+            app:layout_constraintVertical_bias="0.479"
             app:spanCount="2"
-            tools:listitem="@layout/item_deal" />
+            tools:listitem="@layout/item_deal"
+          />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -19,7 +19,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="10dp"
-            android:onClick="@{()->viewModel.openDealDetail(dealproduct)}"
+            android:onClick="@{()->viewModel.openDealDetail(dealproduct.id)}"
            >
 
                 <ImageView
@@ -34,7 +34,7 @@
                     tools:src="@drawable/icplus" />
 
                 <TextView
-                    style="@style/PretendardThin.MiniText"
+                    style="@style/PretendardSemiBold.16"
                     android:id="@+id/tv_deal_product_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                     tools:text="인문대" />
 
                 <TextView
-                    style="@style/PretendardThin.MiniText"
+                    style="@style/PretendardSemiBold.16"
                     android:id="@+id/tv_deal_product_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                     tools:text="2일전" />
 
                 <TextView
-                    style="@style/PretendardThin.MiniText"
+                    style="@style/PretendardSemiBold.16"
                     android:id="@+id/tv_deal_product_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    style="@style/PretendardThin.MiniUpText"
+                    style="@style/PretendardSemiBold.16"
                     android:text="@{dealproduct.nickname}"
                     android:layout_height="wrap_content"
                     tools:text="정보보호학과-1"
