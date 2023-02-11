@@ -5,10 +5,7 @@ import com.google.gson.*
 import com.sugo.app.feat.App
 import com.sugo.app.feat.App.Companion.prefs
 import com.sugo.app.feat.ServiceLocator
-import com.sugo.app.feat.model.DealProduct
-import com.sugo.app.feat.model.LoginFormat
-import com.sugo.app.feat.model.Success
-import com.sugo.app.feat.model.email
+import com.sugo.app.feat.model.*
 import com.sugo.app.feat.ui.common.TokenHeadersText
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,6 +25,10 @@ import java.time.format.DateTimeFormatter
 
 interface SugoRetrofit {
 
+    /**
+     * 텍스트 정리
+     * ui펼 api 정리하기
+     * **/
     @GET("/post/all")
     suspend fun getMainPage(
         @Query("page") page: Int,
@@ -40,7 +41,6 @@ interface SugoRetrofit {
     suspend fun login(
         @Body loginFormat: LoginFormat
     ): Response<Unit>
-
 
     @POST("/token")
     fun refreshAccessToken(
@@ -70,6 +70,13 @@ interface SugoRetrofit {
         @Query("size") size: Int
     ): List<DealProduct>
 
+    @GET("/user")
+    suspend fun getMyPage():Response<MyPage>
+
+    @POST("/post/up-post")
+    suspend fun upPost(
+        @Body productPostId: ProductPostId
+    ): Response<Success>
 
     class TokenAuthenticator : Authenticator {
         override fun authenticate(route: Route?, response: okhttp3.Response): Request? {
