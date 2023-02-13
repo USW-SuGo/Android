@@ -67,6 +67,19 @@
             tools:text="전자기기" />
 
         <TextView
+            android:onClick="@{()->viewModel.showdialog(dealproduct.id)}"
+            android:id="@+id/textViewOptions"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="⋮"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/tv_deal_product_title"
             style="@style/PretendardBold.Middle"
             android:layout_width="0dp"
@@ -122,11 +135,11 @@
             android:layout_width="194dp"
             android:layout_height="40dp"
             android:gravity="center"
+            android:onClick="@{()->viewModel.upPost(dealproduct.id)}"
             android:text="게시물 살리기"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/item_line1"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{()->viewModel.upPost(dealproduct.id)}"
             app:layout_constraintTop_toTopOf="@id/item_line1" />
 
         <TextView

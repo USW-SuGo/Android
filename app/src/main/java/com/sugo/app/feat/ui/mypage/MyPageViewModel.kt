@@ -1,12 +1,19 @@
 package com.sugo.app.feat.ui.mypage
 
+import android.content.Context
+import android.graphics.Color
 import android.util.Log
+import android.view.Menu
 import android.view.View
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import com.sugo.app.R
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.model.MyPage
 import com.sugo.app.feat.repository.repo.mainpage.ProductPagingRepositoryImpl
@@ -18,34 +25,42 @@ import kotlinx.coroutines.launch
 
 class MyPageViewModel(
     val myPageRepository: MyPageRepository,
-    private val repoImpl: ProductPagingRepositoryImpl
-) :ViewModel(){
+    private val repoImpl: ProductPagingRepositoryImpl,
+) : ViewModel() {
     private val _myPage = MutableLiveData<MyPage>()
     val myPage: LiveData<MyPage> = _myPage
-
-
+    val message = MutableLiveData<String>()
     fun getMyPageProduct(): Flow<PagingData<DealProduct>> {
         return repoImpl.getMyPageProduct()
     }
+
+    fun getLikeProduct(): Flow<PagingData<DealProduct>> {
+        return repoImpl.getLikeProduct()
+    }
+
     private val _openDealEvent = MutableLiveData<Event<Long>>()
     val openDealEvent: LiveData<Event<Long>> = _openDealEvent
+
 
     fun openDealDetail(productPostId: Long) {
         _openDealEvent.value = Event(productPostId)
     }
-
     init {
         getMyPage()
     }
+    private val  _openDealEvent1 = MutableLiveData<Event<Long>>()
+    val openDealEvent1: LiveData<Event<Long>> = _openDealEvent1
 
-     fun upPost(productPostId: Long) =viewModelScope.launch {
+    fun showdialog(productPostId: Long){
+        _openDealEvent1.value = Event(productPostId)
+    }
+    fun upPost(productPostId: Long) = viewModelScope.launch {
         val response = myPageRepository.upPost(productPostId)
-         Log.d("UpPost",productPostId.toString())
-         Log.d("UpPost",response.body().toString())
     }
 
-    private fun getMyPage() =viewModelScope.launch {
+
+    private fun getMyPage() = viewModelScope.launch {
         val response = myPageRepository.getMyPage().body()
-        _myPage.value=response!!
+        _myPage.value = response!!
     }
 }
