@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="mypage"
             type="com.sugo.app.feat.model.MyPage" />
+
+        <variable
+            name="viewModel"
+            type="com.sugo.app.feat.ui.mypage.MyPageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -66,11 +71,11 @@
             app:layout_constraintTop_toBottomOf="@+id/tb_mypage" />
 
         <TextView
-           android:text="@{mypage.nickname}"
             style="@style/PretendardBold.Size18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
+            android:text="@{mypage.nickname}"
             app:layout_constraintBottom_toBottomOf="@+id/iv_mypage_user"
             app:layout_constraintStart_toEndOf="@+id/iv_mypage_user"
             app:layout_constraintTop_toTopOf="@+id/iv_mypage_user"
@@ -110,11 +115,11 @@
             app:layout_constraintStart_toEndOf="@id/tv_sugo_count" />
 
         <TextView
-            android:text="@{mypage.mannerGrade.toString()}"
-             android:id="@+id/tv_grade_value"
+            android:id="@+id/tv_grade_value"
             style="@style/PretendardSemiBold.16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{mypage.mannerGrade.toString()}"
             app:layout_constraintBottom_toBottomOf="@id/tv_sugo_count_value"
             app:layout_constraintEnd_toEndOf="@id/tv_grade"
             app:layout_constraintStart_toStartOf="@+id/tv_grade"
@@ -122,9 +127,9 @@
             tools:text="0" />
 
         <TextView
-            countTradeAttempt="@{mypage.countTradeAttempt}"
             android:id="@+id/tv_sugo_count_value"
             style="@style/PretendardSemiBold.16"
+            countTradeAttempt="@{mypage.countTradeAttempt}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -134,9 +139,9 @@
             tools:text="0" />
 
         <TextView
-            countMannerEvaluation="@{mypage.countMannerEvaluation}"
             android:id="@+id/tv_user_evalue_value"
             style="@style/PretendardSemiBold.16"
+            countMannerEvaluation="@{mypage.countMannerEvaluation}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/tv_sugo_count_value"
@@ -160,8 +165,10 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="내가 쓴글"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line1" />
+
 
         <TextView
             android:id="@+id/tv_like_write"
