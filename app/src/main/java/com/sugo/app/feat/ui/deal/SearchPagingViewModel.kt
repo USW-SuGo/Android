@@ -48,7 +48,5 @@ class SearchPagingViewModel(private val repoImpl: ProductPagingRepositoryImpl) :
         _searchValue.value=searchTxt
         Log.d("TEST", "Search $searchTxt")
     }
-
-
 }
 

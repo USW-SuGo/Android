@@ -13,11 +13,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentDealBinding
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ViewModelFactory
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.observeOn
 import kotlinx.coroutines.launch
@@ -54,7 +56,7 @@ class DealFragment : Fragment() {
 //            }
 //        }
 
-        productSubmitData(pagingAdapter)
+        productSubmitData(pagingAdapter,viewModel.getMainPage())
         setNavigation()
     }
 
@@ -77,11 +79,11 @@ class DealFragment : Fragment() {
         ))
     }
 
-    private fun productSubmitData(pagingAdapter: ProductPagingAdapter) {
+    private fun productSubmitData(pagingAdapter: ProductPagingAdapter,getMainData: Flow<PagingData<DealProduct>>) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    viewModel.getMainPage().collectLatest { pagingData ->
+                    getMainData.collectLatest { pagingData ->
                         pagingAdapter.submitData(pagingData)
                     }
                 }

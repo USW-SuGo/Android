@@ -29,7 +29,7 @@ class MyPageViewModel(
 ) : ViewModel() {
     private val _myPage = MutableLiveData<MyPage>()
     val myPage: LiveData<MyPage> = _myPage
-    val message = MutableLiveData<String>()
+
     fun getMyPageProduct(): Flow<PagingData<DealProduct>> {
         return repoImpl.getMyPageProduct()
     }
@@ -57,7 +57,9 @@ class MyPageViewModel(
     fun upPost(productPostId: Long) = viewModelScope.launch {
         val response = myPageRepository.upPost(productPostId)
     }
-
+    fun deletePost(productPostId: Long) = viewModelScope.launch {
+        val response = myPageRepository.deletePost(productPostId)
+    }
 
     private fun getMyPage() = viewModelScope.launch {
         val response = myPageRepository.getMyPage().body()

@@ -4,24 +4,22 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentMypageBinding
+import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ViewModelFactory
-import com.sugo.app.feat.ui.deal.ProductPagingViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -43,12 +41,12 @@ class MyPageFragment : Fragment() {
         val pagingAdapter = initAdapter()
         //이부분을  VM 으로 옮기기 뷰엣허 클릭시 센변경을 하는방법을 모르곘네  셀렉터인가 아닌가?
         binding.tvUserWrite.setOnClickListener {
-            productSubmitData(pagingAdapter)
+            productSubmitData(pagingAdapter,viewModel.getMyPageProduct())
             binding.tvUserWrite.setTextColor(Color.parseColor("#000000"))
             binding.tvLikeWrite.setTextColor(Color.parseColor("#419e3a"))
         }
         binding.tvLikeWrite.setOnClickListener {
-            productLikeSubmitData(pagingAdapter)
+            productSubmitData(pagingAdapter,viewModel.getLikeProduct())
             binding.tvUserWrite.setTextColor(Color.parseColor("#419e3a"))
             binding.tvLikeWrite.setTextColor(Color.parseColor("#000000"))
         }
@@ -58,16 +56,17 @@ class MyPageFragment : Fragment() {
 
     private fun openDailog() {
         viewModel.openDealEvent1.observe(viewLifecycleOwner, EventObserver {
-            val bottomSheetFragment = CustomDialog(requireContext(), it)
-            Log.d("productPostId", it.toString())
+            val bottomSheetFragment = CustomDialog(requireContext(),it)
+            Log.d("productPostId1", it.toString())
             bottomSheetFragment.show(childFragmentManager, "childFragmentManager")
         })
+
     }
 
     private fun initAdapter(): MyPageAdapter {
         val pagingAdapter = MyPageAdapter(viewModel)
         binding.rvMypage.adapter = pagingAdapter
-        productSubmitData(pagingAdapter)
+        productSubmitData(pagingAdapter,viewModel.getMyPageProduct())
         return pagingAdapter
     }
 
@@ -92,23 +91,11 @@ class MyPageFragment : Fragment() {
         )
     }
 
-    private fun productSubmitData(pagingAdapter: MyPageAdapter) {
+    private fun productSubmitData(pagingAdapter: MyPageAdapter, getData: Flow<PagingData<DealProduct>>) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    viewModel.getMyPageProduct().collectLatest { pagingData ->
-                        pagingAdapter.submitData(pagingData)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun productLikeSubmitData(pagingAdapter: MyPageAdapter) {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.getLikeProduct().collectLatest { pagingData ->
+                    getData.collectLatest { pagingData ->
                         pagingAdapter.submitData(pagingData)
                     }
                 }

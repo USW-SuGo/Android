@@ -14,4 +14,8 @@ class MyPageRemoteDataSource(private val apiService:SugoRetrofit):MyPageDataSour
     override suspend fun upPost(productPostId:Long): Response<Success> {
         return apiService.upPost(ProductPostId(productPostId) )
     }
+
+    override suspend fun deletePost(productPostId: Long): Response<Success> {
+        return apiService.deletePost(ProductPostId(productPostId) )
+    }
 }

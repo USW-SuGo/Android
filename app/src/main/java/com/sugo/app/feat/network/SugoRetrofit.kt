@@ -83,6 +83,12 @@ interface SugoRetrofit {
         @Body productPostId: ProductPostId
     ): Response<Success>
 
+
+    @HTTP(method = "DELETE", path="/post", hasBody = true)
+    suspend fun deletePost(
+        @Body productPostId: ProductPostId
+    ): Response<Success>
+
     class TokenAuthenticator : Authenticator {
         override fun authenticate(route: Route?, response: okhttp3.Response): Request? {
             val refreshTokenRequest = App.prefs.getRefreshToken().toString()
