@@ -70,6 +70,11 @@ interface SugoRetrofit {
         @Query("size") size: Int
     ): List<DealProduct>
 
+    @GET("/like-post")
+    suspend fun getLikeProduct(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): List<DealProduct>
     @GET("/user")
     suspend fun getMyPage():Response<MyPage>
 

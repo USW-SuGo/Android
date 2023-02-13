@@ -1,6 +1,7 @@
 package com.sugo.app.feat.ui.common
 
 import android.content.Context
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sugo.app.feat.ServiceLocator
