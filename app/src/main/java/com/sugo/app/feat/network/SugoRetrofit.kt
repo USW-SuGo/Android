@@ -94,6 +94,16 @@ interface SugoRetrofit {
         @Body productPostId: ProductPostId
     ): Response<Success>
 
+    @POST("/user/check-loginId")
+    suspend fun checkLoginId(
+        @Body   loginId: LoginId
+    ): Response<Success>
+
+    @POST("/user/check-email")
+    suspend fun checkEmail(
+        @Body   email: LoginId
+    ): Response<Success>
+
     class TokenAuthenticator : Authenticator {
         override fun authenticate(route: Route?, response: okhttp3.Response): Request? {
             val refreshTokenRequest = App.prefs.getRefreshToken().toString()
