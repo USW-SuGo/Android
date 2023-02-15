@@ -1,31 +1,27 @@
 package com.sugo.app.feat.ui.mypage
 
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.sugo.app.R
-import com.sugo.app.databinding.FragmentMypageBinding
 import com.sugo.app.databinding.MypageProductDialogBinding
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+interface BottomSheetListner {
+    fun onBottomSheetResult()
+}
 
-
-class CustomDialog(context: Context, val id: Long) : BottomSheetDialogFragment() {
-    private val viewModel: MyPageViewModel by viewModels { ViewModelFactory(requireContext()) }
-    private val mContext: Context = context
+class BottomSheetDialog(context: Context, val id: Long) : BottomSheetDialogFragment(),
+    CheckDialogListener {
     private lateinit var binding: MypageProductDialogBinding
+    private val viewModel: MyPageViewModel by viewModels { ViewModelFactory(requireContext()) }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,28 +33,37 @@ class CustomDialog(context: Context, val id: Long) : BottomSheetDialogFragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onClick(binding.tvDealComplete, "deal")
+        onClick(binding.tvDealDelete,"delete")
+    }
 
-
-        binding.tvDealComplete.setOnClickListener {
+    private var checkDialogListener: CheckDialogListener? = null
+//    fun setCheckDialogListener2(listener: CheckDialogListener) {
+//        this.listener = listener
+//    }
+    private var bottomSheetListner: BottomSheetListner? = null
+    fun setCheckDialogListener2(listener: BottomSheetListner) {
+        this.bottomSheetListner= listener
+    }
+    private fun onClick(textView: TextView, type: String) {
+        textView.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 val job = async {
-                    val bottomSheetFragment = CheckDialog(requireContext(), id)
+                    val bottomSheetFragment = CheckDialog(requireContext(), id, type)
+                    bottomSheetFragment.setCheckDialogListener(this@BottomSheetDialog)
                     bottomSheetFragment.show(parentFragmentManager, "childFragmentManager")
                 }
                 job.await()
                 dismiss()
-            }
-        }
+                checkDialogListener?.onCheckDialogResult()
 
-        binding.tvDealDelete.setOnClickListener {
-            viewLifecycleOwner.lifecycleScope.launch {
-                val job = async {
-                    val bottomSheetFragment = CheckDialog(requireContext(), id)
-                    bottomSheetFragment.show(parentFragmentManager, "childFragmentManager")
-                }
-                job.await()
-                dismiss()
             }
         }
     }
+
+    override fun onCheckDialogResult() {
+        Log.d("바텀시트","test")
+        bottomSheetListner?.onBottomSheetResult()
+    }
+
 }

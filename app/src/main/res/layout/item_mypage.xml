@@ -67,6 +67,7 @@
             tools:text="전자기기" />
 
         <TextView
+            android:visibility="visible"
             android:onClick="@{()->viewModel.showdialog(dealproduct.id)}"
             android:id="@+id/textViewOptions"
             android:layout_width="30dp"
@@ -120,6 +121,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_deal_product_nickname"
             tools:text="100,100원" />
+
 
         <View
             android:id="@+id/item_line1"
