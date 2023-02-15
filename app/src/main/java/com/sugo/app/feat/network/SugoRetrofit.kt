@@ -89,6 +89,11 @@ interface SugoRetrofit {
         @Body productPostId: ProductPostId
     ): Response<Success>
 
+    @POST("/post/close")
+    suspend fun postClose(
+        @Body productPostId: ProductPostId
+    ): Response<Success>
+
     class TokenAuthenticator : Authenticator {
         override fun authenticate(route: Route?, response: okhttp3.Response): Request? {
             val refreshTokenRequest = App.prefs.getRefreshToken().toString()

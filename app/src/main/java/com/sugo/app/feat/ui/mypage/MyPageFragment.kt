@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class MyPageFragment : Fragment() {
+class MyPageFragment : Fragment(),BottomSheetListner{
     private val viewModel: MyPageViewModel by viewModels { ViewModelFactory(requireContext()) }
     private lateinit var binding: FragmentMypageBinding
     override fun onCreateView(
@@ -41,12 +41,12 @@ class MyPageFragment : Fragment() {
         val pagingAdapter = initAdapter()
         //이부분을  VM 으로 옮기기 뷰엣허 클릭시 센변경을 하는방법을 모르곘네  셀렉터인가 아닌가?
         binding.tvUserWrite.setOnClickListener {
-            productSubmitData(pagingAdapter,viewModel.getMyPageProduct())
+            productSubmitData(pagingAdapter, viewModel.getMyPageProduct())
             binding.tvUserWrite.setTextColor(Color.parseColor("#000000"))
             binding.tvLikeWrite.setTextColor(Color.parseColor("#419e3a"))
         }
         binding.tvLikeWrite.setOnClickListener {
-            productSubmitData(pagingAdapter,viewModel.getLikeProduct())
+            productSubmitData(pagingAdapter, viewModel.getLikeProduct())
             binding.tvUserWrite.setTextColor(Color.parseColor("#419e3a"))
             binding.tvLikeWrite.setTextColor(Color.parseColor("#000000"))
         }
@@ -56,23 +56,23 @@ class MyPageFragment : Fragment() {
 
     private fun openDailog() {
         viewModel.openDealEvent1.observe(viewLifecycleOwner, EventObserver {
-            val bottomSheetFragment = CustomDialog(requireContext(),it)
-            Log.d("productPostId1", it.toString())
-            bottomSheetFragment.show(childFragmentManager, "childFragmentManager")
+            val bottomSheetFragment = BottomSheetDialog(requireContext(), it)
+            bottomSheetFragment.setCheckDialogListener2(this@MyPageFragment)
+            bottomSheetFragment.show(parentFragmentManager, "childFragmentManager")
         })
-
     }
 
     private fun initAdapter(): MyPageAdapter {
         val pagingAdapter = MyPageAdapter(viewModel)
         binding.rvMypage.adapter = pagingAdapter
-        productSubmitData(pagingAdapter,viewModel.getMyPageProduct())
+        productSubmitData(pagingAdapter, viewModel.getMyPageProduct())
         return pagingAdapter
     }
 
     private fun setUser() {
         viewModel.myPage.observe(viewLifecycleOwner) {
             binding.mypage = it
+
         }
     }
 
@@ -94,13 +94,21 @@ class MyPageFragment : Fragment() {
     private fun productSubmitData(pagingAdapter: MyPageAdapter, getData: Flow<PagingData<DealProduct>>) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    getData.collectLatest { pagingData ->
-                        pagingAdapter.submitData(pagingData)
+                launch { getData.collectLatest { pagingData -> pagingAdapter.submitData(pagingData)
                     }
                 }
             }
         }
     }
 
+    override fun onBottomSheetResult() {
+        val pagingAdapter = initAdapter()
+        productSubmitData(pagingAdapter, viewModel.getMyPageProduct())
+    }
+
+    /**
+     * MyPageFragment 에서 CheckDialog 열고 클릭이벤트 상속받기
+     * ViewModel을통하여 BottomSheetDialog 선택값을 라이브데이터에 저장
+     * 다이얼로그를 사실상 2번 호출한다.
+     * **/
 }

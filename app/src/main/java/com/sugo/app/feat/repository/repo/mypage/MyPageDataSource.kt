@@ -9,4 +9,5 @@ interface MyPageDataSource {
     suspend fun getMyPage():Response<MyPage>
     suspend fun upPost(productPostId:Long):Response<Success>
     suspend fun deletePost(productPostId:Long):Response<Success>
+    suspend fun postClose(productPostId:Long):Response<Success>
 }

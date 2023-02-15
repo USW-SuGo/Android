@@ -1,25 +1,15 @@
 package com.sugo.app.feat.ui.mypage
 
-import android.content.Context
-import android.graphics.Color
-import android.util.Log
-import android.view.Menu
-import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import com.sugo.app.R
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.model.MyPage
 import com.sugo.app.feat.repository.repo.mainpage.ProductPagingRepositoryImpl
 import com.sugo.app.feat.repository.repo.mypage.MyPageRepository
 import com.sugo.app.feat.ui.common.Event
-import com.sugo.app.feat.ui.common.TokenHeadersText
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -58,7 +48,10 @@ class MyPageViewModel(
         val response = myPageRepository.upPost(productPostId)
     }
     fun deletePost(productPostId: Long) = viewModelScope.launch {
-        val response = myPageRepository.deletePost(productPostId)
+        val response = myPageRepository.deletePost(productPostId).isSuccessful
+    }
+    fun postClose(productPostId: Long) = viewModelScope.launch {
+        val response = myPageRepository.postClose(productPostId)
     }
 
     private fun getMyPage() = viewModelScope.launch {

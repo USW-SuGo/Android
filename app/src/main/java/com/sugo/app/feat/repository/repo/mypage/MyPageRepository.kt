@@ -16,4 +16,7 @@ class MyPageRepository(private val myPageDataSource: MyPageRemoteDataSource) {
     suspend fun deletePost(productPostId: Long): Response<Success> {
         return myPageDataSource.deletePost(productPostId)
     }
+    suspend fun postClose(productPostId: Long): Response<Success> {
+        return myPageDataSource.postClose(productPostId)
+    }
 }
