@@ -101,7 +101,7 @@ interface SugoRetrofit {
 
     @POST("/user/check-email")
     suspend fun checkEmail(
-        @Body   email: LoginId
+        @Body   email: email
     ): Response<Success>
 
     class TokenAuthenticator : Authenticator {

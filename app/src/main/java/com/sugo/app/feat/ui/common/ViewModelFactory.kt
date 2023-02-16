@@ -8,6 +8,8 @@ import com.sugo.app.feat.ServiceLocator
 import com.sugo.app.feat.repository.repo.Token.TokenPreferenceManager
 import com.sugo.app.feat.repository.repo.detail.DetailRemoteDataSource
 import com.sugo.app.feat.repository.repo.detail.DetailRepository
+import com.sugo.app.feat.repository.repo.join.JoinRemoteDataSource
+import com.sugo.app.feat.repository.repo.join.JoinRepository
 import com.sugo.app.feat.repository.repo.login.LoginRemoteDataSource
 import com.sugo.app.feat.repository.repo.login.LoginRepository
 import com.sugo.app.feat.repository.repo.mainpage.ProductPagingRepositoryImpl
@@ -16,6 +18,7 @@ import com.sugo.app.feat.repository.repo.mypage.MyPageRepository
 import com.sugo.app.feat.ui.deal.ProductPagingViewModel
 import com.sugo.app.feat.ui.deal.SearchPagingViewModel
 import com.sugo.app.feat.ui.dealdetail.DetailViewModel
+import com.sugo.app.feat.ui.join.JoinViewModel
 import com.sugo.app.feat.ui.login.LoginViewModel
 import com.sugo.app.feat.ui.mypage.MyPageViewModel
 
@@ -44,6 +47,11 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                 val repository =
                     LoginRepository(LoginRemoteDataSource(ServiceLocator.provideTokenApiClient()))
                 LoginViewModel(repository, TokenPreferenceManager(context)) as T
+            }
+            modelClass.isAssignableFrom(JoinViewModel::class.java) ->{
+                val repository =
+                    JoinRepository(JoinRemoteDataSource(ServiceLocator.provideApiClient()))
+                JoinViewModel(repository) as T
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) ->{
                 val repository =

@@ -14,9 +14,3 @@ class LoginRemoteDataSource(private val apiService:SugoRetrofit):LoginDataSource
         return apiService.findlogin(email(email))
     }
 }
-private fun TokenHeadersText(originalHeaders: String?): Pair<String, String> {
-    val tempHeaders = originalHeaders!!.split(", ")
-    val accessToken = tempHeaders[1].replace("}", "")
-    val refreshToken = tempHeaders[0].replace("{", "")
-    return Pair(accessToken, refreshToken)
-}
