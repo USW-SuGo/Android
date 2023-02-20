@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="loginviewmodel"
+            type="com.sugo.app.feat.ui.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_login_tilte"
+            style="@style/PretendardBold.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:gravity="center"
+            android:text="SUGO"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_login_id"
+            style="@style/PretendardBold.Middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:text="아이디"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_tilte" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etv_login_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:hint="ID"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_id" />
+
+        <TextView
+            android:id="@+id/tv_login_pwd"
+            style="@style/PretendardBold.Middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="비밀번호"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etv_login_id" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etv_login_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:hint="ID"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login_pwd" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            style="@style/PretendardBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/sugreen"
+            android:onClick="@{()-> loginviewmodel.login(etvLoginId.getText().toString(),etvLoginPwd.getText().toString())}"
+            android:text="로그인"
+            app:layout_constraintTop_toBottomOf="@+id/etv_login_pwd" />
+
+        <TextView
+            android:id="@+id/tv_find_pwd"
+            style="@style/PretendardBold.Middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="10dp"
+            android:text="비밀번호 찾기"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+        <TextView
+            android:id="@+id/tv_find_id"
+            style="@style/PretendardBold.Middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="10dp"
+            android:text="아이디 찾기"
+            app:layout_constraintEnd_toStartOf="@id/tv_find_pwd"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_assign"
+            style="@style/PretendardBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="8dp"
+            android:background="@color/white"
+            android:text="회원가입"
+            app:layout_constraintTop_toBottomOf="@id/tv_find_pwd" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
