@@ -1,22 +1,21 @@
-package com.sugo.app.feat.ui.join
+package com.sugo.app.feat.ui.join.inputUser
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sugo.app.feat.model.LoginId
-import com.sugo.app.feat.model.email
+import com.sugo.app.feat.model.*
 import com.sugo.app.feat.repository.repo.join.JoinRepository
+import com.sugo.app.feat.ui.common.Event
 import kotlinx.coroutines.launch
-import java.util.regex.Pattern
 
 
 class JoinViewModel(val joinRepository: JoinRepository) : ViewModel() {
 
     val _text = MutableLiveData<String>()
-
     //    val text: LiveData<String> = _text
     val _text2 = MutableLiveData<String>()
 //    val text2: LiveData<String> = _text2
@@ -33,6 +32,20 @@ class JoinViewModel(val joinRepository: JoinRepository) : ViewModel() {
     private val _introPwd = MutableLiveData<String>()
     val introPwd: LiveData<String> = _introPwd
 
+    private val _openMajorEvent = MutableLiveData<Event<String>>()
+    val openMajorEvent: LiveData<Event<String>> = _openMajorEvent
+
+    fun openMajor() {
+        _openMajorEvent.value = Event("test")
+    }
+
+    private val _department = MutableLiveData<String>()
+    val department :LiveData<String> = _department
+
+    fun setDepartmet(getDepartment:String){
+        _department.value=getDepartment
+        Log.d("department",_department.value.toString())
+    }
     fun checkLoginId(loginId: LoginId) = viewModelScope.launch {
         val response = joinRepository.checkLoginId(loginId)
         _introId.value =
@@ -46,7 +59,7 @@ class JoinViewModel(val joinRepository: JoinRepository) : ViewModel() {
     }
 
     fun checkPwd() = viewModelScope.launch {
-        if (isValidPassword(_pwdText.value!!) && _pwdCheckText.value?.let { isValidPassword(it) } == true) {
+        if (_pwdText.value.let { it?.let { it1 -> isValidPassword(it1) } ==true } && _pwdCheckText.value?.let { isValidPassword(it) } == true) {
             _introPwd.value = "2개의 비밀번호가 일치하지 않습니다."
             if (_pwdText.value == _pwdCheckText.value) _introPwd.value = "2개의 비밀번호가 일치합니다."
         } else _introPwd.value = "대문자와 숫자를 이용하세요"

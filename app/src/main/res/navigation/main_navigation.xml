@@ -33,4 +33,5 @@
         android:name="com.sugo.app.feat.ui.dealdetail.DealDetailFragment"
         android:label="DealDetailFragment" />
 
+
 </navigation>

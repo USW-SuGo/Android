@@ -1,6 +1,7 @@
 package com.sugo.app.feat.model
 
 import com.google.gson.annotations.SerializedName
+import kotlin.String
 
 data class LoginFormat(
     val loginId : String,

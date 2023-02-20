@@ -1,134 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tv_join_title"
-        style="@style/PretendardBold.Size20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="회원가입"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.sugo.app.feat.ui.join.inputUser.JoinViewModel" />
+        <variable
+            name="usersign"
+            type="com.sugo.app.feat.model.UserSign" />
+    </data>
 
-    <TextView
-        android:id="@+id/tv_email_Intro"
-        style="@style/PretendardBold.Size20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:text="학교 이메일"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_join_title" />
-
-    <TextView
-        android:id="@+id/tv_email_detail_intro"
-        style="@style/PretendardSemiBold.16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="재학생 인증이 필요하므로 정확히 입력해주세요"
-        app:layout_constraintStart_toStartOf="@id/tv_email_Intro"
-        app:layout_constraintTop_toBottomOf="@id/tv_email_Intro" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/etv_email"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="Email"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_email_detail_intro" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_id_intro"
-        style="@style/PretendardBold.Size20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="아이디"
-        app:layout_constraintStart_toStartOf="@id/tv_email_Intro"
-        app:layout_constraintTop_toBottomOf="@id/etv_email" />
+        <TextView
+            android:id="@+id/tv_join_title"
+            style="@style/PretendardBold.Size20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="회원가입"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/etv_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="Id"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_id_intro" />
+        <TextView
+            android:id="@+id/tv_email_Intro"
+            style="@style/PretendardBold.Size20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:text="학교 이메일"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_join_title" />
 
-    <TextView
-        android:id="@+id/tv_pwd_intro"
-        style="@style/PretendardBold.Size20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="비밀번호"
-        app:layout_constraintStart_toStartOf="@id/etv_id"
-        app:layout_constraintTop_toBottomOf="@id/etv_id" />
 
-    <TextView
-        android:id="@+id/tv_pwd"
-        style="@style/PretendardSemiBold.16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="영문/숫자/특수문자 3가지 조합 (8~20자)"
-        app:layout_constraintStart_toStartOf="@id/tv_email_Intro"
-        app:layout_constraintTop_toBottomOf="@id/tv_pwd_intro" />
+        <TextView
+            android:id="@+id/tv_email_detail_intro"
+            style="@style/PretendardSemiBold.16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="재학생 인증이 필요하므로 정확히 입력해주세요"
+            app:layout_constraintStart_toStartOf="@id/tv_email_Intro"
+            app:layout_constraintTop_toBottomOf="@id/tv_email_Intro" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/etv_pwd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="비밀번호"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_pwd" />
+        <EditText
+            android:id="@+id/etv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Email"
+            android:text="@{usersign.email}"
+            app:addTextChangedListener="@{viewmodel.onEditTextWatcher()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_email_detail_intro" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/etv_pwd_check"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="비밀번호 확인"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etv_pwd" />
+        <TextView
+            android:id="@+id/tv_email_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewmodel.introEmail}"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/etv_email"
+            app:layout_constraintTop_toBottomOf="@+id/etv_email"
+            tools:text="1111111111111111111111111111" />
 
-    <CheckBox
-        android:id="@+id/ck_agree"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_next"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/tv_id_intro"
+            style="@style/PretendardBold.Size20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="아이디"
+            app:layout_constraintStart_toStartOf="@id/tv_email_Intro"
+            app:layout_constraintTop_toBottomOf="@id/tv_email_intro" />
 
-    <TextView
-        style="@style/PretendardBold.Middle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="수고 이용약관 및 개인정보 처리방침에 동의합니다."
-        app:layout_constraintBottom_toBottomOf="@id/ck_agree"
-        app:layout_constraintStart_toEndOf="@+id/ck_agree" />
+        <EditText
+            android:id="@+id/etv_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Id"
+            android:text="@{usersign.loginId}"
+            app:addTextChangedListener="@{viewmodel.onEditTextWatcherId()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_id_intro" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_next"
-        style="@style/PretendardBold.detailTilte"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="30dp"
-        android:background="@color/white"
-        android:text="다음"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <TextView
+            android:id="@+id/tv_check_id_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewmodel.introid}"
+            app:layout_constraintStart_toStartOf="@+id/etv_id"
+            app:layout_constraintTop_toBottomOf="@+id/etv_id"
+            tools:text="Sadasd" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_pwd_intro"
+            style="@style/PretendardBold.Size20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="비밀번호"
+            app:layout_constraintStart_toStartOf="@id/etv_id"
+            app:layout_constraintTop_toBottomOf="@id/tv_check_id_intro" />
+
+        <TextView
+            android:id="@+id/tv_pwd"
+            style="@style/PretendardSemiBold.16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="영문/숫자/특수문자 3가지 조합 (8~20자)"
+            app:layout_constraintStart_toStartOf="@id/tv_email_Intro"
+            app:layout_constraintTop_toBottomOf="@id/tv_pwd_intro" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etv_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="비밀번호"
+            android:text="@{usersign.password}"
+            app:addTextChangedListener="@{viewmodel.onEditTextWatcherPwd()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_pwd" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etv_pwd_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="비밀번호 확인"
+            android:text="@={viewmodel._pwdCheckText}"
+            app:addTextChangedListener="@{viewmodel.onEditTextWatcherPwd()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etv_pwd" />
+
+        <TextView
+            android:id="@+id/tv_check_pwd_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewmodel.introid}"
+            app:layout_constraintStart_toStartOf="@+id/etv_pwd_check"
+            app:layout_constraintTop_toBottomOf="@+id/etv_pwd_check"
+            tools:text="Sadasd"
+            />
+
+        <CheckBox
+            android:id="@+id/ck_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="120dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_check_pwd_intro" />
+
+        <TextView
+            style="@style/PretendardBold.Middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수고 이용약관 및 개인정보 처리방침에 동의합니다."
+            app:layout_constraintBottom_toBottomOf="@id/ck_agree"
+            app:layout_constraintStart_toEndOf="@+id/ck_agree" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            style="@style/PretendardBold.detailTilte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
+            android:background="@color/white"
+            android:text="다음"
+            android:onClick="@{()->viewmodel.openMajor()}"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

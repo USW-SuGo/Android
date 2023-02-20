@@ -6,7 +6,7 @@ import com.sugo.app.feat.network.SugoRetrofit
 import retrofit2.Response
 
 class LoginRemoteDataSource(private val apiService:SugoRetrofit):LoginDataSource {
-    override suspend fun login(id: String,passWord: String): Response<Unit> {
+    override suspend fun login(id: String, passWord: String): Response<Unit> {
         return apiService.login(LoginFormat(id,passWord))
     }
 

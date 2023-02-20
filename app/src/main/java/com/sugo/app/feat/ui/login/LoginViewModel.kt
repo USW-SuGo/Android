@@ -9,6 +9,8 @@ import com.sugo.app.feat.App
 import com.sugo.app.feat.network.SugoRetrofit
 import com.sugo.app.feat.repository.repo.Token.TokenPreferenceManager
 import com.sugo.app.feat.repository.repo.login.LoginRepository
+import com.sugo.app.feat.ui.common.Event
+import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.TokenHeadersText
 import kotlinx.coroutines.launch
 
@@ -16,6 +18,11 @@ class LoginViewModel(
     val loginRepository: LoginRepository,
     val tokenPreferenceManager: TokenPreferenceManager
 ) : ViewModel() {
+
+    private val _openDealEvent = MutableLiveData<Event<Long>>()
+    val openDealEvent: LiveData<Event<Long>> = _openDealEvent
+
+
 
     fun login(id: String, passWord: String) = viewModelScope.launch {
         val response = loginRepository.login(id, passWord)

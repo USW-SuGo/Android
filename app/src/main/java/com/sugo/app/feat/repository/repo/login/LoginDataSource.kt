@@ -5,7 +5,7 @@ import retrofit2.Response
 
 interface LoginDataSource {
 
-    suspend fun login(id: String,passWord: String) :Response<Unit>
+    suspend fun login(id: String, passWord: String) :Response<Unit>
     suspend fun findlogin(email: String) :Response<Success>
 
 

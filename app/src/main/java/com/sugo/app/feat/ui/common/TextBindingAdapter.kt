@@ -9,7 +9,7 @@ import java.text.DecimalFormat
 
 @BindingAdapter("price")
 fun applyPriceFormat(view: TextView, price: Int) {
-    val decimalFormat = DecimalFormat("#,#")
+    val decimalFormat = DecimalFormat("#,###")
     view.text = view.context.getString(R.string.product_price, decimalFormat.format(price))
 }
 
