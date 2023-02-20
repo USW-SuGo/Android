@@ -14,28 +14,6 @@ class JoinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_join)
-        binding.viewmodel=viewModel
-//        IntroChange()
-//        binding.btnNext.setOnClickListener {
-//            val fragment1 = SelectMajorFragment()
-//            supportFragmentManager
-//                .beginTransaction()
-//                .add(R.id.main_container2, fragment1)
-//                .commit()
-//        }
+        binding.viewmodel = viewModel
     }
-//    private fun IntroChange() {
-//        viewModel.introid.observe( this) {
-//            Log.d("tvIdintro", it)
-//            binding.tvCheckIdIntro.text = it
-//        }
-//        viewModel.introEmail.observe( this) {
-//            Log.d("tvEmailintro",it)
-//            binding.tvEmailIntro.text = it
-//        }
-//        viewModel.introPwd.observe( this) {
-//            Log.d("tvPwdintro",it)
-//            binding.tvCheckPwdIntro.text = it
-//        }
-//    }
 }

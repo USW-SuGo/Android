@@ -5,6 +5,3 @@ import com.google.gson.annotations.SerializedName
 data class Department(
     @SerializedName("departments") val departments: ArrayList<String>
 )
-data class Depart(
-    val depart : String
-)

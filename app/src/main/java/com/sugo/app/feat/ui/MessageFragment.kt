@@ -30,22 +30,3 @@ class MessageFragment : Fragment() {
             }
     }
 }
-//    : Fragment() {
-//    private val viewModel: LoginViewModel by viewModels { ViewModelFactory(requireContext()) }
-//    private lateinit var binding: com.sugo.app.databinding.FragmentLoginBinding
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        binding = FragmentLoginBinding.inflate(inflater, container, false)
-//        return binding.root
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        binding.loginviewmodel = viewModel
-//        Log.d("Test", stringPreferencesKey("access_token").toString())
-//
-//    }
-//}

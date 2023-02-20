@@ -16,9 +16,7 @@ import kotlinx.coroutines.launch
 class JoinViewModel(val joinRepository: JoinRepository) : ViewModel() {
 
     val _text = MutableLiveData<String>()
-    //    val text: LiveData<String> = _text
     val _text2 = MutableLiveData<String>()
-//    val text2: LiveData<String> = _text2
 
     val _pwdText = MutableLiveData<String>()
     val _pwdCheckText = MutableLiveData<String>()
@@ -39,8 +37,18 @@ class JoinViewModel(val joinRepository: JoinRepository) : ViewModel() {
         _openMajorEvent.value = Event("test")
     }
 
+    private val _openAuthNum = MutableLiveData<Event<String>>()
+    val openAuthNum: LiveData<Event<String>> = _openAuthNum
+
+    fun openAuthNum() {
+        _openAuthNum.value = Event("test2")
+    }
+
     private val _department = MutableLiveData<String>()
     val department :LiveData<String> = _department
+
+   val _authNum = MutableLiveData<String>()
+
 
     fun setDepartmet(getDepartment:String){
         _department.value=getDepartment

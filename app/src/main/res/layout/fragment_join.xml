@@ -7,9 +7,7 @@
         <variable
             name="viewmodel"
             type="com.sugo.app.feat.ui.join.inputUser.JoinViewModel" />
-        <variable
-            name="usersign"
-            type="com.sugo.app.feat.model.UserSign" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,7 +53,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:hint="Email"
-            android:text="@{usersign.email}"
+            android:text="@{viewmodel._text}"
             app:addTextChangedListener="@{viewmodel.onEditTextWatcher()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_email_detail_intro" />
@@ -87,7 +85,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:hint="Id"
-            android:text="@{usersign.loginId}"
+            android:text="@{viewmodel._text2}"
             app:addTextChangedListener="@{viewmodel.onEditTextWatcherId()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_id_intro" />
@@ -127,7 +125,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:hint="비밀번호"
-            android:text="@{usersign.password}"
+            android:text="@={viewmodel._pwdText}"
             app:addTextChangedListener="@{viewmodel.onEditTextWatcherPwd()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_pwd" />
