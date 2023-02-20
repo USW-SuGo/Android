@@ -1,7 +1,6 @@
 package com.sugo.app.feat.ui.common
 
 import android.content.Context
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sugo.app.feat.ServiceLocator
@@ -18,7 +17,7 @@ import com.sugo.app.feat.repository.repo.mypage.MyPageRepository
 import com.sugo.app.feat.ui.deal.ProductPagingViewModel
 import com.sugo.app.feat.ui.deal.SearchPagingViewModel
 import com.sugo.app.feat.ui.dealdetail.DetailViewModel
-import com.sugo.app.feat.ui.join.JoinViewModel
+import com.sugo.app.feat.ui.join.inputUser.JoinViewModel
 import com.sugo.app.feat.ui.login.LoginViewModel
 import com.sugo.app.feat.ui.mypage.MyPageViewModel
 
