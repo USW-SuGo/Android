@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/join_navigation"
+    app:startDestination="@id/joinInputFragment">
+
+    <fragment
+        android:id="@+id/joinInputFragment"
+        android:name="com.sugo.app.feat.ui.join.inputUser.JoinInputFragment"
+        android:label="JoinInputFragment" >
+        <action
+            android:id="@+id/action_joinInputFragment_to_selectMajorFragment"
+            app:destination="@id/selectMajorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectMajorFragment"
+        android:name="com.sugo.app.feat.ui.join.inputDepartment.SelectMajorFragment"
+        android:label="SelectMajorFragment" >
+        <action
+            android:id="@+id/action_selectMajorFragment_to_emailAuthFragment"
+            app:destination="@id/emailAuthFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailAuthFragment"
+        android:name="com.sugo.app.feat.ui.join.EmailAuthFragment"
+        android:label="EmailAuthFragment" />
+
+</navigation>

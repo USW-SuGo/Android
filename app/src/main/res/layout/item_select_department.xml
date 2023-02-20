@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.sugo.app.feat.ui.join.inputUser.JoinViewModel" />
+        <variable
+            name="department"
+            type="com.sugo.app.feat.model.Department" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:onClick="@{()->viewmodel.setDepartmet(tvSelectDepartment.getText().toString())}"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_select_department"
+            style="@style/PretendardBold.Size20"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="학과선택하기" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
