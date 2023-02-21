@@ -49,5 +49,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_select_department"
             tools:text="선택결과" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_departmet_check"
+            android:id="@+id/btn_nextgo"
+            android:text="회원가입"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

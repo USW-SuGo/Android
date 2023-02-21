@@ -8,6 +8,7 @@
             name="viewmodel"
             type="com.sugo.app.feat.ui.join.inputUser.JoinViewModel" />
 
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -178,7 +179,7 @@
             android:layout_marginBottom="30dp"
             android:background="@color/white"
             android:text="다음"
-            android:onClick="@{()->viewmodel.openMajor()}"
+            android:onClick="@{()->viewmodel.openMajor(etvEmail.getText().toString(),etvId.getText().toString(),etvPwd.getText().toString())}"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

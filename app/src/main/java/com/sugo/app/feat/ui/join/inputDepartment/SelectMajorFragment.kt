@@ -13,6 +13,7 @@ import com.google.gson.Gson
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentSelectMajorBinding
 import com.sugo.app.feat.model.Department
+import com.sugo.app.feat.model.UserSign
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.join.AssetLoader
@@ -33,7 +34,9 @@ class SelectMajorFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel=viewModel
-
+        val productId = requireArguments().get("userSign")
+        Log.d("SelectMajorFragment",productId.toString())
+        val a = productId.toString().split(",")
         val asserLoader = AssetLoader(requireContext())
         val departmentAssetLoader = asserLoader.getJsonString("department.json")
         if (!departmentAssetLoader.isNullOrEmpty()) {
@@ -43,17 +46,26 @@ class SelectMajorFragment: Fragment() {
                 submitList(departmentAsset.departments)
             }
         }
+
         viewModel.department.observe(viewLifecycleOwner){
             binding.tvDepartmetCheck.text = it
             Log.d("  binding.tvDepartmetCheck.text = it",it.toString())
         }
+
+        //임시
+        binding.btnNextgo.setOnClickListener{
+            viewModel.join(UserSign(a[1],"${a[0].replace("[","")}@suwon.ac.kr",a[2].replace("]",""),viewModel.department.value!!))
+        }
         setNavigation()
+
+
     }
 
     private fun setNavigation() {
         viewModel.openAuthNum.observe(viewLifecycleOwner, EventObserver {
             Log.d("AuthNum",it.toString())
             openSelect(it)
+
         })
     }
 

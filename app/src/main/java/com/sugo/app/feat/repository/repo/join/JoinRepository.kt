@@ -1,8 +1,6 @@
 package com.sugo.app.feat.repository.repo.join
 
-import com.sugo.app.feat.model.LoginId
-import com.sugo.app.feat.model.Success
-import com.sugo.app.feat.model.email
+import com.sugo.app.feat.model.*
 import retrofit2.Response
 
 class JoinRepository(private val joinDataSource: JoinRemoteDataSource) {
@@ -11,6 +9,9 @@ class JoinRepository(private val joinDataSource: JoinRemoteDataSource) {
     }
     suspend fun checkEmail(email: email): Response<Success> {
         return joinDataSource.checkEmail(email)
+    }
+    suspend fun join(userSign: UserSign): Response<JoinCheck> {
+        return joinDataSource.join(userSign)
     }
 
 

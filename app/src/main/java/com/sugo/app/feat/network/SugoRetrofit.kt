@@ -104,6 +104,11 @@ interface SugoRetrofit {
         @Body   email: email
     ): Response<Success>
 
+    @POST("/user/join")
+    suspend fun join(
+        @Body  userSign: UserSign
+    ): Response<JoinCheck>
+
     class TokenAuthenticator : Authenticator {
         override fun authenticate(route: Route?, response: okhttp3.Response): Request? {
             val refreshTokenRequest = App.prefs.getRefreshToken().toString()

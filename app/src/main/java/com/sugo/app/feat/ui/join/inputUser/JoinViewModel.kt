@@ -15,6 +15,8 @@ import kotlinx.coroutines.launch
 
 class JoinViewModel(val joinRepository: JoinRepository) : ViewModel() {
 
+
+
     val _text = MutableLiveData<String>()
     val _text2 = MutableLiveData<String>()
 
@@ -30,11 +32,11 @@ class JoinViewModel(val joinRepository: JoinRepository) : ViewModel() {
     private val _introPwd = MutableLiveData<String>()
     val introPwd: LiveData<String> = _introPwd
 
-    private val _openMajorEvent = MutableLiveData<Event<String>>()
-    val openMajorEvent: LiveData<Event<String>> = _openMajorEvent
+    private val _openMajorEvent = MutableLiveData<Event<List<String>>>()
+    val openMajorEvent: LiveData<Event<List<String>>> = _openMajorEvent
 
-    fun openMajor() {
-        _openMajorEvent.value = Event("test")
+    fun openMajor(a: String, b: String, c: String) {
+        _openMajorEvent.value = Event(listOf(a, b, c))
     }
 
     private val _openAuthNum = MutableLiveData<Event<String>>()
@@ -45,15 +47,15 @@ class JoinViewModel(val joinRepository: JoinRepository) : ViewModel() {
     }
 
     private val _department = MutableLiveData<String>()
-    val department :LiveData<String> = _department
+    val department: LiveData<String> = _department
 
-   val _authNum = MutableLiveData<String>()
+    val _authNum = MutableLiveData<String>()
 
-
-    fun setDepartmet(getDepartment:String){
-        _department.value=getDepartment
-        Log.d("department",_department.value.toString())
+    fun setDepartmet(getDepartment: String) {
+        _department.value = getDepartment
+        Log.d("department", _department.value.toString())
     }
+
     fun checkLoginId(loginId: LoginId) = viewModelScope.launch {
         val response = joinRepository.checkLoginId(loginId)
         _introId.value =
@@ -66,8 +68,19 @@ class JoinViewModel(val joinRepository: JoinRepository) : ViewModel() {
             if (response.isSuccessful && response.body()?.Exist == true) "중복된 이메일 입니다." else "사용 가능 이메일 입니다."
     }
 
+    fun join(userSign: UserSign) = viewModelScope.launch {
+        val response = joinRepository.join(userSign)
+        if (response.isSuccessful) {
+            Log.d("testJoin", response.body().toString())
+        } else Log.d("testJoin", response.errorBody().toString())
+    }
+
     fun checkPwd() = viewModelScope.launch {
-        if (_pwdText.value.let { it?.let { it1 -> isValidPassword(it1) } ==true } && _pwdCheckText.value?.let { isValidPassword(it) } == true) {
+        if (_pwdText.value.let { it?.let { it1 -> isValidPassword(it1) } == true } && _pwdCheckText.value?.let {
+                isValidPassword(
+                    it
+                )
+            } == true) {
             _introPwd.value = "2개의 비밀번호가 일치하지 않습니다."
             if (_pwdText.value == _pwdCheckText.value) _introPwd.value = "2개의 비밀번호가 일치합니다."
         } else _introPwd.value = "대문자와 숫자를 이용하세요"

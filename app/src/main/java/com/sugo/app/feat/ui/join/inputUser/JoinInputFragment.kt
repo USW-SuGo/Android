@@ -11,10 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentJoinBinding
+import com.sugo.app.feat.model.UserSign
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ViewModelFactory
 
-class JoinInputFragment: Fragment() {
+class JoinInputFragment : Fragment() {
     private val viewModel: JoinViewModel by viewModels { ViewModelFactory(requireContext()) }
     private lateinit var binding: FragmentJoinBinding
     override fun onCreateView(
@@ -33,31 +34,33 @@ class JoinInputFragment: Fragment() {
         setNavigation()
 
     }
+
     private fun setNavigation() {
         viewModel.openMajorEvent.observe(viewLifecycleOwner, EventObserver {
-            Log.d("JoinInput",it.toString())
+            Log.d("JoinInput", it.toString())
             openSelect(it)
         })
     }
 
-    private fun openSelect(userSign:String) {
+    private fun openSelect(userSign: List<String>) {
         findNavController().navigate(
             R.id.action_joinInputFragment_to_selectMajorFragment, bundleOf(
-            "userSign" to userSign
-        )
+                "userSign" to userSign
+            )
         )
     }
+
     private fun IntroChange() {
         viewModel.introid.observe(viewLifecycleOwner) {
             Log.d("tvIdintro", it)
             binding.tvCheckIdIntro.text = it
         }
         viewModel.introEmail.observe(viewLifecycleOwner) {
-            Log.d("tvEmailintro",it)
+            Log.d("tvEmailintro", it)
             binding.tvEmailIntro.text = it
         }
         viewModel.introPwd.observe(viewLifecycleOwner) {
-            Log.d("tvPwdintro",it)
+            Log.d("tvPwdintro", it)
             binding.tvCheckPwdIntro.text = it
         }
     }
