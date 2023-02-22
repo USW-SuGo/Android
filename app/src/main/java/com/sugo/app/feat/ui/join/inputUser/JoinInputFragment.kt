@@ -54,14 +54,26 @@ class JoinInputFragment : Fragment() {
         viewModel.introid.observe(viewLifecycleOwner) {
             Log.d("tvIdintro", it)
             binding.tvCheckIdIntro.text = it
+            btnEnable()
         }
         viewModel.introEmail.observe(viewLifecycleOwner) {
             Log.d("tvEmailintro", it)
             binding.tvEmailIntro.text = it
+             btnEnable()
         }
         viewModel.introPwd.observe(viewLifecycleOwner) {
             Log.d("tvPwdintro", it)
             binding.tvCheckPwdIntro.text = it
+            btnEnable()
+        }
+
+    }
+
+    private fun btnEnable() {
+        if (viewModel.introid.value == "사용 가능 아이디 입니다." && viewModel.introEmail.value == "사용 가능 이메일 입니다."
+            && viewModel.introPwd.value == "2개의 비밀번호가 일치합니다."
+        ) {
+            binding.btnNext.isEnabled = true
         }
     }
 }

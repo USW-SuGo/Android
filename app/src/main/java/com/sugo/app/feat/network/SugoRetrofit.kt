@@ -1,11 +1,14 @@
 package com.sugo.app.feat.network
 
+import android.content.Intent
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.gson.*
 import com.sugo.app.feat.App
 import com.sugo.app.feat.App.Companion.prefs
 import com.sugo.app.feat.ServiceLocator
 import com.sugo.app.feat.model.*
+import com.sugo.app.feat.ui.MainActivity
 import com.sugo.app.feat.ui.common.TokenHeadersText
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -109,6 +112,10 @@ interface SugoRetrofit {
         @Body  userSign: UserSign
     ): Response<JoinCheck>
 
+    @POST("/user/auth")
+    suspend fun checkPayLoad(
+        @Body  PayLoad:PayLoad
+    ): Response<Success>
     class TokenAuthenticator : Authenticator {
         override fun authenticate(route: Route?, response: okhttp3.Response): Request? {
             val refreshTokenRequest = App.prefs.getRefreshToken().toString()
@@ -117,6 +124,7 @@ interface SugoRetrofit {
             val originalHeaders = response1.headers().get("authorization")
             val (accessToken, refreshToken) = TokenHeadersText(originalHeaders)
             return if (handleResponse(accessToken, refreshToken, response1)) {
+                Log.d("실패실패2","실패했어요 토큰")
                 response.request
                     .newBuilder()
                     .header("authorization", accessToken)
@@ -133,11 +141,16 @@ interface SugoRetrofit {
         ) =
             if (response.isSuccessful && response.headers().get("authorization") != null) {
                 prefs.saveAccessToken(accessToken)
+                Log.d("성공성공","실패했어요 토큰")
                 prefs.saveRefreshToken(refreshToken)
                 true
             } else {
+                Log.d("실패실패","실패했어요 토큰")
+                prefs.saveAccessToken("")
+                prefs.saveRefreshToken("")
                 false
             }
+
     }
 
     companion object {
@@ -205,6 +218,7 @@ interface SugoRetrofit {
                     val response = chain.proceed(request)
                     if (response.code == 401) {
                         TokenAuthenticator()
+                        Log.d("TokenAuthenticator","test")
                     }
                     response
                 }
@@ -239,8 +253,3 @@ interface SugoRetrofit {
         fun String?.isJsonArray(): Boolean = this?.startsWith("[") == true && this.endsWith("]")
     }
 }
-
-
-//}
-//
-//}

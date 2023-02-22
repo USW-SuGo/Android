@@ -30,7 +30,7 @@ class SelectMajorFragment: Fragment() {
         binding = FragmentSelectMajorBinding.inflate(inflater, container, false)
         return binding.root
     }
-
+    private var id :Long = 0
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel=viewModel
@@ -52,9 +52,15 @@ class SelectMajorFragment: Fragment() {
             Log.d("  binding.tvDepartmetCheck.text = it",it.toString())
         }
 
-        //임시
+        // 문제점이 많다 클릭이벤트 여기서 하면 안돼잉 해야지삭아
+        //기능 테스트
         binding.btnNextgo.setOnClickListener{
             viewModel.join(UserSign(a[1],"${a[0].replace("[","")}@suwon.ac.kr",a[2].replace("]",""),viewModel.department.value!!))
+            viewModel.id.observe(viewLifecycleOwner){
+                Log.d("  binding.tvDepartmetCheck.text = it",viewModel.id.value!!.id.toString())
+                id=viewModel.id.value!!.id
+            }
+            viewModel.openAuthNum()
         }
         setNavigation()
 
@@ -64,15 +70,15 @@ class SelectMajorFragment: Fragment() {
     private fun setNavigation() {
         viewModel.openAuthNum.observe(viewLifecycleOwner, EventObserver {
             Log.d("AuthNum",it.toString())
-            openSelect(it)
+            openSelect(id)
 
         })
     }
 
-    private fun openSelect(userSign:String) {
+    private fun openSelect(id:Long) {
         findNavController().navigate(
             R.id.action_selectMajorFragment_to_emailAuthFragment, bundleOf(
-                "userSign" to userSign
+                "userSign" to id
             )
         )
     }

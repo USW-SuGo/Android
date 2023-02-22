@@ -14,5 +14,7 @@ class JoinRepository(private val joinDataSource: JoinRemoteDataSource) {
         return joinDataSource.join(userSign)
     }
 
-
+    suspend fun checkPayLoad(payLoad: PayLoad): Response<Success> {
+        return joinDataSource.checkPayLoad(payLoad)
+    }
 }

@@ -16,5 +16,7 @@ class JoinRemoteDataSource(private val apiService:SugoRetrofit):JoinDataSource {
     override suspend fun join(userSign: UserSign): Response<JoinCheck> {
         return apiService.join(userSign)
     }
-
+    override suspend fun checkPayLoad(payLoad: PayLoad): Response<Success> {
+        return apiService.checkPayLoad(payLoad)
+    }
 }

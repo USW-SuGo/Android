@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 class JoinViewModel(val joinRepository: JoinRepository) : ViewModel() {
 
 
-
     val _text = MutableLiveData<String>()
     val _text2 = MutableLiveData<String>()
 
@@ -68,9 +67,18 @@ class JoinViewModel(val joinRepository: JoinRepository) : ViewModel() {
             if (response.isSuccessful && response.body()?.Exist == true) "중복된 이메일 입니다." else "사용 가능 이메일 입니다."
     }
 
+    fun checkPayLoad(payLoad: PayLoad) = viewModelScope.launch {
+        val response = joinRepository.checkPayLoad(payLoad)
+        if (response.isSuccessful) Log.d("payloadSuccess",response.body().toString())
+        else Log.d("payloadfail",response.errorBody().toString())
+    }
+
+    private val _id1 = MutableLiveData<JoinCheck>()
+    val id: LiveData<JoinCheck> = _id1
     fun join(userSign: UserSign) = viewModelScope.launch {
         val response = joinRepository.join(userSign)
         if (response.isSuccessful) {
+            _id1.value = response.body()
             Log.d("testJoin", response.body().toString())
         } else Log.d("testJoin", response.errorBody().toString())
     }
