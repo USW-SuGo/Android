@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentSelectMajorBinding
-import com.sugo.app.feat.model.Department
-import com.sugo.app.feat.model.UserSign
+import com.sugo.app.feat.model.request.Department
+import com.sugo.app.feat.model.request.UserSign
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.join.AssetLoader

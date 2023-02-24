@@ -1,5 +1,6 @@
 package com.sugo.app.feat.ui.deal
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,9 +17,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentDealBinding
+import com.sugo.app.feat.App
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ViewModelFactory
+import com.sugo.app.feat.ui.login.LoginActivity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.observeOn
@@ -55,7 +58,7 @@ class DealFragment : Fragment() {
 //                productSubmitData2(pagingAdapter,"",it)
 //            }
 //        }
-
+        Log.d("DealFragment",App.loginform.value.toString())
         productSubmitData(pagingAdapter,viewModel.getMainPage())
         setNavigation()
     }
@@ -66,10 +69,17 @@ class DealFragment : Fragment() {
         return pagingAdapter
     }
 
+    // 토큰이 만료되었으면
     private fun setNavigation() {
         viewModel.openDealEvent.observe(viewLifecycleOwner, EventObserver {
             Log.d("productPostId",it.toString())
-            openDealDetail(it)
+            if (App.loginform.value == false) {
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+            } else {
+                openDealDetail(it)
+            }
+            Log.d("productPostId",App.loginform.value.toString())
+
         })
     }
 
@@ -78,7 +88,10 @@ class DealFragment : Fragment() {
             "productPostId" to productPostId
         ))
     }
-
+    /**
+    리프레쉬 토큰이 만료가 되고 들어가는 경우
+    이경우에만 들어가지지 않는다
+    만료가 되지않고 들어가는 경우**/
     private fun productSubmitData(pagingAdapter: ProductPagingAdapter,getMainData: Flow<PagingData<DealProduct>>) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
