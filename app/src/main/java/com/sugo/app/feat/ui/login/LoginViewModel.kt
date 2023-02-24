@@ -12,6 +12,8 @@ import com.sugo.app.feat.repository.repo.login.LoginRepository
 import com.sugo.app.feat.ui.common.Event
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.TokenHeadersText
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
@@ -22,21 +24,24 @@ class LoginViewModel(
     private val _openDealEvent = MutableLiveData<Event<Long>>()
     val openDealEvent: LiveData<Event<Long>> = _openDealEvent
 
-
-
     fun login(id: String, passWord: String) = viewModelScope.launch {
         val response = loginRepository.login(id, passWord)
         val originalHeaders = response.headers().get("authorization")
         if (response.code() == 200) {
+            CoroutineScope(Dispatchers.Main).launch {
+                App.loginform.value = true
+            }
             val (accessToken, refreshToken) = TokenHeadersText(originalHeaders)
-            saveAccessToken(accessToken)
-            saveRefreshToken(refreshToken)
+            App.prefs.saveAccessToken(accessToken)
+            App.prefs.saveRefreshToken(refreshToken)
+//            saveAccessToken(accessToken)
+//            saveRefreshToken(refreshToken)
         }
     }
-    private fun saveAccessToken(token: String) = viewModelScope.launch {
-        tokenPreferenceManager.saveAccessToken(token)
-    }
-    private fun saveRefreshToken(token: String) = viewModelScope.launch {
-        tokenPreferenceManager.saveRefreshToken(token)
-    }
+//    private fun saveAccessToken(token: String) = viewModelScope.launch {
+//        tokenPreferenceManager.saveAccessToken(token)
+//    }
+//    private fun saveRefreshToken(token: String) = viewModelScope.launch {
+//        tokenPreferenceManager.saveRefreshToken(token)
+//    }
 }

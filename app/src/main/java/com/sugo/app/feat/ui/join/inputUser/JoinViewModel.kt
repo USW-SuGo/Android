@@ -7,7 +7,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sugo.app.feat.model.*
+import com.sugo.app.feat.model.request.LoginId
+import com.sugo.app.feat.model.request.PayLoad
+import com.sugo.app.feat.model.request.UserSign
+import com.sugo.app.feat.model.request.email
+import com.sugo.app.feat.model.response.JoinCheck
 import com.sugo.app.feat.repository.repo.join.JoinRepository
 import com.sugo.app.feat.ui.common.Event
 import kotlinx.coroutines.launch

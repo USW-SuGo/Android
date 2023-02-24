@@ -7,7 +7,7 @@
 
         <variable
             name="mypage"
-            type="com.sugo.app.feat.model.MyPage" />
+            type="com.sugo.app.feat.model.response.MyPage" />
 
         <variable
             name="viewModel"

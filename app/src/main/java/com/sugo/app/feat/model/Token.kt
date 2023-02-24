@@ -8,3 +8,6 @@ data class Token(
     @SerializedName("AccessToken") val accessToken: String,
     @SerializedName("RefreshToken") val refreshToken: String
 ): Serializable
+data class RefreshToken(
+     val refreshToken: String
+)

@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.sugo.app.databinding.FragmentEmailAuthBinding
-import com.sugo.app.databinding.FragmentSelectMajorBinding
-import com.sugo.app.feat.model.PayLoad
-import com.sugo.app.feat.model.UserSign
+import com.sugo.app.feat.model.request.PayLoad
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.join.inputUser.JoinViewModel
 

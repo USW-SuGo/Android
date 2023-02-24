@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentJoinBinding
-import com.sugo.app.feat.model.UserSign
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ViewModelFactory
 

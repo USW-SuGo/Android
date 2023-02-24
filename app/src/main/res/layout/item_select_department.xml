@@ -9,7 +9,7 @@
             type="com.sugo.app.feat.ui.join.inputUser.JoinViewModel" />
         <variable
             name="department"
-            type="com.sugo.app.feat.model.Department" />
+            type="com.sugo.app.feat.model.request.Department" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

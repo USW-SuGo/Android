@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.sugo.app.feat.model.DealProduct
-import com.sugo.app.feat.model.MyPage
+import com.sugo.app.feat.model.response.MyPage
 import com.sugo.app.feat.repository.repo.mainpage.ProductPagingRepositoryImpl
 import com.sugo.app.feat.repository.repo.mypage.MyPageRepository
 import com.sugo.app.feat.ui.common.Event

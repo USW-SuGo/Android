@@ -1,4 +1,4 @@
-package com.sugo.app.feat.model
+package com.sugo.app.feat.model.response
 
 import com.google.gson.annotations.SerializedName
 import java.math.BigDecimal

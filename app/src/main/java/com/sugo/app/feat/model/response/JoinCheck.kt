@@ -1,4 +1,4 @@
-package com.sugo.app.feat.model
+package com.sugo.app.feat.model.response
 
 data class JoinCheck(
     val Success : Boolean,

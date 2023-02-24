@@ -1,7 +1,8 @@
 package com.sugo.app.feat.repository.repo.login
 
-import com.sugo.app.feat.App
 import com.sugo.app.feat.model.*
+import com.sugo.app.feat.model.request.LoginFormat
+import com.sugo.app.feat.model.request.email
 import com.sugo.app.feat.network.SugoRetrofit
 import retrofit2.Response
 

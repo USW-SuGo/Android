@@ -1,6 +1,6 @@
 package com.sugo.app.feat.repository.repo.mypage
 
-import com.sugo.app.feat.model.MyPage
+import com.sugo.app.feat.model.response.MyPage
 import com.sugo.app.feat.model.ProductPostId
 import com.sugo.app.feat.model.Success
 import com.sugo.app.feat.network.SugoRetrofit
