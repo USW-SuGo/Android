@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import com.sugo.app.feat.App
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.model.response.MyPage
 import com.sugo.app.feat.repository.repo.mainpage.ProductPagingRepositoryImpl
@@ -56,6 +57,6 @@ class MyPageViewModel(
 
     private fun getMyPage() = viewModelScope.launch {
         val response = myPageRepository.getMyPage().body()
-        _myPage.value = response!!
+        if (App.loginform.value == true) _myPage.value = response!!
     }
 }

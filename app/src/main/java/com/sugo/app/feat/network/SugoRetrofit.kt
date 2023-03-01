@@ -9,6 +9,7 @@ import com.sugo.app.feat.model.*
 import com.sugo.app.feat.model.request.*
 import com.sugo.app.feat.model.response.JoinCheck
 import com.sugo.app.feat.model.response.MyPage
+import com.sugo.app.feat.model.response.NoteId
 import com.sugo.app.feat.ui.common.TokenHeadersText
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -117,6 +118,10 @@ interface SugoRetrofit {
         @Body PayLoad: PayLoad
     ): Response<Success>
 
+    @POST("/note")
+    suspend fun makeNote(
+        @Body noteBody: NoteBody
+    ): Response<NoteId>
 
     companion object {
         val gson = gsonBuilder()
