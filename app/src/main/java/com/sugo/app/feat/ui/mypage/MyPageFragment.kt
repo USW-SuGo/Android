@@ -44,25 +44,10 @@ class MyPageFragment : Fragment(),BottomSheetListner{
         super.onViewCreated(view, savedInstanceState)
         if (App.loginform.value == true) {
             MyPageTest()
-
         } else {
+            binding.ivMypageEdit.setOnClickListener{openSetting()}
             startActivity(Intent(requireContext(), LoginActivity::class.java))
         }
-//        setUser()
-//        val pagingAdapter = initAdapter()
-//        //이부분을  VM 으로 옮기기 뷰엣허 클릭시 센변경을 하는방법을 모르곘네  셀렉터인가 아닌가?
-//        binding.tvUserWrite.setOnClickListener {
-//            productSubmitData(pagingAdapter, viewModel.getMyPageProduct())
-//            binding.tvUserWrite.setTextColor(Color.parseColor("#000000"))
-//            binding.tvLikeWrite.setTextColor(Color.parseColor("#419e3a"))
-//        }
-//        binding.tvLikeWrite.setOnClickListener {
-//            productSubmitData(pagingAdapter, viewModel.getLikeProduct())
-//            binding.tvUserWrite.setTextColor(Color.parseColor("#419e3a"))
-//            binding.tvLikeWrite.setTextColor(Color.parseColor("#000000"))
-//        }
-//        openDailog()
-//        setNavigation()
     }
 
     private fun MyPageTest() {
@@ -81,6 +66,7 @@ class MyPageFragment : Fragment(),BottomSheetListner{
         }
         openDailog()
         setNavigation()
+
     }
 
     private fun openDailog() {
@@ -116,6 +102,13 @@ class MyPageFragment : Fragment(),BottomSheetListner{
         findNavController().navigate(
             R.id.action_mypage_to_dealDetail, bundleOf(
                 "productPostId" to productPostId
+            )
+        )
+    }
+    private fun openSetting() {
+        findNavController().navigate(
+            R.id.action_navigation_mypage_to_settingFragment, bundleOf(
+
             )
         )
     }

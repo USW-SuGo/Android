@@ -27,11 +27,18 @@
         <action
             android:id="@+id/action_mypage_to_dealDetail"
             app:destination="@id/dealDetailFragment" />
+        <action
+            android:id="@+id/action_navigation_mypage_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/dealDetailFragment"
         android:name="com.sugo.app.feat.ui.dealdetail.DealDetailFragment"
         android:label="DealDetailFragment" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.sugo.app.feat.ui.setting.SettingFragment"
+        android:label="SettingFragment" />
 
 
 </navigation>

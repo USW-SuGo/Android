@@ -25,9 +25,6 @@ class MessageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            binding.tvTest.setOnClickListener {
-                val nextIntent = Intent(activity, LoginActivity::class.java)
-                startActivity(nextIntent)
-            }
+
     }
 }
