@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.main_bottom_navigation)
         bottomNavigationView.itemIconTintList=null
         val navController = supportFragmentManager.findFragmentById(R.id.main_container)?.findNavController()
+        if (App.loginform.value==null){
 
+        }
 //        CoroutineScope(Dispatchers.Main).launch {
 //            App.loginform.value = true
 //            Log.d("MainActivity",App.loginform.value.toString())

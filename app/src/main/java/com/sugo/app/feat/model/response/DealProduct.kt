@@ -8,6 +8,7 @@ import kotlin.String
 
 data class DealProduct(
     @SerializedName("productPostId")val id: Long,
+    val writerId:Long,
     val imageLink: String,
     val contactPlace: String,
     val updatedAt: LocalDateTime,

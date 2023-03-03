@@ -23,8 +23,8 @@ class DetailViewModel(
         if(response.isSuccessful) _dealPrduct.value = response.body()
     }
 
-    fun makeNote(noteBody: NoteBody) = viewModelScope.launch {
-        val response = detailRepository.makeNote(noteBody)
+    fun makeNote(id:Long,productPostId: Long) = viewModelScope.launch {
+        val response = detailRepository.makeNote(NoteBody(id,productPostId))
         Log.d("noteId",response.body().toString())
     }
 }

@@ -33,6 +33,7 @@ class DealDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewmodel=viewModel
         val productId = requireArguments().getLong("productPostId")
         val adapter = initAdapter()
         setViewPagerAdapter(adapter, productId)

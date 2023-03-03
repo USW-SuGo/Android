@@ -31,7 +31,13 @@ import java.io.File
 
 class PostActivity : AppCompatActivity() {
     private val binding by lazy { ActivityPostBinding.inflate(layoutInflater) }
-
+/**
+ *  물건 올리는 부문 리팩토링 하기
+ *  spinner
+ *  등등
+ *
+ *
+ * **/
 
     var list = ArrayList<Uri>()
     val adapter = PostUploadAdapter(list)
