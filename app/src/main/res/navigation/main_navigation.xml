@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_deal_to_deal_detail"
             app:destination="@id/dealDetailFragment" />
+        <action
+            android:id="@+id/action_navigation_deal_to_postFragment"
+            app:destination="@id/postFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_message"
@@ -39,6 +42,10 @@
         android:id="@+id/settingFragment"
         android:name="com.sugo.app.feat.ui.setting.SettingFragment"
         android:label="SettingFragment" />
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.sugo.app.feat.ui.post.PostFragment"
+        android:label="PostFragment" />
 
 
 </navigation>

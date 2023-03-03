@@ -12,6 +12,7 @@ import androidx.lifecycle.*
 import androidx.paging.PagingData
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.repository.repo.mainpage.ProductPagingRepositoryImpl
+import com.sugo.app.feat.ui.common.Event
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -44,6 +45,13 @@ class SearchPagingViewModel(private val repoImpl: ProductPagingRepositoryImpl) :
         return repoImpl.getSearchPage(value, category)
     }
 
+    private val _openPostEvent = MutableLiveData<Event<Long>>()
+    val openPostEvent: LiveData<Event<Long>> = _openPostEvent
+
+
+    fun openPostDetail() {
+        _openPostEvent.value = Event(0)
+    }
     fun onClickSearch(searchTxt: String){
         _searchValue.value=searchTxt
         Log.d("TEST", "Search $searchTxt")

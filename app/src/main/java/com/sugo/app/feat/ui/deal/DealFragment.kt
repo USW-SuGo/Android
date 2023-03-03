@@ -79,7 +79,15 @@ class DealFragment : Fragment() {
                 openDealDetail(it)
             }
             Log.d("productPostId",App.loginform.value.toString())
-
+        })
+        viewModel2.openPostEvent.observe(viewLifecycleOwner, EventObserver {
+            Log.d("productPostId",it.toString())
+            if (App.loginform.value == false) {
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+            } else {
+                openPost()
+            }
+            Log.d("productPostId",App.loginform.value.toString())
         })
     }
 
@@ -88,6 +96,10 @@ class DealFragment : Fragment() {
             "productPostId" to productPostId
         ))
     }
+    private fun openPost() {
+        findNavController().navigate(R.id.action_navigation_deal_to_postFragment, bundleOf())
+    }
+
     /**
     리프레쉬 토큰이 만료가 되고 들어가는 경우
     이경우에만 들어가지지 않는다

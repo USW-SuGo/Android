@@ -48,6 +48,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
+                    android:onClick="@{()->productvm.openPostDetail()}"
                     android:id="@+id/toolbar_post_product"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
