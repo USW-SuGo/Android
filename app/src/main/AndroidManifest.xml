@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sugo.app">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".feat.App"
         android:allowBackup="true"
@@ -15,8 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sugo"
         tools:targetApi="31">
-
-        <activity android:name=".feat.ui.SplashActivity"
+        <activity
+            android:name=".PostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".feat.ui.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Sugo.Splash">
             <intent-filter>
@@ -25,20 +30,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".feat.ui.MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true"/>
-
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".feat.ui.login.LoginActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true"/>
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".feat.ui.join.inputUser.JoinActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true"/>
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
