@@ -13,6 +13,7 @@ import com.sugo.app.feat.common.NetWork.ClosePost
 import com.sugo.app.feat.common.NetWork.DetailProduct
 import com.sugo.app.feat.common.NetWork.FindId
 import com.sugo.app.feat.common.NetWork.Join
+import com.sugo.app.feat.common.NetWork.LIKE
 import com.sugo.app.feat.common.NetWork.LikePost
 import com.sugo.app.feat.common.NetWork.Login
 import com.sugo.app.feat.common.NetWork.MainPage
@@ -27,6 +28,7 @@ import com.sugo.app.feat.common.NetWork.UpPost
 import com.sugo.app.feat.model.*
 import com.sugo.app.feat.model.request.*
 import com.sugo.app.feat.model.response.JoinCheck
+import com.sugo.app.feat.model.response.Like
 import com.sugo.app.feat.model.response.MyPage
 import com.sugo.app.feat.model.response.NoteId
 import com.sugo.app.feat.ui.common.TokenHeadersText
@@ -156,6 +158,10 @@ interface SugoRetrofit {
         @Body noteBody: NoteBody
     ): Response<NoteId>
 
+    @POST(LIKE)
+    suspend fun like(
+        @Body productPostId: ProductPostId
+    ):Response<Like>
     companion object {
         val gson = gsonBuilder()
         private fun gsonBuilder(): Gson? {
