@@ -57,9 +57,11 @@ interface SugoRetrofit {
 
     @GET("/post/search")
     suspend fun searchProduct(
-//        position:Int,
+
         @Query("value") value: String,
-        @Query("category") category: String
+        @Query("category") category: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
     ): List<DealProduct>
 
     @GET("/post/{productPostId}")

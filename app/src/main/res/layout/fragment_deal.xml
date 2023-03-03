@@ -77,13 +77,14 @@
         <EditText
             android:gravity="center"
             android:id="@+id/etv_search"
-            android:layout_width="300dp"
-            android:layout_height="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:paddingBottom="15dp"
             android:layout_marginStart="7dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/edge"
             android:paddingLeft="25dp"
+            android:layout_marginEnd="7dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/deal_toolbar" />
 
@@ -98,19 +99,19 @@
             app:layout_constraintStart_toStartOf="@+id/etv_search"
             app:layout_constraintTop_toTopOf="@+id/etv_search" />
 
-        <Spinner
-            android:id="@+id/sp_category"
-            style="@style/PretendardBold.Size20"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="8dp"
-            tools:entries="@{productvm.spinnerEntry}"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/etv_search"
-            app:layout_constraintTop_toBottomOf="@id/deal_toolbar"
-            tools:selectedValue="@={productvm.spinnerData}" />
+<!--        <Spinner-->
+<!--            android:id="@+id/sp_category"-->
+<!--            style="@style/PretendardBold.Size20"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_marginStart="5dp"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            tools:entries="@{productvm.spinnerEntry}"-->
+<!--            android:gravity="center"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/etv_search"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/deal_toolbar"-->
+<!--            tools:selectedValue="@={productvm.spinnerData}" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_deal_product"

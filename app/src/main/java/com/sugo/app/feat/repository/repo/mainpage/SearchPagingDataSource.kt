@@ -20,7 +20,7 @@ class SearchPagingDataSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DealProduct> {
         val position = params.key ?:0
         return try {
-            val Products = apiService.searchProduct(value,category)
+            val Products = apiService.searchProduct(value,category,position,10)
             LoadResult.Page(
                 data = Products,
                 prevKey = if (position == 0) null else position - 1,
