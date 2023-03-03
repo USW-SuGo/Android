@@ -27,4 +27,8 @@ class DetailViewModel(
         val response = detailRepository.makeNote(NoteBody(id,productPostId))
         Log.d("noteId",response.body().toString())
     }
+
+    fun like(productPostId: Long) = viewModelScope.launch {
+        val response = detailRepository.like(productPostId)
+    }
 }
