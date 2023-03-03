@@ -5,6 +5,24 @@ import com.google.gson.*
 import com.sugo.app.feat.App
 import com.sugo.app.feat.App.Companion.prefs
 import com.sugo.app.feat.ServiceLocator
+import com.sugo.app.feat.common.NetWork.AuthPayLoad
+import com.sugo.app.feat.common.NetWork.CheckEmail
+import com.sugo.app.feat.common.NetWork.CheckId
+import com.sugo.app.feat.common.NetWork.ClosePost
+
+import com.sugo.app.feat.common.NetWork.DetailProduct
+import com.sugo.app.feat.common.NetWork.FindId
+import com.sugo.app.feat.common.NetWork.Join
+import com.sugo.app.feat.common.NetWork.LikePost
+import com.sugo.app.feat.common.NetWork.Login
+import com.sugo.app.feat.common.NetWork.MainPage
+import com.sugo.app.feat.common.NetWork.MyPage
+import com.sugo.app.feat.common.NetWork.MyPageProduct
+import com.sugo.app.feat.common.NetWork.Note
+import com.sugo.app.feat.common.NetWork.Search
+
+import com.sugo.app.feat.common.NetWork.TokenRefreshAPI
+import com.sugo.app.feat.common.NetWork.UpPost
 import com.sugo.app.feat.model.*
 import com.sugo.app.feat.model.request.*
 import com.sugo.app.feat.model.response.JoinCheck
@@ -32,7 +50,7 @@ interface SugoRetrofit {
      * 텍스트 정리
      * ui펼 api 정리하기
      * **/
-    @GET("/post/all")
+    @GET(MainPage)
     suspend fun getMainPage(
         @Query("page") page: Int,
         @Query("size") size: Int,
@@ -40,22 +58,22 @@ interface SugoRetrofit {
     ): List<DealProduct>
 
     @Headers("Content-Type:application/json")
-    @POST("/user/login")
+    @POST(Login)
     suspend fun login(
         @Body loginFormat: LoginFormat
     ): Response<Unit>
 
-    @POST("/token")
+    @POST(TokenRefreshAPI)
     fun refreshAccessToken(
         @Header("Authorization") refresh: String
     ): Call<Token>
 
-    @POST("/user/find-id")
+    @POST(FindId)
     suspend fun findlogin(
         @Body email: email
     ): Response<Success>
 
-    @GET("/post/search")
+    @GET(Search)
     suspend fun searchProduct(
 
         @Query("value") value: String,
@@ -64,27 +82,27 @@ interface SugoRetrofit {
         @Query("size") size: Int
     ): List<DealProduct>
 
-    @GET("/post/{productPostId}")
+    @GET(DetailProduct)
     suspend fun detailProduct(
         @Path("productPostId") id: Long
     ): Response<DealProduct>
 
-    @GET("/post/my-post")
+    @GET(MyPageProduct)
     suspend fun getMypageProduct(
         @Query("page") page: Int,
         @Query("size") size: Int
     ): List<DealProduct>
 
-    @GET("/like-post")
+    @GET(LikePost)
     suspend fun getLikeProduct(
         @Query("page") page: Int,
         @Query("size") size: Int
     ): List<DealProduct>
 
-    @GET("/user")
+    @GET(MyPage)
     suspend fun getMyPage(): Response<MyPage>
 
-    @POST("/post/up-post")
+    @POST(UpPost)
     suspend fun upPost(
         @Body productPostId: ProductPostId
     ): Response<Success>
@@ -95,32 +113,32 @@ interface SugoRetrofit {
         @Body productPostId: ProductPostId
     ): Response<Success>
 
-    @POST("/post/close")
+    @POST(ClosePost)
     suspend fun postClose(
         @Body productPostId: ProductPostId
     ): Response<Success>
 
-    @POST("/user/check-loginId")
+    @POST(CheckId)
     suspend fun checkLoginId(
         @Body loginId: LoginId
     ): Response<Success>
 
-    @POST("/user/check-email")
+    @POST(CheckEmail)
     suspend fun checkEmail(
         @Body email: email
     ): Response<Success>
 
-    @POST("/user/join")
+    @POST(Join)
     suspend fun join(
         @Body userSign: UserSign
     ): Response<JoinCheck>
 
-    @POST("/user/auth")
+    @POST(AuthPayLoad)
     suspend fun checkPayLoad(
         @Body PayLoad: PayLoad
     ): Response<Success>
 
-    @POST("/note")
+    @POST(Note)
     suspend fun makeNote(
         @Body noteBody: NoteBody
     ): Response<NoteId>

@@ -42,11 +42,13 @@ class MyPageFragment : Fragment(),BottomSheetListner{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (App.loginform.value == true) {
-            MyPageTest()
-        } else {
+        if (App.loginform.value == false) {
             binding.ivMypageEdit.setOnClickListener{openSetting()}
             startActivity(Intent(requireContext(), LoginActivity::class.java))
+        } else {
+            MyPageTest()
+            binding.ivMypageEdit.setOnClickListener{openSetting()}
+
         }
     }
 
