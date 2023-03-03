@@ -2,6 +2,7 @@ package com.sugo.app.feat.repository.repo.detail
 
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.model.request.NoteBody
+import com.sugo.app.feat.model.response.Like
 import com.sugo.app.feat.model.response.NoteId
 import retrofit2.Response
 
@@ -13,5 +14,9 @@ class DetailRepository(
     }
     suspend fun makeNote(noteBody: NoteBody):Response<NoteId>{
         return detailRemoteDataSource.makeNote(noteBody)
+    }
+
+    suspend fun like(productPostId: Long):Response<Like>{
+        return detailRemoteDataSource.like(productPostId)
     }
 }
