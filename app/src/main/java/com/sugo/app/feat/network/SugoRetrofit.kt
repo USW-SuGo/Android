@@ -19,6 +19,7 @@ import com.sugo.app.feat.common.NetWork.MainPage
 import com.sugo.app.feat.common.NetWork.MyPage
 import com.sugo.app.feat.common.NetWork.MyPageProduct
 import com.sugo.app.feat.common.NetWork.Note
+import com.sugo.app.feat.common.NetWork.POSTUPLOAD
 import com.sugo.app.feat.common.NetWork.Search
 
 import com.sugo.app.feat.common.NetWork.TokenRefreshAPI
@@ -72,7 +73,19 @@ interface SugoRetrofit {
     suspend fun findlogin(
         @Body email: email
     ): Response<Success>
+    @Multipart
+    @POST(POSTUPLOAD)
+    fun postUpload(
+//        @Header(AUTH_HEADER) AccessToken: String,
+//        @Part ("PostFormat") PostFormat: PostFormat,
+        @Part title: MultipartBody.Part,
+        @Part content: MultipartBody.Part,
+        @Part price: MultipartBody.Part,
+        @Part contactPlace: MultipartBody.Part,
+        @Part category: MultipartBody.Part,
+        @Part image: MutableList<MultipartBody.Part>
 
+    ): Call<ProductPostId>
     @GET(Search)
     suspend fun searchProduct(
 

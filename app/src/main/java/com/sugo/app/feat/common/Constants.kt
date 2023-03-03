@@ -19,4 +19,5 @@ object NetWork {
     const val Join = "/user/join"
     const val AuthPayLoad="/user/auth"
     const val Note = "/note"
+    const val POSTUPLOAD = "/post"
 }

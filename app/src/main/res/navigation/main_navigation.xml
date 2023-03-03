@@ -44,7 +44,7 @@
         android:label="SettingFragment" />
     <fragment
         android:id="@+id/postFragment"
-        android:name="com.sugo.app.feat.ui.post.PostFragment"
+        android:name="com.sugo.app.feat.ui.post.fragmentVer.PostFragment"
         android:label="PostFragment" />
 
 

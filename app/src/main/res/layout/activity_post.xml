@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".feat.ui.post.PostActivity">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:paddingLeft="10dp">
+
+                <TextView
+                    android:id="@+id/addsugo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendardbold"
+                    android:gravity="center"
+                    android:text="완료"
+                    android:textColor="@color/sugreen"
+                    android:textSize="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="43dp"
+                    android:fontFamily="@font/pretendardbold"
+                    android:gravity="center"
+                    android:text="수고올리기"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="MissingConstraints" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="-4dp"
+                tools:layout_editor_absoluteY="175dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/postTitle"
+                    android:background="@color/white"
+                    android:fontFamily="@font/pretendardbold"
+                    android:hint="제목" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints">
+
+                    <EditText
+                        android:id="@+id/postPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_rowWeight="1"
+                        android:background="@color/white"
+                        android:fontFamily="@font/pretendardbold"
+                        android:hint="가격"
+                        tools:ignore="MissingConstraints" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/postContactPlace"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/pretendardbold"
+                    android:gravity="center"
+                    android:text="수고 할 장소"
+                    android:textColor="@color/sugreen"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                app:layout_editor_absoluteY="283dp"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/selectPicture"
+                    android:layout_width="46dp"
+                    android:layout_height="47dp"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:src="@drawable/chat" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/addrecycle"
+                    android:layout_width="303dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            </GridLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/grey" />
+            <TextView
+                        android:id="@+id/postCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendardbold"
+                        android:gravity="center"
+                        android:text="카테고리" />
+            <Spinner
+
+                android:id="@+id/spinner"
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+
+                android:layout_margin="10dp"
+
+                android:spinnerMode="dropdown" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/grey" />
+
+            <EditText
+                android:id="@+id/postContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/pretendardbold"
+                android:hint="수고할 상품에 대한 글을 작성해주세요! \n 거짓 정보 및 가품 등 문제가 될만한 글은 자동으로 삭제됩니다."
+                android:textSize="16dp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

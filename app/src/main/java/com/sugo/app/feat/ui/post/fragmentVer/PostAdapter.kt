@@ -1,4 +1,4 @@
-package com.sugo.app.feat.ui.post
+package com.sugo.app.feat.ui.post.fragmentVer
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sugo.app.databinding.ItemPostBinding
 import com.sugo.app.feat.model.ImageLink
-import com.sugo.app.feat.ui.join.inputUser.JoinViewModel
 
 class PostAdapter() : ListAdapter<String, PostAdapter.PostViewHolder>(
     BannerDiffCallback()

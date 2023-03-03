@@ -22,6 +22,7 @@ import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.login.LoginActivity
+import com.sugo.app.feat.ui.post.PostActivity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.observeOn
@@ -97,7 +98,8 @@ class DealFragment : Fragment() {
         ))
     }
     private fun openPost() {
-        findNavController().navigate(R.id.action_navigation_deal_to_postFragment, bundleOf())
+//        findNavController().navigate(R.id.action_navigation_deal_to_postFragment, bundleOf())
+        startActivity(Intent(requireContext(), PostActivity::class.java))
     }
 
     /**

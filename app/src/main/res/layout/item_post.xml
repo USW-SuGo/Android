@@ -25,7 +25,6 @@
                 app:cardCornerRadius="10dp">
 
                 <ImageView
-                    imageUrl="@{post.imageLink}"
                     android:padding="10dp"
                     android:id="@+id/addrecycleitem"
                     android:layout_width="match_parent"
