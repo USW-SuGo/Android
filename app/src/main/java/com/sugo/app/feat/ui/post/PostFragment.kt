@@ -22,6 +22,8 @@ class PostFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val adapter = PostAdapter()
+        binding.addrecycle.adapter=adapter
+        adapter.submitList(listOf("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKZC98XEJ4dZAccryBQ9mJARgxFOeUvYcR7vPPUH6DoQ&s","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpzflepfqRGsH0cBYKnXDVYovu_rKfIMU8TJpZbTZddpBtEzoRNyXKuv4OeElPqPGc0MY&usqp=CAU"))
     }
 }

@@ -21,3 +21,8 @@ data class DealProduct(
 data class ProductPostId(
     @SerializedName("productPostId") val id: Long
 )
+data class ImageLink(
+    val imageLink: String,
+)
+
+
