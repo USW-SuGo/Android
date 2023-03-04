@@ -19,6 +19,7 @@ import com.sugo.app.feat.common.NetWork.Login
 import com.sugo.app.feat.common.NetWork.MainPage
 import com.sugo.app.feat.common.NetWork.MyPage
 import com.sugo.app.feat.common.NetWork.MyPageProduct
+import com.sugo.app.feat.common.NetWork.NOTEROOM
 import com.sugo.app.feat.common.NetWork.Note
 import com.sugo.app.feat.common.NetWork.POSTUPLOAD
 import com.sugo.app.feat.common.NetWork.Search
@@ -27,10 +28,7 @@ import com.sugo.app.feat.common.NetWork.TokenRefreshAPI
 import com.sugo.app.feat.common.NetWork.UpPost
 import com.sugo.app.feat.model.*
 import com.sugo.app.feat.model.request.*
-import com.sugo.app.feat.model.response.JoinCheck
-import com.sugo.app.feat.model.response.Like
-import com.sugo.app.feat.model.response.MyPage
-import com.sugo.app.feat.model.response.NoteId
+import com.sugo.app.feat.model.response.*
 import com.sugo.app.feat.ui.common.TokenHeadersText
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -108,11 +106,7 @@ interface SugoRetrofit {
         @Query("size") size: Int
     ): List<DealProduct>
 
-    @GET(LikePost)
-    suspend fun getLikeProduct(
-        @Query("page") page: Int,
-        @Query("size") size: Int
-    ): List<DealProduct>
+
 
     @GET(MyPage)
     suspend fun getMyPage(): Response<MyPage>
@@ -162,6 +156,17 @@ interface SugoRetrofit {
     suspend fun like(
         @Body productPostId: ProductPostId
     ):Response<Like>
+
+    @GET(NOTEROOM)
+    suspend fun getNoteRoom(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<NoteRoom>
+    @GET(LikePost)
+    suspend fun getLikeProduct(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): List<DealProduct>
     companion object {
         val gson = gsonBuilder()
         private fun gsonBuilder(): Gson? {

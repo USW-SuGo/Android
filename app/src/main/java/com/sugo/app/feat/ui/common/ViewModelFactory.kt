@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sugo.app.feat.ServiceLocator
+import com.sugo.app.feat.repository.repo.Note.NotePagingRepositoryImpl
 import com.sugo.app.feat.repository.repo.Token.TokenPreferenceManager
 import com.sugo.app.feat.repository.repo.detail.DetailRemoteDataSource
 import com.sugo.app.feat.repository.repo.detail.DetailRepository
@@ -14,6 +15,7 @@ import com.sugo.app.feat.repository.repo.login.LoginRepository
 import com.sugo.app.feat.repository.repo.mainpage.ProductPagingRepositoryImpl
 import com.sugo.app.feat.repository.repo.mypage.MyPageRemoteDataSource
 import com.sugo.app.feat.repository.repo.mypage.MyPageRepository
+import com.sugo.app.feat.ui.note.MessageViewModel
 import com.sugo.app.feat.ui.deal.ProductPagingViewModel
 import com.sugo.app.feat.ui.deal.SearchPagingViewModel
 import com.sugo.app.feat.ui.dealdetail.DetailViewModel
@@ -41,6 +43,11 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                 val repository =
                     ProductPagingRepositoryImpl((ServiceLocator.provideTokenApiClient()))
                 SearchPagingViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(MessageViewModel::class.java) -> {
+                val repository =
+                    NotePagingRepositoryImpl((ServiceLocator.provideTokenApiClient()))
+                MessageViewModel(repository) as T
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) ->{
                 val repository =

@@ -1,5 +1,6 @@
 package com.sugo.app.feat.ui.mypage
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -30,6 +31,7 @@ class MyPageAdapter(
 
         fun bind(dealProduct: DealProduct) {
             binding.viewModel = viewModel
+            Log.d("MyPage",dealProduct.toString())
             binding.dealproduct = dealProduct
             binding.executePendingBindings()
 

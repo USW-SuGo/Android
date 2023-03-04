@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_message"
-        android:name="com.sugo.app.feat.ui.MessageFragment"
+        android:name="com.sugo.app.feat.ui.note.MessageFragment"
         android:label="MessageFragment"
         tools:layout="@layout/fragment_message"/>
     <fragment

@@ -54,7 +54,9 @@ class MyPageFragment : Fragment(),BottomSheetListner{
 
     private fun MyPageTest() {
         setUser()
+
         val pagingAdapter = initAdapter()
+        productSubmitData(pagingAdapter, viewModel.getMyPageProduct())
         //이부분을  VM 으로 옮기기 뷰엣허 클릭시 센변경을 하는방법을 모르곘네  셀렉터인가 아닌가?
         binding.tvUserWrite.setOnClickListener {
             productSubmitData(pagingAdapter, viewModel.getMyPageProduct())
@@ -82,7 +84,6 @@ class MyPageFragment : Fragment(),BottomSheetListner{
     private fun initAdapter(): MyPageAdapter {
         val pagingAdapter = MyPageAdapter(viewModel)
         binding.rvMypage.adapter = pagingAdapter
-        productSubmitData(pagingAdapter, viewModel.getMyPageProduct())
         return pagingAdapter
     }
 
