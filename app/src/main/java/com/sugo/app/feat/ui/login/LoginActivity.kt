@@ -24,15 +24,12 @@ class LoginActivity : AppCompatActivity() {
         App.loginform.observe(this) {
             if (it) {
                 finish()
-//                val intent = Intent(this, MainActivity::class.java)
-//                startActivity(intent)
             }
-
             binding.btnAssign.setOnClickListener {
                 val intent = Intent(this, JoinActivity::class.java)
                 startActivity(intent)
+                Log.d("asign", "test")
             }
         }
-
     }
 }

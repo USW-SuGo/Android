@@ -111,7 +111,6 @@ class MyPageFragment : Fragment(),BottomSheetListner{
     private fun openSetting() {
         findNavController().navigate(
             R.id.action_navigation_mypage_to_settingFragment, bundleOf(
-
             )
         )
     }
