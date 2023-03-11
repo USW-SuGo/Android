@@ -10,7 +10,7 @@
             type="com.sugo.app.feat.ui.note.MessageViewModel" />
 
         <variable
-            name="noteRoom"
+            name="noteContent"
             type="com.sugo.app.feat.model.response.NoteContent" />
     </data>
 
@@ -24,7 +24,7 @@
 
         <ImageView
             android:id="@+id/iv_mypage_product_link"
-            imageUrl="@{noteRoom.imageLink}"
+            imageUrl="@{noteContent.imageLink}"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
@@ -44,7 +44,7 @@
             android:layout_marginEnd="8dp"
             android:maxLines="1"
             app:layout_constraintTop_toTopOf="@+id/iv_mypage_product_link"
-            android:text="@{noteRoom.opponentUserNickname}"
+            android:text="@{noteContent.opponentUserNickname}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_mypage_product_link"
             tools:text="아무말이나아무말아무말" />
@@ -52,7 +52,7 @@
 
         <TextView
             style="@style/PretendardBold.Middle"
-            android:text="@{noteRoom.recentContent}"
+            android:text="@{noteContent.recentContent}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -77,7 +77,7 @@
             android:layout_width="194dp"
             android:layout_height="40dp"
             android:gravity="center"
-            android:text="@{noteRoom.requestUserUnreadCount}"
+            android:text="@{noteContent.requestUserUnreadCount}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/item_line1"
             app:layout_constraintStart_toStartOf="parent"

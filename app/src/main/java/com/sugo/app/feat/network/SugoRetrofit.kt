@@ -161,7 +161,7 @@ interface SugoRetrofit {
     suspend fun getNoteRoom(
         @Query("page") page: Int,
         @Query("size") size: Int
-    ): Response<NoteRoom>
+    ): List<NoteRoom>
     @GET(LikePost)
     suspend fun getLikeProduct(
         @Query("page") page: Int,
@@ -193,7 +193,6 @@ interface SugoRetrofit {
         private fun getLogOkHttpClient(): Interceptor {
 
             val interceptor = HttpLoggingInterceptor { message ->
-                var accessToken = prefs.getAccessToken()
                 when {
                     message.isJsonObject() ->
                         Log.d("Retrofit2", JSONObject(message).toString(4))

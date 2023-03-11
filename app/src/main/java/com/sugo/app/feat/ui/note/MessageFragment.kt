@@ -38,7 +38,7 @@ class MessageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val pagingAdapter = initAdapter()
+        initAdapter()
 
     }
     private fun initAdapter(): MessageAdapter {
@@ -70,7 +70,6 @@ class MessageFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch { getData.collectLatest {
                         pagingData -> pagingAdapter.submitData(pagingData)
-                     Log.d("adapter",pagingData.toString())
                 }
                 }
             }

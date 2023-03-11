@@ -1,11 +1,13 @@
 package com.sugo.app.feat.repository.repo.Note
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.model.response.NoteContent
 import com.sugo.app.feat.model.response.NoteRoom
 import com.sugo.app.feat.network.SugoRetrofit
+import java.time.LocalDateTime
 
 class NotePagingDataSource(
     private val apiService : SugoRetrofit,
@@ -21,7 +23,7 @@ class NotePagingDataSource(
         val position = params.key ?:0
         return try {
             val Products = apiService.getNoteRoom(position,10)
-            val result = Products.body()!!.noteContent
+            val result = Products[0].noteContent
             LoadResult.Page(
                 data = result,
                 prevKey = if (position == 0) null else position - 1,

@@ -9,6 +9,5 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 interface NoteDataSource {
-
   fun getNoteRoom(): Flow<PagingData<NoteContent>>
 }

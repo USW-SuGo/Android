@@ -32,16 +32,14 @@ class MessageAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(noteContent: NoteContent) {
-            binding.viewModel = viewModel
-            Log.d("NotePage",noteContent.toString())
-            binding.noteRoom = noteContent
+//            binding.viewModel = viewModel
+            Log.d("note",noteContent.toString())
+//            binding.noteContent = noteContent
             binding.executePendingBindings()
-
         }
     }
 
 }
-
 class NoteRoomDiffCallback : DiffUtil.ItemCallback<NoteContent>() {
     override fun areItemsTheSame(oldItem: NoteContent, newItem: NoteContent): Boolean {
         return oldItem.noteId== newItem.noteId
