@@ -23,12 +23,12 @@ class NotePagingDataSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NoteContent> {
         val position = params.key ?: 0
         return try {
-            val Products = apiService.getNoteRoom(position, 10)
-            val a = MessageRoom(Products.body()!![1].toString())
+            val products = apiService.getNoteRoom(position, 10)
+            val messageContent = MessageRoom(products.body()!![1].toString())
             LoadResult.Page(
-                data = MessageList(a),
+                data = MessageList(messageContent),
                 prevKey = if (position == 0) null else position - 1,
-                nextKey = if (MessageList(a).isEmpty()) null else position + 1
+                nextKey = if (MessageList(messageContent).isEmpty()) null else position + 1
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)

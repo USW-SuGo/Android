@@ -23,7 +23,5 @@ class DetailRemoteDataSource(private val apiService:SugoRetrofit):DetailDataSour
         return apiService.like(ProductPostId( productPostId))
     }
 
-    override suspend fun getNoteRoom(page: Int, size: Int): Response<List<Any>>{
-        return apiService.getNoteRoom(0,10)
-    }
+
 }

@@ -14,5 +14,4 @@ interface DetailDataSource {
 
    suspend fun like(productPostId: Long):Response<Like>
 
-   suspend fun getNoteRoom(page:Int,size:Int):Response<List<Any>>
 }
