@@ -3,6 +3,7 @@ package com.sugo.app.feat.repository.repo.login
 import com.sugo.app.feat.model.*
 import com.sugo.app.feat.model.request.LoginFormat
 import com.sugo.app.feat.model.request.email
+import com.sugo.app.feat.model.response.NoteRoom
 import com.sugo.app.feat.network.SugoRetrofit
 import retrofit2.Response
 
@@ -14,4 +15,6 @@ class LoginRemoteDataSource(private val apiService:SugoRetrofit):LoginDataSource
     override suspend fun findlogin(email: String): Response<Success> {
         return apiService.findlogin(email(email))
     }
+
+
 }

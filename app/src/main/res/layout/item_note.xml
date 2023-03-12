@@ -12,6 +12,7 @@
         <variable
             name="noteContent"
             type="com.sugo.app.feat.model.response.NoteContent" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +34,6 @@
             tools:src="@drawable/icplus" />
 
 
-
         <TextView
             android:id="@+id/tv_deal_product_title"
             style="@style/PretendardBold.Middle"
@@ -43,20 +43,20 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:maxLines="1"
-            app:layout_constraintTop_toTopOf="@+id/iv_mypage_product_link"
             android:text="@{noteContent.opponentUserNickname}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_mypage_product_link"
+            app:layout_constraintTop_toTopOf="@+id/iv_mypage_product_link"
             tools:text="아무말이나아무말아무말" />
 
 
         <TextView
             style="@style/PretendardBold.Middle"
-            android:text="@{noteContent.recentContent}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
+            android:text="@{noteContent.recentContent}"
             app:layout_constraintBottom_toBottomOf="@+id/iv_mypage_product_link"
             app:layout_constraintStart_toEndOf="@id/iv_mypage_product_link"
             app:layout_constraintTop_toBottomOf="@+id/tv_deal_product_title"

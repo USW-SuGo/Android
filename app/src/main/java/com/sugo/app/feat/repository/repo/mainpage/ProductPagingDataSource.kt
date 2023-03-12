@@ -2,6 +2,7 @@ package com.sugo.app.feat.repository.repo.mainpage
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.sugo.app.feat.App
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.network.SugoRetrofit
 
