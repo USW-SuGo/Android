@@ -10,8 +10,9 @@
             type="com.sugo.app.feat.ui.note.MessageViewModel" />
 
         <variable
-            name="noteRoom"
+            name="noteContent"
             type="com.sugo.app.feat.model.response.NoteContent" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,74 +24,67 @@
         android:layout_marginBottom="15dp">
 
         <ImageView
-            android:id="@+id/iv_mypage_product_link"
-            imageUrl="@{noteRoom.imageLink}"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/iv_note_imageLink"
+            imageUrl="@{noteContent.imageLink}"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/icplus" />
 
 
-
         <TextView
-            android:id="@+id/tv_deal_product_title"
-            style="@style/PretendardBold.Middle"
+            android:id="@+id/tv_note_nickname"
+            style="@style/PretendardBold.Size22"
             android:layout_width="0dp"
+            android:padding="6dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:maxLines="1"
-            app:layout_constraintTop_toTopOf="@+id/iv_mypage_product_link"
-            android:text="@{noteRoom.opponentUserNickname}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_mypage_product_link"
-            tools:text="아무말이나아무말아무말" />
-
-
-        <TextView
-            style="@style/PretendardBold.Middle"
-            android:text="@{noteRoom.recentContent}"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_mypage_product_link"
-            app:layout_constraintStart_toEndOf="@id/iv_mypage_product_link"
-            app:layout_constraintTop_toBottomOf="@+id/tv_deal_product_title"
-            tools:text="100,100원" />
-
-
-        <View
-            android:id="@+id/item_line1"
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{noteContent.opponentUserNickname}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_mypage_product_link" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="닉네임" />
 
         <TextView
+            android:id="@+id/tv_note_unread_count"
             style="@style/PretendardBold.Size20"
-            android:layout_width="194dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
-            android:text="@{noteRoom.requestUserUnreadCount}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/item_line1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/item_line1" />
-
+            android:layout_marginStart="30dp"
+            android:text="@{noteContent.requestUserUnreadCount}"
+            tools:text = "안읽은 개수"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_note_nickname"
+            />
         <TextView
             style="@style/PretendardBold.Size20"
-            android:layout_width="194dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:maxLines="1"
+            android:layout_marginStart="4dp"
+            android:text="@{noteContent.recentContent}"
+            tools:text = "최근내용"
+            app:layout_constraintEnd_toStartOf="@+id/iv_note_imageLink"
+            app:layout_constraintTop_toBottomOf="@id/tv_note_nickname"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <TextView
+            style="@style/PretendardBold.Size20"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_marginStart="30dp"
+            android:text="@{noteContent.recentChattingDate}"
+            tools:text = "날짜"
+            app:layout_constraintTop_toBottomOf="@id/iv_note_imageLink"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_line1"
-            app:layout_constraintTop_toTopOf="@id/item_line1" />
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

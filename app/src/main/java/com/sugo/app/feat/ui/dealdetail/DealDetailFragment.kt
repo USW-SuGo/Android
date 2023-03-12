@@ -36,6 +36,7 @@ class DealDetailFragment : Fragment() {
         binding.viewmodel=viewModel
         val productId = requireArguments().getLong("productPostId")
         val adapter = initAdapter()
+
         setViewPagerAdapter(adapter, productId)
         setNavigation()
     }
@@ -59,7 +60,6 @@ class DealDetailFragment : Fragment() {
         viewModel.dealProduct.observe(viewLifecycleOwner) {
             binding.dealproduct = it
             val imageLinkList = it.imageLink.split(", ").toMutableList()
-            Log.d("imaglink", imageLinkList[0])
             adapter.submitList(imageLinkList)
 
         }

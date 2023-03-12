@@ -31,7 +31,6 @@ class MyPageAdapter(
 
         fun bind(dealProduct: DealProduct) {
             binding.viewModel = viewModel
-            Log.d("MyPage",dealProduct.toString())
             binding.dealproduct = dealProduct
             binding.executePendingBindings()
 

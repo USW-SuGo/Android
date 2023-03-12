@@ -6,17 +6,13 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.sugo.app.databinding.ItemMypageBinding
 import com.sugo.app.databinding.ItemNoteBinding
-import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.model.response.NoteContent
-import com.sugo.app.feat.ui.common.DealProductDiffCallback
-import com.sugo.app.feat.ui.mypage.MyPageViewModel
 
 class MessageAdapter(
     private val viewModel: MessageViewModel,
 ) : PagingDataAdapter<NoteContent, MessageAdapter.PagingViewHolder>(
-    NoteRoomDiffCallback()
+   NoteRoomDiffCallback()
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagingViewHolder {
@@ -33,20 +29,17 @@ class MessageAdapter(
 
         fun bind(noteContent: NoteContent) {
             binding.viewModel = viewModel
-            Log.d("NotePage",noteContent.toString())
-            binding.noteRoom = noteContent
+            Log.d("responsetest","tsadasda")
+            binding.noteContent= noteContent
             binding.executePendingBindings()
-
         }
     }
 
 }
-
 class NoteRoomDiffCallback : DiffUtil.ItemCallback<NoteContent>() {
     override fun areItemsTheSame(oldItem: NoteContent, newItem: NoteContent): Boolean {
-        return oldItem.noteId== newItem.noteId
+        return oldItem.noteId == newItem.noteId
     }
-
     override fun areContentsTheSame(oldItem: NoteContent, newItem: NoteContent): Boolean {
         return oldItem == newItem
     }

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sugo.app.R
 import com.sugo.app.databinding.ActivityPostBinding
 import com.sugo.app.feat.model.ProductPostId
+import com.sugo.app.feat.model.response.NoteRoom
 import com.sugo.app.feat.network.SugoRetrofit
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

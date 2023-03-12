@@ -2,9 +2,7 @@ package com.sugo.app.feat.network
 
 import android.util.Log
 import com.google.gson.*
-import com.sugo.app.feat.App
 import com.sugo.app.feat.App.Companion.prefs
-import com.sugo.app.feat.ServiceLocator
 import com.sugo.app.feat.common.NetWork.AuthPayLoad
 import com.sugo.app.feat.common.NetWork.CheckEmail
 import com.sugo.app.feat.common.NetWork.CheckId
@@ -161,7 +159,8 @@ interface SugoRetrofit {
     suspend fun getNoteRoom(
         @Query("page") page: Int,
         @Query("size") size: Int
-    ): Response<NoteRoom>
+    ): Response<List<Any>>
+
     @GET(LikePost)
     suspend fun getLikeProduct(
         @Query("page") page: Int,
@@ -193,7 +192,6 @@ interface SugoRetrofit {
         private fun getLogOkHttpClient(): Interceptor {
 
             val interceptor = HttpLoggingInterceptor { message ->
-                var accessToken = prefs.getAccessToken()
                 when {
                     message.isJsonObject() ->
                         Log.d("Retrofit2", JSONObject(message).toString(4))
