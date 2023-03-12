@@ -24,9 +24,11 @@ class NotePagingDataSource(
             val Products = apiService.getNoteRoom(position, 10)
             val a:List<String> = Products.body()!![1].toString().replace("{","").replace("[","").replace("]","").split("},")
             val test2 = mutableListOf<NoteContent>()
-            val b = a[0].split(",")
-            test2.add(NoteContent(b[0].replace("imageLink=",""),b[1],b[2] ,b[3] ,b[4],b[5],b[6],b[7],b[8]))
-            Log.d("response test", test2[0].toString())
+            for (i in 0..a.size-1){
+                val b = a[i].split(",")
+                test2.add(NoteContent(b[0].replace("imageLink=","").replace(" ",""),b[1],b[2] ,b[3] ,b[4],b[5].replace("opponentUserNickname=",""),
+                    b[6].replace("recentContent=",""),b[7].replace("requestUserUnreadCount=",""),b[8].replace("recentChattingDate=","")))
+            }
             LoadResult.Page(
                 data = test2,
                 prevKey = if (position == 0) null else position - 1,
