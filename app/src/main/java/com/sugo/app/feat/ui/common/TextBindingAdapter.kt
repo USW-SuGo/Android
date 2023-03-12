@@ -34,3 +34,4 @@ fun applyCountTradeAttemptFormat(view: TextView, countTradeAttempt: Long) {
 
 
 
+

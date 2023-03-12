@@ -5,6 +5,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.sugo.app.feat.model.response.NoteContent
 import com.sugo.app.feat.network.SugoRetrofit
+import com.sugo.app.feat.ui.common.MessageList
+import com.sugo.app.feat.ui.common.MessageRoom
 
 class NotePagingDataSource(
     private val apiService: SugoRetrofit,
@@ -22,17 +24,11 @@ class NotePagingDataSource(
         val position = params.key ?: 0
         return try {
             val Products = apiService.getNoteRoom(position, 10)
-            val a:List<String> = Products.body()!![1].toString().replace("{","").replace("[","").replace("]","").split("},")
-            val test2 = mutableListOf<NoteContent>()
-            for (i in 0..a.size-1){
-                val b = a[i].split(",")
-                test2.add(NoteContent(b[0].replace("imageLink=","").replace(" ",""),b[1],b[2] ,b[3] ,b[4],b[5].replace("opponentUserNickname=",""),
-                    b[6].replace("recentContent=",""),b[7].replace("requestUserUnreadCount=",""),b[8].replace("recentChattingDate=","")))
-            }
+            val a = MessageRoom(Products.body()!![1].toString())
             LoadResult.Page(
-                data = test2,
+                data = MessageList(a),
                 prevKey = if (position == 0) null else position - 1,
-                nextKey = if (test2.isEmpty()) null else position + 1
+                nextKey = if (MessageList(a).isEmpty()) null else position + 1
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)
