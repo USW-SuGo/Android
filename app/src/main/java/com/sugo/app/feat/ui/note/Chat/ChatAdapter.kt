@@ -24,7 +24,7 @@ class ChatAdapter (
     }
 
     override fun onBindViewHolder(holder: PagingViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
+        getItem(itemCount - position - 1)?.let { holder.bind(it) }
     }
 
     inner class PagingViewHolder(private val binding: ItemChattingBinding) :
