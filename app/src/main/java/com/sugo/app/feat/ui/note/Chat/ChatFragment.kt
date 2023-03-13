@@ -30,7 +30,7 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val productId = requireArguments().getString("noteId")
-        Log.d("test",productId.toString())
+        Log.d("test",productId!!.substringBefore(".").toLong().toString())
         setNavigation()
     }
 
