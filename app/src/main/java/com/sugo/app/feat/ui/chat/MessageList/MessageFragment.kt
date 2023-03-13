@@ -1,8 +1,7 @@
-package com.sugo.app.feat.ui.note
+package com.sugo.app.feat.ui.chat.MessageList
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.PagingData
 import com.sugo.app.databinding.FragmentMessageBinding
-import com.sugo.app.feat.App.Companion.prefs
 import com.sugo.app.feat.model.response.NoteContent
-import com.sugo.app.feat.model.response.NoteRoom
 
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.mypage.MyPageViewModel

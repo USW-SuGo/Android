@@ -1,4 +1,4 @@
-package com.sugo.app.feat.ui.note
+package com.sugo.app.feat.ui.chat.MessageList
 
 import android.util.Log
 import android.view.LayoutInflater
