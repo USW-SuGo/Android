@@ -9,4 +9,5 @@
     <string name="page_chat">쪽지</string>
     <string name="deal_title_msg">SUGO</string>
     <string name="category_tv">카테고리</string>
+    <string name="click_chat">게시물을 확인하시려면 클릭</string>
 </resources>

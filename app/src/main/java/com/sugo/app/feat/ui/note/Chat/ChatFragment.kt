@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -12,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
+import com.sugo.app.R
 import com.sugo.app.databinding.FragmentChattingBinding
 import com.sugo.app.databinding.FragmentMessageBinding
 import com.sugo.app.feat.model.DealProduct
@@ -47,7 +49,9 @@ class ChatFragment : Fragment() {
         val noteId = requireArguments().getString("noteId")!!.substringBefore(".").toLong()
         val productPostId = requireArguments().getString("productPostId")!!.substringBefore(".").toLong()
         initAdapter(noteId,productPostId)
-
+        binding.tvDealproductGo.setOnClickListener {
+            openDealDetail(productPostId)
+        }
     }
     private fun initAdapter(noteId:Long,productPostId:Long): ChatAdapter {
         val pagingAdapter = ChatAdapter(viewModel)
@@ -57,6 +61,7 @@ class ChatFragment : Fragment() {
         viewModel.dealProduct2.observe(viewLifecycleOwner) {
             binding.dealproduct = it
         }
+        setNavigation()
         return pagingAdapter
     }
     private fun productSubmitData(
@@ -72,6 +77,13 @@ class ChatFragment : Fragment() {
                 }
             }
         }
+    }
+    private fun openDealDetail(productPostId:Long) {
+        findNavController().navigate(
+            R.id.action_chatFragment_to_dealDetailFragment2, bundleOf(
+            "productPostId" to productPostId
+        )
+        )
     }
     private fun setNavigation() {
         binding.toolbarChat.setNavigationOnClickListener {
