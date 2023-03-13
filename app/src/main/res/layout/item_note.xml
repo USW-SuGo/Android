@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
-        android:onClick="@{()->viewModel.openChat(noteContent.noteId)}"
+        android:onClick="@{()->viewModel.openChat(noteContent.noteId,noteContent.productPostId)}"
         android:layout_marginTop="15dp"
         android:layout_marginRight="12dp"
         android:layout_marginBottom="15dp">

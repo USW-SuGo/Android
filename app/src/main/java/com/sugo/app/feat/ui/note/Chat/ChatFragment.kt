@@ -14,12 +14,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import com.sugo.app.databinding.FragmentChattingBinding
 import com.sugo.app.databinding.FragmentMessageBinding
+import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.model.response.ChatRoom
 import com.sugo.app.feat.model.response.NoteContent
 import com.sugo.app.feat.ui.common.ViewModelFactory
+import com.sugo.app.feat.ui.mypage.CheckDialog
 import com.sugo.app.feat.ui.mypage.MyPageViewModel
 import com.sugo.app.feat.ui.note.MessageAdapter
 import com.sugo.app.feat.ui.note.MessageViewModel
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -40,15 +44,19 @@ class ChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val noteId = requireArguments().getString("noteId")
-        initAdapter(noteId!!.substringBefore(".").toLong())
-        setNavigation()
-    }
-    private fun initAdapter(noteId:Long): ChatAdapter {
+        val noteId = requireArguments().getString("noteId")!!.substringBefore(".").toLong()
+        val productPostId = requireArguments().getString("productPostId")!!.substringBefore(".").toLong()
+        initAdapter(noteId,productPostId)
 
+    }
+    private fun initAdapter(noteId:Long,productPostId:Long): ChatAdapter {
         val pagingAdapter = ChatAdapter(viewModel)
         binding.rvChat.adapter = pagingAdapter
         productSubmitData(pagingAdapter, viewModel.getChatRoom(noteId))
+        viewModel.detailProduct(productPostId)
+        viewModel.dealProduct2.observe(viewLifecycleOwner) {
+            binding.dealproduct = it
+        }
         return pagingAdapter
     }
     private fun productSubmitData(

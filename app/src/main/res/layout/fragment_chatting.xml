@@ -1,81 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <data>
 
-    <com.google.android.material.appbar.AppBarLayout
+        <variable
+            name="dealproduct"
+            type="com.sugo.app.feat.model.DealProduct" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
-        android:id="@+id/appbar_msg"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_chat"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:navigationIcon="@drawable/ic_back" />
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_chat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:navigationIcon="@drawable/ic_back" />
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_dealProduct"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tv_dealProduct_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@{dealproduct.title}"
+                    app:layout_constraintStart_toEndOf="@+id/iv_dealProduct"
+                    app:layout_constraintTop_toTopOf="@id/iv_dealProduct"
+                    tools:text="test" />
+
+                <TextView
+                    android:id="@+id/tv_dealProduct_price"
+                    price="@{dealproduct.price}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/iv_dealProduct"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_dealProduct_title"
+                    tools:text="기갹" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_manner_grade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="학점 주기"
+                    app:layout_constraintStart_toStartOf="@id/tv_dealProduct_price"
+                    app:layout_constraintTop_toBottomOf="@id/tv_dealProduct_price" />
+
+                <TextView
+                    android:id="@+id/tv_dealproduct_go"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_manner_grade"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="test" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_chat"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/appbar_msg"
+            tools:listitem="@layout/item_mypage" />
 
-            <ImageView
-                android:id="@+id/iv_dealProduct"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_dealProduct_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                app:layout_constraintStart_toEndOf="@+id/iv_dealProduct"
-                app:layout_constraintTop_toTopOf="@id/iv_dealProduct"
-                tools:text="test" />
-
-            <TextView
-                android:id="@+id/tv_dealProduct_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/iv_dealProduct"
-                app:layout_constraintTop_toBottomOf="@+id/tv_dealProduct_title"
-                tools:text="기갹" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_manner_grade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="학점 주기"
-                app:layout_constraintStart_toStartOf="@id/tv_dealProduct_price"
-                app:layout_constraintTop_toBottomOf="@id/tv_dealProduct_price" />
-
-            <TextView
-                android:id="@+id/tv_dealproduct_go"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintBottom_toBottomOf="@id/btn_manner_grade"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:text="test" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_chat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-       app:layout_constraintTop_toBottomOf="@id/appbar_msg"
-        tools:listitem="@layout/item_mypage" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

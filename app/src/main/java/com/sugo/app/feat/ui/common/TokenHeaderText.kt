@@ -14,7 +14,7 @@ fun MessageList(noteContent:List<String>):List<NoteContent>{
     for (i in 0..noteContent.size-1){
         val b = noteContent[i].split(",")
         test2.add(
-            NoteContent(b[0].replace("imageLink=","").replace(" ",""),b[1].replace(" ","").replace("noteId=",""),b[2] ,b[3] ,b[4],b[5].replace("opponentUserNickname=",""),
+            NoteContent(b[0].replace("imageLink=","").replace(" ",""),b[1].replace(" ","").replace("noteId=",""),b[2].replace(" ","").replace("productPostId=","") ,b[3] ,b[4],b[5].replace("opponentUserNickname=",""),
                 b[6].replace("recentContent=",""),b[7].replace("requestUserUnreadCount=",""),b[8].replace("recentChattingDate=",""))
         )
     }
@@ -34,3 +34,6 @@ fun ChatList(noteContent:List<String>):List<ChatRoom>{
 fun MessageRoom(noteRoom:String):List<String>{
     return noteRoom.replace("{","").replace("[","").replace("]","").split("},")
 }
+
+
+

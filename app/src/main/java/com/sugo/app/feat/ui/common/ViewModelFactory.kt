@@ -56,7 +56,9 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             modelClass.isAssignableFrom(ChatViewModel::class.java) -> {
                 val repository =
                     ChatRepository((ServiceLocator.provideTokenApiClient()))
-               ChatViewModel(repository) as T
+                val repository2 =
+                    DetailRepository(DetailRemoteDataSource(ServiceLocator.provideTokenApiClient()))
+               ChatViewModel(repository,repository2) as T
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) ->{
                 val repository =

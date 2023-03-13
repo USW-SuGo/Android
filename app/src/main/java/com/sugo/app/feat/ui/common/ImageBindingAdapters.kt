@@ -23,3 +23,4 @@ fun loadImage(view: ImageView, imageUrl: String?) {
 }
 
 
+

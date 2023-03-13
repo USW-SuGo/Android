@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentMessageBinding
+import com.sugo.app.feat.model.ProductPostId
 import com.sugo.app.feat.model.response.NoteContent
 import com.sugo.app.feat.ui.common.EventObserver
 
@@ -54,16 +55,18 @@ class MessageFragment : Fragment() {
     }
 
     private fun setNavigation() {
+
         viewModel.openChatEvent.observe(viewLifecycleOwner, EventObserver {
             Log.d("productPostId", it.toString())
-            openChat(it)
+            openChat(it[0],it[1])
         })
     }
 
-    private fun openChat(noteId: String) {
+    private fun openChat(noteId: String,productPostId: String) {
         findNavController().navigate(
             R.id.action_navigation_message_to_chatFragment, bundleOf(
-                "noteId" to noteId
+                "noteId" to noteId,
+                "productPostId" to productPostId
             )
         )
     }

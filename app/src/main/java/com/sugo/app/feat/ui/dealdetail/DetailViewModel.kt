@@ -22,7 +22,6 @@ class DetailViewModel(
     private val _dealPrduct1 = MutableLiveData<String>()
     val dealProduct1: LiveData<String> = _dealPrduct1
 
-
     fun detailProduct(productPostId: Long) = viewModelScope.launch {
         val response = detailRepository.detailProduct(productPostId)
         if(response.isSuccessful) _dealPrduct.value = response.body()

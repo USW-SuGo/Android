@@ -61,7 +61,6 @@ class DealDetailFragment : Fragment() {
             binding.dealproduct = it
             val imageLinkList = it.imageLink.split(", ").toMutableList()
             adapter.submitList(imageLinkList)
-
         }
 
     }
