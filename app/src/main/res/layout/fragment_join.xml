@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_email_Intro"
+            android:id="@+id/tv_emailintro"
             style="@style/PretendardBold.Size20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,8 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="재학생 인증이 필요하므로 정확히 입력해주세요"
-            app:layout_constraintStart_toStartOf="@id/tv_email_Intro"
-            app:layout_constraintTop_toBottomOf="@id/tv_email_Intro" />
+            app:layout_constraintStart_toStartOf="@id/tv_emailintro"
+            app:layout_constraintTop_toBottomOf="@id/tv_emailintro" />
 
         <EditText
             android:id="@+id/etv_email"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="아이디"
-            app:layout_constraintStart_toStartOf="@id/tv_email_Intro"
+            app:layout_constraintStart_toStartOf="@id/tv_emailintro"
             app:layout_constraintTop_toBottomOf="@id/tv_email_intro" />
 
         <EditText
@@ -116,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="영문/숫자/특수문자 3가지 조합 (8~20자)"
-            app:layout_constraintStart_toStartOf="@id/tv_email_Intro"
+            app:layout_constraintStart_toStartOf="@id/tv_emailintro"
             app:layout_constraintTop_toBottomOf="@id/tv_pwd_intro" />
 
         <com.google.android.material.textfield.TextInputEditText

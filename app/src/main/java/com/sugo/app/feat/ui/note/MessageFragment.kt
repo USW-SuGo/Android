@@ -1,18 +1,23 @@
-package com.sugo.app.feat.ui.chat.MessageList
+package com.sugo.app.feat.ui.note
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
+import com.sugo.app.R
 import com.sugo.app.databinding.FragmentMessageBinding
 import com.sugo.app.feat.model.response.NoteContent
+import com.sugo.app.feat.ui.common.EventObserver
 
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.mypage.MyPageViewModel
@@ -36,8 +41,10 @@ class MessageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setNavigation()
         initAdapter()
     }
+
     private fun initAdapter(): MessageAdapter {
 
         val pagingAdapter = MessageAdapter(viewModel)
@@ -46,12 +53,31 @@ class MessageFragment : Fragment() {
         return pagingAdapter
     }
 
-    private fun productSubmitData(pagingAdapter: MessageAdapter, getData: Flow<PagingData<NoteContent>>) {
+    private fun setNavigation() {
+        viewModel.openChatEvent.observe(viewLifecycleOwner, EventObserver {
+            Log.d("productPostId", it.toString())
+            openChat(it)
+        })
+    }
+
+    private fun openChat(noteId: String) {
+        findNavController().navigate(
+            R.id.action_navigation_message_to_chatFragment, bundleOf(
+                "noteId" to noteId
+            )
+        )
+    }
+
+    private fun productSubmitData(
+        pagingAdapter: MessageAdapter,
+        getData: Flow<PagingData<NoteContent>>
+    ) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch { getData.collectLatest {
-                        pagingData -> pagingAdapter.submitData(pagingData)
-                }
+                launch {
+                    getData.collectLatest { pagingData ->
+                        pagingAdapter.submitData(pagingData)
+                    }
                 }
             }
         }

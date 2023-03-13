@@ -1,4 +1,4 @@
-package com.sugo.app.feat.ui.chat.MessageList
+package com.sugo.app.feat.ui.note
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,7 +28,7 @@ class MessageAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(noteContent: NoteContent) {
-            binding.viewModel = viewModel
+            binding.viewModel=viewModel
             Log.d("responsetest","tsadasda")
             binding.noteContent= noteContent
             binding.executePendingBindings()
