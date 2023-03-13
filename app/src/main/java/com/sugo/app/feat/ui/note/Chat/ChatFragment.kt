@@ -16,6 +16,7 @@ import com.sugo.app.feat.ui.note.MessageViewModel
 
 class ChatFragment : Fragment() {
 
+    private val viewModel: ChatViewModel by viewModels { ViewModelFactory(requireContext()) }
 
     private lateinit var binding: FragmentChattingBinding
     override fun onCreateView(
@@ -30,6 +31,7 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val productId = requireArguments().getString("noteId")
+        viewModel.getChatRoom()
         Log.d("test",productId!!.substringBefore(".").toLong().toString())
         setNavigation()
     }

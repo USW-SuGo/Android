@@ -1,5 +1,6 @@
 package com.sugo.app.feat.ui.common
 
+import com.sugo.app.feat.model.response.ChatRoom
 import com.sugo.app.feat.model.response.NoteContent
 
 fun TokenHeadersText(originalHeaders: String?): Pair<String, String> {
@@ -20,6 +21,16 @@ fun MessageList(noteContent:List<String>):List<NoteContent>{
     return test2
 }
 
+fun ChatList(noteContent:List<String>):List<ChatRoom>{
+    val test2 = mutableListOf<ChatRoom>()
+    for (i in 0..noteContent.size-1){
+        val b = noteContent[i].split(",")
+        test2.add(
+                ChatRoom(b[0],b[1],b[2],b[3],b[4],b[5],b[6])
+      )
+    }
+    return test2
+}
 fun MessageRoom(noteRoom:String):List<String>{
     return noteRoom.replace("{","").replace("[","").replace("]","").split("},")
 }

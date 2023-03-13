@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sugo.app.feat.ServiceLocator
+import com.sugo.app.feat.repository.repo.Chat.ChatRemoteDataSource
+import com.sugo.app.feat.repository.repo.Chat.ChatRepository
 import com.sugo.app.feat.repository.repo.Note.NotePagingRepositoryImpl
 import com.sugo.app.feat.repository.repo.Token.TokenPreferenceManager
 import com.sugo.app.feat.repository.repo.detail.DetailRemoteDataSource
@@ -22,6 +24,8 @@ import com.sugo.app.feat.ui.dealdetail.DetailViewModel
 import com.sugo.app.feat.ui.join.inputUser.JoinViewModel
 import com.sugo.app.feat.ui.login.LoginViewModel
 import com.sugo.app.feat.ui.mypage.MyPageViewModel
+import com.sugo.app.feat.ui.note.Chat.ChatViewModel
+
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 
@@ -49,6 +53,11 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                     NotePagingRepositoryImpl((ServiceLocator.provideTokenApiClient()))
                 MessageViewModel(repository) as T
             }
+            modelClass.isAssignableFrom(ChatViewModel::class.java) -> {
+                val repository =
+                    ChatRepository((ServiceLocator.provideTokenApiClient()))
+               ChatViewModel(repository) as T
+            }
             modelClass.isAssignableFrom(LoginViewModel::class.java) ->{
                 val repository =
                     LoginRepository(LoginRemoteDataSource(ServiceLocator.provideTokenApiClient()))
@@ -64,6 +73,7 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                     DetailRepository(DetailRemoteDataSource(ServiceLocator.provideTokenApiClient()))
                 DetailViewModel(repository) as T
             }
+
             else -> {
                 throw IllegalArgumentException("Failed to create ViewModel : ${modelClass.name}")
             }
