@@ -21,7 +21,11 @@
         android:id="@+id/navigation_message"
         android:name="com.sugo.app.feat.ui.note.MessageFragment"
         android:label="MessageFragment"
-        tools:layout="@layout/fragment_message"/>
+        tools:layout="@layout/fragment_message">
+        <action
+            android:id="@+id/action_navigation_message_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_mypage"
         android:name="com.sugo.app.feat.ui.mypage.MyPageFragment"
@@ -46,6 +50,14 @@
         android:id="@+id/postFragment"
         android:name="com.sugo.app.feat.ui.post.fragmentVer.PostFragment"
         android:label="PostFragment" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.sugo.app.feat.ui.note.Chat.ChatFragment"
+        android:label="ChatFragment" >
+        <action
+            android:id="@+id/action_chatFragment_to_dealDetailFragment2"
+            app:destination="@id/dealDetailFragment" />
+    </fragment>
 
 
 </navigation>

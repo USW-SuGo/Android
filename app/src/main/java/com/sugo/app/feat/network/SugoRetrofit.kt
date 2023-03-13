@@ -166,6 +166,13 @@ interface SugoRetrofit {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): List<DealProduct>
+
+    @GET("/note-content/{noteId}")
+    suspend fun getNoteContent(
+        @Path("noteId") noteId: Long,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<List<Any>>
     companion object {
         val gson = gsonBuilder()
         private fun gsonBuilder(): Gson? {

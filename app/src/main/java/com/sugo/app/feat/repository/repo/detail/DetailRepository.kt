@@ -22,7 +22,6 @@ class DetailRepository(
         return detailRemoteDataSource.like(productPostId)
     }
 
-    suspend fun makeNoteRoom(): Response<List<Any>>{
-        return detailRemoteDataSource.getNoteRoom(0,10)
-    }
+
+
 }

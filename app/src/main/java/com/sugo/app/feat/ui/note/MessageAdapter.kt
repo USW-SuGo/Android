@@ -28,8 +28,7 @@ class MessageAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(noteContent: NoteContent) {
-            binding.viewModel = viewModel
-            Log.d("responsetest","tsadasda")
+            binding.viewModel=viewModel
             binding.noteContent= noteContent
             binding.executePendingBindings()
         }
