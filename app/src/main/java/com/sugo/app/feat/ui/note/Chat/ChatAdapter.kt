@@ -31,7 +31,13 @@ class ChatAdapter (
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(noteContent: ChatRoom) {
-            binding.chatroom= noteContent
+            val a =noteContent.requestUserId.replace(" ","").substringBefore(".").replace("{requestUserId=","").toInt()
+            if (noteContent.senderId!!.replace(" ","").substringBefore(".").toInt()==a){
+                binding.chatroom= noteContent
+            }
+            else{
+                binding.chatroom2= noteContent
+            }
             binding.executePendingBindings()
         }
     }

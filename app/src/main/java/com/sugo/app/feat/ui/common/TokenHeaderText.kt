@@ -21,12 +21,12 @@ fun MessageList(noteContent:List<String>):List<NoteContent>{
     return test2
 }
 
-fun ChatList(noteContent:List<String>):List<ChatRoom>{
+fun ChatList(noteContent:List<String>,test:String):List<ChatRoom>{
     val test2 = mutableListOf<ChatRoom>()
     for (i in 0..noteContent.size-1){
         val b = noteContent[i].split(",")
         test2.add(
-                ChatRoom(b[0],b[1],b[2],b[3],b[4],b[5],b[6])
+                ChatRoom(b[0],b[1],b[2].replace("message=",""),b[3].replace("imageLink=","").replace(" ",""),b[4].replace("senderId=",""),b[5].replace("receiverId=",""),b[6].replace("createdAt=",""),test)
       )
     }
     return test2

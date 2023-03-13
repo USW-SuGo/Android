@@ -23,17 +23,15 @@ class ChatRemoteDataSource   (private val apiService: SugoRetrofit,
         }
     }
 
-
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ChatRoom> {
         val position = params.key ?: 0
         return try {
             val products = apiService.getNoteContent(noteId ,position,10)
-            val test= MessageRoom(products.body()!![1].toString())
+            val message= MessageRoom(products.body()!![1].toString())
            LoadResult.Page(
-                data = ChatList(test),
+                data = ChatList(message,products.body()!![0].toString()),
                 prevKey = if (position == 0) null else position - 1,
-                nextKey = if (ChatList(test).isEmpty()) null else position + 1
+                nextKey = if (ChatList(message,products.body()!![0].toString()).isEmpty()) null else position + 1
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)

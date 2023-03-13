@@ -10,4 +10,5 @@ data class ChatRoom(
     val senderId: String,
     val receiverId: String,
     val createdAt: String,
+    val requestUserId: String
 )

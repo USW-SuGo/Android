@@ -7,6 +7,9 @@
         <variable
             name="chatroom"
             type="com.sugo.app.feat.model.response.ChatRoom" />
+        <variable
+            name="chatroom2"
+            type="com.sugo.app.feat.model.response.ChatRoom" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,6 +42,7 @@
             android:id="@+id/tv_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{chatroom2.message}"
             android:layout_margin="6dp"
             android:fontFamily="@font/pretendardbold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
+            android:text="@{chatroom2.createdAt}"
             android:fontFamily="@font/pretendardbold"
             app:layout_constraintEnd_toStartOf="@id/tv_user"
             app:layout_constraintTop_toTopOf="parent"
