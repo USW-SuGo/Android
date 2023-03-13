@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 
 class ChatViewModel  (private val chatRepository: ChatRepository) : ViewModel() {
 
-    fun getChatRoom(): Flow<PagingData<ChatRoom>> {
-        return chatRepository.getNoteRoom()
+    fun getChatRoom(noteId:Long): Flow<PagingData<ChatRoom>> {
+        return chatRepository.getNoteRoom(noteId)
     }
 }

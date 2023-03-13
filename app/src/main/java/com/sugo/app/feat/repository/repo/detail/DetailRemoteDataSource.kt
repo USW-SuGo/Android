@@ -24,4 +24,6 @@ class DetailRemoteDataSource(private val apiService:SugoRetrofit):DetailDataSour
     }
 
 
+
+
 }

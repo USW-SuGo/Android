@@ -167,7 +167,7 @@ interface SugoRetrofit {
         @Query("size") size: Int
     ): List<DealProduct>
 
-    @GET(NOTEROOM)
+    @GET("/note-content/{noteId}")
     suspend fun getNoteContent(
         @Path("noteId") noteId: Long,
         @Query("page") page: Int,

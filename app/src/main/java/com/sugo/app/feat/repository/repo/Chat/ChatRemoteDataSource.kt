@@ -14,6 +14,7 @@ import com.sugo.app.feat.ui.common.MessageRoom
 import retrofit2.Response
 
 class ChatRemoteDataSource   (private val apiService: SugoRetrofit,
+                              private val noteId:Long
 ) : PagingSource<Int, ChatRoom>() {
     override fun getRefreshKey(state: PagingState<Int, ChatRoom>): Int? {
         return state.anchorPosition?.let { position ->
@@ -27,7 +28,7 @@ class ChatRemoteDataSource   (private val apiService: SugoRetrofit,
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ChatRoom> {
         val position = params.key ?: 0
         return try {
-            val products = apiService.getNoteContent(24 ,position,10)
+            val products = apiService.getNoteContent(noteId ,position,10)
             val test= MessageRoom(products.body()!![1].toString())
            LoadResult.Page(
                 data = ChatList(test),

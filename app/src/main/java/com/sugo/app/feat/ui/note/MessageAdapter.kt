@@ -29,7 +29,6 @@ class MessageAdapter(
 
         fun bind(noteContent: NoteContent) {
             binding.viewModel=viewModel
-            Log.d("responsetest","tsadasda")
             binding.noteContent= noteContent
             binding.executePendingBindings()
         }

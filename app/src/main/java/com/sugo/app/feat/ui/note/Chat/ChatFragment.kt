@@ -7,12 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
 import com.sugo.app.databinding.FragmentChattingBinding
 import com.sugo.app.databinding.FragmentMessageBinding
+import com.sugo.app.feat.model.response.ChatRoom
+import com.sugo.app.feat.model.response.NoteContent
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.mypage.MyPageViewModel
+import com.sugo.app.feat.ui.note.MessageAdapter
 import com.sugo.app.feat.ui.note.MessageViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class ChatFragment : Fragment() {
 
@@ -30,12 +40,31 @@ class ChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val productId = requireArguments().getString("noteId")
-        viewModel.getChatRoom()
-        Log.d("test",productId!!.substringBefore(".").toLong().toString())
+        val noteId = requireArguments().getString("noteId")
+        initAdapter(noteId!!.substringBefore(".").toLong())
         setNavigation()
     }
+    private fun initAdapter(noteId:Long): ChatAdapter {
 
+        val pagingAdapter = ChatAdapter(viewModel)
+        binding.rvChat.adapter = pagingAdapter
+        productSubmitData(pagingAdapter, viewModel.getChatRoom(noteId))
+        return pagingAdapter
+    }
+    private fun productSubmitData(
+        pagingAdapter: ChatAdapter,
+        getData: Flow<PagingData<ChatRoom>>
+    ) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    getData.collectLatest { pagingData ->
+                        pagingAdapter.submitData(pagingData)
+                    }
+                }
+            }
+        }
+    }
     private fun setNavigation() {
         binding.toolbarChat.setNavigationOnClickListener {
             findNavController().navigateUp()

@@ -13,9 +13,9 @@ import retrofit2.Response
 
 class ChatRepository(private val apiService: SugoRetrofit): ChatDataSource {
 
-    override fun getNoteRoom(): Flow<PagingData<ChatRoom>> =
+    override fun getNoteRoom(noteId:Long): Flow<PagingData<ChatRoom>> =
         Pager(PagingConfig(10)){
-            ChatRemoteDataSource(apiService)
+            ChatRemoteDataSource(apiService,noteId)
         }.flow
 
 
