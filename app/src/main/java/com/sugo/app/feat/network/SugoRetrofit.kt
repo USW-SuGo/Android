@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.gson.*
 import com.sugo.app.feat.App.Companion.prefs
 import com.sugo.app.feat.common.NetWork.AuthPayLoad
+import com.sugo.app.feat.common.NetWork.CHATROOM
 import com.sugo.app.feat.common.NetWork.CheckEmail
 import com.sugo.app.feat.common.NetWork.CheckId
 import com.sugo.app.feat.common.NetWork.ClosePost
@@ -167,7 +168,7 @@ interface SugoRetrofit {
         @Query("size") size: Int
     ): List<DealProduct>
 
-    @GET("/note-content/{noteId}")
+    @GET(CHATROOM)
     suspend fun getNoteContent(
         @Path("noteId") noteId: Long,
         @Query("page") page: Int,

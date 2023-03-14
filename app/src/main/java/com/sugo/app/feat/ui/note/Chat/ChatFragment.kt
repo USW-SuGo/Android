@@ -2,9 +2,13 @@ package com.sugo.app.feat.ui.note.Chat
 
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -60,6 +64,13 @@ class ChatFragment : Fragment() {
         viewModel.detailProduct(productPostId)
         viewModel.dealProduct2.observe(viewLifecycleOwner) {
             binding.dealproduct = it
+        }
+
+        binding.ivChatSend.setOnClickListener {
+            // EditText에서 입력한 텍스트를 가져옵니다.
+            val inputText = binding.etvChatSend.text.toString()
+            Log.d("text",inputText)
+
         }
         setNavigation()
         return pagingAdapter
