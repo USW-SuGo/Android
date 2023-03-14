@@ -59,7 +59,6 @@ class ChatFragment : Fragment() {
         binding.ivChatSend.setOnClickListener {
             val inputText = binding.etvChatSend.text.toString()
             val chatContent=viewModel.chatContent.value
-            Log.d("chatContent","${chatContent!![0]},${chatContent[1]}")
             viewModel.sendChat(Chat(noteId,inputText,chatContent!![0],chatContent[1]))
         }
         binding.tvDealproductGo.setOnClickListener {
