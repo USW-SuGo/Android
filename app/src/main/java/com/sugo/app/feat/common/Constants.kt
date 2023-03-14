@@ -23,5 +23,6 @@ object NetWork {
     const val LIKE = "/like-post"
     const val NOTEROOM = "/note/list"
     const val CHATROOM = "/note-content/{noteId}"
+    const val SENDCHAT = "/note-content/text"
 
 }

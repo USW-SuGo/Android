@@ -36,7 +36,8 @@ data class NoteContent(
     val opponentUserNickname: String,
     val recentContent: String,
     val requestUserUnreadCount:String,
-    val recentChattingDate: String
+    val recentChattingDate: String,
+    val requestUserId: String
 )
 
 

@@ -21,6 +21,7 @@ import com.sugo.app.feat.common.NetWork.MyPageProduct
 import com.sugo.app.feat.common.NetWork.NOTEROOM
 import com.sugo.app.feat.common.NetWork.Note
 import com.sugo.app.feat.common.NetWork.POSTUPLOAD
+import com.sugo.app.feat.common.NetWork.SENDCHAT
 import com.sugo.app.feat.common.NetWork.Search
 
 import com.sugo.app.feat.common.NetWork.TokenRefreshAPI
@@ -174,6 +175,11 @@ interface SugoRetrofit {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Response<List<Any>>
+
+    @POST(SENDCHAT)
+    suspend fun sendChat(
+        @Body chat: Chat
+    ):Response<Any>
     companion object {
         val gson = gsonBuilder()
         private fun gsonBuilder(): Gson? {

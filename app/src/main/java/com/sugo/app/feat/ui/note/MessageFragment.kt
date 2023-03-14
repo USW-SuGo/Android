@@ -22,13 +22,14 @@ import com.sugo.app.feat.ui.common.EventObserver
 
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.mypage.MyPageViewModel
+import com.sugo.app.feat.ui.note.Chat.ChatViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MessageFragment : Fragment() {
     private val viewModel: MessageViewModel by viewModels { ViewModelFactory(requireContext()) }
-    private val viewModel2: MyPageViewModel by viewModels { ViewModelFactory(requireContext()) }
+    private val viewModel2: ChatViewModel by viewModels { ViewModelFactory(requireContext()) }
 
     private lateinit var binding: FragmentMessageBinding
     override fun onCreateView(
@@ -48,7 +49,7 @@ class MessageFragment : Fragment() {
 
     private fun initAdapter(): MessageAdapter {
 
-        val pagingAdapter = MessageAdapter(viewModel)
+        val pagingAdapter = MessageAdapter(viewModel, viewModel2)
         binding.rvNote.adapter = pagingAdapter
         productSubmitData(pagingAdapter, viewModel.getNoteRoom())
         return pagingAdapter
@@ -58,15 +59,24 @@ class MessageFragment : Fragment() {
 
         viewModel.openChatEvent.observe(viewLifecycleOwner, EventObserver {
             Log.d("productPostId", it.toString())
-            openChat(it[0],it[1])
+            openChat(it[0], it[1], it[2], it[3], it[4])
         })
     }
 
-    private fun openChat(noteId: String,productPostId: String) {
+    private fun openChat(
+        noteId: String,
+        productPostId: String,
+        creatingUserId: String,
+        opponentUserId: String,
+        requestUserId: String
+    ) {
         findNavController().navigate(
             R.id.action_navigation_message_to_chatFragment, bundleOf(
                 "noteId" to noteId,
-                "productPostId" to productPostId
+                "productPostId" to productPostId,
+                "creatingUserId" to creatingUserId,
+                "opponentUserId" to opponentUserId,
+                "requestUserId" to requestUserId
             )
         )
     }

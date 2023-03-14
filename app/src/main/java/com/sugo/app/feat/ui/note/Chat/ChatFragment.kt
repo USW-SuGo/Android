@@ -2,13 +2,9 @@ package com.sugo.app.feat.ui.note.Chat
 
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
-import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,17 +15,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentChattingBinding
-import com.sugo.app.databinding.FragmentMessageBinding
-import com.sugo.app.feat.model.DealProduct
+import com.sugo.app.feat.model.request.Chat
 import com.sugo.app.feat.model.response.ChatRoom
-import com.sugo.app.feat.model.response.NoteContent
 import com.sugo.app.feat.ui.common.ViewModelFactory
-import com.sugo.app.feat.ui.mypage.CheckDialog
-import com.sugo.app.feat.ui.mypage.MyPageViewModel
-import com.sugo.app.feat.ui.note.MessageAdapter
-import com.sugo.app.feat.ui.note.MessageViewModel
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
+import com.sugo.app.feat.ui.common.chatLong
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -51,8 +40,28 @@ class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val noteId = requireArguments().getString("noteId")!!.substringBefore(".").toLong()
-        val productPostId = requireArguments().getString("productPostId")!!.substringBefore(".").toLong()
+        Log.d("noteId",noteId.toString())
+        val productPostId = chatLong(requireArguments().getString("productPostId")!!).toLong()
+        val creatingUserId = chatLong(requireArguments().getString("creatingUserId")!!).toLong()
+        val opponentUserId = chatLong(requireArguments().getString("opponentUserId")!!).toLong()
+        val requestUserId = chatLong(requireArguments().getString("requestUserId")!!.replace("{requestUserId=","")).toLong()
         initAdapter(noteId,productPostId)
+            if (creatingUserId==requestUserId){
+                viewModel.getTest(
+                  creatingUserId,
+                    opponentUserId)
+            }
+            else{
+                viewModel.getTest(
+                    creatingUserId,
+                    opponentUserId)
+            }
+        binding.ivChatSend.setOnClickListener {
+            val inputText = binding.etvChatSend.text.toString()
+            val chatContent=viewModel.chatContent.value
+            Log.d("chatContent","${chatContent!![0]},${chatContent[1]}")
+            viewModel.sendChat(Chat(noteId,inputText,chatContent!![0],chatContent[1]))
+        }
         binding.tvDealproductGo.setOnClickListener {
             openDealDetail(productPostId)
         }
@@ -66,12 +75,7 @@ class ChatFragment : Fragment() {
             binding.dealproduct = it
         }
 
-        binding.ivChatSend.setOnClickListener {
-            // EditText에서 입력한 텍스트를 가져옵니다.
-            val inputText = binding.etvChatSend.text.toString()
-            Log.d("text",inputText)
 
-        }
         setNavigation()
         return pagingAdapter
     }

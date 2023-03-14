@@ -18,9 +18,9 @@ import kotlinx.coroutines.launch
 class MessageViewModel (private val repoImpl: NotePagingRepositoryImpl) : ViewModel() {
     private val _openChatEvent = MutableLiveData<Event<List<String>>>()
     val openChatEvent: LiveData<Event<List<String>>> = _openChatEvent
-  private var test : String = ""
-    fun openChat(noteId:String,productPostId:String) {
-        _openChatEvent.value = Event(listOf(noteId,productPostId))
+
+    fun openChat(noteId:String,productPostId:String,creatingUserId:String,opponentUserId:String,requestUserId:String) {
+        _openChatEvent.value = Event(listOf(noteId,productPostId,creatingUserId,opponentUserId,requestUserId))
     }
 
     fun getNoteRoom(): Flow<PagingData<NoteContent>> {
