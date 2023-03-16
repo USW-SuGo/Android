@@ -34,8 +34,7 @@ class ChatAdapter (
                 binding.chatroom2= noteContent
             }
             else{
-                binding.chatroom= noteContent
-            }
+                binding.chatroom= noteContent }
             binding.executePendingBindings()
         }
     }

@@ -3,6 +3,7 @@ package com.sugo.app.feat.common
 import com.sugo.app.feat.model.response.MyPage
 
 object NetWork {
+    const val BASE_URL = "https://api.sugo-diger.com"
     const val MainPage = "/post/all"
     const val Login = "/user/login"
     const val TokenRefreshAPI = "/token"
@@ -24,5 +25,6 @@ object NetWork {
     const val NOTEROOM = "/note/list"
     const val CHATROOM = "/note-content/{noteId}"
     const val SENDCHAT = "/note-content/text"
+    const val SEND_FILE="/note-file/file"
 
 }
