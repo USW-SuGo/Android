@@ -26,9 +26,9 @@ class NotePagingDataSource(
             val products = apiService.getNoteRoom(position, 10)
             val messageContent = MessageRoom(products.body()!![1].toString())
             LoadResult.Page(
-                data = MessageList(messageContent),
+                data = MessageList(messageContent,products.body()!![0].toString()),
                 prevKey = if (position == 0) null else position - 1,
-                nextKey = if (MessageList(messageContent).isEmpty()) null else position + 1
+                nextKey = if (MessageList(messageContent,products.body()!![0].toString()).isEmpty()) null else position + 1
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)

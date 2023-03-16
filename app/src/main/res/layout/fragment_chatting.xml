@@ -42,6 +42,7 @@
                     android:layout_height="75dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
                     android:id="@+id/tv_dealProduct_title"
                     android:layout_width="wrap_content"
@@ -70,11 +71,11 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_dealProduct_price" />
 
                 <TextView
-                    android:text="@string/click_chat"
                     android:id="@+id/tv_dealproduct_go"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:text="@string/click_chat"
                     app:layout_constraintBottom_toBottomOf="@id/btn_manner_grade"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:text="test" />
@@ -85,11 +86,34 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_chat"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="450dp"
+            android:inputType="text"
+            android:imeOptions="actionDone"
             android:layout_marginTop="13dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/appbar_msg"
             tools:listitem="@layout/item_chatting" />
+
+        <ImageView
+            android:id="@+id/iv_chat_send"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="14dp"
+            android:src="@android:drawable/ic_menu_send"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_chat" />
+
+        <EditText
+
+            android:id="@+id/etv_chat_send"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            app:layout_constraintEnd_toStartOf="@id/iv_chat_send"
+            app:layout_constraintStart_toStartOf="parent"
+            android:hint="msg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_chat" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

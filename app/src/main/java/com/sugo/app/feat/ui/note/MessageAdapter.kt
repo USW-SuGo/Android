@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sugo.app.databinding.ItemNoteBinding
 import com.sugo.app.feat.model.response.NoteContent
+import com.sugo.app.feat.ui.common.chatLong
+import com.sugo.app.feat.ui.note.Chat.ChatViewModel
 
 class MessageAdapter(
-    private val viewModel: MessageViewModel,
+    private val viewModel: MessageViewModel,private val chatViewModel: ChatViewModel
 ) : PagingDataAdapter<NoteContent, MessageAdapter.PagingViewHolder>(
    NoteRoomDiffCallback()
 ) {
@@ -31,7 +33,8 @@ class MessageAdapter(
             binding.viewModel=viewModel
             binding.noteContent= noteContent
             binding.executePendingBindings()
-        }
+
+            }
     }
 
 }

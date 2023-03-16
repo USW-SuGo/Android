@@ -2,6 +2,7 @@ package com.sugo.app.feat.repository.repo.detail
 
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.model.ProductPostId
+import com.sugo.app.feat.model.request.Chat
 import com.sugo.app.feat.model.request.NoteBody
 import com.sugo.app.feat.model.response.Like
 import com.sugo.app.feat.model.response.NoteContent
@@ -23,7 +24,8 @@ class DetailRemoteDataSource(private val apiService:SugoRetrofit):DetailDataSour
         return apiService.like(ProductPostId( productPostId))
     }
 
-
-
+    override suspend fun sendChat(chat: Chat):Response<Any>{
+        return apiService.sendChat(chat)
+    }
 
 }

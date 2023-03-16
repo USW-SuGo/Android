@@ -1,16 +1,13 @@
 package com.sugo.app.feat.ui.note.Chat
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sugo.app.databinding.ItemChattingBinding
-import com.sugo.app.databinding.ItemNoteBinding
 import com.sugo.app.feat.model.response.ChatRoom
-import com.sugo.app.feat.model.response.NoteContent
-import com.sugo.app.feat.ui.note.MessageViewModel
+import com.sugo.app.feat.ui.common.chatLong
 
 class ChatAdapter (
     private val viewModel: ChatViewModel,
@@ -30,14 +27,14 @@ class ChatAdapter (
     inner class PagingViewHolder(private val binding: ItemChattingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        //
         fun bind(noteContent: ChatRoom) {
-            val a =noteContent.requestUserId.replace(" ","").substringBefore(".").replace("{requestUserId=","").toInt()
-            if (noteContent.senderId!!.replace(" ","").substringBefore(".").toInt()==a){
-                binding.chatroom= noteContent
-            }
-            else{
+            val requestUserId =chatLong(noteContent.requestUserId).replace("{requestUserId=","").toInt()
+            if (chatLong(noteContent.senderId!!).toInt()==requestUserId){
                 binding.chatroom2= noteContent
             }
+            else{
+                binding.chatroom= noteContent }
             binding.executePendingBindings()
         }
     }

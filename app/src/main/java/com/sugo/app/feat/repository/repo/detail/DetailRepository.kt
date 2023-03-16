@@ -1,6 +1,7 @@
 package com.sugo.app.feat.repository.repo.detail
 
 import com.sugo.app.feat.model.DealProduct
+import com.sugo.app.feat.model.request.Chat
 import com.sugo.app.feat.model.request.NoteBody
 import com.sugo.app.feat.model.response.Like
 import com.sugo.app.feat.model.response.NoteContent
@@ -24,4 +25,7 @@ class DetailRepository(
 
 
 
+    suspend  fun sendChat(chat: Chat):Response<Any>{
+        return detailRemoteDataSource.sendChat(chat)
+    }
 }

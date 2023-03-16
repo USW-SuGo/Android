@@ -4,6 +4,8 @@ import android.util.Log
 import com.google.gson.*
 import com.sugo.app.feat.App.Companion.prefs
 import com.sugo.app.feat.common.NetWork.AuthPayLoad
+import com.sugo.app.feat.common.NetWork.BASE_URL
+import com.sugo.app.feat.common.NetWork.CHATROOM
 import com.sugo.app.feat.common.NetWork.CheckEmail
 import com.sugo.app.feat.common.NetWork.CheckId
 import com.sugo.app.feat.common.NetWork.ClosePost
@@ -20,6 +22,8 @@ import com.sugo.app.feat.common.NetWork.MyPageProduct
 import com.sugo.app.feat.common.NetWork.NOTEROOM
 import com.sugo.app.feat.common.NetWork.Note
 import com.sugo.app.feat.common.NetWork.POSTUPLOAD
+import com.sugo.app.feat.common.NetWork.SENDCHAT
+import com.sugo.app.feat.common.NetWork.SEND_FILE
 import com.sugo.app.feat.common.NetWork.Search
 
 import com.sugo.app.feat.common.NetWork.TokenRefreshAPI
@@ -167,12 +171,21 @@ interface SugoRetrofit {
         @Query("size") size: Int
     ): List<DealProduct>
 
-    @GET("/note-content/{noteId}")
+    @GET(CHATROOM)
     suspend fun getNoteContent(
         @Path("noteId") noteId: Long,
         @Query("page") page: Int,
         @Query("size") size: Int
     ): Response<List<Any>>
+
+    @POST(SENDCHAT)
+    suspend fun sendChat(
+        @Body chat: Chat
+    ):Response<Any>
+    @POST(SEND_FILE)
+    suspend fun sendFile(
+        @Body chatFile: ChatFile
+    ):Response<Any>
     companion object {
         val gson = gsonBuilder()
         private fun gsonBuilder(): Gson? {
@@ -213,7 +226,7 @@ interface SugoRetrofit {
             return interceptor
         }
 
-        private const val baseUrl = "https://api.sugo-diger.com"
+        private const val baseUrl = BASE_URL
         fun create(): SugoRetrofit {
             val client = OkHttpClient.Builder()
                 .addInterceptor(getLogOkHttpClient())
