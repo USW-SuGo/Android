@@ -16,6 +16,7 @@ import androidx.paging.PagingData
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentChattingBinding
 import com.sugo.app.feat.model.request.Chat
+import com.sugo.app.feat.model.request.ChatFile
 import com.sugo.app.feat.model.response.ChatRoom
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.common.chatLong
@@ -60,6 +61,7 @@ class ChatFragment : Fragment() {
             val inputText = binding.etvChatSend.text.toString()
             val chatContent=viewModel.chatContent.value
             viewModel.sendChat(Chat(noteId,inputText,chatContent!![0],chatContent[1]))
+//            viewModel.sendFile(ChatFile(noteId,chatContent!![0],chatContent[1],))
         }
         binding.tvDealproductGo.setOnClickListener {
             openDealDetail(productPostId)

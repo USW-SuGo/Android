@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.model.request.Chat
+import com.sugo.app.feat.model.request.ChatFile
 import com.sugo.app.feat.model.response.ChatRoom
 import com.sugo.app.feat.repository.repo.Chat.ChatRepository
 import com.sugo.app.feat.repository.repo.detail.DetailRepository
@@ -32,6 +33,9 @@ class ChatViewModel  (private val chatRepository: ChatRepository,private val det
     }
     fun sendChat(chat: Chat) = viewModelScope.launch {
         detailRepository.sendChat(chat)
+    }
+    fun sendFile(chatFile: ChatFile) = viewModelScope.launch {
+        detailRepository.sendFile(chatFile)
     }
 
 }

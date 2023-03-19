@@ -10,7 +10,7 @@ data class Chat(
 )
 data class ChatFile(
     val noteId:Long,
-    val message:String,
     val senderId:Long,
-    val receiverId:MultipartBody.Part
+    val receiverId:Long,
+    val multipartList:MultipartBody.Part
 )

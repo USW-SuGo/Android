@@ -2,6 +2,7 @@ package com.sugo.app.feat.repository.repo.detail
 
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.model.request.Chat
+import com.sugo.app.feat.model.request.ChatFile
 import com.sugo.app.feat.model.request.NoteBody
 import com.sugo.app.feat.model.response.Like
 import com.sugo.app.feat.model.response.NoteContent
@@ -18,5 +19,7 @@ interface DetailDataSource {
    suspend fun like(productPostId: Long):Response<Like>
 
    suspend fun sendChat(chat: Chat):Response<Any>
+
+   suspend fun sendFile(chatFile: ChatFile):Response<Any>
 
 }
