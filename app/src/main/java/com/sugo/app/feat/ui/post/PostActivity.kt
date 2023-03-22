@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sugo.app.R
 import com.sugo.app.databinding.ActivityPostBinding
 import com.sugo.app.feat.model.ProductPostId
+import com.sugo.app.feat.model.request.Chat
+import com.sugo.app.feat.model.request.ChatFile
 import com.sugo.app.feat.model.response.NoteRoom
 import com.sugo.app.feat.network.SugoRetrofit
 import okhttp3.MediaType
@@ -27,6 +29,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
@@ -67,18 +70,22 @@ class PostActivity : AppCompatActivity() {
             val content = getBody("content", binding.postContent.text.toString())
             val price = getBody("price", binding.postPrice.editableText.toString())
             val contactPlace = getBody("contactPlace",binding.postContactPlace.text.toString())
+
             val postCategory = getBody("category", postCategory.toString())
             val imageMultipartBody = mutableListOf<MultipartBody.Part>()
+            Log.d("image",list.toString())
             for (image in list) {
                 val file = File(getRealPathFromURI(image))
                 if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
                     file.mkdirs()
                 }
                 val requestFile = RequestBody.create("image*/".toMediaTypeOrNull(), file)
+                Log.d("requestFileList",requestFile.toString())
                 val body =
                     MultipartBody.Part.createFormData("multipartFileList", file.name, requestFile)
                 imageMultipartBody.add(body)
             }
+
             SugoRetrofit.tokenCreate().postUpload(
                 title, content, price, contactPlace, postCategory, imageMultipartBody
             )

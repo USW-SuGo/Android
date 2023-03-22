@@ -7,11 +7,14 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.model.request.Chat
+import com.sugo.app.feat.model.request.ChatFile
 import com.sugo.app.feat.model.response.ChatRoom
 import com.sugo.app.feat.repository.repo.Chat.ChatRepository
 import com.sugo.app.feat.repository.repo.detail.DetailRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class ChatViewModel  (private val chatRepository: ChatRepository,private val detailRepository: DetailRepository) : ViewModel() {
     private val _dealPrduct2 = MutableLiveData<DealProduct>()
@@ -33,5 +36,14 @@ class ChatViewModel  (private val chatRepository: ChatRepository,private val det
     fun sendChat(chat: Chat) = viewModelScope.launch {
         detailRepository.sendChat(chat)
     }
-
+    fun sendFile(noteId:MultipartBody.Part,senderId:MultipartBody.Part,receiverId:MultipartBody.Part,d:MutableList<MultipartBody.Part>) = viewModelScope.launch {
+        detailRepository.sendFile(noteId,senderId,receiverId,d)
+    }
+    fun makeId(
+        creatingUserId: Long, requestUserId: Long, opponentUserId: Long
+    ) {
+        if (creatingUserId == requestUserId)
+            getTest(creatingUserId, opponentUserId)
+        else getTest(creatingUserId, opponentUserId)
+    }
 }

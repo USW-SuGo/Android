@@ -1,10 +1,20 @@
 package com.sugo.app.feat.ui.note.Chat
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.DocumentsContract
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,20 +23,27 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
+import com.google.gson.Gson
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentChattingBinding
 import com.sugo.app.feat.model.request.Chat
+import com.sugo.app.feat.model.request.ChatFile
 import com.sugo.app.feat.model.response.ChatRoom
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.common.chatLong
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 
 class ChatFragment : Fragment() {
 
     private val viewModel: ChatViewModel by viewModels { ViewModelFactory(requireContext()) }
-
+    private val list = ArrayList<Uri>()
     private lateinit var binding: FragmentChattingBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,33 +56,48 @@ class ChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val noteId = requireArguments().getString("noteId")!!.substringBefore(".").toLong()
-        Log.d("noteId",noteId.toString())
+        binding.imageUrl = ""
+        var noteId = requireArguments().getString("noteId")!!.substringBefore(".").toLong()
         val productPostId = chatLong(requireArguments().getString("productPostId")!!).toLong()
         val creatingUserId = chatLong(requireArguments().getString("creatingUserId")!!).toLong()
         val opponentUserId = chatLong(requireArguments().getString("opponentUserId")!!).toLong()
-        val requestUserId = chatLong(requireArguments().getString("requestUserId")!!.replace("{requestUserId=","")).toLong()
-        initAdapter(noteId,productPostId)
-            if (creatingUserId==requestUserId){
-                viewModel.getTest(
-                  creatingUserId,
-                    opponentUserId)
-            }
-            else{
-                viewModel.getTest(
-                    creatingUserId,
-                    opponentUserId)
-            }
+        val requestUserId = chatLong(
+            requireArguments().getString("requestUserId")!!.replace("{requestUserId=", "")
+        ).toLong()
+        initAdapter(noteId, productPostId)
+        viewModel.makeId(creatingUserId, requestUserId, opponentUserId)
         binding.ivChatSend.setOnClickListener {
+
             val inputText = binding.etvChatSend.text.toString()
-            val chatContent=viewModel.chatContent.value
-            viewModel.sendChat(Chat(noteId,inputText,chatContent!![0],chatContent[1]))
+            val chatContent = viewModel.chatContent.value
+            val imageMultipartBody = mutableListOf<MultipartBody.Part>()
+            Log.d("image", list.toString())
+            for (image in list) {
+                val file = File(getRealPathFromURI(image))
+                if (!file.exists()) {
+                    file.mkdirs()
+                }
+                val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+                val body =
+                    MultipartBody.Part.createFormData("multipartFileList", file.name, requestFile)
+                imageMultipartBody.add(body)
+            }
+            val noteId1 = getBody("noteId", noteId)
+            val senderId1 = getBody("senderId",chatContent!![1])
+            val receiverId = getBody("receiverId",chatContent!![0])
+            viewModel.sendFile(noteId1,senderId1,receiverId, imageMultipartBody)
+            viewModel.sendChat(Chat(noteId,inputText,chatContent!![1],chatContent!![0]))
+
+        }
+        binding.ivChatFile.setOnClickListener {
+            selectGallery()
         }
         binding.tvDealproductGo.setOnClickListener {
             openDealDetail(productPostId)
         }
     }
-    private fun initAdapter(noteId:Long,productPostId:Long): ChatAdapter {
+
+    private fun initAdapter(noteId: Long, productPostId: Long): ChatAdapter {
         val pagingAdapter = ChatAdapter(viewModel)
         binding.rvChat.adapter = pagingAdapter
         productSubmitData(pagingAdapter, viewModel.getChatRoom(noteId))
@@ -78,6 +110,7 @@ class ChatFragment : Fragment() {
         setNavigation()
         return pagingAdapter
     }
+
     private fun productSubmitData(
         pagingAdapter: ChatAdapter,
         getData: Flow<PagingData<ChatRoom>>
@@ -92,16 +125,115 @@ class ChatFragment : Fragment() {
             }
         }
     }
-    private fun openDealDetail(productPostId:Long) {
+
+    private fun openDealDetail(productPostId: Long) {
         findNavController().navigate(
             R.id.action_chatFragment_to_dealDetailFragment2, bundleOf(
-            "productPostId" to productPostId
-        )
+                "productPostId" to productPostId
+            )
         )
     }
+
     private fun setNavigation() {
         binding.toolbarChat.setNavigationOnClickListener {
             findNavController().navigateUp()
+        }
+    }
+
+
+    /***
+     * 리팩토링 필수 일단 기능구현 테스트
+     *
+     *
+     * */
+    private val imageResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == AppCompatActivity.RESULT_OK) {
+            list.clear()
+            if (result.data?.clipData != null) { // 사진 여러개 선택한 경우
+                val count = result.data!!.clipData!!.itemCount
+                if (count > 2) {
+                    // Do something
+                }
+                for (i in 0 until count) {
+                    val imageUri = result.data!!.clipData!!.getItemAt(i).uri
+                    list.add(imageUri)
+                }
+            } else {
+                result.data?.data?.let { uri ->
+                    val imageUri: Uri? = result.data?.data
+                    if (imageUri != null) {
+                        list.add(imageUri)
+                    }
+                }
+            }
+            binding.imageUrl = list[0].toString()
+        }
+    }
+
+
+    private fun getBody(key: String, value: Any): MultipartBody.Part {
+        return MultipartBody.Part.createFormData(key, value.toString())
+    }
+
+    private fun getRealPathFromURI(contentUri: Uri): String? {
+        if (contentUri.path!!.startsWith("/storage")) {
+            return contentUri.path
+        }
+        val id = DocumentsContract.getDocumentId(contentUri).split(":").toTypedArray()[1]
+        val columns = arrayOf(MediaStore.Files.FileColumns.DATA)
+        val selection = MediaStore.Files.FileColumns._ID + " = " + id
+        val cursor = requireActivity().contentResolver.query(
+            MediaStore.Files.getContentUri("external"),
+            columns,
+            selection,
+            null,
+            null
+        )
+        try {
+            val columnIndex: Int = cursor!!.getColumnIndex(columns[0])
+            if (cursor.moveToFirst()) {
+                return cursor.getString(columnIndex)
+            }
+        } finally {
+            cursor!!.close()
+        }
+        return null
+    }
+
+    private fun selectGallery() {
+        val writePermission =
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+        val readPermission =
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+        if (writePermission == PackageManager.PERMISSION_DENIED ||
+            readPermission == PackageManager.PERMISSION_DENIED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ),
+                1
+            )
+        } else {
+            var intent = Intent(Intent.ACTION_PICK)
+            intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            intent.action = Intent.ACTION_GET_CONTENT
+            intent.setDataAndType(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*"
+            )
+
+            imageResult.launch(intent)
         }
     }
 }

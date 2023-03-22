@@ -78,15 +78,12 @@ interface SugoRetrofit {
     @Multipart
     @POST(POSTUPLOAD)
     fun postUpload(
-//        @Header(AUTH_HEADER) AccessToken: String,
-//        @Part ("PostFormat") PostFormat: PostFormat,
         @Part title: MultipartBody.Part,
         @Part content: MultipartBody.Part,
         @Part price: MultipartBody.Part,
         @Part contactPlace: MultipartBody.Part,
         @Part category: MultipartBody.Part,
         @Part image: MutableList<MultipartBody.Part>
-
     ): Call<ProductPostId>
     @GET(Search)
     suspend fun searchProduct(
@@ -182,10 +179,19 @@ interface SugoRetrofit {
     suspend fun sendChat(
         @Body chat: Chat
     ):Response<Any>
+
+    @Multipart
     @POST(SEND_FILE)
     suspend fun sendFile(
-        @Body chatFile: ChatFile
-    ):Response<Any>
+//        @Part("chatFile") chatFile: RequestBody,
+        @Part noteId: MultipartBody.Part,
+        @Part senderId: MultipartBody.Part,
+        @Part receiverId:MultipartBody.Part,
+        @Part  multipartFileList: MutableList<MultipartBody.Part>
+): Response<Any>
+
+
+
     companion object {
         val gson = gsonBuilder()
         private fun gsonBuilder(): Gson? {
