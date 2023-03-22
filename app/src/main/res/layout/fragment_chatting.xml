@@ -8,6 +8,9 @@
         <variable
             name="dealproduct"
             type="com.sugo.app.feat.model.DealProduct" />
+        <variable
+            name="imageUrl"
+            type="String" />
 
     </data>
 
@@ -104,16 +107,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_chat" />
 
-        <EditText
 
+        <ImageView
+            android:id="@+id/iv_chat_file"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="14dp"
+            android:src="@android:drawable/ic_menu_send"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/iv_chat_send" />
+        <EditText
             android:id="@+id/etv_chat_send"
             android:layout_width="0dp"
             android:layout_height="48dp"
             app:layout_constraintEnd_toStartOf="@id/iv_chat_send"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_chat_file"
             android:hint="msg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_chat" />
 
+        <ImageView
+            imageUrl="@{imageUrl}"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintBottom_toTopOf="@id/iv_chat_send"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

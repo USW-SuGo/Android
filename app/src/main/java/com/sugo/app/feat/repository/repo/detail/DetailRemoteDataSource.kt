@@ -10,6 +10,8 @@ import com.sugo.app.feat.model.response.NoteContent
 import com.sugo.app.feat.model.response.NoteId
 import com.sugo.app.feat.model.response.NoteRoom
 import com.sugo.app.feat.network.SugoRetrofit
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 
 class DetailRemoteDataSource(private val apiService:SugoRetrofit):DetailDataSource {
@@ -28,7 +30,7 @@ class DetailRemoteDataSource(private val apiService:SugoRetrofit):DetailDataSour
     override suspend fun sendChat(chat: Chat):Response<Any>{
         return apiService.sendChat(chat)
     }
-    override suspend fun sendFile(chatFile: ChatFile):Response<Any>{
-        return apiService.sendFile(chatFile)
+    override suspend fun sendFile(noteId:MultipartBody.Part,senderId:MultipartBody.Part,receiverId:MultipartBody.Part,d:MutableList<MultipartBody.Part>):Response<Any>{
+        return apiService.sendFile(noteId,senderId,receiverId,d)
     }
 }

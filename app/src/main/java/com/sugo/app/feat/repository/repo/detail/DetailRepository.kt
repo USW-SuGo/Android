@@ -8,6 +8,8 @@ import com.sugo.app.feat.model.response.Like
 import com.sugo.app.feat.model.response.NoteContent
 import com.sugo.app.feat.model.response.NoteId
 import com.sugo.app.feat.model.response.NoteRoom
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 
 class DetailRepository(
@@ -27,7 +29,7 @@ class DetailRepository(
         return detailRemoteDataSource.sendChat(chat)
     }
 
-    suspend  fun sendFile(chatFile: ChatFile):Response<Any>{
-        return detailRemoteDataSource.sendFile(chatFile)
+    suspend  fun sendFile(noteId:MultipartBody.Part,senderId:MultipartBody.Part,receiverId:MultipartBody.Part,d:MutableList<MultipartBody.Part>):Response<Any>{
+        return detailRemoteDataSource.sendFile(noteId,senderId,receiverId,d)
     }
 }

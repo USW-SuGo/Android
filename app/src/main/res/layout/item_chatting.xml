@@ -10,6 +10,7 @@
         <variable
             name="chatroom2"
             type="com.sugo.app.feat.model.response.ChatRoom" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,6 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="test" />
 
+
         <TextView
             android:id="@+id/tv_datetime"
             android:layout_width="wrap_content"
@@ -37,6 +39,13 @@
             app:layout_constraintStart_toEndOf="@id/tv_oppenent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="test" />
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_datetime"
+         />
 
         <TextView
             android:id="@+id/tv_user"
@@ -59,5 +68,12 @@
             app:layout_constraintEnd_toStartOf="@id/tv_user"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="test" />
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_datetime"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
