@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.sugo.app.R
 import com.sugo.app.databinding.ActivityLoginBinding
 import com.sugo.app.feat.App
+import com.sugo.app.feat.common.MyFirebaseMessagingService
 import com.sugo.app.feat.ui.MainActivity
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.join.inputUser.JoinActivity
@@ -21,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         binding.loginviewmodel = viewModel
         binding.lifecycleOwner = this
+
         App.loginform.observe(this) {
             if (it) {
                 finish()
@@ -31,5 +33,7 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("asign", "test")
             }
         }
+
     }
+
 }

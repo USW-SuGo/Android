@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sugo.app.databinding.FragmentMessageBinding
 import com.sugo.app.databinding.FragmentSettingBinding
+import com.sugo.app.feat.App
 import com.sugo.app.feat.ui.login.LoginActivity
 
 class SettingFragment: Fragment() {
@@ -28,5 +29,14 @@ class SettingFragment: Fragment() {
             val nextIntent = Intent(activity, LoginActivity::class.java)
             startActivity(nextIntent)
         }
+        binding.tvNotification.setOnClickListener {
+            logout()
+        }
+
+    }
+    fun logout() {
+        App.loginform.value=false
+        App.prefs.saveAccessToken("")
+        App.prefs.saveRefreshToken("")
     }
 }

@@ -1,6 +1,7 @@
 package com.sugo.app.feat.repository.repo.login
 
 import com.sugo.app.feat.model.*
+import com.sugo.app.feat.model.request.FCMToken
 import com.sugo.app.feat.model.request.LoginFormat
 import com.sugo.app.feat.model.request.email
 import com.sugo.app.feat.model.response.NoteRoom
@@ -14,6 +15,10 @@ class LoginRemoteDataSource(private val apiService:SugoRetrofit):LoginDataSource
 
     override suspend fun findlogin(email: String): Response<Success> {
         return apiService.findlogin(email(email))
+    }
+
+    override suspend fun sendFCM(fcmToken: FCMToken): Response<Success> {
+        return apiService.sendFCM(fcmToken)
     }
 
 
