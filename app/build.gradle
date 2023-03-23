@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
 
 }
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdk 32
@@ -71,4 +72,7 @@ dependencies {
     //paging
     implementation("androidx.paging:paging-runtime-ktx:$pagingVersion")
 
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation platform('com.google.firebase:firebase-bom:31.2.3')
 }
