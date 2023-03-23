@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sugo.app.feat.App
+import com.sugo.app.feat.model.Success
+import com.sugo.app.feat.model.request.FCMToken
 import com.sugo.app.feat.network.SugoRetrofit
 import com.sugo.app.feat.repository.repo.Token.TokenPreferenceManager
 import com.sugo.app.feat.repository.repo.login.LoginRepository
@@ -15,6 +17,7 @@ import com.sugo.app.feat.ui.common.TokenHeadersText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class LoginViewModel(
     val loginRepository: LoginRepository,
@@ -34,9 +37,12 @@ class LoginViewModel(
             val (accessToken, refreshToken) = TokenHeadersText(originalHeaders)
             App.prefs.saveAccessToken(accessToken)
             App.prefs.saveRefreshToken(refreshToken)
-//            saveAccessToken(accessToken)
-//            saveRefreshToken(refreshToken)
+            sendFCM(FCMToken(App.prefs.getFCM().toString()))
         }
+    }
+
+    fun sendFCM(fcmToken: FCMToken)= viewModelScope.launch {
+        val response = loginRepository.sendFCM(fcmToken)
     }
 //    private fun saveAccessToken(token: String) = viewModelScope.launch {
 //        tokenPreferenceManager.saveAccessToken(token)
