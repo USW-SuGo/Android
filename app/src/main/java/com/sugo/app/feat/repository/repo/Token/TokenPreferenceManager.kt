@@ -27,15 +27,15 @@ class TokenPreferenceManager(context: Context) : TokenLocalDataSource {
     override fun saveRefreshToken(token: String?) {
         prefs.edit().putString(Refresh_TOKEN, token).apply()
     }
-    override fun savenote(token: String?) {
+    override fun saveFCM(token: String?) {
         prefs.edit().putString(TEST_NOTE, token).apply()
     }
-    override fun getnote(): String? {
+    override fun getFCM(): String? {
         return prefs.getString(TEST_NOTE, null)
     }
 
     private companion object {
-        const val TEST_NOTE="test"
+        const val TEST_NOTE="fcmtoken"
         const val PREFS_NAME = "preferences"
         const val ACCESS_TOKEN = "accesstoken"
         const val Refresh_TOKEN = "refreshtoken"
