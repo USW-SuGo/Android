@@ -190,6 +190,12 @@ interface SugoRetrofit {
         @Part  multipartFileList: MutableList<MultipartBody.Part>
 ): Response<Any>
 
+    @PATCH("/user/fcm")
+    suspend fun sendFCM(
+        @Body fcmToken : FCMToken
+    ):Response<Success>
+
+
 
 
     companion object {
