@@ -31,20 +31,20 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-//        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-//            if (!task.isSuccessful) {
-//                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-//                return@OnCompleteListener
-//            }
-//
-//            // Get new FCM registration token
-//            val token = task.result
-//
-//            // Log and toast
-////            val msg = getString(R.string.msg_token_fmt, token)
-//            Log.d(TAG, msg)
-//            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-//        })
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            App.prefs.savenote(token)
+            Log.d("FCMTOKEN", App.prefs.getnote().toString())
+            Toast.makeText(baseContext, App.prefs.getnote().toString(), Toast.LENGTH_SHORT).show()
+        })
         navController?.let {
             bottomNavigationView.setupWithNavController(it)
 

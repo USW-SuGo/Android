@@ -35,7 +35,7 @@ class TokenPreferenceManager(context: Context) : TokenLocalDataSource {
     }
 
     private companion object {
-        const val TEST_NOTE="test"
+        const val TEST_NOTE="fcmtoken"
         const val PREFS_NAME = "preferences"
         const val ACCESS_TOKEN = "accesstoken"
         const val Refresh_TOKEN = "refreshtoken"
