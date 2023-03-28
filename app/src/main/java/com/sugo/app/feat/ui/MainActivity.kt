@@ -12,6 +12,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import com.sugo.app.R
 import com.sugo.app.feat.App
+import com.sugo.app.feat.ui.common.User
+import com.sugo.app.feat.ui.common.User.loginform
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,14 +24,13 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d("Tokenvalue",App.prefs.getAccessToken().toString())
-        Log.d("Tokenvalue",App.prefs.getRefreshToken().toString())
+        Log.d("Tokenvalue", App.prefs.getAccessToken().toString())
+        Log.d("Tokenvalue", App.prefs.getRefreshToken().toString())
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.main_bottom_navigation)
-        bottomNavigationView.itemIconTintList=null
-        val navController = supportFragmentManager.findFragmentById(R.id.main_container)?.findNavController()
-        if (App.loginform.value==null){
+        bottomNavigationView.itemIconTintList = null
+        val navController =
+            supportFragmentManager.findFragmentById(R.id.main_container)?.findNavController()
 
-        }
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -43,7 +44,6 @@ class MainActivity : AppCompatActivity() {
             // Log and toast
             App.prefs.savenote(token)
             Log.d("FCMTOKEN", App.prefs.getnote().toString())
-            Toast.makeText(baseContext, App.prefs.getnote().toString(), Toast.LENGTH_SHORT).show()
         })
         navController?.let {
             bottomNavigationView.setupWithNavController(it)

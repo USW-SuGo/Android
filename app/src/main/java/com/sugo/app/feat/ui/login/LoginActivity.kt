@@ -10,6 +10,7 @@ import com.sugo.app.R
 import com.sugo.app.databinding.ActivityLoginBinding
 import com.sugo.app.feat.App
 import com.sugo.app.feat.ui.MainActivity
+import com.sugo.app.feat.ui.common.User
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.join.inputUser.JoinActivity
 
@@ -21,15 +22,15 @@ class LoginActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         binding.loginviewmodel = viewModel
         binding.lifecycleOwner = this
-        App.loginform.observe(this) {
+        User.loginform.observe(this) {
             if (it) {
                 finish()
             }
-            binding.btnAssign.setOnClickListener {
-                val intent = Intent(this, JoinActivity::class.java)
-                startActivity(intent)
-                Log.d("asign", "test")
-            }
+        }
+        binding.btnAssign.setOnClickListener {
+            val intent = Intent(this, JoinActivity::class.java)
+            startActivity(intent)
+            Log.d("asign", "test")
         }
     }
 }

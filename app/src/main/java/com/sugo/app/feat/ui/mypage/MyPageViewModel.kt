@@ -11,6 +11,7 @@ import com.sugo.app.feat.model.response.MyPage
 import com.sugo.app.feat.repository.repo.mainpage.ProductPagingRepositoryImpl
 import com.sugo.app.feat.repository.repo.mypage.MyPageRepository
 import com.sugo.app.feat.ui.common.Event
+import com.sugo.app.feat.ui.common.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -36,9 +37,7 @@ class MyPageViewModel(
     fun openDealDetail(productPostId: Long) {
         _openDealEvent.value = Event(productPostId)
     }
-    init {
-        getMyPage()
-    }
+
     private val  _openDealEvent1 = MutableLiveData<Event<Long>>()
     val openDealEvent1: LiveData<Event<Long>> = _openDealEvent1
 
@@ -55,8 +54,8 @@ class MyPageViewModel(
         val response = myPageRepository.postClose(productPostId)
     }
 
-    private fun getMyPage() = viewModelScope.launch {
+    fun getMyPage() = viewModelScope.launch {
         val response = myPageRepository.getMyPage().body()
-        if (App.loginform.value !=false) _myPage.value = response!!
+         _myPage.value = response!!
     }
 }

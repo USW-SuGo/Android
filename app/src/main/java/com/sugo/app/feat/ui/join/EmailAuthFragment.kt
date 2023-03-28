@@ -29,11 +29,10 @@ class EmailAuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val productId = requireArguments().getLong("userSign")
-        Log.d("EamilAuth",productId.toString())
+        Log.d("productId",productId.toString())
         binding.viewmodel=viewModel
         binding.btnJoin.setOnClickListener {
             viewModel.checkPayLoad(PayLoad(productId,binding.etvAuthNum.text.toString()))
-
         }
     }
 

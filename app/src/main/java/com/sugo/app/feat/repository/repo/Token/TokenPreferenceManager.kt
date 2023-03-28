@@ -15,7 +15,6 @@ class TokenPreferenceManager(context: Context) : TokenLocalDataSource {
         return prefs.getString(ACCESS_TOKEN, null)
     }
 
-    @SuppressLint("CommitPrefEdits")
     override fun saveAccessToken(token: String?) {
         prefs.edit().putString(ACCESS_TOKEN, token).apply()
     }

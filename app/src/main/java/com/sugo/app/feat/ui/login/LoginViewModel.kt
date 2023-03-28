@@ -6,15 +6,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sugo.app.feat.App
+import com.sugo.app.feat.model.Success
+import com.sugo.app.feat.model.request.FcmToken
 import com.sugo.app.feat.network.SugoRetrofit
 import com.sugo.app.feat.repository.repo.Token.TokenPreferenceManager
 import com.sugo.app.feat.repository.repo.login.LoginRepository
 import com.sugo.app.feat.ui.common.Event
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.TokenHeadersText
+import com.sugo.app.feat.ui.common.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class LoginViewModel(
     val loginRepository: LoginRepository,
@@ -29,19 +33,22 @@ class LoginViewModel(
         val originalHeaders = response.headers().get("authorization")
         if (response.code() == 200) {
             CoroutineScope(Dispatchers.Main).launch {
-                App.loginform.value = true
+                User.loginform.value = true
+                val (accessToken, refreshToken) = TokenHeadersText(originalHeaders)
+                saveAccessToken(accessToken)
+                saveRefreshToken(refreshToken)
             }
-            val (accessToken, refreshToken) = TokenHeadersText(originalHeaders)
-            App.prefs.saveAccessToken(accessToken)
-            App.prefs.saveRefreshToken(refreshToken)
-//            saveAccessToken(accessToken)
-//            saveRefreshToken(refreshToken)
+
         }
+
     }
-//    private fun saveAccessToken(token: String) = viewModelScope.launch {
-//        tokenPreferenceManager.saveAccessToken(token)
-//    }
-//    private fun saveRefreshToken(token: String) = viewModelScope.launch {
-//        tokenPreferenceManager.saveRefreshToken(token)
-//    }
+     fun sendFCM(fcmToken: FcmToken) = viewModelScope.launch{
+         loginRepository.sendFCM(fcmToken)
+     }
+    private fun saveAccessToken(token: String) = viewModelScope.launch {
+        tokenPreferenceManager.saveAccessToken(token)
+    }
+    private fun saveRefreshToken(token: String) = viewModelScope.launch {
+        tokenPreferenceManager.saveRefreshToken(token)
+    }
 }

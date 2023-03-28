@@ -11,6 +11,7 @@ import com.sugo.app.feat.common.NetWork.CheckId
 import com.sugo.app.feat.common.NetWork.ClosePost
 
 import com.sugo.app.feat.common.NetWork.DetailProduct
+import com.sugo.app.feat.common.NetWork.FCMTOKEN
 import com.sugo.app.feat.common.NetWork.FindId
 import com.sugo.app.feat.common.NetWork.Join
 import com.sugo.app.feat.common.NetWork.LIKE
@@ -189,6 +190,11 @@ interface SugoRetrofit {
         @Part receiverId:MultipartBody.Part,
         @Part  multipartFileList: MutableList<MultipartBody.Part>
 ): Response<Any>
+
+    @PATCH(FCMTOKEN)
+    suspend fun sendFCM(
+        @Body fcmToken: FcmToken
+    ):Response<Success>
 
 
 
