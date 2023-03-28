@@ -8,7 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 object User {
-    val loginform=MutableLiveData<Boolean>(false)
+    val loginform=MutableLiveData<Boolean>(App.prefs.getAccessToken()!="")
 
     fun logout() {
         CoroutineScope(Dispatchers.Main).launch {

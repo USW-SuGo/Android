@@ -38,6 +38,10 @@ class MyPageFragment : Fragment(), BottomSheetListner {
     ): View? {
         binding = FragmentMypageBinding.inflate(inflater, container, false)
         Log.d("MyPageFragment", User.loginform.value.toString())
+        if (User.loginform.value==true) {
+            Log.d("MyPageFragment2", User.loginform.value.toString())
+            viewModel.getMyPage()
+        }
         return binding.root
     }
 
@@ -46,9 +50,6 @@ class MyPageFragment : Fragment(), BottomSheetListner {
         if (User.loginform.value == false) {
             Log.d("MyPageFragment1", User.loginform.value.toString())
             startActivity(Intent(requireContext(), LoginActivity::class.java))
-        } else {
-            Log.d("MyPageFragment2", User.loginform.value.toString())
-            viewModel.getMyPage()
         }
     }
 

@@ -1,5 +1,5 @@
 package com.sugo.app.feat.model.request
 
-data class FCMToken(
+data class FcmToken(
     val fcmToken: String
 )

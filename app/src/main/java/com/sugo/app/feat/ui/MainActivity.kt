@@ -42,8 +42,8 @@ class MainActivity : AppCompatActivity() {
             val token = task.result
 
             // Log and toast
-            App.prefs.savenote(token)
-            Log.d("FCMTOKEN", App.prefs.getnote().toString())
+            App.prefs.saveFCM(token)
+            Log.d("FCMTOKEN", App.prefs.getFCM().toString())
         })
         navController?.let {
             bottomNavigationView.setupWithNavController(it)
