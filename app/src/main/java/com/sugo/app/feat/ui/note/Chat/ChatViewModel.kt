@@ -7,14 +7,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.model.request.Chat
-import com.sugo.app.feat.model.request.ChatFile
 import com.sugo.app.feat.model.response.ChatRoom
 import com.sugo.app.feat.repository.repo.Chat.ChatRepository
 import com.sugo.app.feat.repository.repo.detail.DetailRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 
 class ChatViewModel  (private val chatRepository: ChatRepository,private val detailRepository: DetailRepository) : ViewModel() {
     private val _dealPrduct2 = MutableLiveData<DealProduct>()
@@ -29,9 +27,9 @@ class ChatViewModel  (private val chatRepository: ChatRepository,private val det
         return chatRepository.getNoteRoom(noteId)
     }
     fun getTest(a:Long,b:Long):List<Long>{
-        val c = mutableListOf<Long>()
+        val idList = mutableListOf<Long>()
         _ChatContent.value= listOf(a,b)
-        return c
+        return idList
     }
     fun sendChat(chat: Chat) = viewModelScope.launch {
         detailRepository.sendChat(chat)

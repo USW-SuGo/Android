@@ -26,9 +26,9 @@ import com.sugo.app.R
 import com.sugo.app.databinding.FragmentChattingBinding
 import com.sugo.app.feat.model.request.Chat
 import com.sugo.app.feat.model.response.ChatRoom
+import com.sugo.app.feat.ui.common.ImageRealPath
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.common.chatLong
-import com.sugo.app.feat.ui.common.ImageRealPath
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -49,7 +49,11 @@ class ChatFragment : Fragment() {
         binding = FragmentChattingBinding.inflate(inflater, container, false)
         return binding.root
     }
-
+    /**
+     * 리팩토링 필수 일단 기능먼저 개벌
+     *
+     *
+     * **/
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.imageUrl = ""
@@ -63,16 +67,13 @@ class ChatFragment : Fragment() {
         initAdapter(noteId, productPostId)
         viewModel.makeId(creatingUserId, requestUserId, opponentUserId)
         binding.ivChatSend.setOnClickListener {
-
             val inputText = binding.etvChatSend.text.toString()
             val chatContent = viewModel.chatContent.value
             val imageMultipartBody = mutableListOf<MultipartBody.Part>()
             Log.d("image", list.toString())
             for (image in list) {
                 val file=ImageRealPath(requireContext()).getFileFromUri(image)
-                if (!file.exists()) {
-                    file.mkdirs()
-                }
+                if (!file.exists()) file.mkdirs()
                 val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
                 val body =
                     MultipartBody.Part.createFormData("multipartFileList", file.name, requestFile)
