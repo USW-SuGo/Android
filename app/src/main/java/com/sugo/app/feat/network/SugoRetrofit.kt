@@ -111,6 +111,7 @@ interface SugoRetrofit {
     @GET(MyPage)
     suspend fun getMyPage(): Response<MyPage>
 
+
     @POST(UpPost)
     suspend fun upPost(
         @Body productPostId: ProductPostId
@@ -267,16 +268,12 @@ interface SugoRetrofit {
         }
 
         private fun tokenInterceptor(): Interceptor {
-            var accessToken = prefs.getAccessToken()
-            if (accessToken.isNullOrEmpty()) {
-                accessToken = "null"
-            }
-            Log.d("token", accessToken)
+
             val requestInterceptor = Interceptor { chain ->
                 val original = chain.request()
                 val builder = original.newBuilder()
-                if (accessToken != null) {
-                    builder.addHeader("Authorization", "$accessToken")
+                if (prefs.getAccessToken() != null) {
+                    builder.addHeader("Authorization", "${prefs.getAccessToken()}")
                 }
                 chain.proceed(builder.build())
             }
