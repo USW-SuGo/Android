@@ -63,7 +63,7 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             modelClass.isAssignableFrom(LoginViewModel::class.java) ->{
                 val repository =
                     LoginRepository(LoginRemoteDataSource(ServiceLocator.provideTokenApiClient()))
-                LoginViewModel(repository, TokenPreferenceManager(context)) as T
+                LoginViewModel(repository) as T
             }
             modelClass.isAssignableFrom(JoinViewModel::class.java) ->{
                 val repository =
