@@ -80,10 +80,10 @@ class ChatFragment : Fragment() {
                 imageMultipartBody.add(body)
             }
             val noteId1 = getBody("noteId", noteId)
-            val senderId1 = getBody("senderId",chatContent!![1])
-            val receiverId = getBody("receiverId",chatContent!![0])
+            val senderId1 = getBody("senderId",chatContent!![0])
+            val receiverId = getBody("receiverId",chatContent!![1])
             viewModel.sendFile(noteId1,senderId1,receiverId, imageMultipartBody)
-            viewModel.sendChat(Chat(noteId,inputText,chatContent!![1],chatContent!![0]))
+            viewModel.sendChat(Chat(noteId,inputText,chatContent!![0],chatContent!![1]))
 
         }
         binding.ivChatFile.setOnClickListener {

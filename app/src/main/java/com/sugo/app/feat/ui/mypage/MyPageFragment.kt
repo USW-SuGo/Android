@@ -38,18 +38,18 @@ class MyPageFragment : Fragment(), BottomSheetListner {
     ): View? {
         binding = FragmentMypageBinding.inflate(inflater, container, false)
         Log.d("MyPageFragment", User.loginform.value.toString())
-        if (User.loginform.value==true) {
-            Log.d("MyPageFragment2", User.loginform.value.toString())
-            viewModel.getMyPage()
+        if (User.loginform.value==false) {
+            Log.d("MyPageFragment1", User.loginform.value.toString())
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
         }
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        if (User.loginform.value == false) {
-            Log.d("MyPageFragment1", User.loginform.value.toString())
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
+        if (User.loginform.value==true) {
+            Log.d("MyPageFragment2", User.loginform.value.toString())
+            viewModel.getMyPage()
         }
     }
 
