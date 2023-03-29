@@ -42,6 +42,6 @@ class ChatViewModel  (private val chatRepository: ChatRepository,private val det
     ) {
         if (creatingUserId == requestUserId)
             getTest(creatingUserId, opponentUserId)
-        else getTest(creatingUserId, opponentUserId)
+        else getTest(opponentUserId, creatingUserId)
     }
 }

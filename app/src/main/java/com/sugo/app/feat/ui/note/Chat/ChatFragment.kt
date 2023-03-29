@@ -65,6 +65,7 @@ class ChatFragment : Fragment() {
             requireArguments().getString("requestUserId")!!.replace("{requestUserId=", "")
         ).toLong()
         initAdapter(noteId, productPostId)
+//        if(requestUserId==)
         viewModel.makeId(creatingUserId, requestUserId, opponentUserId)
         binding.ivChatSend.setOnClickListener {
             val inputText = binding.etvChatSend.text.toString()
