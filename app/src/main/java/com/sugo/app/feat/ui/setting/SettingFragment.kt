@@ -2,12 +2,15 @@ package com.sugo.app.feat.ui.setting
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sugo.app.databinding.FragmentMessageBinding
 import com.sugo.app.databinding.FragmentSettingBinding
+import com.sugo.app.feat.App
+import com.sugo.app.feat.ui.common.User
 import com.sugo.app.feat.ui.login.LoginActivity
 
 class SettingFragment: Fragment() {
@@ -27,6 +30,10 @@ class SettingFragment: Fragment() {
         binding.tvLogincheck.setOnClickListener {
             val nextIntent = Intent(activity, LoginActivity::class.java)
             startActivity(nextIntent)
+        }
+        binding.tvNotification.setOnClickListener {
+            Log.d("Clicklogout","test")
+            User.logout()
         }
     }
 }

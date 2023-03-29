@@ -57,7 +57,7 @@ class SelectMajorFragment: Fragment() {
         binding.btnNextgo.setOnClickListener{
             viewModel.join(UserSign(a[1],"${a[0].replace("[","")}@suwon.ac.kr",a[2].replace("]",""),viewModel.department.value!!))
             viewModel.id.observe(viewLifecycleOwner){
-                Log.d("  binding.tvDepartmetCheck.text = it",viewModel.id.value!!.id.toString())
+                Log.d("  binding.test = it",viewModel.id.value!!.id.toString())
                 id=viewModel.id.value!!.id
             }
             viewModel.openAuthNum()
@@ -68,11 +68,15 @@ class SelectMajorFragment: Fragment() {
     }
 
     private fun setNavigation() {
-        viewModel.openAuthNum.observe(viewLifecycleOwner, EventObserver {
-            Log.d("AuthNum",it.toString())
+        viewModel.id.observe(viewLifecycleOwner){
+            Log.d("  binding.test = it",viewModel.id.value!!.id.toString())
+            id=viewModel.id.value!!.id
             openSelect(id)
-
-        })
+        }
+//        viewModel.openAuthNum.observe(viewLifecycleOwner, EventObserver {
+//            Log.d("AuthNum",it.toString())
+//            openSelect(id)
+//        })
     }
 
     private fun openSelect(id:Long) {

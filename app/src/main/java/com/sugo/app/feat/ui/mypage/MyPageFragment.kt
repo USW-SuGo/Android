@@ -21,13 +21,14 @@ import com.sugo.app.databinding.FragmentMypageBinding
 import com.sugo.app.feat.App
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.ui.common.EventObserver
+import com.sugo.app.feat.ui.common.User
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.login.LoginActivity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class MyPageFragment : Fragment(),BottomSheetListner{
+class MyPageFragment : Fragment(), BottomSheetListner {
     private val viewModel: MyPageViewModel by viewModels { ViewModelFactory(requireContext()) }
     private lateinit var binding: FragmentMypageBinding
     override fun onCreateView(
@@ -36,20 +37,26 @@ class MyPageFragment : Fragment(),BottomSheetListner{
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMypageBinding.inflate(inflater, container, false)
+        Log.d("MyPageFragment", User.loginform.value.toString())
+        if (User.loginform.value==false) {
+            Log.d("MyPageFragment1", User.loginform.value.toString())
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
+        }
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (User.loginform.value==true) {
+            Log.d("MyPageFragment2", User.loginform.value.toString())
+            viewModel.getMyPage()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (App.loginform.value == false) {
-            binding.ivMypageEdit.setOnClickListener{openSetting()}
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
-        } else {
-            MyPageTest()
-            binding.ivMypageEdit.setOnClickListener{openSetting()}
-
-        }
+        MyPageTest()
+        binding.ivMypageEdit.setOnClickListener { openSetting() }
     }
 
     private fun MyPageTest() {
@@ -108,6 +115,7 @@ class MyPageFragment : Fragment(),BottomSheetListner{
             )
         )
     }
+
     private fun openSetting() {
         findNavController().navigate(
             R.id.action_navigation_mypage_to_settingFragment, bundleOf(
@@ -115,10 +123,15 @@ class MyPageFragment : Fragment(),BottomSheetListner{
         )
     }
 
-    private fun productSubmitData(pagingAdapter: MyPageAdapter, getData: Flow<PagingData<DealProduct>>) {
+    private fun productSubmitData(
+        pagingAdapter: MyPageAdapter,
+        getData: Flow<PagingData<DealProduct>>
+    ) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch { getData.collectLatest { pagingData -> pagingAdapter.submitData(pagingData)
+                launch {
+                    getData.collectLatest { pagingData ->
+                        pagingAdapter.submitData(pagingData)
                     }
                 }
             }

@@ -5,6 +5,7 @@ import com.sugo.app.feat.App
 import com.sugo.app.feat.ServiceLocator
 import com.sugo.app.feat.model.Token
 import com.sugo.app.feat.ui.common.TokenHeadersText
+import com.sugo.app.feat.ui.common.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -53,13 +54,13 @@ class TokenAuthenticator : Authenticator {
             App.prefs.saveAccessToken( accesstoken)
             App.prefs.saveRefreshToken( refreshtoken)
             CoroutineScope(Dispatchers.Main).launch {
-                App.loginform.value = true
+                User.loginform.value = true
             }
             true
         } else {
             Log.d("실패실패", "실패했어요 토큰")
             CoroutineScope(Dispatchers.Main).launch {
-                App.loginform.value = false
+                User.loginform.value = false
             }
             false
         }

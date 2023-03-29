@@ -26,5 +26,6 @@ object NetWork {
     const val CHATROOM = "/note-content/{noteId}"
     const val SENDCHAT = "/note-content/text"
     const val SEND_FILE="/note-content/file"
+    const val FCMTOKEN = "/user/fcm"
 
 }

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,12 +22,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
-import com.google.gson.Gson
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentChattingBinding
 import com.sugo.app.feat.model.request.Chat
-import com.sugo.app.feat.model.request.ChatFile
 import com.sugo.app.feat.model.response.ChatRoom
+import com.sugo.app.feat.ui.common.ImageRealPath
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.common.chatLong
 import kotlinx.coroutines.flow.Flow
@@ -37,8 +35,6 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.File
 
 class ChatFragment : Fragment() {
 
@@ -53,7 +49,11 @@ class ChatFragment : Fragment() {
         binding = FragmentChattingBinding.inflate(inflater, container, false)
         return binding.root
     }
-
+    /**
+     * 리팩토링 필수 일단 기능먼저 개벌
+     *
+     *
+     * **/
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.imageUrl = ""
@@ -67,26 +67,23 @@ class ChatFragment : Fragment() {
         initAdapter(noteId, productPostId)
         viewModel.makeId(creatingUserId, requestUserId, opponentUserId)
         binding.ivChatSend.setOnClickListener {
-
             val inputText = binding.etvChatSend.text.toString()
             val chatContent = viewModel.chatContent.value
             val imageMultipartBody = mutableListOf<MultipartBody.Part>()
             Log.d("image", list.toString())
             for (image in list) {
-                val file = File(getRealPathFromURI(image))
-                if (!file.exists()) {
-                    file.mkdirs()
-                }
+                val file=ImageRealPath(requireContext()).getFileFromUri(image)
+                if (!file.exists()) file.mkdirs()
                 val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
                 val body =
                     MultipartBody.Part.createFormData("multipartFileList", file.name, requestFile)
                 imageMultipartBody.add(body)
             }
             val noteId1 = getBody("noteId", noteId)
-            val senderId1 = getBody("senderId",chatContent!![1])
-            val receiverId = getBody("receiverId",chatContent!![0])
+            val senderId1 = getBody("senderId",chatContent!![0])
+            val receiverId = getBody("receiverId",chatContent!![1])
             viewModel.sendFile(noteId1,senderId1,receiverId, imageMultipartBody)
-            viewModel.sendChat(Chat(noteId,inputText,chatContent!![1],chatContent!![0]))
+            viewModel.sendChat(Chat(noteId,inputText,chatContent!![0],chatContent!![1]))
 
         }
         binding.ivChatFile.setOnClickListener {
@@ -175,31 +172,6 @@ class ChatFragment : Fragment() {
 
     private fun getBody(key: String, value: Any): MultipartBody.Part {
         return MultipartBody.Part.createFormData(key, value.toString())
-    }
-
-    private fun getRealPathFromURI(contentUri: Uri): String? {
-        if (contentUri.path!!.startsWith("/storage")) {
-            return contentUri.path
-        }
-        val id = DocumentsContract.getDocumentId(contentUri).split(":").toTypedArray()[1]
-        val columns = arrayOf(MediaStore.Files.FileColumns.DATA)
-        val selection = MediaStore.Files.FileColumns._ID + " = " + id
-        val cursor = requireActivity().contentResolver.query(
-            MediaStore.Files.getContentUri("external"),
-            columns,
-            selection,
-            null,
-            null
-        )
-        try {
-            val columnIndex: Int = cursor!!.getColumnIndex(columns[0])
-            if (cursor.moveToFirst()) {
-                return cursor.getString(columnIndex)
-            }
-        } finally {
-            cursor!!.close()
-        }
-        return null
     }
 
     private fun selectGallery() {

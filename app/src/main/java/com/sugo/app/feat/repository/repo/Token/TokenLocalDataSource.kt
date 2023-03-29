@@ -5,6 +5,6 @@ interface TokenLocalDataSource {
     fun saveAccessToken(token: String?)
     fun getRefreshToken(): String?
     fun saveRefreshToken(token: String?)
-    fun savenote(token: String?)
-    fun getnote(): String?
+    fun saveFCM(token: String?)
+    fun getFCM(): String?
 }

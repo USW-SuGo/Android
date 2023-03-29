@@ -39,14 +39,14 @@ class ChatAdapter(
                 if (noteContent.imageLink != null) {
                     loadImage(binding.image2, noteContent.imageLink)
                 }
-                binding.chatroom = noteContent
+                binding.chatroom2 = noteContent
                 binding.image2.isGone
 
             } else {
                 if (noteContent.imageLink != null) {
                     loadImage(binding.image1, noteContent.imageLink)
                 }
-                binding.chatroom2 = noteContent
+                binding.chatroom = noteContent
                 binding.image1.isGone
             }
             binding.executePendingBindings()

@@ -11,6 +11,7 @@ import com.sugo.app.feat.common.NetWork.CheckId
 import com.sugo.app.feat.common.NetWork.ClosePost
 
 import com.sugo.app.feat.common.NetWork.DetailProduct
+import com.sugo.app.feat.common.NetWork.FCMTOKEN
 import com.sugo.app.feat.common.NetWork.FindId
 import com.sugo.app.feat.common.NetWork.Join
 import com.sugo.app.feat.common.NetWork.LIKE
@@ -110,6 +111,7 @@ interface SugoRetrofit {
     @GET(MyPage)
     suspend fun getMyPage(): Response<MyPage>
 
+
     @POST(UpPost)
     suspend fun upPost(
         @Body productPostId: ProductPostId
@@ -190,6 +192,11 @@ interface SugoRetrofit {
         @Part  multipartFileList: MutableList<MultipartBody.Part>
 ): Response<Any>
 
+    @PATCH(FCMTOKEN)
+    suspend fun sendFCM(
+        @Body fcmToken: FcmToken
+    ):Response<Success>
+
 
 
     companion object {
@@ -261,16 +268,12 @@ interface SugoRetrofit {
         }
 
         private fun tokenInterceptor(): Interceptor {
-            var accessToken = prefs.getAccessToken()
-            if (accessToken.isNullOrEmpty()) {
-                accessToken = "null"
-            }
-            Log.d("token", accessToken)
+
             val requestInterceptor = Interceptor { chain ->
                 val original = chain.request()
                 val builder = original.newBuilder()
-                if (accessToken != null) {
-                    builder.addHeader("Authorization", "$accessToken")
+                if (prefs.getAccessToken() != null) {
+                    builder.addHeader("Authorization", "${prefs.getAccessToken()}")
                 }
                 chain.proceed(builder.build())
             }
