@@ -20,6 +20,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contactrv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="600dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/placetitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

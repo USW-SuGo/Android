@@ -50,7 +50,6 @@ class CheckDialog(context: Context, val id: Long, val type: String) : DialogFrag
             dismiss()
         }
     }
-    // Set the listener to this BottomSheetDialog
 
     private fun handleClick() {
         viewLifecycleOwner.lifecycleScope.launch {

@@ -59,7 +59,6 @@ class BottomSheetDialog(context: Context, val id: Long) : BottomSheetDialogFragm
     }
 
     override fun onCheckDialogResult() {
-        Log.d("바텀시트","test")
         bottomSheetListner?.onBottomSheetResult()
     }
 

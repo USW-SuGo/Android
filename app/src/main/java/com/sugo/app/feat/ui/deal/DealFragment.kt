@@ -2,12 +2,10 @@ package com.sugo.app.feat.ui.deal
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,17 +15,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentDealBinding
-import com.sugo.app.feat.App
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.User
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.login.LoginActivity
-import com.sugo.app.feat.ui.post.PostActivity
 import com.sugo.app.feat.ui.upload.UploadActivity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.observeOn
 import kotlinx.coroutines.launch
 
 
