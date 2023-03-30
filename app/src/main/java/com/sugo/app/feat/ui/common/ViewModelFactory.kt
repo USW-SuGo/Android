@@ -25,6 +25,7 @@ import com.sugo.app.feat.ui.join.inputUser.JoinViewModel
 import com.sugo.app.feat.ui.login.LoginViewModel
 import com.sugo.app.feat.ui.mypage.MyPageViewModel
 import com.sugo.app.feat.ui.note.Chat.ChatViewModel
+import com.sugo.app.feat.ui.upload.UploadViewModel
 
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
@@ -74,6 +75,10 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                 val repository =
                     DetailRepository(DetailRemoteDataSource(ServiceLocator.provideTokenApiClient()))
                 DetailViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(UploadViewModel::class.java) ->{
+
+                UploadViewModel() as T
             }
 
             else -> {

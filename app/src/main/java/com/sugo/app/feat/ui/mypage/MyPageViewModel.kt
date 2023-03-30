@@ -56,6 +56,6 @@ class MyPageViewModel(
 
     fun getMyPage() = viewModelScope.launch {
         val response = myPageRepository.getMyPage().body()
-         _myPage.value = response!!
+         if(User.loginform.value==true) _myPage.value = response!!
     }
 }

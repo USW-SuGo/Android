@@ -38,8 +38,6 @@ class SearchPagingViewModel(private val repoImpl: ProductPagingRepositoryImpl) :
 
     private val _searchValue = MutableLiveData<String>()
     val searchValue: LiveData<String> = _searchValue
-    private val _categoryValue = MutableLiveData<String>()
-    val categoryValue: LiveData<String> = _categoryValue
 
     fun getSearchPage(value: String, category: String): Flow<PagingData<DealProduct>> {
         return repoImpl.getSearchPage(value, category)
@@ -47,7 +45,6 @@ class SearchPagingViewModel(private val repoImpl: ProductPagingRepositoryImpl) :
 
     private val _openPostEvent = MutableLiveData<Event<Long>>()
     val openPostEvent: LiveData<Event<Long>> = _openPostEvent
-
 
     fun openPostDetail() {
         _openPostEvent.value = Event(0)

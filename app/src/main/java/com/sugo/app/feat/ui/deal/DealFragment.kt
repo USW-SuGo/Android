@@ -24,6 +24,7 @@ import com.sugo.app.feat.ui.common.User
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.login.LoginActivity
 import com.sugo.app.feat.ui.post.PostActivity
+import com.sugo.app.feat.ui.upload.UploadActivity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.observeOn
@@ -52,8 +53,7 @@ class DealFragment : Fragment() {
         viewModel2.searchValue.observe(viewLifecycleOwner) {
             productSubmitData2(pagingAdapter, it, "")
         }
-        Log.d("DealFragment", User.loginform.value.toString())
-        productSubmitData(pagingAdapter,viewModel.getMainPage())
+        productSubmitData(pagingAdapter, viewModel.getMainPage())
         setNavigation()
     }
 
@@ -66,7 +66,7 @@ class DealFragment : Fragment() {
     // 토큰이 만료되었으면
     private fun setNavigation() {
         viewModel.openDealEvent.observe(viewLifecycleOwner, EventObserver {
-            if (User.loginform.value == false ) {
+            if (User.loginform.value == false) {
                 startActivity(Intent(requireContext(), LoginActivity::class.java))
             } else {
                 openDealDetail(it)
@@ -81,21 +81,27 @@ class DealFragment : Fragment() {
         })
     }
 
-    private fun openDealDetail(productPostId:Long) {
-        findNavController().navigate(R.id.action_deal_to_deal_detail, bundleOf(
-            "productPostId" to productPostId
-        ))
+    private fun openDealDetail(productPostId: Long) {
+        findNavController().navigate(
+            R.id.action_deal_to_deal_detail, bundleOf(
+                "productPostId" to productPostId
+            )
+        )
     }
+
     private fun openPost() {
 //        findNavController().navigate(R.id.action_navigation_deal_to_postFragment, bundleOf())
-        startActivity(Intent(requireContext(), PostActivity::class.java))
+        startActivity(Intent(requireContext(), UploadActivity::class.java))
     }
 
     /**
     리프레쉬 토큰이 만료가 되고 들어가는 경우
     이경우에만 들어가지지 않는다
     만료가 되지않고 들어가는 경우**/
-    private fun productSubmitData(pagingAdapter: ProductPagingAdapter,getMainData: Flow<PagingData<DealProduct>>) {
+    private fun productSubmitData(
+        pagingAdapter: ProductPagingAdapter,
+        getMainData: Flow<PagingData<DealProduct>>
+    ) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {

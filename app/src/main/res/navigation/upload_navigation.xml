@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/upload_navigation"
+    app:startDestination="@id/uploadFragment">
+
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.sugo.app.feat.ui.upload.UploadFragment"
+        android:label="UploadFragment"
+        tools:layout="@layout/fragment_upload">
+        <action
+            android:id="@+id/action_upload_to_contact"
+            app:destination="@id/contactFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.sugo.app.feat.ui.upload.ContactFragment"
+        android:label="ContactFragment"
+        tools:layout="@layout/fragment_contact"/>
+</navigation>

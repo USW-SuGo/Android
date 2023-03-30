@@ -47,6 +47,10 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".feat.ui.upload.UploadActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".feat.ui.login.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
