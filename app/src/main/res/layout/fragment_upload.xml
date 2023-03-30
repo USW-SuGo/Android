@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.sugo.app.feat.ui.upload.UploadViewModel" />
@@ -95,15 +96,15 @@
                     android:layout_height="48dp"
                     android:layout_columnWeight="1"
                     android:layout_gravity="center"
+                    android:background="@color/white"
                     android:fontFamily="@font/pretendardbold"
                     android:gravity="center"
-                    android:text="수고 할 장소"
                     android:onClick="@{()->viewmodel.openContact()}"
+                    android:text="수고할 장소"
                     android:textColor="@color/sugreen"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingConstraints" />
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -145,12 +146,11 @@
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
-
                 android:layout_margin="10dp"
-
-                android:spinnerMode="dropdown" />
+                android:spinnerMode="dropdown"
+                tools:entries="@{viewmodel.spinnerEntry}"
+                tools:selectedValue="@={viewmodel.spinnerData}" />
 
             <View
                 android:layout_width="wrap_content"
