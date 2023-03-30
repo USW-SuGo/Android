@@ -4,10 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sugo.app.feat.ServiceLocator
-import com.sugo.app.feat.repository.repo.Chat.ChatRemoteDataSource
 import com.sugo.app.feat.repository.repo.Chat.ChatRepository
 import com.sugo.app.feat.repository.repo.Note.NotePagingRepositoryImpl
-import com.sugo.app.feat.repository.repo.Token.TokenPreferenceManager
 import com.sugo.app.feat.repository.repo.detail.DetailRemoteDataSource
 import com.sugo.app.feat.repository.repo.detail.DetailRepository
 import com.sugo.app.feat.repository.repo.join.JoinRemoteDataSource

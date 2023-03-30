@@ -37,9 +37,7 @@ class MyPageFragment : Fragment(), BottomSheetListner {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMypageBinding.inflate(inflater, container, false)
-        Log.d("MyPageFragment", User.loginform.value.toString())
         if (User.loginform.value==false) {
-            Log.d("MyPageFragment1", User.loginform.value.toString())
             startActivity(Intent(requireContext(), LoginActivity::class.java))
         }
         return binding.root
@@ -48,7 +46,6 @@ class MyPageFragment : Fragment(), BottomSheetListner {
     override fun onResume() {
         super.onResume()
         if (User.loginform.value==true) {
-            Log.d("MyPageFragment2", User.loginform.value.toString())
             viewModel.getMyPage()
         }
     }
@@ -97,13 +94,11 @@ class MyPageFragment : Fragment(), BottomSheetListner {
     private fun setUser() {
         viewModel.myPage.observe(viewLifecycleOwner) {
             binding.mypage = it
-
         }
     }
 
     private fun setNavigation() {
         viewModel.openDealEvent.observe(viewLifecycleOwner, EventObserver {
-            Log.d("productPostId", it.toString())
             openDealDetail(it)
         })
     }
