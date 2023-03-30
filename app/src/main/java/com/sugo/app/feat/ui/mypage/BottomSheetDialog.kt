@@ -20,6 +20,9 @@ interface BottomSheetListner {
 
 class BottomSheetDialog(context: Context, val id: Long) : BottomSheetDialogFragment(),
     CheckDialogListener {
+
+    private var checkDialogListener: CheckDialogListener? = null
+    private var bottomSheetListner: BottomSheetListner? = null
     private lateinit var binding: MypageProductDialogBinding
     private val viewModel: MyPageViewModel by viewModels { ViewModelFactory(requireContext()) }
     override fun onCreateView(
@@ -37,11 +40,6 @@ class BottomSheetDialog(context: Context, val id: Long) : BottomSheetDialogFragm
         onClick(binding.tvDealDelete,"delete")
     }
 
-    private var checkDialogListener: CheckDialogListener? = null
-//    fun setCheckDialogListener2(listener: CheckDialogListener) {
-//        this.listener = listener
-//    }
-    private var bottomSheetListner: BottomSheetListner? = null
     fun setCheckDialogListener2(listener: BottomSheetListner) {
         this.bottomSheetListner= listener
     }
@@ -56,7 +54,6 @@ class BottomSheetDialog(context: Context, val id: Long) : BottomSheetDialogFragm
                 job.await()
                 dismiss()
                 checkDialogListener?.onCheckDialogResult()
-
             }
         }
     }
