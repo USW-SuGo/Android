@@ -10,25 +10,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.sugo.app.R
 import com.sugo.app.databinding.FragmentUploadBinding
 import com.sugo.app.feat.model.ProductPostId
 import com.sugo.app.feat.network.SugoRetrofit
+import com.sugo.app.feat.ui.MainActivity
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ImageRealPath
 import com.sugo.app.feat.ui.common.ViewModelFactory
-import com.sugo.app.feat.ui.mypage.BottomSheetDialog
+import com.sugo.app.feat.ui.login.LoginActivity
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -98,6 +96,9 @@ class UploadFragment : Fragment() {
                         response: Response<ProductPostId>
                     ) {
                         if (response.isSuccessful) {
+                            val intent = Intent(requireContext(), MainActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
                         } else {
                             Log.d("postUploadFail", response.errorBody()!!.toString())
                         }
@@ -129,9 +130,7 @@ class UploadFragment : Fragment() {
         ActivityResultContracts.StartActivityForResult()
     ) {
         if (it.resultCode == AppCompatActivity.RESULT_OK) {
-
             list.clear()
-
             if (it.data?.clipData != null) { // 사진 여러개 선택한 경우
                 val count = it.data!!.clipData!!.itemCount
                 if (count > 2) {
@@ -141,13 +140,11 @@ class UploadFragment : Fragment() {
                     val imageUri = it.data!!.clipData!!.getItemAt(i).uri
                     list.add(imageUri)
                 }
-
             } else {
                 it.data?.data?.let { uri ->
                     val imageUri: Uri? = it.data?.data
                     if (imageUri != null) {
                         list.add(imageUri)
-
                     }
                 }
             }

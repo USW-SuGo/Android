@@ -1,6 +1,5 @@
 package com.sugo.app.feat.ui.mypage
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,12 +17,13 @@ interface CheckDialogListener {
     fun onCheckDialogResult()
 }
 
-class CheckDialog(context: Context, val id: Long, val type: String) : DialogFragment() {
+class CheckDialog(val id: Long, val type: String) : DialogFragment() {
 
     private var listener: CheckDialogListener? = null
     fun setCheckDialogListener(listener: CheckDialogListener) {
         this.listener = listener
     }
+
     private val viewModel: MyPageViewModel by viewModels { ViewModelFactory(requireContext()) }
     private lateinit var binding: MypageCheckDialogBinding
 
@@ -55,7 +55,9 @@ class CheckDialog(context: Context, val id: Long, val type: String) : DialogFrag
         viewLifecycleOwner.lifecycleScope.launch {
             val job = async {
                 when (type) {
-                    "delete" -> {viewModel.deletePost(id)}
+                    "delete" -> {
+                        viewModel.deletePost(id)
+                    }
                     else -> viewModel.postClose(id)
                 }
             }

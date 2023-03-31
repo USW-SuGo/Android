@@ -18,7 +18,7 @@ interface BottomSheetListner {
     fun onBottomSheetResult()
 }
 
-class BottomSheetDialog(context: Context, val id: Long) : BottomSheetDialogFragment(),
+class BottomSheetDialog(val id: Long) : BottomSheetDialogFragment(),
     CheckDialogListener {
 
     private var checkDialogListener: CheckDialogListener? = null
@@ -47,7 +47,7 @@ class BottomSheetDialog(context: Context, val id: Long) : BottomSheetDialogFragm
         textView.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 val job = async {
-                    val bottomSheetFragment = CheckDialog(requireContext(), id, type)
+                    val bottomSheetFragment = CheckDialog(id, type)
                     bottomSheetFragment.setCheckDialogListener(this@BottomSheetDialog)
                     bottomSheetFragment.show(parentFragmentManager, "childFragmentManager")
                 }

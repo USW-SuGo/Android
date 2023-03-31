@@ -79,7 +79,7 @@ class MyPageFragment : Fragment(), BottomSheetListner {
 
     private fun openDailog() {
         viewModel.openDealEvent1.observe(viewLifecycleOwner, EventObserver {
-            val bottomSheetFragment = BottomSheetDialog(requireContext(), it)
+            val bottomSheetFragment = BottomSheetDialog(it)
             bottomSheetFragment.setCheckDialogListener2(this@MyPageFragment)
             bottomSheetFragment.show(parentFragmentManager, "childFragmentManager")
         })
