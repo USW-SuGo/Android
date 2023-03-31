@@ -4,23 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewmodel"
-            type="com.sugo.app.feat.ui.join.inputUser.JoinViewModel" />
-
-        <variable
-            name="department"
-            type="com.sugo.app.feat.model.request.Department" />
+            type="com.sugo.app.feat.ui.upload.UploadViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="@{()->viewmodel.setDepartmet(tvSelectDepartment.getText().toString())}">
+        android:onClick="@{()->viewmodel.setPlace(tvPlace.getText().toString())}"
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_select_department"
+            android:id="@+id/tv_place"
             style="@style/PretendardBold.Size20"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

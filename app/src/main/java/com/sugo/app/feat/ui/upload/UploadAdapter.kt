@@ -1,4 +1,4 @@
-package com.sugo.app.feat.ui.post
+package com.sugo.app.feat.ui.upload
 
 import android.net.Uri
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sugo.app.R
 
-class PostUploadAdapter(private val items : ArrayList<Uri>) :
-    RecyclerView.Adapter<PostUploadAdapter.ViewHolder>() {
+class UploadAdapter(private val items : ArrayList<Uri>) :
+    RecyclerView.Adapter<UploadAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflatedView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_post,parent,false)

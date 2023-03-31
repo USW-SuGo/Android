@@ -4,10 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sugo.app.feat.ServiceLocator
-import com.sugo.app.feat.repository.repo.Chat.ChatRemoteDataSource
 import com.sugo.app.feat.repository.repo.Chat.ChatRepository
 import com.sugo.app.feat.repository.repo.Note.NotePagingRepositoryImpl
-import com.sugo.app.feat.repository.repo.Token.TokenPreferenceManager
 import com.sugo.app.feat.repository.repo.detail.DetailRemoteDataSource
 import com.sugo.app.feat.repository.repo.detail.DetailRepository
 import com.sugo.app.feat.repository.repo.join.JoinRemoteDataSource
@@ -25,6 +23,7 @@ import com.sugo.app.feat.ui.join.inputUser.JoinViewModel
 import com.sugo.app.feat.ui.login.LoginViewModel
 import com.sugo.app.feat.ui.mypage.MyPageViewModel
 import com.sugo.app.feat.ui.note.Chat.ChatViewModel
+import com.sugo.app.feat.ui.upload.UploadViewModel
 
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
@@ -74,6 +73,10 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                 val repository =
                     DetailRepository(DetailRemoteDataSource(ServiceLocator.provideTokenApiClient()))
                 DetailViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(UploadViewModel::class.java) ->{
+
+                UploadViewModel() as T
             }
 
             else -> {

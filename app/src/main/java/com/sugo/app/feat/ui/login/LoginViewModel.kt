@@ -28,6 +28,7 @@ class LoginViewModel(
                 val (accessToken, refreshToken) = TokenHeadersText(originalHeaders)
                 App.prefs.saveAccessToken(accessToken)
                 App.prefs.saveRefreshToken(refreshToken)
+                sendFCM(FcmToken(App.prefs.getFCM().toString()))
             }
         }
     }
