@@ -37,7 +37,6 @@ class MyPageViewModel(
     private val _openDealEvent = MutableLiveData<Event<Long>>()
     val openDealEvent: LiveData<Event<Long>> = _openDealEvent
 
-
     fun openDealDetail(productPostId: Long) {
         _openDealEvent.value = Event(productPostId)
     }

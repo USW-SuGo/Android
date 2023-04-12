@@ -19,24 +19,24 @@ class DetailViewModel(
 ) : ViewModel() {
     private val _dealPrduct = MutableLiveData<DealProduct>()
     val dealProduct: LiveData<DealProduct> = _dealPrduct
-    private val _dealPrduct1 = MutableLiveData<String>()
-    val dealProduct1: LiveData<String> = _dealPrduct1
+    private val _likeStatus = MutableLiveData(false)
+    val likeStatus: LiveData<Boolean> = _likeStatus
 
     fun detailProduct(productPostId: Long) = viewModelScope.launch {
         val response = detailRepository.detailProduct(productPostId)
-        if(response.isSuccessful) _dealPrduct.value = response.body()
-
+        if (response.isSuccessful) {
+            _dealPrduct.value = response.body()
+            _likeStatus.value =response.body()?.userLikeStatus
+        }
     }
 
-    fun makeNote(id:Long,productPostId: Long) = viewModelScope.launch {
-        val response = detailRepository.makeNote(NoteBody(id,productPostId))
-        Log.d("noteId",response.body().toString())
+    fun makeNote(id: Long, productPostId: Long) = viewModelScope.launch {
+        val response = detailRepository.makeNote(NoteBody(id, productPostId))
     }
 
     fun like(productPostId: Long) = viewModelScope.launch {
-        val response = detailRepository.like(productPostId)
+        detailRepository.like(productPostId)
     }
-
 
 
 }

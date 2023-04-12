@@ -18,6 +18,7 @@ data class DealProduct(
     val category: String,
     val content: String,
     val status :Boolean,
+    val userLikeStatus:Boolean
 )
 data class ProductPostId(
     @SerializedName("productPostId") val id: Long

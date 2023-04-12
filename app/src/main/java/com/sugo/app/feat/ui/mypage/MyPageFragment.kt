@@ -60,18 +60,12 @@ class MyPageFragment : Fragment(), BottomSheetListner {
         //이부분을  VM 으로 옮기기 뷰엣허 클릭시 센변경을 하는방법을 모르곘네  셀렉터인가 아닌가?
         binding.tvUserWrite.setOnClickListener {
             productSubmitData(pagingAdapter, viewModel.getMyPageProduct())
-            binding.tvUserWrite.setTextColor(Color.parseColor("#000000"))
-            binding.tvLikeWrite.setTextColor(Color.parseColor("#419e3a"))
         }
         binding.tvLikeWrite.setOnClickListener {
             productSubmitData(pagingAdapter, viewModel.getLikeProduct())
-            binding.tvUserWrite.setTextColor(Color.parseColor("#419e3a"))
-            binding.tvLikeWrite.setTextColor(Color.parseColor("#000000"))
         }
         binding.tvDealSuccess.setOnClickListener {
             productSubmitData(pagingAdapter, viewModel.getClosePost())
-            binding.tvUserWrite.setTextColor(Color.parseColor("#419e3a"))
-            binding.tvLikeWrite.setTextColor(Color.parseColor("#000000"))
         }
         openDailog()
         setNavigation()
@@ -114,8 +108,7 @@ class MyPageFragment : Fragment(), BottomSheetListner {
 
     private fun openSetting() {
         findNavController().navigate(
-            R.id.action_navigation_mypage_to_settingFragment, bundleOf(
-            )
+            R.id.action_navigation_mypage_to_settingFragment, bundleOf()
         )
     }
 

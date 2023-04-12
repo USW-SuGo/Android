@@ -20,7 +20,6 @@ class MyLikePagingDataSource (
         val position = params.key ?:0
         return try {
             val Products = apiService.getLikeProduct(position,10)
-            Log.d("response test", "test2[0].imageLink.toString()")
             LoadResult.Page(
                 data = Products,
                 prevKey = if (position == 0) null else position - 1,

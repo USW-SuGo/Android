@@ -48,7 +48,6 @@ class TokenAuthenticator : Authenticator {
         response: Response<Token>
     ) =
         if (response.isSuccessful && response.body() != null) {
-            Log.d("TokenAuthenticator1", response.headers().toString())
             val a =response.headers().get("authorization")
             val (accesstoken,refreshtoken) = TokenHeadersText(a)
             App.prefs.saveAccessToken( accesstoken)
@@ -58,7 +57,6 @@ class TokenAuthenticator : Authenticator {
             }
             true
         } else {
-            Log.d("실패실패", "실패했어요 토큰")
             CoroutineScope(Dispatchers.Main).launch {
                 User.loginform.value = false
             }

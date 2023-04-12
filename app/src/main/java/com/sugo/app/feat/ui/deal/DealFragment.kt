@@ -58,7 +58,7 @@ class DealFragment : Fragment() {
         val pagingAdapter = ProductPagingAdapter(viewModel)
         binding.rvDealProduct.adapter = pagingAdapter
         binding.loDeal.setOnClickListener {
-            this@DealFragment.hideKeyboard()
+           hideKeyboard()
         }
         return pagingAdapter
     }
