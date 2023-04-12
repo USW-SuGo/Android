@@ -14,29 +14,42 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 
-class ChatViewModel  (private val chatRepository: ChatRepository,private val detailRepository: DetailRepository) : ViewModel() {
+class ChatViewModel(
+    private val chatRepository: ChatRepository,
+    private val detailRepository: DetailRepository
+) : ViewModel() {
     private val _dealPrduct2 = MutableLiveData<DealProduct>()
     val dealProduct2: LiveData<DealProduct> = _dealPrduct2
     private val _ChatContent = MutableLiveData<List<Long>>()
     val chatContent: LiveData<List<Long>> = _ChatContent
     fun detailProduct(productPostId: Long) = viewModelScope.launch {
         val response = detailRepository.detailProduct(productPostId)
-        if(response.isSuccessful) _dealPrduct2.value = response.body()
+        if (response.isSuccessful) _dealPrduct2.value = response.body()
     }
-    fun getChatRoom(noteId:Long): Flow<PagingData<ChatRoom>> {
+
+    fun getChatRoom(noteId: Long): Flow<PagingData<ChatRoom>> {
         return chatRepository.getNoteRoom(noteId)
     }
-    fun getTest(a:Long,b:Long):List<Long>{
+
+    fun getTest(a: Long, b: Long): List<Long> {
         val idList = mutableListOf<Long>()
-        _ChatContent.value= listOf(a,b)
+        _ChatContent.value = listOf(a, b)
         return idList
     }
+
     fun sendChat(chat: Chat) = viewModelScope.launch {
         detailRepository.sendChat(chat)
     }
-    fun sendFile(noteId:MultipartBody.Part,senderId:MultipartBody.Part,receiverId:MultipartBody.Part,d:MutableList<MultipartBody.Part>) = viewModelScope.launch {
-        detailRepository.sendFile(noteId,senderId,receiverId,d)
+
+    fun sendFile(
+        noteId: MultipartBody.Part,
+        senderId: MultipartBody.Part,
+        receiverId: MultipartBody.Part,
+        d: MutableList<MultipartBody.Part>
+    ) = viewModelScope.launch {
+        detailRepository.sendFile(noteId, senderId, receiverId, d)
     }
+
     fun makeId(
         creatingUserId: Long, requestUserId: Long, opponentUserId: Long
     ) {

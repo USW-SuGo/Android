@@ -1,18 +1,17 @@
 package com.sugo.app.feat.ui.join.inputDepartment
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sugo.app.databinding.ItemSelectDepartmentBinding
-import com.sugo.app.feat.ui.deal.ProductPagingViewModel
 import com.sugo.app.feat.ui.join.inputUser.JoinViewModel
 
-class SelectAdapter(private val viewModel: JoinViewModel) : ListAdapter<String, SelectAdapter.HomeBannerViewHolder>(
-    BannerDiffCallback()
-) {
+class SelectAdapter(private val viewModel: JoinViewModel) :
+    ListAdapter<String, SelectAdapter.HomeBannerViewHolder>(
+        BannerDiffCallback()
+    ) {
     private lateinit var binding: ItemSelectDepartmentBinding
 
 
@@ -30,7 +29,7 @@ class SelectAdapter(private val viewModel: JoinViewModel) : ListAdapter<String, 
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(department: String) {
-            binding.viewmodel=viewModel
+            binding.viewmodel = viewModel
             binding.tvSelectDepartment.text = department
             binding.executePendingBindings()
         }

@@ -1,6 +1,7 @@
 package com.sugo.app.feat.ui.join.inputUser
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -15,5 +16,8 @@ class JoinActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_join)
         binding.viewmodel = viewModel
+        viewModel._pwdText.observe(this) {
+            Log.d("teasd", "taseasease")
+        }
     }
 }

@@ -19,6 +19,7 @@ import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.User
 import com.sugo.app.feat.ui.common.ViewModelFactory
+import com.sugo.app.feat.ui.common.hideKeyboard
 import com.sugo.app.feat.ui.login.LoginActivity
 import com.sugo.app.feat.ui.upload.UploadActivity
 import kotlinx.coroutines.flow.Flow
@@ -50,11 +51,15 @@ class DealFragment : Fragment() {
         }
         productSubmitData(pagingAdapter, viewModel.getMainPage())
         setNavigation()
+
     }
 
     private fun initAdapter(): ProductPagingAdapter {
         val pagingAdapter = ProductPagingAdapter(viewModel)
         binding.rvDealProduct.adapter = pagingAdapter
+        binding.loDeal.setOnClickListener {
+            hideKeyboard()
+        }
         return pagingAdapter
     }
 

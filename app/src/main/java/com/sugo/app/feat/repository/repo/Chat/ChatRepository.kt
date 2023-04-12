@@ -11,13 +11,12 @@ import com.sugo.app.feat.repository.repo.Note.NotePagingDataSource
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
-class ChatRepository(private val apiService: SugoRetrofit): ChatDataSource {
+class ChatRepository(private val apiService: SugoRetrofit) : ChatDataSource {
 
-    override fun getNoteRoom(noteId:Long): Flow<PagingData<ChatRoom>> =
-        Pager(PagingConfig(10)){
-            ChatRemoteDataSource(apiService,noteId)
+    override fun getNoteRoom(noteId: Long): Flow<PagingData<ChatRoom>> =
+        Pager(PagingConfig(10)) {
+            ChatRemoteDataSource(apiService, noteId)
         }.flow
-
 
 
 }

@@ -1,14 +1,10 @@
 package com.sugo.app.feat.ui.login
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sugo.app.feat.App
 import com.sugo.app.feat.model.request.FcmToken
-import com.sugo.app.feat.repository.repo.Token.TokenPreferenceManager
 import com.sugo.app.feat.repository.repo.login.LoginRepository
-import com.sugo.app.feat.ui.common.Event
 import com.sugo.app.feat.ui.common.TokenHeadersText
 import com.sugo.app.feat.ui.common.User
 import kotlinx.coroutines.CoroutineScope
@@ -33,8 +29,8 @@ class LoginViewModel(
         }
     }
 
-     fun sendFCM(fcmToken: FcmToken) = viewModelScope.launch{
-         loginRepository.sendFCM(fcmToken)
-     }
+    fun sendFCM(fcmToken: FcmToken) = viewModelScope.launch {
+        loginRepository.sendFCM(fcmToken)
+    }
 
 }

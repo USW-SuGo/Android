@@ -16,12 +16,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentMessageBinding
-import com.sugo.app.feat.model.ProductPostId
 import com.sugo.app.feat.model.response.NoteContent
 import com.sugo.app.feat.ui.common.EventObserver
-
 import com.sugo.app.feat.ui.common.ViewModelFactory
-import com.sugo.app.feat.ui.mypage.MyPageViewModel
 import com.sugo.app.feat.ui.note.Chat.ChatViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest

@@ -20,36 +20,29 @@
         android:onClick="@{()->viewModel.openDealDetail(dealproduct.id)}"
         android:padding="8dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_deal_product_image"
+        <ImageView
+            android:clipToOutline="true"
+            android:id="@+id/iv_deal_product_image"
+            imageUrl="@{dealproduct.imageLink}"
             android:layout_width="0dp"
-            android:layout_height="170dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="0dp"
+            android:layout_height="150dp"
+            android:background="@drawable/edge"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_deal_product_image"
-                imageUrl="@{dealproduct.imageLink}"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToOutline="true"
-                android:scaleType="fitXY" />
-        </androidx.cardview.widget.CardView>
-
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_deal_product_place"
             style="@style/PretendardSemiBold.16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="@{dealproduct.contactPlace}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_deal_product_image"
+            app:layout_constraintTop_toBottomOf="@+id/iv_deal_product_image"
             tools:text="인문대" />
 
         <TextView
@@ -78,6 +71,8 @@
             style="@style/PretendardBold.Middle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="4dp"
             android:maxLines="1"
@@ -92,6 +87,8 @@
             style="@style/PretendardSemiBold.16"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:text="@{dealproduct.nickname}"
             app:layout_constraintEnd_toEndOf="parent"

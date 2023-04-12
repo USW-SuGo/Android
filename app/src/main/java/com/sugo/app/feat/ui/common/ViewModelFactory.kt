@@ -75,7 +75,6 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                 DetailViewModel(repository) as T
             }
             modelClass.isAssignableFrom(UploadViewModel::class.java) ->{
-
                 UploadViewModel() as T
             }
 

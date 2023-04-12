@@ -58,7 +58,7 @@ class JoinInputFragment : Fragment() {
         viewModel.introEmail.observe(viewLifecycleOwner) {
             Log.d("tvEmailintro", it)
             binding.tvEmailIntro.text = it
-             btnEnable()
+            btnEnable()
         }
         viewModel.introPwd.observe(viewLifecycleOwner) {
             Log.d("tvPwdintro", it)

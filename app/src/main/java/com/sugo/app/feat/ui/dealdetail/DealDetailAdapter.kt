@@ -13,7 +13,7 @@ class DealDetailAdapter() : ListAdapter<String, DealDetailAdapter.DealDetailView
 ) {
     private lateinit var binding: ItemDetailImageBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DealDetailViewHolder {
-        binding = ItemDetailImageBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        binding = ItemDetailImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return DealDetailViewHolder(binding)
     }
@@ -30,13 +30,14 @@ class DealDetailAdapter() : ListAdapter<String, DealDetailAdapter.DealDetailView
             binding.executePendingBindings()
         }
     }
+
     class imageLinkDiffCallback : DiffUtil.ItemCallback<String>() {
 
         override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
             TODO("Not yet implemented")
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem:String): Boolean {
+        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
             return oldItem == newItem
         }
 

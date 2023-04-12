@@ -1,7 +1,5 @@
 package com.sugo.app.feat.common
 
-import com.sugo.app.feat.model.response.MyPage
-
 object NetWork {
     const val BASE_URL = "https://api.sugo-diger.com"
     const val MainPage = "/post/all"
@@ -15,6 +13,7 @@ object NetWork {
     const val MyPage= "/user"
     const val UpPost="/post/up-post"
     const val ClosePost="/post/close"
+    const val getClosePost = "/post/close-post"
     const val CheckId="/user/check-loginId"
     const val CheckEmail="/user/check-email"
     const val Join = "/user/join"

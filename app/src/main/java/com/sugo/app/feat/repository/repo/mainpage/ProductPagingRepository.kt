@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProductPagingRepository {
     fun getMainPage(): Flow<PagingData<DealProduct>>
-    fun getSearchPage(value:String,category: String): Flow<PagingData<DealProduct>>
+
+    fun getClosePost(): Flow<PagingData<DealProduct>>
+    fun getSearchPage(value: String, category: String): Flow<PagingData<DealProduct>>
     fun getMyPageProduct(): Flow<PagingData<DealProduct>>
     fun getLikeProduct(): Flow<PagingData<DealProduct>>
 }

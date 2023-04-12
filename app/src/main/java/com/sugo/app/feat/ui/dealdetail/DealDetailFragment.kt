@@ -1,21 +1,15 @@
 package com.sugo.app.feat.ui.dealdetail
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sugo.app.databinding.FragmentDealDetailBinding
-import com.sugo.app.feat.App
 import com.sugo.app.feat.ui.common.ViewModelFactory
-import com.sugo.app.feat.ui.common.*
-import com.sugo.app.feat.ui.login.LoginActivity
 
 class DealDetailFragment : Fragment() {
 
@@ -33,10 +27,12 @@ class DealDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewmodel=viewModel
+        binding.viewmodel = viewModel
         val productId = requireArguments().getLong("productPostId")
         val adapter = initAdapter()
-
+        viewModel.likeStatus.observe(viewLifecycleOwner) {
+            binding.ivHeart.isSelected = it
+        }
         setViewPagerAdapter(adapter, productId)
         setNavigation()
     }
@@ -50,7 +46,7 @@ class DealDetailFragment : Fragment() {
     private fun setViewPagerAdapter(adapter: DealDetailAdapter, productId: Long) {
         with(binding.viewpagerDealDetail) {
             setPageTransformer { page, position ->
-                page.translationX = position * -16
+                page.translationX = position * -10
             }
             TabLayoutMediator(binding.viewpagerDealDetailIndicator, this) { tab, position ->
 
