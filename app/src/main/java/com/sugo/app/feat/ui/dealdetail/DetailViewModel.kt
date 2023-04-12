@@ -35,8 +35,8 @@ class DetailViewModel(
     }
 
     fun like(productPostId: Long) = viewModelScope.launch {
-        detailRepository.like(productPostId)
+        val response = detailRepository.like(productPostId)
+        _likeStatus.value = response.body()?.Like
     }
-
 
 }
