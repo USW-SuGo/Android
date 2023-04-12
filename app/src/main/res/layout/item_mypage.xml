@@ -15,7 +15,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="15dp"
@@ -24,6 +24,7 @@
         android:onClick="@{()->viewModel.openDealDetail(dealproduct.id)}">
 
         <ImageView
+
             android:id="@+id/iv_mypage_product_link"
             imageUrl="@{dealproduct.imageLink}"
             android:layout_width="100dp"
@@ -39,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
             android:text="@{dealproduct.contactPlace}"
             app:layout_constraintStart_toEndOf="@+id/iv_mypage_product_link"
@@ -67,16 +69,16 @@
             tools:text="전자기기" />
 
         <TextView
-            android:visibility="visible"
-            android:onClick="@{()->viewModel.showdialog(dealproduct.id)}"
             android:id="@+id/textViewOptions"
             android:layout_width="30dp"
             android:layout_height="40dp"
             android:layout_alignParentTop="true"
             android:gravity="center"
+            android:onClick="@{()->viewModel.showdialog(dealproduct.id)}"
             android:text="⋮"
             android:textAppearance="?android:textAppearanceLarge"
             android:textStyle="bold"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,14 +87,12 @@
             style="@style/PretendardBold.Middle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="4dp"
             android:maxLines="1"
             android:text="@{dealproduct.title}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_mypage_product_link"
+            app:layout_constraintStart_toStartOf="@+id/tv_deal_product_place"
             app:layout_constraintTop_toBottomOf="@+id/tv_deal_product_category"
             tools:text="아무말이나아무말아무말" />
 
@@ -125,14 +125,25 @@
 
         <View
             android:id="@+id/item_line1"
+            android:layout_marginTop="10dp"
             android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:background="@color/black"
+            android:layout_height="0dp"
+            android:background="@color/grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_mypage_product_link" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/iv_mypage_product_link"
+            />
+
         <TextView
+            android:id="@+id/tv_up"
             style="@style/PretendardBold.Size20"
             android:layout_width="194dp"
             android:layout_height="40dp"
@@ -145,6 +156,7 @@
             app:layout_constraintTop_toTopOf="@id/item_line1" />
 
         <TextView
+            android:id="@+id/tv_fix"
             style="@style/PretendardBold.Size20"
             android:layout_width="194dp"
             android:layout_height="40dp"
@@ -153,6 +165,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_line1"
-            app:layout_constraintTop_toTopOf="@id/item_line1" />
+            app:layout_constraintTop_toTopOf="@id/tv_up" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/tv_fix" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

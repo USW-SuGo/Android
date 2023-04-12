@@ -26,6 +26,7 @@ import com.sugo.app.feat.ui.MainActivity
 import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ImageRealPath
 import com.sugo.app.feat.ui.common.ViewModelFactory
+import com.sugo.app.feat.ui.common.hideKeyboard
 import com.sugo.app.feat.ui.login.LoginActivity
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -56,6 +57,9 @@ class UploadFragment : Fragment() {
         binding.viewmodel = viewModel
         val category= listOf("서적","전자기기","생활용품","기타")
         viewModel.setSpinnerEntry(category)
+        binding.loUpload.setOnClickListener {
+            this@UploadFragment.hideKeyboard()
+        }
         binding.selectPicture.setOnClickListener {
             selectGallery()
         }

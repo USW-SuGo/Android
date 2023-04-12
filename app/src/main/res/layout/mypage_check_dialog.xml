@@ -13,9 +13,9 @@
 
         <TextView
             android:id="@+id/tv_intro"
-            style="@style/PretendardBold.Middle"
+            android:textSize="30sp"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="0dp"
             android:gravity="center"
             android:text="게시글을 정말 삭제하시겠어요?"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,9 +25,10 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_ok"
             android:layout_width="0dp"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
             android:background="@color/white"
+            android:minHeight="48dp"
             android:text="확인"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_intro" />
@@ -35,8 +36,9 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_cansel"
             android:layout_width="0dp"
-            android:layout_height="24dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="7dp"
+            android:minHeight="48dp"
             android:text="취소"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"

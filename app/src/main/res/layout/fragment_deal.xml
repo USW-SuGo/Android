@@ -13,6 +13,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lo_deal"
         android:layout_width="match_parent"
         android:paddingHorizontal="8dp"
         android:layout_height="match_parent"
