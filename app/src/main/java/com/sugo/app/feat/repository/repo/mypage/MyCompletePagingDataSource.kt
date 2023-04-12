@@ -6,28 +6,27 @@ import androidx.paging.PagingState
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.network.SugoRetrofit
 
-//class MyCompletePagingDataSource  (
-//    private val apiService : SugoRetrofit,
-//) : PagingSource<Int, DealProduct>(){
-//    override fun getRefreshKey(state: PagingState<Int, DealProduct>): Int? {
-//        return state.anchorPosition?.let { position ->
-//            state.closestPageToPosition(position)?.prevKey?.plus(1)
-//                ?: state.closestPageToPosition(position)?.nextKey?.minus(1)
-//        }
-//    }
-//
-//    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DealProduct> {
-//        val position = params.key ?:0
-//        return try {
-//            val Products = apiService.getCompleteProduct(position,10)
-//            Log.d("response test", "test2[0].imageLink.toString()")
-//            LoadResult.Page(
-//                data = Products,
-//                prevKey = if (position == 0) null else position - 1,
-//                nextKey = if (Products.isEmpty()) null else position + 1
-//            )
-//        } catch (e: Exception) {
-//            return LoadResult.Error(e)
-//        }
-//    }
-//}
+class MyCompletePagingDataSource  (
+    private val apiService : SugoRetrofit,
+) : PagingSource<Int, DealProduct>(){
+    override fun getRefreshKey(state: PagingState<Int, DealProduct>): Int? {
+        return state.anchorPosition?.let { position ->
+            state.closestPageToPosition(position)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(position)?.nextKey?.minus(1)
+        }
+    }
+
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DealProduct> {
+        val position = params.key ?:0
+        return try {
+            val Products = apiService.getClosePost(position,10)
+            LoadResult.Page(
+                data = Products,
+                prevKey = if (position == 0) null else position - 1,
+                nextKey = if (Products.isEmpty()) null else position + 1
+            )
+        } catch (e: Exception) {
+            return LoadResult.Error(e)
+        }
+    }
+}

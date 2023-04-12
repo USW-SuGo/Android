@@ -1,15 +1,12 @@
 package com.sugo.app.feat.ui.mypage
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sugo.app.databinding.ItemMypageBinding
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.ui.common.DealProductDiffCallback
-import com.sugo.app.feat.ui.deal.ProductPagingViewModel
 
 class MyPageAdapter(
     private val viewModel: MyPageViewModel,

@@ -30,6 +30,10 @@ class MyPageViewModel(
         return repoImpl.getLikeProduct()
     }
 
+    fun getClosePost(): Flow<PagingData<DealProduct>> {
+        return repoImpl.getClosePost()
+    }
+
     private val _openDealEvent = MutableLiveData<Event<Long>>()
     val openDealEvent: LiveData<Event<Long>> = _openDealEvent
 

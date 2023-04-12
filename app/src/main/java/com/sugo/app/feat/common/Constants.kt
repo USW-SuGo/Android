@@ -15,6 +15,7 @@ object NetWork {
     const val MyPage= "/user"
     const val UpPost="/post/up-post"
     const val ClosePost="/post/close"
+    const val getClosePost = "/post/close-post"
     const val CheckId="/user/check-loginId"
     const val CheckEmail="/user/check-email"
     const val Join = "/user/join"

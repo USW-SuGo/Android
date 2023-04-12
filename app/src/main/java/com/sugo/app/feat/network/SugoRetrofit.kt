@@ -29,6 +29,7 @@ import com.sugo.app.feat.common.NetWork.Search
 
 import com.sugo.app.feat.common.NetWork.TokenRefreshAPI
 import com.sugo.app.feat.common.NetWork.UpPost
+import com.sugo.app.feat.common.NetWork.getClosePost
 import com.sugo.app.feat.model.*
 import com.sugo.app.feat.model.request.*
 import com.sugo.app.feat.model.response.*
@@ -59,6 +60,12 @@ interface SugoRetrofit {
         @Query("page") page: Int,
         @Query("size") size: Int,
         @Query("category") category: String
+    ): List<DealProduct>
+
+    @GET(getClosePost)
+    suspend fun getClosePost(
+        @Query("page") page: Int,
+        @Query("size") size: Int
     ): List<DealProduct>
 
     @Headers("Content-Type:application/json")

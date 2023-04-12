@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.sugo.app.feat.model.DealProduct
 import com.sugo.app.feat.network.SugoRetrofit
+import com.sugo.app.feat.repository.repo.mypage.MyCompletePagingDataSource
 import com.sugo.app.feat.repository.repo.mypage.MyLikePagingDataSource
 import com.sugo.app.feat.repository.repo.mypage.MyPagePagingDataSource
 import kotlinx.coroutines.flow.Flow
@@ -29,6 +30,9 @@ class ProductPagingRepositoryImpl(private val apiService:SugoRetrofit): ProductP
         Pager(PagingConfig(10)){
             MyLikePagingDataSource(apiService)
         }.flow
-
+    override fun getClosePost(): Flow<PagingData<DealProduct>> =
+        Pager(PagingConfig(10)){
+            MyCompletePagingDataSource(apiService)
+        }.flow
 
 }
