@@ -16,8 +16,8 @@ class JoinActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_join)
         binding.viewmodel = viewModel
-        viewModel._pwdText.observe(this){
-            Log.d("teasd","taseasease")
+        viewModel._pwdText.observe(this) {
+            Log.d("teasd", "taseasease")
         }
     }
 }

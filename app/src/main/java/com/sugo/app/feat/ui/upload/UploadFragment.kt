@@ -18,7 +18,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.sugo.app.databinding.FragmentUploadBinding
 import com.sugo.app.feat.model.ProductPostId
 import com.sugo.app.feat.network.SugoRetrofit
@@ -27,7 +26,6 @@ import com.sugo.app.feat.ui.common.EventObserver
 import com.sugo.app.feat.ui.common.ImageRealPath
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.common.hideKeyboard
-import com.sugo.app.feat.ui.login.LoginActivity
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -48,6 +46,7 @@ class UploadFragment : Fragment() {
         binding = FragmentUploadBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     /**
      *
      * 미래의 삭아 고생하자
@@ -55,7 +54,7 @@ class UploadFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel
-        val category= listOf("서적","전자기기","생활용품","기타")
+        val category = listOf("서적", "전자기기", "생활용품", "기타")
         viewModel.setSpinnerEntry(category)
         binding.loUpload.setOnClickListener {
             this@UploadFragment.hideKeyboard()
@@ -69,19 +68,19 @@ class UploadFragment : Fragment() {
             val title = getBody("title", binding.postTitle.text.toString())
             val content = getBody("content", binding.postContent.text.toString())
             val price = getBody("price", binding.postPrice.editableText.toString())
-            val contactPlace = getBody("contactPlace","중앙도서관")
-            var a =""
+            val contactPlace = getBody("contactPlace", "중앙도서관")
+            var a = ""
             lifecycleScope.launch {
-                viewModel.spinnerData.collect{
-                    Log.v("sdfsdfsdf" , it)
-                    a=it
+                viewModel.spinnerData.collect {
+                    Log.v("sdfsdfsdf", it)
+                    a = it
                 }
             }
             val postCategory = getBody("category", a)
 
             val imageMultipartBody = mutableListOf<MultipartBody.Part>()
             for (image in list) {
-                val file= ImageRealPath(requireContext()).getFileFromUri(image)
+                val file = ImageRealPath(requireContext()).getFileFromUri(image)
                 if (!file.exists()) {       // 원하는 경로에 폴더가 있는지 확인
                     file.mkdirs()
                 }
@@ -116,12 +115,13 @@ class UploadFragment : Fragment() {
         }
         openDailog()
     }
+
     private fun openDailog() {
         viewModel.openContactEvent.observe(viewLifecycleOwner, EventObserver {
             val bottomSheetFragment = BottomSheetContact(requireContext())
             bottomSheetFragment.show(parentFragmentManager, "childFragmentManager")
-            bottomSheetFragment.setOnClickListner (object :
-            BottomSheetContact.bottomSheetContactListner{
+            bottomSheetFragment.setOnClickListner(object :
+                BottomSheetContact.bottomSheetContactListner {
                 override fun onClicked(clickItem: String) {
                     binding.postContactPlace.text = clickItem
                 }
@@ -155,6 +155,7 @@ class UploadFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
     }
+
     private fun getBody(key: String, value: Any): MultipartBody.Part {
         return MultipartBody.Part.createFormData(key, value.toString())
     }

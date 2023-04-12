@@ -49,6 +49,7 @@ class ChatFragment : Fragment() {
         binding = FragmentChattingBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     /**
      * 리팩토링 필수 일단 기능먼저 개벌
      *
@@ -72,7 +73,7 @@ class ChatFragment : Fragment() {
             val imageMultipartBody = mutableListOf<MultipartBody.Part>()
             Log.d("image", list.toString())
             for (image in list) {
-                val file=ImageRealPath(requireContext()).getFileFromUri(image)
+                val file = ImageRealPath(requireContext()).getFileFromUri(image)
                 if (!file.exists()) file.mkdirs()
                 val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
                 val body =
@@ -80,10 +81,10 @@ class ChatFragment : Fragment() {
                 imageMultipartBody.add(body)
             }
             val noteId1 = getBody("noteId", noteId)
-            val senderId1 = getBody("senderId",chatContent!![0])
-            val receiverId = getBody("receiverId",chatContent!![1])
+            val senderId1 = getBody("senderId", chatContent!![0])
+            val receiverId = getBody("receiverId", chatContent!![1])
 //            viewModel.sendFile(noteId1,senderId1,receiverId, imageMultipartBody)
-            viewModel.sendChat(Chat(noteId,inputText,chatContent!![0],chatContent!![1]))
+            viewModel.sendChat(Chat(noteId, inputText, chatContent!![0], chatContent!![1]))
 
         }
         binding.ivChatFile.setOnClickListener {

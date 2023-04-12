@@ -7,13 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.sugo.app.databinding.FragmentMessageBinding
 import com.sugo.app.databinding.FragmentSettingBinding
-import com.sugo.app.feat.App
 import com.sugo.app.feat.ui.common.User
 import com.sugo.app.feat.ui.login.LoginActivity
 
-class SettingFragment: Fragment() {
+class SettingFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingBinding
     override fun onCreateView(
@@ -32,7 +30,7 @@ class SettingFragment: Fragment() {
             startActivity(nextIntent)
         }
         binding.tvNotification.setOnClickListener {
-            Log.d("Clicklogout","test")
+            Log.d("Clicklogout", "test")
             User.logout()
         }
     }

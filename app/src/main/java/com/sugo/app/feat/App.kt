@@ -6,13 +6,13 @@ import com.sugo.app.feat.repository.repo.Token.TokenPreferenceManager
 
 class App : Application(){
 
-    companion object{
-      lateinit var prefs : TokenPreferenceManager
-      val loginform =MutableLiveData<Boolean>()
-    }
     override fun onCreate() {
         prefs = TokenPreferenceManager(applicationContext)
         super.onCreate()
+    }
 
+    companion object{
+        lateinit var prefs : TokenPreferenceManager
+        val loginform =MutableLiveData<Boolean>()
     }
 }

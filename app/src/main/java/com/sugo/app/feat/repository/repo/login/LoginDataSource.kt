@@ -1,10 +1,8 @@
 package com.sugo.app.feat.repository.repo.login
 
-import com.sugo.app.feat.model.*
+import com.sugo.app.feat.model.Success
 import com.sugo.app.feat.model.request.FcmToken
-import com.sugo.app.feat.model.response.NoteRoom
 import retrofit2.Response
-import retrofit2.http.Body
 
 interface LoginDataSource {
 

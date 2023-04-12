@@ -1,7 +1,6 @@
 package com.sugo.app.feat.ui.mypage
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

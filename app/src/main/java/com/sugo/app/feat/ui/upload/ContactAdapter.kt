@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sugo.app.databinding.ItemPlaceBinding
 
-class ContactAdapter (private val viewModel: UploadViewModel) : ListAdapter<String, ContactAdapter.ContactViewHolder>(
-    BannerDiffCallback()
-) {
+class ContactAdapter(private val viewModel: UploadViewModel) :
+    ListAdapter<String, ContactAdapter.ContactViewHolder>(
+        BannerDiffCallback()
+    ) {
     private lateinit var binding: ItemPlaceBinding
 
 
@@ -27,7 +28,7 @@ class ContactAdapter (private val viewModel: UploadViewModel) : ListAdapter<Stri
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(place: String) {
-            binding.viewmodel=viewModel
+            binding.viewmodel = viewModel
             binding.tvPlace.text = place
             binding.executePendingBindings()
         }

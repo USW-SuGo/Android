@@ -1,8 +1,6 @@
 package com.sugo.app.feat.network
 
-import android.util.Log
 import com.sugo.app.feat.App
-import com.sugo.app.feat.ServiceLocator
 import com.sugo.app.feat.model.Token
 import com.sugo.app.feat.ui.common.TokenHeadersText
 import com.sugo.app.feat.ui.common.User
@@ -37,7 +35,7 @@ class TokenAuthenticator : Authenticator {
             response.request
                 .newBuilder()
                 .removeHeader("Authorization")
-                .header("Authorization",App.prefs.getAccessToken() ?: "")
+                .header("Authorization", App.prefs.getAccessToken() ?: "")
                 .build()
         } else {
             null
@@ -48,10 +46,10 @@ class TokenAuthenticator : Authenticator {
         response: Response<Token>
     ) =
         if (response.isSuccessful && response.body() != null) {
-            val a =response.headers().get("authorization")
-            val (accesstoken,refreshtoken) = TokenHeadersText(a)
-            App.prefs.saveAccessToken( accesstoken)
-            App.prefs.saveRefreshToken( refreshtoken)
+            val a = response.headers().get("authorization")
+            val (accesstoken, refreshtoken) = TokenHeadersText(a)
+            App.prefs.saveAccessToken(accesstoken)
+            App.prefs.saveRefreshToken(refreshtoken)
             CoroutineScope(Dispatchers.Main).launch {
                 User.loginform.value = true
             }

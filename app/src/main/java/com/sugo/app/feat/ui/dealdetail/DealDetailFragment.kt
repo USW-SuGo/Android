@@ -1,7 +1,6 @@
 package com.sugo.app.feat.ui.dealdetail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
-import com.sugo.app.R
 import com.sugo.app.databinding.FragmentDealDetailBinding
 import com.sugo.app.feat.ui.common.ViewModelFactory
 
@@ -33,7 +31,7 @@ class DealDetailFragment : Fragment() {
         val productId = requireArguments().getLong("productPostId")
         val adapter = initAdapter()
         viewModel.likeStatus.observe(viewLifecycleOwner) {
-            binding.ivHeart.isSelected =it
+            binding.ivHeart.isSelected = it
         }
         setViewPagerAdapter(adapter, productId)
         setNavigation()

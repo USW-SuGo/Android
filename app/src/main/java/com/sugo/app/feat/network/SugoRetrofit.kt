@@ -9,7 +9,6 @@ import com.sugo.app.feat.common.NetWork.CHATROOM
 import com.sugo.app.feat.common.NetWork.CheckEmail
 import com.sugo.app.feat.common.NetWork.CheckId
 import com.sugo.app.feat.common.NetWork.ClosePost
-
 import com.sugo.app.feat.common.NetWork.DetailProduct
 import com.sugo.app.feat.common.NetWork.FCMTOKEN
 import com.sugo.app.feat.common.NetWork.FindId
@@ -26,14 +25,12 @@ import com.sugo.app.feat.common.NetWork.POSTUPLOAD
 import com.sugo.app.feat.common.NetWork.SENDCHAT
 import com.sugo.app.feat.common.NetWork.SEND_FILE
 import com.sugo.app.feat.common.NetWork.Search
-
 import com.sugo.app.feat.common.NetWork.TokenRefreshAPI
 import com.sugo.app.feat.common.NetWork.UpPost
 import com.sugo.app.feat.common.NetWork.getClosePost
 import com.sugo.app.feat.model.*
 import com.sugo.app.feat.model.request.*
 import com.sugo.app.feat.model.response.*
-import com.sugo.app.feat.ui.common.TokenHeadersText
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONArray
@@ -83,6 +80,7 @@ interface SugoRetrofit {
     suspend fun findlogin(
         @Body email: email
     ): Response<Success>
+
     @Multipart
     @POST(POSTUPLOAD)
     fun postUpload(
@@ -93,6 +91,7 @@ interface SugoRetrofit {
         @Part category: MultipartBody.Part,
         @Part image: MutableList<MultipartBody.Part>
     ): Call<ProductPostId>
+
     @GET(Search)
     suspend fun searchProduct(
 
@@ -112,7 +111,6 @@ interface SugoRetrofit {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): List<DealProduct>
-
 
 
     @GET(MyPage)
@@ -163,7 +161,7 @@ interface SugoRetrofit {
     @POST(LIKE)
     suspend fun like(
         @Body productPostId: ProductPostId
-    ):Response<Like>
+    ): Response<Like>
 
     @GET(NOTEROOM)
     suspend fun getNoteRoom(
@@ -187,7 +185,7 @@ interface SugoRetrofit {
     @POST(SENDCHAT)
     suspend fun sendChat(
         @Body chat: Chat
-    ):Response<Any>
+    ): Response<Any>
 
     @Multipart
     @POST(SEND_FILE)
@@ -195,15 +193,14 @@ interface SugoRetrofit {
 //        @Part("chatFile") chatFile: RequestBody,
         @Part noteId: MultipartBody.Part,
         @Part senderId: MultipartBody.Part,
-        @Part receiverId:MultipartBody.Part,
-        @Part  multipartFileList: MutableList<MultipartBody.Part>
-): Response<Any>
+        @Part receiverId: MultipartBody.Part,
+        @Part multipartFileList: MutableList<MultipartBody.Part>
+    ): Response<Any>
 
     @PATCH(FCMTOKEN)
     suspend fun sendFCM(
         @Body fcmToken: FcmToken
-    ):Response<Success>
-
+    ): Response<Success>
 
 
     companion object {

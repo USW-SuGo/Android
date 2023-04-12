@@ -1,6 +1,5 @@
 package com.sugo.app.feat.repository.repo.mypage
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.sugo.app.feat.model.DealProduct
