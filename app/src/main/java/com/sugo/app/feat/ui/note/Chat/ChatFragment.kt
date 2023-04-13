@@ -29,6 +29,7 @@ import com.sugo.app.feat.model.response.ChatRoom
 import com.sugo.app.feat.ui.common.ImageRealPath
 import com.sugo.app.feat.ui.common.ViewModelFactory
 import com.sugo.app.feat.ui.common.chatLong
+import com.sugo.app.feat.ui.common.loadImage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -83,8 +84,8 @@ class ChatFragment : Fragment() {
             val noteId1 = getBody("noteId", noteId)
             val senderId1 = getBody("senderId", chatContent!![0])
             val receiverId = getBody("receiverId", chatContent!![1])
-//            viewModel.sendFile(noteId1,senderId1,receiverId, imageMultipartBody)
-            viewModel.sendChat(Chat(noteId, inputText, chatContent!![0], chatContent!![1]))
+            viewModel.sendFile(noteId1,senderId1,receiverId, imageMultipartBody)
+//            viewModel.sendChat(Chat(noteId, inputText, chatContent!![0], chatContent!![1]))
 
         }
         binding.ivChatFile.setOnClickListener {
@@ -102,12 +103,14 @@ class ChatFragment : Fragment() {
         viewModel.detailProduct(productPostId)
         viewModel.dealProduct2.observe(viewLifecycleOwner) {
             binding.dealproduct = it
+            loadImage( binding.ivDealProduct, it.imageLink)
+            Log.d("dealProduct",it.imageLink)
         }
-
 
         setNavigation()
         return pagingAdapter
     }
+
 
     private fun productSubmitData(
         pagingAdapter: ChatAdapter,

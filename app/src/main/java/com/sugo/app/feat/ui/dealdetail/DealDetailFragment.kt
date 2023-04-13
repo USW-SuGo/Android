@@ -31,7 +31,7 @@ class DealDetailFragment : Fragment() {
         val productId = requireArguments().getLong("productPostId")
         val adapter = initAdapter()
         viewModel.likeStatus.observe(viewLifecycleOwner) {
-            binding.ivHeart.isSelected = it
+            binding.ivHeart.isSelected = it?:false
         }
         setViewPagerAdapter(adapter, productId)
         setNavigation()
@@ -49,7 +49,6 @@ class DealDetailFragment : Fragment() {
                 page.translationX = position * -10
             }
             TabLayoutMediator(binding.viewpagerDealDetailIndicator, this) { tab, position ->
-
             }.attach()
         }
         viewModel.detailProduct(productId)

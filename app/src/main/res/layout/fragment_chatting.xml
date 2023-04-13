@@ -8,6 +8,7 @@
         <variable
             name="dealproduct"
             type="com.sugo.app.feat.model.DealProduct" />
+
         <variable
             name="imageUrl"
             type="String" />
@@ -43,6 +44,7 @@
                     android:id="@+id/iv_dealProduct"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
+                    android:scaleType="fitXY"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -95,7 +97,6 @@
             android:layout_marginTop="13dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/appbar_msg"
-            app:stackFromEnd="true"
             tools:listitem="@layout/item_chatting" />
 
         <ImageView
