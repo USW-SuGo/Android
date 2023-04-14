@@ -14,11 +14,9 @@ import com.sugo.app.feat.model.response.ChatRoom
 import com.sugo.app.feat.ui.common.chatLong
 import com.sugo.app.feat.ui.common.loadImage
 
-class ChatAdapter(
-    private val viewModel: ChatViewModel,
-) : PagingDataAdapter<ChatRoom, RecyclerView.ViewHolder>(
-    ChatRoomDiffCallback()
-) {
+class ChatAdapter(private val viewModel: ChatViewModel) :
+    PagingDataAdapter<ChatRoom, RecyclerView.ViewHolder>(ChatRoomDiffCallback()) {
+
     companion object {
         const val VIEW_TYPE_MY_CHAT = 1
         const val VIEW_TYPE_OTHER_CHAT = 2
@@ -27,67 +25,35 @@ class ChatAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        val request = getItem(itemCount - position - 1)?.requestUserId?.let {
-            chatLong(it).replace(
-                "{requestUserId=",
-                ""
-            ).toInt()
-        }
-        val sender = getItem(itemCount - position - 1)?.senderId?.let { chatLong(it).toInt() }
-        val image = getItem(itemCount - position - 1)?.imageLink
-        return if (request != sender) {
-            if (image!!.length>5) {
-                Log.d("1","1")
-                VIEW_TYPE_OTHER_PICTURE
-            } else {
-                Log.d("1","2")
-                VIEW_TYPE_OTHER_CHAT
-            }
-        } else {
-            if (image!!.length>5) {
-                Log.d("1","3")
-                VIEW_TYPE_MY_PICTURE
-            } else {
-                Log.d("1","4")
-                VIEW_TYPE_MY_CHAT
-            }
+        val chatRoom = getItem(itemCount - position - 1) ?: return VIEW_TYPE_MY_CHAT
+        val request = chatLong(chatRoom.requestUserId)?.replace("{requestUserId=", "")?.toInt()
+        val sender = chatLong(chatRoom.senderId)?.toInt()
+        val image = chatRoom.imageLink
+
+        return when {
+            request != sender && image?.length ?: 0 > 5 -> VIEW_TYPE_OTHER_PICTURE
+            request != sender && image?.length ?: 0 <= 5 -> VIEW_TYPE_OTHER_CHAT
+            request == sender && image?.length ?: 0 > 5 -> VIEW_TYPE_MY_PICTURE
+            else -> VIEW_TYPE_MY_CHAT
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             VIEW_TYPE_MY_CHAT -> {
-                val binding = ItemChattingUserBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-                MyChatViewHolder(binding)
+                MyChatViewHolder(ItemChattingUserBinding.inflate(layoutInflater, parent, false))
             }
             VIEW_TYPE_OTHER_CHAT -> {
-                val binding = ItemChattingBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-                OtherChatViewHolder(binding)
+                OtherChatViewHolder(ItemChattingBinding.inflate(layoutInflater, parent, false))
             }
             VIEW_TYPE_MY_PICTURE -> {
-                val binding = ItemMyIvBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-                MyChatImageViewHolder(binding)
+                MyChatImageViewHolder(ItemMyIvBinding.inflate(layoutInflater, parent, false))
             }
-            else -> {
-                val binding = ItemOtherIvBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-                OtherChatImageViewHolder(binding)
+            VIEW_TYPE_OTHER_PICTURE -> {
+                OtherChatImageViewHolder(ItemOtherIvBinding.inflate(layoutInflater, parent, false))
             }
+            else -> throw IllegalArgumentException("Invalid view type")
         }
     }
 
@@ -134,7 +100,6 @@ class ChatAdapter(
         }
     }
 }
-
 class ChatRoomDiffCallback : DiffUtil.ItemCallback<ChatRoom>() {
     override fun areItemsTheSame(oldItem: ChatRoom, newItem: ChatRoom): Boolean {
         return oldItem.noteContentId == newItem.noteContentId

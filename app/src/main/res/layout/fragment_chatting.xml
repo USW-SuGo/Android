@@ -92,9 +92,9 @@
             android:id="@+id/rv_chat"
             android:layout_width="match_parent"
             android:layout_height="450dp"
-            android:inputType="text"
-            android:imeOptions="actionDone"
             android:layout_marginTop="13dp"
+            android:imeOptions="actionDone"
+            android:inputType="text"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/appbar_msg"
             tools:listitem="@layout/item_chatting" />
@@ -116,16 +116,18 @@
             android:layout_height="30dp"
             android:layout_marginEnd="14dp"
             android:src="@android:drawable/ic_menu_send"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/iv_chat_send" />
+            app:layout_constraintBottom_toBottomOf="@id/iv_chat_send"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <EditText
             android:id="@+id/etv_chat_send"
             android:layout_width="0dp"
             android:layout_height="48dp"
+            android:hint="msg"
+            android:inputType="text"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_chat_send"
             app:layout_constraintStart_toEndOf="@+id/iv_chat_file"
-            android:hint="msg"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_chat" />
 
         <ImageView

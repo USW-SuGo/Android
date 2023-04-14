@@ -15,10 +15,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lo_deal"
         android:layout_width="match_parent"
-        android:paddingHorizontal="8dp"
         android:layout_height="match_parent"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:paddingHorizontal="8dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/deal_toolbar"
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp">
-                
+
                 <TextView
                     android:id="@+id/deal_title"
                     style="@style/PretendardBold.Title"
@@ -49,12 +49,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:onClick="@{()->productvm.openPostDetail()}"
                     android:id="@+id/toolbar_post_product"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_margin="8dp"
                     android:layout_marginEnd="4dp"
+                    android:onClick="@{()->productvm.openPostDetail()}"
                     android:scaleType="center"
                     android:src="@drawable/icplus"
                     app:layout_constraintBottom_toBottomOf="@+id/deal_title"
@@ -77,57 +77,57 @@
         </androidx.appcompat.widget.Toolbar>
 
         <EditText
-            android:gravity="center"
             android:id="@+id/etv_search"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="search"
             android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/edge"
-            android:layout_marginEnd="7dp"
+            android:gravity="center"
+            android:hint="search"
+            android:inputType="text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/deal_toolbar" />
 
         <ImageView
-            android:padding="10dp"
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:onClick="@{()->productvm.onClickSearch(etvSearch.getText().toString)}"
+            android:padding="10dp"
             android:src="@drawable/search"
             app:layout_constraintBottom_toBottomOf="@id/etv_search"
             app:layout_constraintStart_toStartOf="@+id/etv_search"
             app:layout_constraintTop_toTopOf="@+id/etv_search" />
 
-<!--        <Spinner-->
-<!--            android:id="@+id/sp_category"-->
-<!--            style="@style/PretendardBold.Size20"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:layout_marginStart="5dp"-->
-<!--            android:layout_marginEnd="8dp"-->
-<!--            tools:entries="@{productvm.spinnerEntry}"-->
-<!--            android:gravity="center"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/etv_search"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/deal_toolbar"-->
-<!--            tools:selectedValue="@={productvm.spinnerData}" />-->
+        <!--        <Spinner-->
+        <!--            android:id="@+id/sp_category"-->
+        <!--            style="@style/PretendardBold.Size20"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="30dp"-->
+        <!--            android:layout_marginStart="5dp"-->
+        <!--            android:layout_marginEnd="8dp"-->
+        <!--            tools:entries="@{productvm.spinnerEntry}"-->
+        <!--            android:gravity="center"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/etv_search"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/deal_toolbar"-->
+        <!--            tools:selectedValue="@={productvm.spinnerData}" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_deal_product"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etv_search"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:spanCount="2"
-            tools:listitem="@layout/item_deal"
-          />
+            tools:listitem="@layout/item_deal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
