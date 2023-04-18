@@ -3,30 +3,49 @@ package com.sugo.app.feat.ui
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import com.sugo.app.R
+import com.sugo.app.databinding.ActivityMainBinding
 import com.sugo.app.feat.App
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_main)
         getFCM()
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.main_bottom_navigation)
-        bottomNavigationView.itemIconTintList = null
-        val navController =
-            supportFragmentManager.findFragmentById(R.id.main_container)?.findNavController()
-
-        navController?.let {
-            bottomNavigationView.setupWithNavController(it)
+//        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.main_bottom_navigation)
+//        bottomNavigationView.itemIconTintList = null
+//        val navController =
+//            supportFragmentManager.findFragmentById(R.id.main_container)?.findNavController()
+//
+//        navController?.let {
+//            bottomNavigationView.setupWithNavController(it)
+//        }
+        val navigationFragment =
+            supportFragmentManager.findFragmentById(R.id.main_container) as NavHostFragment
+        val navController = navigationFragment.navController
+        NavigationUI.setupWithNavController(binding.mainBottomNavigation, navController)
+        binding.mainBottomNavigation.setOnItemReselectedListener { }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.navigation_deal || destination.id == R.id.navigation_message || destination.id == R.id.navigation_mypage)
+                binding.mainBottomNavigation.visibility = View.VISIBLE
+            else
+                binding.mainBottomNavigation.visibility = View.GONE
         }
+
     }
 
     private fun getFCM() {

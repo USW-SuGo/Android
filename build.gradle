@@ -12,7 +12,6 @@ ext {
     roomVersion = '2.4.1'
     retrofitVersion = '2.9.0'
     pagingVersion = "3.1.1"
-
 }
 task clean(type: Delete) {
     delete rootProject.buildDir
