@@ -94,6 +94,7 @@ class ChatFragment : Fragment() {
         binding.tvDealproductGo.setOnClickListener {
             openDealDetail(productPostId)
         }
+
     }
 
     private fun initAdapter(noteId: Long, productPostId: Long): ChatAdapter {
@@ -106,7 +107,10 @@ class ChatFragment : Fragment() {
             loadImage( binding.ivDealProduct, it.imageLink)
             Log.d("dealProduct",it.imageLink)
         }
-
+        binding.srlChatting.setOnRefreshListener {
+            binding.srlChatting.isRefreshing=false
+            productSubmitData(pagingAdapter, viewModel.getChatRoom(noteId))
+        }
         setNavigation()
         return pagingAdapter
     }

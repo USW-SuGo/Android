@@ -15,127 +15,132 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_chatting"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar_msg"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_chat"
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar_msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:navigationIcon="@drawable/ic_back" />
+                android:background="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar_chat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:navigationIcon="@drawable/ic_back" />
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_dealProduct"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_dealProduct_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="@{dealproduct.title}"
+                        app:layout_constraintStart_toEndOf="@+id/iv_dealProduct"
+                        app:layout_constraintTop_toTopOf="@id/iv_dealProduct"
+                        tools:text="test" />
+
+                    <TextView
+                        android:id="@+id/tv_dealProduct_price"
+                        price="@{dealproduct.price}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/iv_dealProduct"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_dealProduct_title"
+                        tools:text="기갹" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_manner_grade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="학점 주기"
+                        app:layout_constraintStart_toStartOf="@id/tv_dealProduct_price"
+                        app:layout_constraintTop_toBottomOf="@id/tv_dealProduct_price" />
+
+                    <TextView
+                        android:id="@+id/tv_dealproduct_go"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/click_chat"
+                        app:layout_constraintBottom_toBottomOf="@id/btn_manner_grade"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="test" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_chat"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="450dp"
+                android:layout_marginTop="13dp"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/appbar_msg"
+                tools:listitem="@layout/item_chatting" />
 
-                <ImageView
-                    android:id="@+id/iv_dealProduct"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:scaleType="fitXY"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_dealProduct_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:text="@{dealproduct.title}"
-                    app:layout_constraintStart_toEndOf="@+id/iv_dealProduct"
-                    app:layout_constraintTop_toTopOf="@id/iv_dealProduct"
-                    tools:text="test" />
-
-                <TextView
-                    android:id="@+id/tv_dealProduct_price"
-                    price="@{dealproduct.price}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/iv_dealProduct"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_dealProduct_title"
-                    tools:text="기갹" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_manner_grade"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="학점 주기"
-                    app:layout_constraintStart_toStartOf="@id/tv_dealProduct_price"
-                    app:layout_constraintTop_toBottomOf="@id/tv_dealProduct_price" />
-
-                <TextView
-                    android:id="@+id/tv_dealproduct_go"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:text="@string/click_chat"
-                    app:layout_constraintBottom_toBottomOf="@id/btn_manner_grade"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="test" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_chat"
-            android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:layout_marginTop="13dp"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/appbar_msg"
-            tools:listitem="@layout/item_chatting" />
-
-        <ImageView
-            android:id="@+id/iv_chat_send"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="14dp"
-            android:src="@android:drawable/ic_menu_send"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_chat" />
+            <ImageView
+                android:id="@+id/iv_chat_send"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="14dp"
+                android:src="@android:drawable/ic_menu_send"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_chat" />
 
 
-        <ImageView
-            android:id="@+id/iv_chat_file"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="14dp"
-            android:src="@android:drawable/ic_menu_send"
-            app:layout_constraintBottom_toBottomOf="@id/iv_chat_send"
-            app:layout_constraintStart_toStartOf="parent" />
+            <ImageView
+                android:id="@+id/iv_chat_file"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="14dp"
+                android:src="@android:drawable/ic_menu_send"
+                app:layout_constraintBottom_toBottomOf="@id/iv_chat_send"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <EditText
-            android:id="@+id/etv_chat_send"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:hint="msg"
-            android:inputType="text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/iv_chat_send"
-            app:layout_constraintStart_toEndOf="@+id/iv_chat_file"
-            app:layout_constraintTop_toBottomOf="@+id/rv_chat" />
+            <EditText
+                android:id="@+id/etv_chat_send"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:hint="msg"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_chat_send"
+                app:layout_constraintStart_toEndOf="@+id/iv_chat_file"
+                app:layout_constraintTop_toBottomOf="@+id/rv_chat" />
 
-        <ImageView
-            imageUrl="@{imageUrl}"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:layout_constraintBottom_toTopOf="@id/iv_chat_send"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                imageUrl="@{imageUrl}"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:layout_constraintBottom_toTopOf="@id/iv_chat_send"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>
