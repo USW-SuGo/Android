@@ -15,6 +15,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.sugo.app.R
 import com.sugo.app.databinding.ActivityMainBinding
 import com.sugo.app.feat.App
+import com.sugo.app.feat.ui.common.KeepStateNavigator
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,20 +24,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
         getFCM()
-//        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.main_bottom_navigation)
-//        bottomNavigationView.itemIconTintList = null
-//        val navController =
-//            supportFragmentManager.findFragmentById(R.id.main_container)?.findNavController()
-//
-//        navController?.let {
-//            bottomNavigationView.setupWithNavController(it)
-//        }
+
+
         val navigationFragment =
             supportFragmentManager.findFragmentById(R.id.main_container) as NavHostFragment
         val navController = navigationFragment.navController
+//        val navigator =
+//            KeepStateNavigator(this, navigationFragment.childFragmentManager, R.id.main_container)
+//        navController.navigatorProvider.addNavigator(navigator)
+//        navController.setGraph(R.navigation.main_navigation)
         NavigationUI.setupWithNavController(binding.mainBottomNavigation, navController)
         binding.mainBottomNavigation.setOnItemReselectedListener { }
         navController.addOnDestinationChangedListener { _, destination, _ ->
