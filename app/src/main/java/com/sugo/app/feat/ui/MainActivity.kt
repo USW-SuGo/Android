@@ -30,10 +30,6 @@ class MainActivity : AppCompatActivity() {
         val navigationFragment =
             supportFragmentManager.findFragmentById(R.id.main_container) as NavHostFragment
         val navController = navigationFragment.navController
-//        val navigator =
-//            KeepStateNavigator(this, navigationFragment.childFragmentManager, R.id.main_container)
-//        navController.navigatorProvider.addNavigator(navigator)
-//        navController.setGraph(R.navigation.main_navigation)
         NavigationUI.setupWithNavController(binding.mainBottomNavigation, navController)
         binding.mainBottomNavigation.setOnItemReselectedListener { }
         navController.addOnDestinationChangedListener { _, destination, _ ->
