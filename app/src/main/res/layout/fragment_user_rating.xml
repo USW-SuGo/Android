@@ -128,43 +128,52 @@
             android:layout_height="1dp"
             android:background="@color/grey"
             app:layout_constraintTop_toBottomOf="@id/tv_rate_coment" />
-
-        <CheckBox
-            android:id="@+id/cb_a"
-            style="@style/PretendardBold.Size20"
+        <RadioGroup
+            android:id="@+id/rg_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="A+"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line" />
+            app:layout_constraintTop_toBottomOf="@id/line">
 
-        <CheckBox
-            android:id="@+id/cb_b"
-            style="@style/PretendardBold.Size20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="B+"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cb_a" />
+        <RadioButton
+                android:id="@+id/cb_a"
+                style="@style/PretendardBold.Size20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="A+"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line" />
 
-        <CheckBox
-            android:id="@+id/cb_c"
-            style="@style/PretendardBold.Size20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="C+"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cb_b" />
+            <RadioButton
+                android:id="@+id/cb_b"
+                style="@style/PretendardBold.Size20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B+"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cb_a" />
 
-        <CheckBox
-            android:id="@+id/cb_d"
-            style="@style/PretendardBold.Size20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="D0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cb_c" />
+            <RadioButton
+                android:id="@+id/cb_c"
+                style="@style/PretendardBold.Size20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="C+"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cb_b" />
+
+            <RadioButton
+                android:id="@+id/cb_d"
+                style="@style/PretendardBold.Size20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cb_c" />
+
+
+        </RadioGroup>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_rating"

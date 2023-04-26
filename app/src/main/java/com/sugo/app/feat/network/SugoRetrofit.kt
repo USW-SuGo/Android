@@ -125,6 +125,11 @@ interface SugoRetrofit {
         @Body productPostId: ProductPostId
     ): Response<Success>
 
+    @POST("/user/manner")
+    suspend fun setManner(
+        @Body mannerTarget:MannerTarget
+    ): Response<Success>
+
 
     @HTTP(method = "DELETE", path = "/post", hasBody = true)
     suspend fun deletePost(
