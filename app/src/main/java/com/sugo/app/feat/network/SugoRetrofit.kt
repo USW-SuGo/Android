@@ -111,7 +111,19 @@ interface SugoRetrofit {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): List<DealProduct>
+    @GET("/post/my-post/{userId}")
+    suspend fun getUserPageProduct(
+        @Path("userId") id: Long,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): List<DealProduct>
 
+    @GET("/post/close-post/{userId}")
+    suspend fun getUserCompletePageProduct(
+        @Path("userId") id: Long,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): List<DealProduct>
 
     @GET(MyPage)
     suspend fun getMyPage(): Response<MyPage>

@@ -8,6 +8,8 @@ import com.sugo.app.feat.network.SugoRetrofit
 import com.sugo.app.feat.repository.repo.mypage.MyCompletePagingDataSource
 import com.sugo.app.feat.repository.repo.mypage.MyLikePagingDataSource
 import com.sugo.app.feat.repository.repo.mypage.MyPagePagingDataSource
+import com.sugo.app.feat.repository.repo.user.ProdcutCompleteUserDataSource
+import com.sugo.app.feat.repository.repo.user.ProductUserPagingDataSource
 import kotlinx.coroutines.flow.Flow
 
 class ProductPagingRepositoryImpl(private val apiService:SugoRetrofit): ProductPagingRepository {
@@ -34,5 +36,7 @@ class ProductPagingRepositoryImpl(private val apiService:SugoRetrofit): ProductP
         Pager(PagingConfig(10)){
             MyCompletePagingDataSource(apiService)
         }.flow
+
+
 
 }
