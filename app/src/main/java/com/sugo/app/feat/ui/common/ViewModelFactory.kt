@@ -15,6 +15,8 @@ import com.sugo.app.feat.repository.repo.login.LoginRepository
 import com.sugo.app.feat.repository.repo.mainpage.ProductPagingRepositoryImpl
 import com.sugo.app.feat.repository.repo.mypage.MyPageRemoteDataSource
 import com.sugo.app.feat.repository.repo.mypage.MyPageRepository
+import com.sugo.app.feat.repository.repo.user.UserRemoteDataSource
+import com.sugo.app.feat.repository.repo.user.UserRepository
 import com.sugo.app.feat.ui.note.MessageViewModel
 import com.sugo.app.feat.ui.deal.ProductPagingViewModel
 import com.sugo.app.feat.ui.deal.SearchPagingViewModel
@@ -24,6 +26,7 @@ import com.sugo.app.feat.ui.login.LoginViewModel
 import com.sugo.app.feat.ui.mypage.MyPageViewModel
 import com.sugo.app.feat.ui.note.Chat.ChatViewModel
 import com.sugo.app.feat.ui.upload.UploadViewModel
+import com.sugo.app.feat.ui.user.UserViewModel
 
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
@@ -76,6 +79,11 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             }
             modelClass.isAssignableFrom(UploadViewModel::class.java) ->{
                 UploadViewModel() as T
+            }
+            modelClass.isAssignableFrom(UserViewModel::class.java) ->{
+                val repository =
+                   UserRepository(UserRemoteDataSource(ServiceLocator.provideTokenApiClient()))
+                UserViewModel(repository) as T
             }
 
             else -> {

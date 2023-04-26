@@ -41,15 +41,6 @@ class ChatViewModel(
         detailRepository.sendChat(chat)
     }
 
-    fun sendFile(
-        noteId: MultipartBody.Part,
-        senderId: MultipartBody.Part,
-        receiverId: MultipartBody.Part,
-        d: MutableList<MultipartBody.Part>
-    ) = viewModelScope.launch {
-        detailRepository.sendFile(noteId, senderId, receiverId, d)
-    }
-
     fun makeId(
         creatingUserId: Long, requestUserId: Long, opponentUserId: Long
     ) {

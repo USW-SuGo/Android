@@ -13,10 +13,7 @@
         <action
             android:id="@+id/action_deal_to_deal_detail"
             app:destination="@id/dealDetailFragment" />
-        <action
-            android:id="@+id/action_navigation_deal_to_postFragment"
-            app:destination="@id/postFragment" />
-    </fragment>
+      </fragment>
     <fragment
         android:id="@+id/navigation_message"
         android:name="com.sugo.app.feat.ui.note.MessageFragment"
@@ -47,17 +44,20 @@
         android:name="com.sugo.app.feat.ui.setting.SettingFragment"
         android:label="SettingFragment" />
     <fragment
-        android:id="@+id/postFragment"
-        android:name="com.sugo.app.feat.ui.post.fragmentVer.PostFragment"
-        android:label="PostFragment" />
-    <fragment
         android:id="@+id/chatFragment"
         android:name="com.sugo.app.feat.ui.note.Chat.ChatFragment"
         android:label="ChatFragment" >
         <action
             android:id="@+id/action_chatFragment_to_dealDetailFragment2"
             app:destination="@id/dealDetailFragment" />
+        <action
+            android:id="@+id/action_chatFragment_to_userRateFragment"
+            app:destination="@id/userRateFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/userRateFragment"
+        android:name="com.sugo.app.feat.ui.user.UserRateFragment"
+        android:label="UserRateFragment" />
 
 
 </navigation>

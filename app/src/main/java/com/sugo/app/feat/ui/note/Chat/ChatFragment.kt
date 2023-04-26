@@ -42,6 +42,7 @@ class ChatFragment : Fragment() {
 
     private val viewModel: ChatViewModel by viewModels { ViewModelFactory(requireContext()) }
     private val list = ArrayList<Uri>()
+    private var userId:Long = 0
     private lateinit var binding: FragmentChattingBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -113,6 +114,9 @@ class ChatFragment : Fragment() {
         binding.tvDealproductGo.setOnClickListener {
             openDealDetail(productPostId)
         }
+        binding.btnMannerGrade.setOnClickListener {
+            openRatingGrade(userId)
+        }
     }
 
     private fun initAdapter(
@@ -120,6 +124,7 @@ class ChatFragment : Fragment() {
         productPostId: Long
     ): ChatAdapter {
         val pagingAdapter = ChatAdapter(viewModel)
+
         binding.rvChat.adapter = pagingAdapter
         viewLifecycleOwner.lifecycleScope.launch {
             val job = async {
@@ -132,6 +137,7 @@ class ChatFragment : Fragment() {
         viewModel.detailProduct(productPostId)
         viewModel.dealProduct2.observe(viewLifecycleOwner) {
             binding.dealproduct = it
+            userId=it.writerId
             loadImage(binding.ivDealProduct, it.imageLink)
         }
         initRefresh(pagingAdapter, noteId)
@@ -176,6 +182,13 @@ class ChatFragment : Fragment() {
         findNavController().navigate(
             R.id.action_chatFragment_to_dealDetailFragment2, bundleOf(
                 "productPostId" to productPostId
+            )
+        )
+    }
+    private fun openRatingGrade(userId:Long) {
+        findNavController().navigate(
+            R.id.action_chatFragment_to_userRateFragment, bundleOf(
+                "userId" to userId
             )
         )
     }
