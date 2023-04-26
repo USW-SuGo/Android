@@ -34,7 +34,7 @@ class DealDetailAdapter() : ListAdapter<String, DealDetailAdapter.DealDetailView
     class imageLinkDiffCallback : DiffUtil.ItemCallback<String>() {
 
         override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-            TODO("Not yet implemented")
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {

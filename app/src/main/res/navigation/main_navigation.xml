@@ -38,7 +38,11 @@
     <fragment
         android:id="@+id/dealDetailFragment"
         android:name="com.sugo.app.feat.ui.dealdetail.DealDetailFragment"
-        android:label="DealDetailFragment" />
+        android:label="DealDetailFragment" >
+        <action
+            android:id="@+id/action_dealDetailFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.sugo.app.feat.ui.setting.SettingFragment"
@@ -58,6 +62,10 @@
         android:id="@+id/userRateFragment"
         android:name="com.sugo.app.feat.ui.user.UserRateFragment"
         android:label="UserRateFragment" />
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.sugo.app.feat.ui.user.UserFragment"
+        android:label="UserFragment" />
 
 
 </navigation>
