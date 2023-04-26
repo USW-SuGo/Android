@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="user"
+            type="com.sugo.app.feat.model.response.User" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="20dp">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/ab_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    style="@style/PretendardBold.Size20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center"
+                    android:text="유저 평가"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbarProductDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:navigationIcon="@drawable/ic_back" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ImageView
+            android:id="@+id/iv_user_rate"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/user"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ab_user" />
+
+        <TextView
+            android:id="@+id/tv_user_nickname"
+            style="@style/PretendardBold.Size20"
+            android:text="@{user.nickname}"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="15dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_rate"
+            app:layout_constraintStart_toEndOf="@id/iv_user_rate"
+            app:layout_constraintTop_toTopOf="@id/iv_user_rate"
+            tools:text="전기공학과 -1" />
+
+        <TextView
+            android:id="@+id/tv_rate_title"
+            style="@style/PretendardBold.Size20"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="15dp"
+            android:text="학점"
+            app:layout_constraintEnd_toStartOf="@id/iv_rate_chat"
+            app:layout_constraintTop_toTopOf="@id/iv_user_rate" />
+
+        <TextView
+            style="@style/PretendardBold.Size20"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@{user.mannerGrade.toString()}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_rate"
+            app:layout_constraintEnd_toEndOf="@id/tv_rate_title"
+            app:layout_constraintStart_toStartOf="@id/tv_rate_title"
+            tools:text="0.0" />
+
+        <ImageView
+            android:id="@+id/iv_rate_chat"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:src="@drawable/chat"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_rate_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_user_rate" />
+
+        <TextView
+            style="@style/PretendardBold.Size20"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            countTradeAttempt="@{user.countTradeAttempt}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_user_rate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/iv_rate_chat"
+            tools:text="2" />
+
+        <TextView
+            android:id="@+id/tv_rate_coment"
+            style="@style/PretendardBold.Size20"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="가는 말이 고와야 오는 말이 곱다. 항상 말조심 하세요!"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_user_rate" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"
+            app:layout_constraintTop_toBottomOf="@id/tv_rate_coment" />
+ </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

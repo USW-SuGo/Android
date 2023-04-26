@@ -115,11 +115,19 @@ interface SugoRetrofit {
 
     @GET(MyPage)
     suspend fun getMyPage(): Response<MyPage>
-
+    @GET("/user/{userId}")
+    suspend fun getUser(
+        @Path("userId") userId: Long
+    ):Response<User>
 
     @POST(UpPost)
     suspend fun upPost(
         @Body productPostId: ProductPostId
+    ): Response<Success>
+
+    @POST("/user/manner")
+    suspend fun setManner(
+        @Body mannerTarget:MannerTarget
     ): Response<Success>
 
 

@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,9 +28,9 @@ import com.sugo.app.R
 import com.sugo.app.databinding.FragmentChattingBinding
 import com.sugo.app.feat.model.request.Chat
 import com.sugo.app.feat.model.response.ChatRoom
-import com.sugo.app.feat.ui.common.ImageRealPath
-import com.sugo.app.feat.ui.common.ViewModelFactory
-import com.sugo.app.feat.ui.common.chatLong
+import com.sugo.app.feat.ui.common.*
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -40,6 +42,7 @@ class ChatFragment : Fragment() {
 
     private val viewModel: ChatViewModel by viewModels { ViewModelFactory(requireContext()) }
     private val list = ArrayList<Uri>()
+    private var userId:Long = 0
     private lateinit var binding: FragmentChattingBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,49 +68,100 @@ class ChatFragment : Fragment() {
         val requestUserId = chatLong(
             requireArguments().getString("requestUserId")!!.replace("{requestUserId=", "")
         ).toLong()
+
         initAdapter(noteId, productPostId)
+        sendMsg(noteId)
+
         viewModel.makeId(creatingUserId, requestUserId, opponentUserId)
+//        binding.ivChatSend.setOnClickListener {
+//            val inputText = binding.etvChatSend.text.toString()
+//            val chatContent = viewModel.chatContent.value
+//            val imageMultipartBody = mutableListOf<MultipartBody.Part>()
+//            for (image in list) {
+//                val file = ImageRealPath(requireContext()).getFileFromUri(image)
+//                if (!file.exists()) file.mkdirs()
+//                val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+//                val body =
+//                    MultipartBody.Part.createFormData("multipartFileList", file.name, requestFile)
+//                imageMultipartBody.add(body)
+//            }
+//            val noteId1 = getBody("noteId", noteId)
+//            val senderId1 = getBody("senderId", chatContent!![0])
+//            val receiverId = getBody("receiverId", chatContent!![1])
+//            viewModel.sendFile(noteId1,senderId1,receiverId, imageMultipartBody)
+//            viewModel.sendChat(Chat(noteId, inputText, chatContent!![0], chatContent!![1]))
+//        }
+
+        initClickBtn(productPostId)
+
+    }
+
+    private fun sendMsg(noteId: Long) {
+
         binding.ivChatSend.setOnClickListener {
             val inputText = binding.etvChatSend.text.toString()
             val chatContent = viewModel.chatContent.value
-            val imageMultipartBody = mutableListOf<MultipartBody.Part>()
-            Log.d("image", list.toString())
-            for (image in list) {
-                val file = ImageRealPath(requireContext()).getFileFromUri(image)
-                if (!file.exists()) file.mkdirs()
-                val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-                val body =
-                    MultipartBody.Part.createFormData("multipartFileList", file.name, requestFile)
-                imageMultipartBody.add(body)
-            }
-            val noteId1 = getBody("noteId", noteId)
-            val senderId1 = getBody("senderId", chatContent!![0])
-            val receiverId = getBody("receiverId", chatContent!![1])
-//            viewModel.sendFile(noteId1,senderId1,receiverId, imageMultipartBody)
             viewModel.sendChat(Chat(noteId, inputText, chatContent!![0], chatContent!![1]))
-
+            hideKeyboard()
         }
+    }
+
+    private fun initClickBtn(productPostId: Long) {
         binding.ivChatFile.setOnClickListener {
             selectGallery()
+            hideKeyboard()
         }
         binding.tvDealproductGo.setOnClickListener {
             openDealDetail(productPostId)
         }
+        binding.btnMannerGrade.setOnClickListener {
+            openRatingGrade(userId)
+        }
     }
 
-    private fun initAdapter(noteId: Long, productPostId: Long): ChatAdapter {
+    private fun initAdapter(
+        noteId: Long,
+        productPostId: Long
+    ): ChatAdapter {
         val pagingAdapter = ChatAdapter(viewModel)
+
         binding.rvChat.adapter = pagingAdapter
-        productSubmitData(pagingAdapter, viewModel.getChatRoom(noteId))
+        viewLifecycleOwner.lifecycleScope.launch {
+            val job = async {
+                productSubmitData(pagingAdapter, viewModel.getChatRoom(noteId))
+            }
+            job.await()
+            delay(500)
+            binding.rvChat.scrollToPosition(pagingAdapter.itemCount - 1)
+        }
         viewModel.detailProduct(productPostId)
         viewModel.dealProduct2.observe(viewLifecycleOwner) {
             binding.dealproduct = it
+            userId=it.writerId
+            loadImage(binding.ivDealProduct, it.imageLink)
         }
-
-
+        initRefresh(pagingAdapter, noteId)
         setNavigation()
         return pagingAdapter
     }
+
+    private fun initRefresh(
+        pagingAdapter: ChatAdapter,
+        noteId: Long
+    ) {
+        binding.srlChatting.setOnRefreshListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val job = async {
+                    binding.srlChatting.isRefreshing = false
+                    productSubmitData(pagingAdapter, viewModel.getChatRoom(noteId))
+                }
+                job.await()
+                delay(500)
+                binding.rvChat.scrollToPosition(pagingAdapter.itemCount - 1)
+            }
+        }
+    }
+
 
     private fun productSubmitData(
         pagingAdapter: ChatAdapter,
@@ -128,6 +182,13 @@ class ChatFragment : Fragment() {
         findNavController().navigate(
             R.id.action_chatFragment_to_dealDetailFragment2, bundleOf(
                 "productPostId" to productPostId
+            )
+        )
+    }
+    private fun openRatingGrade(userId:Long) {
+        findNavController().navigate(
+            R.id.action_chatFragment_to_userRateFragment, bundleOf(
+                "userId" to userId
             )
         )
     }

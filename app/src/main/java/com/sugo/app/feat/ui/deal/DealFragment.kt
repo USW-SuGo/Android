@@ -51,7 +51,14 @@ class DealFragment : Fragment() {
         }
         productSubmitData(pagingAdapter, viewModel.getMainPage())
         setNavigation()
+        refreshDeal(pagingAdapter)
+    }
 
+    private fun refreshDeal(pagingAdapter: ProductPagingAdapter) {
+        binding.refresh.setOnRefreshListener {
+            binding.refresh.isRefreshing = false
+            productSubmitData(pagingAdapter, viewModel.getMainPage())
+        }
     }
 
     private fun initAdapter(): ProductPagingAdapter {

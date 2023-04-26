@@ -1,60 +1,105 @@
 package com.sugo.app.feat.ui.note.Chat
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isGone
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sugo.app.databinding.ItemChattingBinding
+import com.sugo.app.databinding.ItemChattingUserBinding
+import com.sugo.app.databinding.ItemMyIvBinding
+import com.sugo.app.databinding.ItemOtherIvBinding
 import com.sugo.app.feat.model.response.ChatRoom
 import com.sugo.app.feat.ui.common.chatLong
 import com.sugo.app.feat.ui.common.loadImage
 
-class ChatAdapter(
-    private val viewModel: ChatViewModel,
-) : PagingDataAdapter<ChatRoom, ChatAdapter.PagingViewHolder>(
-    ChatRoomDiffCallback()
-) {
+class ChatAdapter(private val viewModel: ChatViewModel) :
+    PagingDataAdapter<ChatRoom, RecyclerView.ViewHolder>(ChatRoomDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagingViewHolder {
-        val binding =
-            ItemChattingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PagingViewHolder(binding)
+    companion object {
+        const val VIEW_TYPE_MY_CHAT = 1
+        const val VIEW_TYPE_OTHER_CHAT = 2
+        const val VIEW_TYPE_MY_PICTURE = 3
+        const val VIEW_TYPE_OTHER_PICTURE = 4
     }
 
-    override fun onBindViewHolder(holder: PagingViewHolder, position: Int) {
-        getItem(itemCount - position - 1)?.let { holder.bind(it) }
+    override fun getItemViewType(position: Int): Int {
+        val chatRoom = getItem(itemCount - position - 1) ?: return VIEW_TYPE_MY_CHAT
+        val request = chatLong(chatRoom.requestUserId)?.replace("{requestUserId=", "")?.toInt()
+        val sender = chatLong(chatRoom.senderId)?.toInt()
+        val image = chatRoom.imageLink
+
+        return when {
+            request != sender && image?.length ?: 0 > 5 -> VIEW_TYPE_OTHER_PICTURE
+            request != sender && image?.length ?: 0 <= 5 -> VIEW_TYPE_OTHER_CHAT
+            request == sender && image?.length ?: 0 > 5 -> VIEW_TYPE_MY_PICTURE
+            else -> VIEW_TYPE_MY_CHAT
+        }
     }
 
-    inner class PagingViewHolder(private val binding: ItemChattingBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        //
-        fun bind(noteContent: ChatRoom) {
-
-            val requestUserId =
-                chatLong(noteContent.requestUserId).replace("{requestUserId=", "").toInt()
-            if (chatLong(noteContent.senderId!!).toInt() == requestUserId) {
-                if (noteContent.imageLink != null) {
-                    loadImage(binding.image2, noteContent.imageLink)
-                }
-                binding.chatroom2 = noteContent
-                binding.image2.isGone
-
-            } else {
-                if (noteContent.imageLink != null) {
-                    loadImage(binding.image1, noteContent.imageLink)
-                }
-                binding.chatroom = noteContent
-                binding.image1.isGone
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        return when (viewType) {
+            VIEW_TYPE_MY_CHAT -> {
+                MyChatViewHolder(ItemChattingUserBinding.inflate(layoutInflater, parent, false))
             }
+            VIEW_TYPE_OTHER_CHAT -> {
+                OtherChatViewHolder(ItemChattingBinding.inflate(layoutInflater, parent, false))
+            }
+            VIEW_TYPE_MY_PICTURE -> {
+                MyChatImageViewHolder(ItemMyIvBinding.inflate(layoutInflater, parent, false))
+            }
+            VIEW_TYPE_OTHER_PICTURE -> {
+                OtherChatImageViewHolder(ItemOtherIvBinding.inflate(layoutInflater, parent, false))
+            }
+            else -> throw IllegalArgumentException("Invalid view type")
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        getItem(itemCount - position - 1)?.let {
+            when (holder) {
+                is MyChatViewHolder -> holder.bind(it)
+                is OtherChatViewHolder -> holder.bind(it)
+                is MyChatImageViewHolder -> holder.bind(it)
+                is OtherChatImageViewHolder -> holder.bind(it)
+            }
+        }
+    }
+
+    inner class MyChatViewHolder(private val binding: ItemChattingUserBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(chatRoom: ChatRoom) {
+            binding.chatroom = chatRoom
             binding.executePendingBindings()
         }
     }
 
-}
+    inner class OtherChatViewHolder(private val binding: ItemChattingBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(chatRoom: ChatRoom) {
+            binding.chatroom = chatRoom
+            binding.executePendingBindings()
+        }
+    }
 
+    inner class MyChatImageViewHolder(private val binding: ItemMyIvBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(chatRoom: ChatRoom) {
+            loadImage(binding.ivMy, chatRoom.imageLink)
+            binding.executePendingBindings()
+        }
+    }
+
+    inner class OtherChatImageViewHolder(private val binding: ItemOtherIvBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(chatRoom: ChatRoom) {
+            loadImage(binding.ivOther, chatRoom.imageLink)
+            binding.executePendingBindings()
+        }
+    }
+}
 class ChatRoomDiffCallback : DiffUtil.ItemCallback<ChatRoom>() {
     override fun areItemsTheSame(oldItem: ChatRoom, newItem: ChatRoom): Boolean {
         return oldItem.noteContentId == newItem.noteContentId
@@ -65,3 +110,5 @@ class ChatRoomDiffCallback : DiffUtil.ItemCallback<ChatRoom>() {
     }
 
 }
+
+

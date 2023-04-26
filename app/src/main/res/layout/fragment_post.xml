@@ -56,12 +56,13 @@
                 tools:layout_editor_absoluteY="175dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/postTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/postTitle"
                     android:background="@color/white"
                     android:fontFamily="@font/pretendardbold"
-                    android:hint="제목" />
+                    android:hint="제목"
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,6 +83,7 @@
                         android:background="@color/white"
                         android:fontFamily="@font/pretendardbold"
                         android:hint="가격"
+                        android:inputType="number"
                         tools:ignore="MissingConstraints" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -89,7 +91,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/postContactPlace"
                     android:layout_width="180dp"
-                    android:layout_height="40dp"
+                    android:layout_height="48dp"
                     android:layout_columnWeight="1"
                     android:layout_gravity="center"
                     android:fontFamily="@font/pretendardbold"
@@ -131,15 +133,12 @@
                 android:background="@color/grey" />
 
             <Spinner
-
+                tools:listitem="@layout/spinneritem"
                 android:id="@+id/spinner"
-
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
-
+                android:minHeight="48dp"
                 android:layout_margin="10dp"
-
                 android:spinnerMode="dropdown" />
 
             <View
@@ -154,6 +153,7 @@
                 android:layout_margin="10dp"
                 android:fontFamily="@font/pretendardbold"
                 android:hint="수고할 상품에 대한 글을 작성해주세요! \n 거짓 정보 및 가품 등 문제가 될만한 글은 자동으로 삭제됩니다."
+                android:inputType="text"
                 android:textSize="16dp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

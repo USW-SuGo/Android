@@ -31,7 +31,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
         dataBinding = true
     }
@@ -62,7 +62,7 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-   //Networking
+    //Networking
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
@@ -73,7 +73,8 @@ dependencies {
     implementation("androidx.paging:paging-runtime-ktx:$pagingVersion")
 
     implementation platform('com.google.firebase:firebase-bom:28.4.1')
-
+    //pull to refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-messaging-ktx'

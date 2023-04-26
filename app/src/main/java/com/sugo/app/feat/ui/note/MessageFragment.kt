@@ -42,6 +42,7 @@ class MessageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setNavigation()
         initAdapter()
+
     }
 
     private fun initAdapter(): MessageAdapter {
@@ -49,6 +50,10 @@ class MessageFragment : Fragment() {
         val pagingAdapter = MessageAdapter(viewModel, viewModel2)
         binding.rvNote.adapter = pagingAdapter
         productSubmitData(pagingAdapter, viewModel.getNoteRoom())
+        binding.srlMessage.setOnRefreshListener {
+            binding.srlMessage.isRefreshing = false
+            productSubmitData(pagingAdapter, viewModel.getNoteRoom())
+        }
         return pagingAdapter
     }
 
