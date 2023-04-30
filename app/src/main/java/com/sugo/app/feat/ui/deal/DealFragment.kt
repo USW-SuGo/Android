@@ -49,6 +49,9 @@ class DealFragment : Fragment() {
         viewModel2.searchValue.observe(viewLifecycleOwner) {
             productSubmitData2(pagingAdapter, it, "")
         }
+        binding.loDeal.setOnClickListener {
+            hideKeyboard()
+        }
         productSubmitData(pagingAdapter, viewModel.getMainPage())
         setNavigation()
         refreshDeal(pagingAdapter)
@@ -64,9 +67,6 @@ class DealFragment : Fragment() {
     private fun initAdapter(): ProductPagingAdapter {
         val pagingAdapter = ProductPagingAdapter(viewModel)
         binding.rvDealProduct.adapter = pagingAdapter
-        binding.loDeal.setOnClickListener {
-            hideKeyboard()
-        }
         return pagingAdapter
     }
 

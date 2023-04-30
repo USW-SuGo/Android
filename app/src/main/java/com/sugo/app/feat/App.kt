@@ -7,7 +7,7 @@ import com.sugo.app.feat.repository.repo.Token.TokenPreferenceManager
 class App : Application(){
 
     override fun onCreate() {
-        prefs = TokenPreferenceManager(applicationContext)
+        prefs = TokenPreferenceManager(applicationContext) // ContextWrapper.getApplicationContext()
         super.onCreate()
     }
 

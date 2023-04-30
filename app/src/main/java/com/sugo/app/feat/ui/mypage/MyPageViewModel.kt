@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 class MyPageViewModel(
     val myPageRepository: MyPageRepository,
     private val repoImpl: ProductPagingRepositoryImpl,
+
 ) : ViewModel() {
     private val _myPage = MutableLiveData<MyPage>()
     val myPage: LiveData<MyPage> = _myPage
@@ -32,6 +33,7 @@ class MyPageViewModel(
     fun getClosePost(): Flow<PagingData<DealProduct>> {
         return repoImpl.getClosePost()
     }
+
 
     private val _openDealEvent = MutableLiveData<Event<Long>>()
     val openDealEvent: LiveData<Event<Long>> = _openDealEvent

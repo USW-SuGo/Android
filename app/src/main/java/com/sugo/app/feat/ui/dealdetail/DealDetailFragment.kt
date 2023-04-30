@@ -67,7 +67,6 @@ class DealDetailFragment : Fragment() {
             val imageLinkList = it.imageLink.split(", ").toMutableList()
             adapter.submitList(imageLinkList)
         }
-
     }
     private fun openUser(userId: Long) {
         findNavController().navigate(

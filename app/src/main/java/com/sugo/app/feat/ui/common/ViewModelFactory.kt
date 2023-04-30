@@ -83,7 +83,7 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             modelClass.isAssignableFrom(UserViewModel::class.java) ->{
                 val repository =
                    UserRepository(UserRemoteDataSource(ServiceLocator.provideTokenApiClient()))
-                UserViewModel(repository) as T
+                    UserViewModel(repository) as T
             }
 
             else -> {
