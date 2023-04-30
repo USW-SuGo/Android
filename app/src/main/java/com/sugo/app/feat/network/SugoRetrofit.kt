@@ -12,6 +12,8 @@ import com.sugo.app.feat.common.NetWork.ClosePost
 import com.sugo.app.feat.common.NetWork.DetailProduct
 import com.sugo.app.feat.common.NetWork.FCMTOKEN
 import com.sugo.app.feat.common.NetWork.FindId
+import com.sugo.app.feat.common.NetWork.GetUserCloseDealItem
+import com.sugo.app.feat.common.NetWork.GetUserDealItem
 import com.sugo.app.feat.common.NetWork.Join
 import com.sugo.app.feat.common.NetWork.LIKE
 import com.sugo.app.feat.common.NetWork.LikePost
@@ -111,14 +113,14 @@ interface SugoRetrofit {
         @Query("page") page: Int,
         @Query("size") size: Int
     ): List<DealProduct>
-    @GET("/post/my-post/{userId}")
+    @GET(GetUserDealItem)
     suspend fun getUserPageProduct(
         @Path("userId") id: Long,
         @Query("page") page: Int,
         @Query("size") size: Int
     ): List<DealProduct>
 
-    @GET("/post/close-post/{userId}")
+    @GET(GetUserCloseDealItem)
     suspend fun getUserCompletePageProduct(
         @Path("userId") id: Long,
         @Query("page") page: Int,
