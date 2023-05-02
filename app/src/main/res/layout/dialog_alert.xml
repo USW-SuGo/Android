@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_radius_background"
+    android:paddingHorizontal="60dp"
+    android:paddingVertical="20dp">
+
+    <TextView
+        android:id="@+id/tv_alert_dialog"
+        style="@style/PretendardBold.Size22"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="알림 기능을 알려주겠습니다." />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_ok"
+        style="@style/PretendardBold.Size22"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/radius_chat_user"
+        android:text="확인"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_alert_dialog" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_fail"
+        style="@style/PretendardBold.Size22"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/radius_chat_user"
+        android:text="취소"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_ok" />
+</androidx.constraintlayout.widget.ConstraintLayout>
