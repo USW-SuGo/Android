@@ -2,10 +2,12 @@ package com.sugo.app.feat.ui.deal
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -16,10 +18,7 @@ import androidx.paging.PagingData
 import com.sugo.app.R
 import com.sugo.app.databinding.FragmentDealBinding
 import com.sugo.app.feat.model.DealProduct
-import com.sugo.app.feat.ui.common.EventObserver
-import com.sugo.app.feat.ui.common.User
-import com.sugo.app.feat.ui.common.ViewModelFactory
-import com.sugo.app.feat.ui.common.hideKeyboard
+import com.sugo.app.feat.ui.common.*
 import com.sugo.app.feat.ui.login.LoginActivity
 import com.sugo.app.feat.ui.upload.UploadActivity
 import kotlinx.coroutines.flow.Flow
@@ -32,7 +31,7 @@ class DealFragment : Fragment() {
     private val viewModel: ProductPagingViewModel by viewModels { ViewModelFactory(requireContext()) }
     private val viewModel2: SearchPagingViewModel by viewModels { ViewModelFactory(requireContext()) }
     private lateinit var binding: FragmentDealBinding
-
+    private val searchDebouncer = Debouncer<String>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +45,8 @@ class DealFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.productvm = viewModel2
         val pagingAdapter = initAdapter()
+
+        getSearchData(pagingAdapter)
         viewModel2.searchValue.observe(viewLifecycleOwner) {
             productSubmitData2(pagingAdapter, it, "")
         }
@@ -55,6 +56,24 @@ class DealFragment : Fragment() {
         productSubmitData(pagingAdapter, viewModel.getMainPage())
         setNavigation()
         refreshDeal(pagingAdapter)
+    }
+
+    private fun getSearchData(pagingAdapter: ProductPagingAdapter) {
+        binding.etvSearch.setOnKeyListener { _, keyCode, event ->
+            var handled = false
+            if ((event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                productSubmitData2(pagingAdapter, binding.etvSearch.text.toString(), "")
+                hideKeyboard()
+                handled = true
+            }
+            handled
+        }
+
+        binding.etvSearch.doAfterTextChanged { text ->
+            searchDebouncer.setDelay(text.toString(), 500L) {
+                productSubmitData2(pagingAdapter, binding.etvSearch.text.toString(), "")
+            }
+        }
     }
 
     private fun refreshDeal(pagingAdapter: ProductPagingAdapter) {
